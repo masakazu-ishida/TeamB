@@ -12,6 +12,7 @@ public class PurchasesDTO {
 	private String destination;
 	private boolean cancel;
 	private List<PurchaseDetailDTO> purchaseDetailDTO;
+	
 	public int getPurchaseId() {
 		return purchaseId;
 	}
