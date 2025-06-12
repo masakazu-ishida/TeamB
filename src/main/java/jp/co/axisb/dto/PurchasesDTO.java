@@ -7,11 +7,11 @@ public class PurchasesDTO {
 	
 	private int purchaseId;
 	private String purchasedUser;
-	private Users users;
+	private UsersDTO users;
 	private Date purchasedDate;
 	private String destination;
 	private boolean cancel;
-	private List<PurchaseDetailDTO> purchaseDetailDTO;
+	private List<PurchasesDetailsDTO> purchasesDetails;
 	
 	public int getPurchaseId() {
 		return purchaseId;
@@ -25,10 +25,10 @@ public class PurchasesDTO {
 	public void setPurchasedUser(String purchasedUser) {
 		this.purchasedUser = purchasedUser;
 	}
-	public Users getUsers() {
+	public UsersDTO getUsers() {
 		return users;
 	}
-	public void setUsers(Users users) {
+	public void setUsers(UsersDTO users) {
 		this.users = users;
 	}
 	public Date getPurchasedDate() {
@@ -49,11 +49,11 @@ public class PurchasesDTO {
 	public void setCancel(boolean cancel) {
 		this.cancel = cancel;
 	}
-	public List<PurchaseDetailDTO> getPurchaseDetailDTO() {
-		return purchaseDetailDTO;
+	public List<PurchasesDetailsDTO> getPurchaseDetailDTO() {
+		return purchasesDetails;
 	}
-	public void setPurchaseDetailDTO(List<PurchaseDetailDTO> purchaseDetailDTO) {
-		this.purchaseDetailDTO = purchaseDetailDTO;
+	public void setPurchaseDetailDTO(List<PurchasesDetailsDTO> purchasesDetails) {
+		this.purchasesDetails = purchasesDetails;
 	}
 	
 	

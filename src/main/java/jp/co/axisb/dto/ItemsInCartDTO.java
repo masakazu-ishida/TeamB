@@ -3,8 +3,14 @@ package jp.co.axisb.dto;
 import java.sql.Date;
 
 public class ItemsInCartDTO {
+<<<<<<< HEAD
 	private String userId;
 	private int itemId;
+=======
+	
+	private String user_id;
+	private int item_id;
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 	private int amount;
 	private Date bookedDate;
 	
