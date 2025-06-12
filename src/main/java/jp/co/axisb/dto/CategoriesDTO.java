@@ -1,6 +1,7 @@
 package jp.co.axisb.dto;
 
 public class CategoriesDTO {
+	
 	private int cotegory_id;
 	private String name;
 

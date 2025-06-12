@@ -10,13 +10,13 @@ public class ItemsDTO {
 	private int price;
 	private int stock;
 	private boolean recommended;
-	private Categories categories;
+	private CategoriesDTO categories;
 
-	public Categories getCategories() {
+	public CategoriesDTO getCategories() {
 		return categories;
 	}
 
-	public void setCategories(Categories categories) {
+	public void setCategories(CategoriesDTO categories) {
 		this.categories = categories;
 	}
 
