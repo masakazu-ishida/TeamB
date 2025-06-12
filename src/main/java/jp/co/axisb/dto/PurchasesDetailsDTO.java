@@ -1,28 +1,27 @@
 package jp.co.axisb.dto;
 
 public class PurchasesDetailsDTO {
-	private int purchases_details_id;
-	private int purchases_id;
-	private int item_id;
+	private int purchasesDetailsId;
+	private int purchasesId;
+	private int itemId;
 	private int amount;
-	
-	public int getPurchases_details_id() {
-		return purchases_details_id;
+	public int getPurchasesDetailsId() {
+		return purchasesDetailsId;
 	}
-	public void setPurchases_details_id(int purchases_details_id) {
-		this.purchases_details_id = purchases_details_id;
+	public void setPurchasesDetailsId(int purchasesDetailsId) {
+		this.purchasesDetailsId = purchasesDetailsId;
 	}
-	public int getPurchases_id() {
-		return purchases_id;
+	public int getPurchasesId() {
+		return purchasesId;
 	}
-	public void setPurchases_id(int purchases_id) {
-		this.purchases_id = purchases_id;
+	public void setPurchasesId(int purchasesId) {
+		this.purchasesId = purchasesId;
 	}
-	public int getItem_id() {
-		return item_id;
+	public int getItemId() {
+		return itemId;
 	}
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 	public int getAmount() {
 		return amount;
@@ -30,5 +29,7 @@ public class PurchasesDetailsDTO {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+	
+	
 
 }
