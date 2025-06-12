@@ -1,6 +1,6 @@
 package jp.co.axisb.dto;
 
-public class PurchasesDetails {
+public class PurchasesDetailsDTO {
 	private int purchases_details_id;
 	private int purchases_id;
 	private int item_id;
