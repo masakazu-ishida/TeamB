@@ -10,6 +10,15 @@ public class ItemsDTO {
 	private int price;
 	private int stock;
 	private boolean recommended;
+	private Categories categories;
+
+	public Categories getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Categories categories) {
+		this.categories = categories;
+	}
 
 	public int getItemId() {
 		return itemId;
