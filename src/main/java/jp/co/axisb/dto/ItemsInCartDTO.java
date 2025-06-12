@@ -3,10 +3,10 @@ package jp.co.axisb.dto;
 import java.sql.Date;
 
 public class ItemsInCartDTO {
-	private String user_id;
-	private int item_id;
+	private String userId;
+	private int itemId;
 	private int amount;
-	private Date booked_date;
+	private Date bookedDate;
 	
 	
 	public String getUser_id() {
