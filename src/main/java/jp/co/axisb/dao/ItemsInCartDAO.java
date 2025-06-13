@@ -149,7 +149,7 @@ public class ItemsInCartDAO extends BaseDAO{
 	
 	public int delete(ItemsInCartDTO dto) throws SQLException{
 		
-		String sql = "DELETE item_in_cart where user_id = ? and item_id = ?";
+		String sql = "DELETE FROM item_in_cart where user_id = ? and item_id = ?";
 		
 		int updateLowNum = 0;
 		

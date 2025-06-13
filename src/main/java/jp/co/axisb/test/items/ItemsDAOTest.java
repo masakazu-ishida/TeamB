@@ -48,19 +48,20 @@ public class ItemsDAOTest {
 			 ItemsDAO dao  = new ItemsDAO(conn);
 	            
 	         //正しくDTOにレコードの値を詰めてるか確認する
-			 int i = 1;
 	         List<ItemsDTO> itemsDTO = dao.findByItemName("麦わら");
 
 	         
-	         assertEquals(2, itemDTO.size());
-		         assertEquals(1, idto.getItemId());
-		         assertEquals("麦わら帽子", idto.getName());
-		         assertEquals("日本帽子製造", idto.getManufacturer());
-		         assertEquals(1, idto.getCategoryId());
-		         assertEquals("黄色", idto.getColor());
-		         assertEquals(4980, idto.getPrice());
-		         assertEquals(12, idto.getStock());
-		         assertEquals(false, idto.isRecommended());
+	         assertEquals(2, itemsDTO.size());
+	         
+	         ItemsDTO dto = itemsDTO.get(0);
+		     assertEquals(1, dto.getItemId());
+		     assertEquals("麦わら帽子", dto.getName());
+		     assertEquals("日本帽子製造", dto.getManufacturer());
+		     assertEquals(1, dto.getCategoryId());
+	         assertEquals("黄色", dto.getColor());
+	         assertEquals(4980, dto.getPrice());
+	         assertEquals(12, dto.getStock());
+	         assertEquals(false, dto.isRecommended());
 	            
 	         //存在しない主キーを指定した場合、NULLを返す事を確認する
 	         itemsDTO = dao.findByItemName("田中");
@@ -74,8 +75,25 @@ public class ItemsDAOTest {
 	 @Test
 	 public void testUpdate() {
 		 try(Connection conn = ConnectionUtil.getConnectionForJUnit()){
+			 ItemsDAO dao = new ItemsDAO(conn);
 			 
-		 }
+			 ItemsDTO dto = new ItemsDTO();
+			 dto.setStock(1);
+			 dto.setItemId(1);
+			 
+			 int result = dao.update(dto);
+			 
+			 assertEquals(1, result);
+			 
+			 ItemsDTO serch = dao.findById(1);
+			 
+			 assertEquals(1, serch.getItemId());
+			 assertEquals(11, serch.getStock());
+			 
+			 
+		 }catch(Exception e) {
+	            fail(e.getMessage());
+	        }
 	 }
 
 }
