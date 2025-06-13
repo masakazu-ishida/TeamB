@@ -28,7 +28,7 @@ public class ItemsDAO extends BaseDAO{
 			
 			if (rs.next()) {
 				dto = new ItemsDTO();
-				CategoriesDTO categoriesDTO = new CategoriesDTO();
+				CategoriesDTO categories = new CategoriesDTO();
 
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setName(rs.getString("name"));
@@ -38,7 +38,7 @@ public class ItemsDAO extends BaseDAO{
 				dto.setPrice(rs.getInt("price"));
 				dto.setStock(rs.getInt("stock"));
 				dto.setRecommended(rs.getBoolean("recommended"));
-				dto.setCategories(categoriesDTO);
+				dto.setCategories(categories);
 			}
 		}
 
@@ -47,7 +47,7 @@ public class ItemsDAO extends BaseDAO{
 	}
 		
 	public List<ItemsDTO> findByItemName(String keyword) throws SQLException{
-		//実行するSQL文
+		
 		String sql = "SELECT * FROM items WHERE name LIKE '%' || '?' || '%'";
 
 		List<ItemsDTO> list = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ItemsDAO extends BaseDAO{
 
 			while (rs.next()) {
 				ItemsDTO dto = new ItemsDTO();
-				CategoriesDTO categoriesDTO = new CategoriesDTO();
+				CategoriesDTO categories = new CategoriesDTO();
 				
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setName(rs.getString("name"));
@@ -70,7 +70,7 @@ public class ItemsDAO extends BaseDAO{
 				dto.setPrice(rs.getInt("price"));
 				dto.setStock(rs.getInt("stock"));
 				dto.setRecommended(rs.getBoolean("recommended"));
-				dto.setCategories(categoriesDTO);
+				dto.setCategories(categories);
 
 				list.add(dto);
 			}
@@ -80,55 +80,54 @@ public class ItemsDAO extends BaseDAO{
 		return list;
 	}
 	
-	//降順にソートした一覧情報を表示
-		public List<ItemsDTO> findALL() throws SQLException {
+	public List<ItemsDTO> findALL() throws SQLException {
 
-			String sql = "SELECT * FROM items";
+		String sql = "SELECT * FROM items";
 
-			List<ItemsDTO> list = new ArrayList<>();
+		List<ItemsDTO> list = new ArrayList<>();
 
-			try (PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-				ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 
-				while (rs.next()) {
-					ItemsDTO dto = new ItemsDTO();
-					CategoriesDTO categoriesDTO = new CategoriesDTO();
+			while (rs.next()) {
+				ItemsDTO dto = new ItemsDTO();
+				CategoriesDTO categories = new CategoriesDTO();
 
-					dto.setItemId(rs.getInt("item_id"));
-					dto.setName(rs.getString("name"));
-					dto.setManufacturer(rs.getString("manufacuture"));
-					dto.setCategoryId(rs.getInt("category_id"));
-					dto.setColor(rs.getString("color"));
-					dto.setPrice(rs.getInt("price"));
-					dto.setStock(rs.getInt("stock"));
-					dto.setRecommended(rs.getBoolean("recommended"));
-					dto.setCategories(categoriesDTO);
+				dto.setItemId(rs.getInt("item_id"));
+				dto.setName(rs.getString("name"));
+				dto.setManufacturer(rs.getString("manufacuture"));
+				dto.setCategoryId(rs.getInt("category_id"));
+				dto.setColor(rs.getString("color"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setStock(rs.getInt("stock"));
+				dto.setRecommended(rs.getBoolean("recommended"));
+				dto.setCategories(categories);
 					
-					list.add(dto);
-				}
+				list.add(dto);
 			}
-
-			return list;
-
 		}
+
+		return list;
+
+	}
 		
-		public int update(ItemsDTO dto) throws SQLException {
+	public int update(ItemsDTO dto) throws SQLException {
 
-			String sql = "UPDATE items SET stock = ? where item_id = ?";
+		String sql = "UPDATE items SET stock = ? where item_id = ?";
 
-			int updateLowNum = 0;
+		int updateLowNum = 0;
 
-			try (PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-				ps.setInt(1, dto.getStock());
-				ps.setInt(2, dto.getItemId());
+			ps.setInt(1, dto.getStock());
+			ps.setInt(2, dto.getItemId());
 
-				updateLowNum = ps.executeUpdate();
-			}
-			
-			return updateLowNum;
+			updateLowNum = ps.executeUpdate();
+		}	
+		
+		return updateLowNum;
 
-		}
+	}
 
 }
