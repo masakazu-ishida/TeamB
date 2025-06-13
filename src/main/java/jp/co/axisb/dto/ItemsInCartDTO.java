@@ -34,5 +34,17 @@ public class ItemsInCartDTO {
 	public void setBookedDate(Date bookedDate) {
 		this.bookedDate = bookedDate;
 	}
+	public UsersDTO getUsers() {
+		return users;
+	}
+	public void setUsers(UsersDTO users) {
+		this.users = users;
+	}
+	public ItemsDTO getItems() {
+		return items;
+	}
+	public void setItems(ItemsDTO items) {
+		this.items = items;
+	}
 
 }
