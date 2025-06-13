@@ -48,14 +48,16 @@ public class ItemsDAO extends BaseDAO{
 		
 	public List<ItemsDTO> findByItemName(String keyword) throws SQLException{
 		
-		String sql = "SELECT * FROM items WHERE name LIKE '%' || '?' || '%'";
+		String sql = "SELECT * FROM items WHERE name LIKE '?'";
 
 		List<ItemsDTO> list = new ArrayList<>();
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
+			
 			ps.setString(1, keyword);
 
+			System.out.println(ps);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -114,7 +116,7 @@ public class ItemsDAO extends BaseDAO{
 		
 	public int update(ItemsDTO dto) throws SQLException {
 
-		String sql = "UPDATE items SET stock = (stock + ?) where item_id = ?";
+		String sql = "UPDATE items SET stock = (stock - ?) where item_id = ?";
 
 		int updateLowNum = 0;
 
