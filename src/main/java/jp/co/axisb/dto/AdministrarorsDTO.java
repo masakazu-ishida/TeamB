@@ -2,8 +2,8 @@ package jp.co.axisb.dto;
 
 public class AdministrarorsDTO {
 
-	private int adminId;
-	private int password;
+	private String adminId;
+	private String password;
 	private String name;
 	
 	public int getAdminId() {
