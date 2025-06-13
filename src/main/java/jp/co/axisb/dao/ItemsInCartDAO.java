@@ -129,12 +129,16 @@ public class ItemsInCartDAO extends BaseDAO{
 	public int update(ItemsInCartDTO dto) throws SQLException {
 
 		//ここ相談
-		String sql = "UPDATE items_in_cart SET // where //";
+		String sql = "UPDATE items_in_cart SET amount = ?, booked_date = ? where user_id = ? AND item_id = ?";
 
 		int updateLowNum = 0;
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
+			ps.setInt(1, dto.getAmount());
+			ps.setDate(2, dto.getBookedDate());
+			ps.setString(3, dto.getUserId());
+			ps.setInt(4, dto.getItemId());
 
 			updateLowNum = ps.executeUpdate();
 		}	
