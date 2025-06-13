@@ -15,7 +15,7 @@ public class UsersDAOtest {
 	
 
 	    @Test
-	    void testFindById() {
+	  public  void testFindById() {
 	        
 	        try(Connection conn = ConnectionUtil.getConnectionForJUnit()){
 	            
