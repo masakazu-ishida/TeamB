@@ -11,7 +11,7 @@ import jp.co.axisb.dao.CategoriesDAO;
 import jp.co.axisb.dto.CategoriesDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
-class Categories {
+class CategoriesDAOTest {
 
 	@Test
 	void testfindById() {
@@ -19,14 +19,14 @@ class Categories {
 			CategoriesDAO dao = new CategoriesDAO(conn);
 			
 			//正しくDTOにレコードの値を詰めてるか確認する
-			CategoriesDTO dto = dao.findById(1);
+			CategoriesDTO categoriesdto = dao.findById(0);
 			
-			assertEquals(0, dto.getCotegoryId());
-			assertEquals("すべて", dto.getName());
+			assertEquals(0, categoriesdto.getCotegoryId());
+			assertEquals("すべて", categoriesdto.getName());
 			
 			//存在しない主キーを指定した場合、NULLを返す事を確認する
-			dto = dao.findById(6);
-			assertNull(dto);
+			categoriesdto = dao.findById(6);
+			assertNull(categoriesdto);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -41,10 +41,10 @@ class Categories {
 			try {
 				List<CategoriesDTO> list = dao.findAll();
 				assertEquals(3, list.size());
-				CategoriesDTO dto = list.get(1);
+				CategoriesDTO categoriesdto = list.get(1);
 				
-				assertEquals(0, dto.getCotegoryId());
-				assertEquals("すべて", dto.getName());
+				assertEquals(1, categoriesdto.getCotegoryId());
+				assertEquals("帽子", categoriesdto.getName());
 				
 				
 				

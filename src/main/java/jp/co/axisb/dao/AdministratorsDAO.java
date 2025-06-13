@@ -16,11 +16,12 @@ public class AdministratorsDAO extends BaseDAO {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	AdministratorsDTO dto = null;
 
 	//キー検索
 	public AdministratorsDTO findById(String adminId) throws SQLException {
 
+		AdministratorsDTO admindto = null;
+		
 		String sql = "SELECT * FROM administrators WHERE admin_id = ?";
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -30,32 +31,35 @@ public class AdministratorsDAO extends BaseDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				dto = new AdministratorsDTO();
-				dto.setAdminId("adminId");
-				dto.setPassword(rs.getString("password"));
-				dto.setName(rs.getString("name"));
+				admindto = new AdministratorsDTO();
+				admindto.setAdminId(rs.getString("admin_id"));
+				admindto.setPassword(rs.getString("password"));
+				admindto.setName(rs.getString("name"));
 			}
 		}
-		return dto;
+		return admindto;
 	}
 
 	//全検索
 	public List<AdministratorsDTO> findAll() throws SQLException {
 
+		AdministratorsDTO admindto = null;
+		
 		String sql = "SELECT * FROM administrators";
+		
 		List<AdministratorsDTO> list = new ArrayList<>();
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				AdministratorsDTO dto = new AdministratorsDTO();
+				admindto = new AdministratorsDTO();
 
-				dto.setAdminId(rs.getString("admin_id"));
-				dto.setPassword(rs.getString("password"));
-				dto.setName(rs.getString("name"));
+				admindto.setAdminId(rs.getString("admin_id"));
+				admindto.setPassword(rs.getString("password"));
+				admindto.setName(rs.getString("name"));
 
-				list.add(dto);
+				list.add(admindto);
 
 			}
 		}

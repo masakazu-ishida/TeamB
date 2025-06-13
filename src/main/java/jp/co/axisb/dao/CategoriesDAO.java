@@ -16,9 +16,10 @@ public class CategoriesDAO extends BaseDAO {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	CategoriesDTO dto = null;
 
 	public CategoriesDTO findById(int categoryId) throws SQLException {
+		
+		CategoriesDTO categoriesdto = null;
 
 		String sql = "SELECT * FROM categories WHERE category_id = ?";
 
@@ -28,29 +29,32 @@ public class CategoriesDAO extends BaseDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				dto = new CategoriesDTO();
+				categoriesdto = new CategoriesDTO();
 
-				dto.setCotegoryId(rs.getInt("category_id"));
-				dto.setName(rs.getString("name"));
+				categoriesdto.setCotegoryId(rs.getInt("category_id"));
+				categoriesdto.setName(rs.getString("name"));
 			}
 		}
-		return dto;
+		return categoriesdto;
 	}
 
 	public List<CategoriesDTO> findAll() throws SQLException {
+		CategoriesDTO categoriesdto = null;
+		
 		String sql = "SELECT * FROM categories";
+		
 		List<CategoriesDTO> list = new ArrayList<>();
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ResultSet rs = ps.executeQuery();
 
-			if (rs.next()) {
-				dto = new CategoriesDTO();
+			while (rs.next()) {
+				categoriesdto = new CategoriesDTO();
 
-				dto.setCotegoryId(rs.getInt("category_id"));
-				dto.setName(rs.getString("name"));
+				categoriesdto.setCotegoryId(rs.getInt("category_id"));
+				categoriesdto.setName(rs.getString("name"));
 
-				list.add(dto);
+				list.add(categoriesdto);
 			}
 		}
 		return list;
