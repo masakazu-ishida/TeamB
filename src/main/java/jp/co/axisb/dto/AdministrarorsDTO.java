@@ -6,26 +6,21 @@ public class AdministrarorsDTO {
 	private String password;
 	private String name;
 	
-	public int getAdminId() {
+	public String getAdminId() {
 		return adminId;
 	}
-
-	public void setAdmin_id(int adminId) {
+	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
-
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
-
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
