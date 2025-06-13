@@ -32,7 +32,7 @@ public class ItemsDAO extends BaseDAO{
 
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setName(rs.getString("name"));
-				dto.setManufacturer(rs.getString("manufacuture"));
+				dto.setManufacturer(rs.getString("manufacturer"));
 				dto.setCategoryId(rs.getInt("category_id"));
 				dto.setColor(rs.getString("color"));
 				dto.setPrice(rs.getInt("price"));
@@ -64,7 +64,7 @@ public class ItemsDAO extends BaseDAO{
 				
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setName(rs.getString("name"));
-				dto.setManufacturer(rs.getString("manufacuture"));
+				dto.setManufacturer(rs.getString("manufacturer"));
 				dto.setCategoryId(rs.getInt("category_id"));
 				dto.setColor(rs.getString("color"));
 				dto.setPrice(rs.getInt("price"));
@@ -96,7 +96,7 @@ public class ItemsDAO extends BaseDAO{
 
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setName(rs.getString("name"));
-				dto.setManufacturer(rs.getString("manufacuture"));
+				dto.setManufacturer(rs.getString("manufacturer"));
 				dto.setCategoryId(rs.getInt("category_id"));
 				dto.setColor(rs.getString("color"));
 				dto.setPrice(rs.getInt("price"));
