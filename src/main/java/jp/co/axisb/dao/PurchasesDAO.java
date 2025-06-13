@@ -24,15 +24,15 @@ public class PurchasesDAO extends BaseDAO {
 		PurchasesDTO dto = null;
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
-			
+
 			ps.setInt(1, purchaseId);
-			
+
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
 				dto = new PurchasesDTO();
 				UsersDTO users = new UsersDTO();
-				PurchasesDetailsDAO pddto= new PurchasesDetailsDAO(conn);
+				PurchasesDetailsDAO pddto = new PurchasesDetailsDAO(conn);
 				List<PurchasesDetailsDTO> purchasesDetails = pddto.findById(purchaseId);
 
 				dto.setPurchaseId(rs.getInt("purchase_id"));

@@ -10,22 +10,22 @@ import java.util.List;
 import jp.co.axisb.dto.CategoriesDTO;
 import jp.co.axisb.dto.ItemsDTO;
 
-public class ItemsDAO extends BaseDAO{
-	
+public class ItemsDAO extends BaseDAO {
+
 	public ItemsDAO(Connection conn) {
 		super(conn);
 	}
 
 	public ItemsDTO findById(int itemId) throws SQLException {
-		
+
 		String sql = "SELECT * FROM items WHERE item_id = ?";
 		ItemsDTO dto = null;
-		
+
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, itemId);
-				
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
 				dto = new ItemsDTO();
 				CategoriesDTO categories = new CategoriesDTO();
@@ -45,9 +45,9 @@ public class ItemsDAO extends BaseDAO{
 		return dto;
 
 	}
-		
-	public List<ItemsDTO> findByItemName(String keyword) throws SQLException{
-		
+
+	public List<ItemsDTO> findByItemName(String keyword) throws SQLException {
+
 		String sql = "SELECT * FROM items WHERE name LIKE '%' || '?' || '%'";
 
 		List<ItemsDTO> list = new ArrayList<>();
@@ -61,7 +61,7 @@ public class ItemsDAO extends BaseDAO{
 			while (rs.next()) {
 				ItemsDTO dto = new ItemsDTO();
 				CategoriesDTO categories = new CategoriesDTO();
-				
+
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setName(rs.getString("name"));
 				dto.setManufacturer(rs.getString("manufacturer"));
@@ -79,7 +79,7 @@ public class ItemsDAO extends BaseDAO{
 
 		return list;
 	}
-	
+
 	public List<ItemsDTO> findALL() throws SQLException {
 
 		String sql = "SELECT * FROM items";
@@ -103,7 +103,7 @@ public class ItemsDAO extends BaseDAO{
 				dto.setStock(rs.getInt("stock"));
 				dto.setRecommended(rs.getBoolean("recommended"));
 				dto.setCategories(categories);
-					
+
 				list.add(dto);
 			}
 		}
@@ -111,7 +111,7 @@ public class ItemsDAO extends BaseDAO{
 		return list;
 
 	}
-		
+
 	public int update(ItemsDTO dto) throws SQLException {
 
 		String sql = "UPDATE items SET stock = ? where item_id = ?";
@@ -124,8 +124,8 @@ public class ItemsDAO extends BaseDAO{
 			ps.setInt(2, dto.getItemId());
 
 			updateLowNum = ps.executeUpdate();
-		}	
-		
+		}
+
 		return updateLowNum;
 
 	}

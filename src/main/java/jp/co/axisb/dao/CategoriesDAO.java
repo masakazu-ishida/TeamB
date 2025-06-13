@@ -9,47 +9,48 @@ import java.util.List;
 
 import jp.co.axisb.dto.CategoriesDTO;
 
-public class CategoriesDAO extends BaseDAO{
+public class CategoriesDAO extends BaseDAO {
 
 	public CategoriesDAO(Connection conn) {
 		super(conn);
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
-	
+
 	CategoriesDTO dto = null;
-	
-	public CategoriesDTO findById(int categoryId) throws SQLException{
-		
+
+	public CategoriesDTO findById(int categoryId) throws SQLException {
+
 		String sql = "SELECT * FROM categories WHERE category_id = ?";
-		
-		try(PreparedStatement ps = conn.prepareStatement(sql)){
-			
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
 			ps.setInt(1, categoryId);
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
-				dto =new CategoriesDTO();
-				
+				dto = new CategoriesDTO();
+
 				dto.setCotegoryId(rs.getInt("category_id"));
-				dto.setName(rs.getString("name"));	
+				dto.setName(rs.getString("name"));
 			}
 		}
-		return dto;	
+		return dto;
 	}
-	public List<CategoriesDTO>findAll() throws SQLException{
+
+	public List<CategoriesDTO> findAll() throws SQLException {
 		String sql = "SELECT * FROM categories";
 		List<CategoriesDTO> list = new ArrayList<>();
-		
-		try(PreparedStatement ps = conn.prepareStatement(sql)){
-			 ResultSet rs = ps.executeQuery();
-			 
-			 if (rs.next()) {
-				 dto = new CategoriesDTO();
-				 
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				dto = new CategoriesDTO();
+
 				dto.setCotegoryId(rs.getInt("category_id"));
-				dto.setName(rs.getString("name"));	
-				
-			list.add(dto);
+				dto.setName(rs.getString("name"));
+
+				list.add(dto);
 			}
 		}
 		return list;
