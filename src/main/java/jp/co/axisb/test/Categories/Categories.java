@@ -41,7 +41,7 @@ class Categories {
 			try {
 				List<CategoriesDTO> list = dao.findAll();
 				assertEquals(3, list.size());
-				CategoriesDTO dto = list.get(3);
+				CategoriesDTO dto = list.get(1);
 				
 				assertEquals(0, dto.getCotegoryId());
 				assertEquals("すべて", dto.getName());

@@ -23,7 +23,7 @@ class AdministratorsDAOtest {
 			 //正しくDTOにレコードの値を詰めてるか確認する
 				AdministratorsDTO dto = dao.findById("admin");
 				
-				assertEquals("admin", dto.getAdminId());
+				assertEquals("admin", dto.getAdminId());//ここ怪しい
 				assertEquals("admin", dto.getPassword());
 				assertEquals("管理者", dto.getName());
 			//存在しない主キーを指定した場合、NULLを返す事を確認する
@@ -49,7 +49,7 @@ class AdministratorsDAOtest {
 			assertEquals(1, list.size());
 			AdministratorsDTO dto = list.get(0);
 			
-			assertEquals(1, dto.getAdminId());//ここ怪しい
+			assertEquals("admin", dto.getAdminId());//ここ怪しい
 			assertEquals("admin", dto.getPassword());
 			assertEquals("管理者", dto.getName());
 			
