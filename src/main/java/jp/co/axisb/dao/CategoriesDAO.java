@@ -20,11 +20,6 @@ public class CategoriesDAO extends BaseDAO{
 		
 		CategoriesDTO categoriesdto = null;
 	
-	CategoriesDTO dto = null;
-	
-	public CategoriesDTO findById(int categoryId) throws SQLException{
-		
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 		String sql = "SELECT * FROM categories WHERE category_id = ?";
 		
 		try(PreparedStatement ps = conn.prepareStatement(sql)){
@@ -33,37 +28,28 @@ public class CategoriesDAO extends BaseDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
-<<<<<<< HEAD
 				categoriesdto = new CategoriesDTO();
 
 				categoriesdto.setCotegoryId(rs.getInt("category_id"));
 				categoriesdto.setName(rs.getString("name"));
-=======
-				dto =new CategoriesDTO();
+
+				categoriesdto =new CategoriesDTO();
 				
-				dto.setCotegoryId(rs.getInt("category_id"));
-				dto.setName(rs.getString("name"));	
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
+				categoriesdto.setCotegoryId(rs.getInt("category_id"));
+				categoriesdto.setName(rs.getString("name"));	
 			}
 		}
-<<<<<<< HEAD
 		return categoriesdto;
-=======
-		return dto;	
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 	}
-<<<<<<< HEAD
 
-	public List<CategoriesDTO> findAll() throws SQLException {
+
+
+	public List<CategoriesDTO>findAll() throws SQLException{
 		CategoriesDTO categoriesdto = null;
 		
-=======
-	public List<CategoriesDTO>findAll() throws SQLException{
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 		String sql = "SELECT * FROM categories";
 		
 		List<CategoriesDTO> list = new ArrayList<>();
-<<<<<<< HEAD
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ResultSet rs = ps.executeQuery();
@@ -75,21 +61,10 @@ public class CategoriesDAO extends BaseDAO{
 				categoriesdto.setName(rs.getString("name"));
 
 				list.add(categoriesdto);
-=======
-		
-		try(PreparedStatement ps = conn.prepareStatement(sql)){
-			 ResultSet rs = ps.executeQuery();
-			 
-			 if (rs.next()) {
-				 dto = new CategoriesDTO();
-				 
-				dto.setCotegoryId(rs.getInt("category_id"));
-				dto.setName(rs.getString("name"));	
-				
-			list.add(dto);
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
+
 			}
 		}
 		return list;
 	}
 }
+	
