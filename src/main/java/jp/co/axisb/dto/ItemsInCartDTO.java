@@ -7,6 +7,8 @@ public class ItemsInCartDTO {
 	private int itemId;
 	private int amount;
 	private Date bookedDate;
+	private UsersDTO users;
+	private ItemsDTO items;
 	
 	public String getUserId() {
 		return userId;
