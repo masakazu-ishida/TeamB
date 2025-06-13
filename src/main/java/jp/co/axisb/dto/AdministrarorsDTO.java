@@ -2,20 +2,16 @@ package jp.co.axisb.dto;
 
 public class AdministrarorsDTO {
 	
-	private int admin_id;
-	private int password;
-	private String name;
-	
-	public int getAdmin_id() {
-		return admin_id;
+	public String getAdminId() {
+		return adminId;
 	}
-	public void setAdmin_id(int admin_id) {
-		this.admin_id = admin_id;
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
 	}
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	public String getName() {
@@ -24,6 +20,10 @@ public class AdministrarorsDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	private String adminId;
+	private String password;
+	private String name;
+	
+	
 
 }
