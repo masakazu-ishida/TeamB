@@ -34,5 +34,6 @@ public class ItemsInCartDTO {
 	public void setBookedDate(Date bookedDate) {
 		this.bookedDate = bookedDate;
 	}
+	
 
 }
