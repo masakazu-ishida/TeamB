@@ -24,7 +24,7 @@ public class CategoriesDAO extends BaseDAO{
 	
 	public CategoriesDTO findById(int categoryId) throws SQLException{
 		
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
+
 		String sql = "SELECT * FROM categories WHERE category_id = ?";
 		
 		try(PreparedStatement ps = conn.prepareStatement(sql)){

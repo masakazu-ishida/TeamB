@@ -114,7 +114,7 @@ public class ItemsDAO extends BaseDAO{
 		
 	public int update(ItemsDTO dto) throws SQLException {
 
-		String sql = "UPDATE items SET stock = ? where item_id = ?";
+		String sql = "UPDATE items SET stock = (stock + ?) where item_id = ?";
 
 		int updateLowNum = 0;
 
