@@ -1,5 +1,7 @@
 package jp.co.axisb.dao;
 
+import static org.junit.Assert.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,6 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
+
+import jp.co.axisb.dto.UsersDTO;
+import jp.co.axisb.util.ConnectionUtil;
 
 /**
  * Connectionの保持と、JUnit単体テストでのSQLの初期化機能を提供するスーパークラス
@@ -28,6 +35,32 @@ public class BaseDAO {
 		this.conn = conn;
 	}
 
+	class UsersDAOTest {
+
+	    @Test
+	    void testFindById() {
+	        
+	        try(Connection conn = ConnectionUtil.getConnectionForJUnit()){
+	            
+	            UsersDAO dao  = new UsersDAO(conn);
+	            
+	            //正しくDTOにレコードの値を詰めてるか確認する
+	            UsersDTO usersDTO = dao.findById("user");
+	            assertEquals("user", usersDTO.getUserId());
+	            assertEquals("userpass", usersDTO.getPassword());
+	            assertEquals("鳥取太郎", usersDTO.getName());
+	            assertEquals("東京都港区赤坂3-3-3", usersDTO.getAddress());
+	            
+	            //存在しない主キーを指定した場合、NULLを返す事を確認する
+	            usersDTO = dao.findById("aaaa");
+	            assertNull(usersDTO);
+	           
+	        }catch(Exception e) {
+	            fail(e.getMessage());
+	        }
+	    }
+	}
+	
 	/**
 	 * SQLファイル内のSQL文を元に、一括でDBへの初期化を行う。
 	 * Junitの@BeforeEachで呼び出す。
@@ -73,5 +106,7 @@ public class BaseDAO {
 		}
 		return sqlList;
 	}
+	
+	
 
 }

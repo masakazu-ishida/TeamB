@@ -18,7 +18,7 @@ public class UsersDAO extends BaseDAO{
 
 			
 		}
-		public UsersDTO findById(int userId)throws SQLException{
+		public UsersDTO findById(String userId)throws SQLException{
 			
 			String sql = "SELECT * FROM users WHERE userId=";
 			
@@ -26,7 +26,7 @@ public class UsersDAO extends BaseDAO{
 			
 			try(PreparedStatement ps = conn.prepareStatement(sql)){
 				
-				ps.setInt(1, userId);
+				ps.setString(1, userId);
 				
 				ResultSet rs = ps.executeQuery();
 				
