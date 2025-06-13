@@ -1,15 +1,16 @@
 package jp.co.axisb.dto;
 
 public class CategoriesDTO {
-	private int cotegory_id;
+
+	private int cotegoryId;
 	private String name;
 
-	public int getCotegory_id() {
-		return cotegory_id;
+	public int getCotegoryId() {
+		return cotegoryId;
 	}
 
-	public void setCotegory_id(int cotegory_id) {
-		this.cotegory_id = cotegory_id;
+	public void setCotegoryId(int cotegoryId) {
+		this.cotegoryId = cotegoryId;
 	}
 
 	public String getName() {

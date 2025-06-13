@@ -3,23 +3,22 @@ package jp.co.axisb.dto;
 import java.sql.Date;
 
 public class ItemsInCartDTO {
-	private String user_id;
-	private int item_id;
+	private String userId;
+	private int itemId;
 	private int amount;
-	private Date booked_date;
+	private Date bookedDate;
 	
-	
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public int getItem_id() {
-		return item_id;
+	public int getItemId() {
+		return itemId;
 	}
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 	public int getAmount() {
 		return amount;
@@ -27,11 +26,11 @@ public class ItemsInCartDTO {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	public Date getBooked_date() {
-		return booked_date;
+	public Date getBookedDate() {
+		return bookedDate;
 	}
-	public void setBooked_date(Date booked_date) {
-		this.booked_date = booked_date;
+	public void setBookedDate(Date bookedDate) {
+		this.bookedDate = bookedDate;
 	}
 
 }
