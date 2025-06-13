@@ -15,7 +15,7 @@ public class ItemsDAO extends BaseDAO{
 
 		public ItemsDTO findById(int itemId) throws SQLException {
 
-			String sql = "SLECT * FROM items WHERE itemId = ?";
+			String sql = "SELECT * FROM items WHERE itemId = ?";
 
 			ItemsDTO dto = null;
 
