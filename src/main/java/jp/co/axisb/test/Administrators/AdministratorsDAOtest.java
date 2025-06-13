@@ -47,7 +47,7 @@ class AdministratorsDAOtest {
 			assertEquals(1, list.size());
 			AdministratorsDTO dto = list.get(0);
 			
-			assertEquals(1, dto.getAdminId());//ここ怪しい
+			assertEquals("admin", dto.getAdminId());
 			assertEquals("admin", dto.getPassword());
 			assertEquals("管理者", dto.getName());
 			
