@@ -13,9 +13,10 @@ public class UsersDAO extends BaseDAO {
 
 	public UsersDAO(Connection conn) {
 		super(conn);
+	}
 		// TODO 自動生成されたコンストラクター・スタブ
 
-	}
+
 
 	public UsersDTO findById(String userId) throws SQLException {
 

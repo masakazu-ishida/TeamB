@@ -12,7 +12,7 @@ import jp.co.axisb.dao.AdministratorsDAO;
 import jp.co.axisb.dto.AdministratorsDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
-class AdministratorsDAOTest {
+class AdministratorsDAOtest {
 
 	@Test
 	void testFindById() {
@@ -20,21 +20,19 @@ class AdministratorsDAOTest {
 		try(Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			AdministratorsDAO dao = new AdministratorsDAO(conn);
 
-			 //正しくDTOにレコードの値を詰めてるか確認する
-				AdministratorsDTO admindto = dao.findById("admin");
+				AdministratorsDTO dto = dao.findById("admin");
 				
-				assertEquals("admin", admindto.getAdminId());//ここ怪しい
-				assertEquals("admin", admindto.getPassword());
-				assertEquals("管理者", admindto.getName());
-			//存在しない主キーを指定した場合、NULLを返す事を確認する
-				admindto = dao.findById("aaaa");
-				assertNull(admindto);
-				
+				assertEquals("admin", dto.getAdminId());
+				assertEquals("admin", dto.getPassword());
+				assertEquals("管理者", dto.getName());
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			fail(e.getMessage());
 		}
 	}
+	
+	
 	
 	
 	@Test
@@ -47,11 +45,11 @@ class AdministratorsDAOTest {
 		try {
 			List<AdministratorsDTO> list = dao.findAll();
 			assertEquals(1, list.size());
-			AdministratorsDTO admindto = list.get(0);
+			AdministratorsDTO dto = list.get(0);
 			
-			assertEquals("admin", admindto.getAdminId());//ここ怪しい
-			assertEquals("admin", admindto.getPassword());
-			assertEquals("管理者", admindto.getName());
+			assertEquals(1, dto.getAdminId());//ここ怪しい
+			assertEquals("admin", dto.getPassword());
+			assertEquals("管理者", dto.getName());
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -61,6 +59,26 @@ class AdministratorsDAOTest {
 			// TODO: handle exception
 			e.printStackTrace();
 			
+			fail(e.getMessage());
+		}
+	}
+	
+	void testFindByIdNull() {
+		try(Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			AdministratorsDAO dao = new AdministratorsDAO(conn);
+			
+			try {
+				AdministratorsDTO dto = dao.findById("afj");
+				assertNull(dto);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				fail(e.getMessage());
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
 			fail(e.getMessage());
 		}
 	}
