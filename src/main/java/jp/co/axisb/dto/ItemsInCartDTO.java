@@ -34,6 +34,7 @@ public class ItemsInCartDTO {
 	public void setBookedDate(Date bookedDate) {
 		this.bookedDate = bookedDate;
 	}
+<<<<<<< HEAD
 	public UsersDTO getUsers() {
 		return users;
 	}
@@ -46,5 +47,8 @@ public class ItemsInCartDTO {
 	public void setItems(ItemsDTO items) {
 		this.items = items;
 	}
+=======
+	
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 
 }
