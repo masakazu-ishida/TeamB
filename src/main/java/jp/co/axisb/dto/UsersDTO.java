@@ -2,21 +2,22 @@ package jp.co.axisb.dto;
 
 public class UsersDTO {
 	
-	private int user_id;
-	private int password;
+	
+	private String userId;
+	private String password;
 	private String name;
 	private String address;
 	
-	public int getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	public String getName() {
@@ -31,7 +32,9 @@ public class UsersDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	
+
 	
 	
 
