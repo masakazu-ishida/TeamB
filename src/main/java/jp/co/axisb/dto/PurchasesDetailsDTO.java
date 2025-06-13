@@ -1,10 +1,14 @@
 package jp.co.axisb.dto;
 
 public class PurchasesDetailsDTO {
+	
 	private int purchasesDetailsId;
 	private int purchasesId;
 	private int itemId;
 	private int amount;
+	private PurchasesDTO purchases;
+	private ItemsDTO items;
+	
 	public int getPurchasesDetailsId() {
 		return purchasesDetailsId;
 	}
@@ -28,6 +32,18 @@ public class PurchasesDetailsDTO {
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+	public PurchasesDTO getPurchases() {
+		return purchases;
+	}
+	public void setPurchases(PurchasesDTO purchases) {
+		this.purchases = purchases;
+	}
+	public ItemsDTO getItems() {
+		return items;
+	}
+	public void setItems(ItemsDTO items) {
+		this.items = items;
 	}
 	
 	
