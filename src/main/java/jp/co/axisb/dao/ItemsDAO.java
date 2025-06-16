@@ -48,7 +48,7 @@ public class ItemsDAO extends BaseDAO{
 		
 	public List<ItemsDTO> findByItemName(String keyword) throws SQLException{
 		
-		String sql = "SELECT * FROM items WHERE name LIKE '?'";
+		String sql = "SELECT * FROM items WHERE name LIKE ?";
 
 		List<ItemsDTO> list = new ArrayList<>();
 
@@ -59,6 +59,8 @@ public class ItemsDAO extends BaseDAO{
 
 			ResultSet rs = ps.executeQuery();
 
+			
+			
 			while (rs.next()) {
 				ItemsDTO dto = new ItemsDTO();
 				CategoriesDTO categories = new CategoriesDTO();

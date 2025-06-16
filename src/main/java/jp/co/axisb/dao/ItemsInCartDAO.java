@@ -49,20 +49,20 @@ public class ItemsInCartDAO extends BaseDAO{
 
 	}
 	
-	public ItemsInCartDTO findById(String userId) throws SQLException {
+	public List<ItemsInCartDTO> findById(String userId) throws SQLException {
 		
 		String sql = "SELECT * FROM items_in_cart WHERE user_id = ?";
-		ItemsInCartDTO dto = null;
+		ItemsInCartDTO dto = new ItemsInCartDTO();
+		List<ItemsInCartDTO> list = new ArrayList<>();
+		UsersDTO users = new UsersDTO();
+		ItemsDTO items = new ItemsDTO();
 		
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, userId);
 				
 			ResultSet rs = ps.executeQuery();
 			
-			if (rs.next()) {
-				dto = new ItemsInCartDTO();
-				UsersDTO users = new UsersDTO();
-				ItemsDTO items = new ItemsDTO();
+			while (rs.next()) {
 
 				dto.setUserId(rs.getString("user_id"));
 				dto.setItemId(rs.getInt("item_id"));
@@ -70,10 +70,12 @@ public class ItemsInCartDAO extends BaseDAO{
 				dto.setBookedDate(rs.getDate("booked_date"));
 				dto.setUsers(users);
 				dto.setItems(items);
+				
+				list.add(dto);
 			}
 		}
 
-		return dto;
+		return list;
 
 	}
 	
@@ -128,8 +130,7 @@ public class ItemsInCartDAO extends BaseDAO{
 	
 	public int update(ItemsInCartDTO dto) throws SQLException {
 
-		//ここ相談
-		String sql = "UPDATE items_in_cart SET amount = ?, booked_date = ? where user_id = ? AND item_id = ?";
+		String sql = "UPDATE items_in_cart SET amount = (amount - ?), booked_date = ? where user_id = ? AND item_id = ?";
 
 		int updateLowNum = 0;
 
@@ -149,7 +150,7 @@ public class ItemsInCartDAO extends BaseDAO{
 	
 	public int delete(ItemsInCartDTO dto) throws SQLException{
 		
-		String sql = "DELETE FROM item_in_cart where user_id = ? and item_id = ?";
+		String sql = "DELETE FROM items_in_cart where user_id = ? and item_id = ?";
 		
 		int updateLowNum = 0;
 		
