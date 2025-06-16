@@ -8,12 +8,30 @@ import java.sql.Connection;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
+import jp.co.axisb.dao.BaseDAO;
 import jp.co.axisb.dao.ItemsDAO;
 import jp.co.axisb.dto.ItemsDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
 public class ItemsDAOTest {
+	
+	@BeforeEach
+    void init() {
+        try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+            
+            BaseDAO dao = new BaseDAO(conn);
+            try {
+                dao.insertBatch("sqlFiles/init.sql");
+    
+            } catch (Exception e) {
+                throw e;
+            }
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+	}
 	
 	 @Test
 	   public void testFindById() {
