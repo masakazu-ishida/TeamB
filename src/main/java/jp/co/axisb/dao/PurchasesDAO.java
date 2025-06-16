@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.co.axisb.dto.ItemsDTO;
 import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.dto.PurchasesDetailsDTO;
 import jp.co.axisb.dto.UsersDTO;
 
 public class PurchasesDAO extends BaseDAO {
+
 	public PurchasesDAO(Connection conn) {
 		super(conn);
 	}
@@ -19,12 +21,21 @@ public class PurchasesDAO extends BaseDAO {
 	// 主キー検索
 	public PurchasesDTO findById(int purchaseId) throws SQLException {
 
-		String sql = "select * from purchases where purchase_id = ?";
+		String sql = "SELECT purchases.purchase_id, purchases.purchased_user, purchases.purchased_date, purchases.destination, purchases.cancel,\n"
+				+ "       purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,\n"
+				+ "	   items.item_id, items.name, items.manufacturer,items.category_id\n"
+				+ "       \n"
+				+ "	  \n"
+				+ "	FROM purchases inner join purchase_details\n"
+				+ "	ON purchases.purchase_id = purchase_details.purchase_id\n"
+				+ "\n"
+				+ "	inner join items\n"
+				+ "	ON purchase_details.item_id = items.item_id\n"
+				+ "	where purchases.purchase_id = ?";
 
 		PurchasesDTO dto = null;
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
-
 			ps.setInt(1, purchaseId);
 
 			ResultSet rs = ps.executeQuery();
@@ -35,6 +46,7 @@ public class PurchasesDAO extends BaseDAO {
 				PurchasesDetailsDAO pddto = new PurchasesDetailsDAO(conn);
 				List<PurchasesDetailsDTO> purchasesDetails = pddto.findById(purchaseId);
 
+				dto.setUserId(rs.getString("user_id"));
 				dto.setPurchaseId(rs.getInt("purchase_id"));
 				dto.setPurchasedDate(rs.getDate("purchased_date"));
 
@@ -43,14 +55,73 @@ public class PurchasesDAO extends BaseDAO {
 				dto.setUsers(users);
 				dto.setPurchaseDetailDTO(purchasesDetails);
 
+				for (PurchasesDetailsDTO pd : purchasesDetails) {
+					dto = new PurchasesDTO();
+					ItemsDTO items = new ItemsDTO();
+					pd.setPurchasesDetailsId(rs.getInt("purchase_detail_id"));
+					pd.setPurchasesId(rs.getInt("purchase_id"));
+					pd.setItemId(rs.getInt("item_id"));
+					pd.setAmount(rs.getInt("amount"));
+					pd.setItems(items);
+				}
+
 			}
 		}
 		return dto;
 	}
 
+	//public PurchasesDTO findByUserId(String userId) throws SQLException {
+	//		
+	//		String sql = "SELECT purchases.purchase_id, purchases.purchased_user, purchases.purchased_date, purchases.destination, purchases.cancel, --purchasesの取得列\n"
+	//				+ "       purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,			 	   --purchase_detailsの取得列	\n"
+	//				+ "       items.name, items.manufacturer, items.category_id, items.color, items.price, items.stock, items.recommended         --itemsの取得列\n"
+	//				+ "	\n"
+	//				+ "	FROM public.purchases inner join purchase_details             --purchasesとpurchase_detailsの結合\n"
+	//				+ "	ON purchases.purchase_id = purchase_details.purchase_id\n"
+	//				+ "	\n"
+	//				+ "	inner join items					      --purchase_detailsとitemsの結合\n"
+	//				+ "	ON purchase_details.item_id = items.item_id";
+	//		PurchasesDTO dto = null;
+	//		
+	//		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	//			ps.setString(1, userId);
+	//				
+	//			ResultSet rs = ps.executeQuery();
+	//			
+	//			if (rs.next()) {
+	//				dto = new PurchasesDTO();
+	//				UsersDTO users = new UsersDTO();
+	//				PurchasesDetailsDAO pddto = new PurchasesDetailsDAO(conn);
+	//				List<PurchasesDetailsDTO> purchasesDetails = pddto.findByUserId(userId);
+	//
+	//				dto.setUserId(rs.getString("user_id"));
+	//				dto.setPurchaseId(rs.getInt("purchase_id"));
+	//				dto.setPurchasedDate(rs.getDate("purchased_date"));
+	//
+	//				dto.setDestination(rs.getString("destination"));
+	//				dto.setCancel(rs.getBoolean("cancel"));
+	//				dto.setUsers(users);
+	//				dto.setPurchaseDetailDTO(purchasesDetails);
+	//
+	//			}
+	//		}
+	//
+	//		return dto;
+	//
+	//	}
+
 	// 全件検索
 	public List<PurchasesDTO> findAll() throws SQLException {
-		String sql = "select * from purchases";
+		String sql = "SELECT purchases.purchase_id, purchases.purchased_user, purchases.purchased_date, purchases.destination, purchases.cancel,\n"
+				+ "       purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,\n"
+				+ "	   items.item_id, items.name, items.manufacturer,items.category_id\n"
+				+ "       \n"
+				+ "	  \n"
+				+ "	FROM purchases inner join purchase_details\n"
+				+ "	ON purchases.purchase_id = purchase_details.purchase_id\n"
+				+ "\n"
+				+ "	inner join items\n"
+				+ "	ON purchase_details.item_id = items.item_id";
 
 		List<PurchasesDTO> list = new ArrayList<>();
 
@@ -59,16 +130,30 @@ public class PurchasesDAO extends BaseDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
+				PurchasesDetailsDAO dao = new PurchasesDetailsDAO(conn);
+
 				PurchasesDTO dto = new PurchasesDTO();
 
 				UsersDTO users = new UsersDTO();
 
+				List<PurchasesDetailsDTO> list2 = dao.findById(rs.getInt("purchase_id"));
 				dto.setPurchaseId(rs.getInt("purchase_id"));
 				dto.setPurchasedDate(rs.getDate("purchased_date"));
 
 				dto.setDestination(rs.getString("destination"));
 				dto.setCancel(rs.getBoolean("cancel"));
 				dto.setUsers(users);
+
+				for (PurchasesDetailsDTO pd : list2) {
+					dto = new PurchasesDTO();
+					ItemsDTO items = new ItemsDTO();
+					pd.setPurchasesDetailsId(rs.getInt("purchase_detail_id"));
+					pd.setPurchasesId(rs.getInt("purchase_id"));
+					pd.setItemId(rs.getInt("item_id"));
+					pd.setAmount(rs.getInt("amount"));
+					pd.setItems(items);
+				}
+
 			}
 		}
 		return list;
@@ -110,7 +195,7 @@ public class PurchasesDAO extends BaseDAO {
 		}
 		return updateNum;
 	}
-	
+
 	public int delete(PurchasesDTO dto) throws SQLException {
 		String sql = "DELETE FROM purchases WHERE purchase_id = ?";
 
