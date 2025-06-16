@@ -20,7 +20,7 @@ public class UsersDAO extends BaseDAO {
 
 	public UsersDTO findById(String userId) throws SQLException {
 
-		String sql = "SELECT * FROM users WHERE userId=";
+		String sql = "SELECT * FROM users WHERE user_id=?";
 
 		UsersDTO dto = null;
 
@@ -33,10 +33,10 @@ public class UsersDAO extends BaseDAO {
 			if (rs.next()) {
 				dto = new UsersDTO();
 
-				dto.setUserId(rs.getString("userId_id"));
+				dto.setUserId(rs.getString("user_id"));
 				dto.setPassword(rs.getString("password"));
 				dto.setName(rs.getString("name"));
-				dto.setAddress(rs.getString("adress"));
+				dto.setAddress(rs.getString("address"));
 
 			}
 
@@ -54,6 +54,8 @@ public class UsersDAO extends BaseDAO {
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
 
 			UsersDTO dto = new UsersDTO();
 
@@ -68,5 +70,6 @@ public class UsersDAO extends BaseDAO {
 		return list;
 
 	}
+		}
 
 }
