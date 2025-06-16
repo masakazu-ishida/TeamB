@@ -1,6 +1,10 @@
 package jp.co.axisb.dto;
 
+<<<<<<< HEAD
 import java.sql.Date;
+=======
+import java.util.Date;
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 import java.util.List;
 
 public class PurchasesDTO {

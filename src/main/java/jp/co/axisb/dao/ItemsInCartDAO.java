@@ -21,7 +21,7 @@ public class ItemsInCartDAO extends BaseDAO{
 	
 	public ItemsInCartDTO findById(String userId, int itemId) throws SQLException {
 		
-		String sql = "SELECT * FROM items_in_cart WHERE user_id = ? and item_id = ?";
+		String sql = "SELECT * FROM items_in_cart INNER JOIN users ON items_in_cart.user_id = users.user_id INNER JOIN items ON items_in_cart.item_id = items.item_id WHERE items_in_cart.user_id = ? and items_in_cart.item_id = ?";
 		ItemsInCartDTO dto = null;
 		
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -32,8 +32,10 @@ public class ItemsInCartDAO extends BaseDAO{
 			
 			if (rs.next()) {
 				dto = new ItemsInCartDTO();
-				UsersDTO users = new UsersDTO();
-				ItemsDTO items = new ItemsDTO();
+				UsersDAO dao1 = new UsersDAO(conn);
+				ItemsDAO dao2 = new ItemsDAO(conn);
+				UsersDTO users = dao1.findById(rs.getString("user_id"));
+				ItemsDTO items = dao2.findById(rs.getInt("item_id"));
 
 				dto.setUserId(rs.getString("user_id"));
 				dto.setItemId(rs.getInt("item_id"));
@@ -49,37 +51,44 @@ public class ItemsInCartDAO extends BaseDAO{
 
 	}
 	
-	public ItemsInCartDTO findById(String userId) throws SQLException {
+	public List<ItemsInCartDTO> findById(String userId) throws SQLException {
 		
-		String sql = "SELECT * FROM items_in_cart WHERE user_id = ?";
+		String sql = "SELECT * FROM items_in_cart INNER JOIN users ON items_in_cart.user_id = users.user_id INNER JOIN items ON items_in_cart.item_id = items.item_id WHERE items_in_cart.user_id = ?";
 		ItemsInCartDTO dto = null;
+		List<ItemsInCartDTO> list = new ArrayList<>();
+		
 		
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, userId);
 				
 			ResultSet rs = ps.executeQuery();
 			
-			if (rs.next()) {
-				dto = new ItemsInCartDTO();
-				UsersDTO users = new UsersDTO();
-				ItemsDTO items = new ItemsDTO();
+			while (rs.next()) {
 
+				dto = new ItemsInCartDTO();
+				UsersDAO dao1 = new UsersDAO(conn);
+				ItemsDAO dao2 = new ItemsDAO(conn);
+				UsersDTO users = dao1.findById(rs.getString("user_id"));
+				ItemsDTO items = dao2.findById(rs.getInt("item_id"));
+				
 				dto.setUserId(rs.getString("user_id"));
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setAmount(rs.getInt("amount"));
 				dto.setBookedDate(rs.getDate("booked_date"));
 				dto.setUsers(users);
 				dto.setItems(items);
+				
+				list.add(dto);
 			}
 		}
 
-		return dto;
+		return list;
 
 	}
 	
 	public List<ItemsInCartDTO> findALL() throws SQLException {
 
-		String sql = "SELECT * FROM items_in_cart";
+		String sql = "SELECT * FROM items_in_cart INNER JOIN users ON items_in_cart.user_id = users.user_id INNER JOIN items ON items_in_cart.item_id = items.item_id";
 
 		List<ItemsInCartDTO> list = new ArrayList<>();
 
@@ -89,8 +98,10 @@ public class ItemsInCartDAO extends BaseDAO{
 
 			while (rs.next()) {
 				ItemsInCartDTO dto = new ItemsInCartDTO();
-				UsersDTO users = new UsersDTO();
-				ItemsDTO items = new ItemsDTO();
+				UsersDAO dao1 = new UsersDAO(conn);
+				ItemsDAO dao2 = new ItemsDAO(conn);
+				UsersDTO users = dao1.findById(rs.getString("user_id"));
+				ItemsDTO items = dao2.findById(rs.getInt("item_id"));
 
 				dto.setUserId(rs.getString("user_id"));
 				dto.setItemId(rs.getInt("item_id"));
@@ -128,8 +139,7 @@ public class ItemsInCartDAO extends BaseDAO{
 	
 	public int update(ItemsInCartDTO dto) throws SQLException {
 
-		//ここ相談
-		String sql = "UPDATE items_in_cart SET amount = ?, booked_date = ? where user_id = ? AND item_id = ?";
+		String sql = "UPDATE items_in_cart SET amount = (amount - ?), booked_date = ? where user_id = ? AND item_id = ?";
 
 		int updateLowNum = 0;
 
@@ -149,7 +159,7 @@ public class ItemsInCartDAO extends BaseDAO{
 	
 	public int delete(ItemsInCartDTO dto) throws SQLException{
 		
-		String sql = "DELETE FROM item_in_cart where user_id = ? and item_id = ?";
+		String sql = "DELETE FROM items_in_cart where user_id = ? and item_id = ?";
 		
 		int updateLowNum = 0;
 		

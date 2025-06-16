@@ -18,7 +18,8 @@ public class ItemsDAO extends BaseDAO{
 
 	public ItemsDTO findById(int itemId) throws SQLException {
 		
-		String sql = "SELECT * FROM items WHERE item_id = ?";
+		String sql = "SELECT * FROM items INNER JOIN categories "
+				+ "ON items.category_id = categories.category_id WHERE item_id = ?";
 		ItemsDTO dto = null;
 		
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -28,7 +29,8 @@ public class ItemsDAO extends BaseDAO{
 			
 			if (rs.next()) {
 				dto = new ItemsDTO();
-				CategoriesDTO categories = new CategoriesDTO();
+				CategoriesDAO dao = new CategoriesDAO(conn);
+				CategoriesDTO categories = dao.findById(rs.getInt("category_id"));
 
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setName(rs.getString("name"));
@@ -48,7 +50,8 @@ public class ItemsDAO extends BaseDAO{
 		
 	public List<ItemsDTO> findByItemName(String keyword) throws SQLException{
 		
-		String sql = "SELECT * FROM items WHERE name LIKE '?'";
+		String sql = "SELECT * FROM items INNER JOIN categories "
+				+ "ON items.category_id = categories.category_id WHERE items.name LIKE ?";
 
 		List<ItemsDTO> list = new ArrayList<>();
 
@@ -59,9 +62,13 @@ public class ItemsDAO extends BaseDAO{
 
 			ResultSet rs = ps.executeQuery();
 
+			
+			
 			while (rs.next()) {
 				ItemsDTO dto = new ItemsDTO();
-				CategoriesDTO categories = new CategoriesDTO();
+				CategoriesDAO dao = new CategoriesDAO(conn);
+				CategoriesDTO categories = dao.findById(rs.getInt("category_id"));
+
 				
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setName(rs.getString("name"));
@@ -83,7 +90,8 @@ public class ItemsDAO extends BaseDAO{
 	
 	public List<ItemsDTO> findALL() throws SQLException {
 
-		String sql = "SELECT * FROM items";
+		String sql = "SELECT * FROM items INNER JOIN categories "
+				+ "ON items.category_id = categories.category_id";
 
 		List<ItemsDTO> list = new ArrayList<>();
 
