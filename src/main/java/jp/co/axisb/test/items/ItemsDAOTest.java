@@ -38,6 +38,9 @@ public class ItemsDAOTest {
 	            
 	         //正しくDTOにレコードの値を詰めてるか確認する
 	         ItemsDTO itemsDTO = dao.findById(1);
+	         
+	         assertNotNull(itemsDTO);
+	         
 	         assertEquals(1, itemsDTO.getItemId());
 	         assertEquals("麦わら帽子", itemsDTO.getName());
 	         assertEquals("日本帽子製造", itemsDTO.getManufacturer());
@@ -46,6 +49,7 @@ public class ItemsDAOTest {
 	         assertEquals(4980, itemsDTO.getPrice());
 	         assertEquals(12, itemsDTO.getStock());
 	         assertEquals(false, itemsDTO.isRecommended());
+	         assertEquals("帽子", itemsDTO.getCategories().getName());
 	            
 	         //存在しない主キーを指定した場合、NULLを返す事を確認する
 	         itemsDTO = dao.findById(9999);
@@ -78,6 +82,7 @@ public class ItemsDAOTest {
 	         assertEquals(4980, dto.getPrice());
 	         assertEquals(12, dto.getStock());
 	         assertEquals(false, dto.isRecommended());
+	         assertEquals("帽子", dto.getCategories().getName());
 	            
 	         //存在しない主キーを指定した場合、NULLを返す事を確認する
 	         itemsDTO = dao.findByItemName("田中");
