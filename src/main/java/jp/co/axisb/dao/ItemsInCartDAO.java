@@ -53,7 +53,7 @@ public class ItemsInCartDAO extends BaseDAO{
 	
 	public List<ItemsInCartDTO> findById(String userId) throws SQLException {
 		
-		String sql = "SELECT * FROM items_in_cart INNER JOIN users ON items_in_cart.user_id = users.user_id INNER JOIN items ON items_in_cart.item_id = items.item_id WHERE user_id = ?";
+		String sql = "SELECT * FROM items_in_cart INNER JOIN users ON items_in_cart.user_id = users.user_id INNER JOIN items ON items_in_cart.item_id = items.item_id WHERE items_in_cart.user_id = ?";
 		ItemsInCartDTO dto = null;
 		List<ItemsInCartDTO> list = new ArrayList<>();
 		
