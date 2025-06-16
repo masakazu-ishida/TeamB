@@ -18,9 +18,7 @@ public class PurchasesDetailsDAO extends BaseDAO {
 
 	public List<PurchasesDetailsDTO> findById(int purchasesId) throws SQLException {
 
-		String sql = "select * from purchase_details where purchase_id = ?";
-
-		PurchasesDetailsDTO dto = null;
+		String sql = "select purchase_detail_id,purchase_id,item_id,amount from purchase_details where purchase_id = ?";
 
 		List<PurchasesDetailsDTO> list = new ArrayList<>();
 
@@ -31,13 +29,14 @@ public class PurchasesDetailsDAO extends BaseDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				ItemsDTO itemsdto = new ItemsDTO();
+				PurchasesDetailsDTO dto = new PurchasesDetailsDTO();
+				ItemsDTO item = new ItemsDTO();
 
 				dto.setPurchasesDetailsId(rs.getInt("purchase_detail_id"));
 				dto.setPurchasesId(rs.getInt("purchase_id"));
 				dto.setItemId(rs.getInt("item_id"));
 				dto.setAmount(rs.getInt("amount"));
-				dto.setItems(itemsdto);
+				dto.setItems(item);
 				list.add(dto);
 			}
 		}

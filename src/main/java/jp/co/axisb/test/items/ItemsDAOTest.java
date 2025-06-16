@@ -1,14 +1,12 @@
 package jp.co.axisb.test.items;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
 import java.util.List;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import jp.co.axisb.dao.BaseDAO;
 import jp.co.axisb.dao.ItemsDAO;
@@ -83,7 +81,7 @@ public class ItemsDAOTest {
 	            
 	         //存在しない主キーを指定した場合、NULLを返す事を確認する
 	         itemsDTO = dao.findByItemName("田中");
-	         assertNull(itemsDTO);
+	         assertEquals(0, itemsDTO.size());
 	           
 		 }catch(Exception e) {
 	            fail(e.getMessage());
