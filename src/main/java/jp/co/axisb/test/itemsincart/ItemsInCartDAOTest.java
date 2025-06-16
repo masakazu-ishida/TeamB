@@ -1,5 +1,6 @@
 package jp.co.axisb.test.itemsincart;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -40,11 +41,23 @@ public class ItemsInCartDAOTest {
 	            
 	         //正しくDTOにレコードの値を詰めてるか確認する
 	         ItemsInCartDTO itemsDTO = dao.findById("user", 1);
+	         
+	         assertNotNull(itemsDTO);
+	         
 	         assertEquals("user", itemsDTO.getUserId());
 	         assertEquals(1, itemsDTO.getItemId());
 	         assertEquals(5, itemsDTO.getAmount());
 	         assertEquals(java.sql.Date.valueOf("2020-10-20"), itemsDTO.getBookedDate());
-
+	         assertEquals("userpass", itemsDTO.getUsers().getPassword());
+	         assertEquals("鳥取一郎", itemsDTO.getUsers().getName());
+	         assertEquals("鳥取県鳥取市河原町６丁目１０７", itemsDTO.getUsers().getAddress());
+	         assertEquals("麦わら帽子", itemsDTO.getItems().getName());
+	         assertEquals("日本帽子製造", itemsDTO.getItems().getManufacturer());
+	         assertEquals(1, itemsDTO.getItems().getCategoryId());
+	         assertEquals("黄色", itemsDTO.getItems().getColor());
+	         assertEquals(4980, itemsDTO.getItems().getPrice());
+	         assertEquals(12, itemsDTO.getItems().getStock());
+	         assertEquals(false, itemsDTO.getItems().isRecommended());
 	            
 	         //存在しない主キーを指定した場合、NULLを返す事を確認する
 	         itemsDTO = dao.findById("user", 9999);
@@ -75,6 +88,16 @@ public class ItemsInCartDAOTest {
 	         assertEquals(1, dto.getItemId());
 	         assertEquals(5, dto.getAmount());
 	         assertEquals(java.sql.Date.valueOf("2020-10-20"), dto.getBookedDate());
+	         assertEquals("userpass", dto.getUsers().getPassword());
+	         assertEquals("鳥取一郎", dto.getUsers().getName());
+	         assertEquals("鳥取県鳥取市河原町６丁目１０７", dto.getUsers().getAddress());
+	         assertEquals("麦わら帽子", dto.getItems().getName());
+	         assertEquals("日本帽子製造", dto.getItems().getManufacturer());
+	         assertEquals(1, dto.getItems().getCategoryId());
+	         assertEquals("黄色", dto.getItems().getColor());
+	         assertEquals(4980, dto.getItems().getPrice());
+	         assertEquals(12, dto.getItems().getStock());
+	         assertEquals(false, dto.getItems().isRecommended());
 
 	           //サイズ確認
 	         itemsDTO = dao.findById("aaaaaaa"); 
@@ -100,7 +123,17 @@ public class ItemsInCartDAOTest {
 	         assertEquals(1, dto.getItemId());
 	         assertEquals(5, dto.getAmount());
 	         assertEquals(java.sql.Date.valueOf("2020-10-20"), dto.getBookedDate());
-
+	         assertEquals("userpass", dto.getUsers().getPassword());
+	         assertEquals("鳥取一郎", dto.getUsers().getName());
+	         assertEquals("鳥取県鳥取市河原町６丁目１０７", dto.getUsers().getAddress());
+	         assertEquals("麦わら帽子", dto.getItems().getName());
+	         assertEquals("日本帽子製造", dto.getItems().getManufacturer());
+	         assertEquals(1, dto.getItems().getCategoryId());
+	         assertEquals("黄色", dto.getItems().getColor());
+	         assertEquals(4980, dto.getItems().getPrice());
+	         assertEquals(12, dto.getItems().getStock());
+	         assertEquals(false, dto.getItems().isRecommended());
+	         
 	         //サイズ確認
 	         for (int i = 1; i < 4; i++) {
 					dto.setItemId(i);
