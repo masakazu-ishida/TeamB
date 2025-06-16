@@ -32,11 +32,7 @@ public class CategoriesDAO extends BaseDAO{
 
 				categoriesdto.setCotegoryId(rs.getInt("category_id"));
 				categoriesdto.setName(rs.getString("name"));
-
-				categoriesdto =new CategoriesDTO();
-				
-				categoriesdto.setCotegoryId(rs.getInt("category_id"));
-				categoriesdto.setName(rs.getString("name"));	
+			
 			}
 		}
 		return categoriesdto;
@@ -45,9 +41,9 @@ public class CategoriesDAO extends BaseDAO{
 
 
 	public List<CategoriesDTO>findAll() throws SQLException{
-		CategoriesDTO categoriesdto = null;
+		//CategoriesDTO categoriesdto = null;➡５４行目の書き方が正しい
 		
-		String sql = "SELECT * FROM categories";
+		String sql = "SELECT category_id, name FROM public.categories";
 		
 		List<CategoriesDTO> list = new ArrayList<>();
 
@@ -55,7 +51,7 @@ public class CategoriesDAO extends BaseDAO{
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				categoriesdto = new CategoriesDTO();
+				CategoriesDTO categoriesdto = new CategoriesDTO();
 
 				categoriesdto.setCotegoryId(rs.getInt("category_id"));
 				categoriesdto.setName(rs.getString("name"));
