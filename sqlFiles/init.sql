@@ -65,3 +65,8 @@ insert into items_in_cart values('user',1,5,'2020/10/20');
 insert into items_in_cart values('user',2,1,'2020/10/20');
 insert into items_in_cart values('user',3,3,'2020/10/20');
 
+/*purchases、purchase_detailsのテスト用レコード*/
+insert into purchases values(1,'user1',current_date,'テスト',false);
+insert into purchase_details values(1,1,20,1);
+
+
