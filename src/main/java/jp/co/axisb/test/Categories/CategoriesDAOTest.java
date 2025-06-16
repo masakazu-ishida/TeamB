@@ -13,6 +13,7 @@ import jp.co.axisb.util.ConnectionUtil;
 
 class CategoriesDAOTest {
 
+	//キー検索
 	@Test
 	void testfindById() {
 		try(Connection conn = ConnectionUtil.getConnectionForJUnit()) {
@@ -21,6 +22,10 @@ class CategoriesDAOTest {
 			//正しくDTOにレコードの値を詰めてるか確認する
 			CategoriesDTO categoriesdto = dao.findById(0);
 			
+			//入力値がNULLではないことを検証
+			assertNotNull(categoriesdto);
+			
+			//findById(０)で指定した行を取得
 			assertEquals(0, categoriesdto.getCotegoryId());
 			assertEquals("すべて", categoriesdto.getName());
 			
@@ -28,11 +33,15 @@ class CategoriesDAOTest {
 			categoriesdto = dao.findById(6);
 			assertNull(categoriesdto);
 			
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			fail(e.getMessage());
 		}	
 	}
+	
+	//全検索
 	@Test
 	void  testFindAll() {
 		try(Connection conn = ConnectionUtil.getConnectionForJUnit()) {
@@ -41,10 +50,10 @@ class CategoriesDAOTest {
 			try {
 				List<CategoriesDTO> list = dao.findAll();
 				assertEquals(3, list.size());
-				CategoriesDTO categoriesdto = list.get(1);
+				CategoriesDTO categoriesdto = list.get(0);
 				
-				assertEquals(1, categoriesdto.getCotegoryId());
-				assertEquals("帽子", categoriesdto.getName());
+				assertEquals(0, categoriesdto.getCotegoryId());
+				assertEquals("すべて", categoriesdto.getName());
 				
 				
 				
