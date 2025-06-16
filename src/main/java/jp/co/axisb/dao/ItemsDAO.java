@@ -55,9 +55,8 @@ public class ItemsDAO extends BaseDAO{
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			
-			ps.setString(1, keyword);
+			ps.setString(1, "%" + keyword + "%");
 
-			System.out.println(ps);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
