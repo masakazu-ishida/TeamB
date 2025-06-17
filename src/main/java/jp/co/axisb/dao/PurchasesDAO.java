@@ -31,7 +31,7 @@ public class PurchasesDAO extends BaseDAO {
 				+ "\n"
 				+ "	inner join items\n"
 				+ "	ON purchase_details.item_id = items.item_id\n"
-				+ "	where purchases.purchase_id = ?";
+				+ "	where purchases.purchase_id = ? and purchases.cancel = false";
 
 		PurchasesDTO dto = null;
 
@@ -122,6 +122,7 @@ public class PurchasesDAO extends BaseDAO {
 				+ "\n"
 				+ "	inner join items\n"
 				+ "	ON purchase_details.item_id = items.item_id";
+		//				purchases.cancel = false;
 
 		List<PurchasesDTO> list = new ArrayList<>();
 

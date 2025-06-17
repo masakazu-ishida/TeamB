@@ -1,7 +1,8 @@
 DELETE FROM items_in_cart;
-DELETE FROM items;
+
 DELETE FROM purchase_details;
 DELETE FROM purchases;
+DELETE FROM items;
 DELETE FROM categories;
 DELETE FROM users;
 DELETE FROM administrators;
