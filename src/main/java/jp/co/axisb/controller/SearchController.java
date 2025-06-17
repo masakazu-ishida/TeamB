@@ -39,7 +39,21 @@ public class SearchController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);]
+
+		//リクエストパラメータを取り出す
+		request.getParameter();
+		//サーチサービスをインスタンス化
+		SearchService search = new SearchService();
+
+		//サーチサービスのサーチメソッドを呼び出す
+
+		//引数には検索キーワードとカテゴリIDを渡す
+
+		//サービスからの戻り値をセットアトリビュートする
+
+		//フォワード
+
 	}
 
 }
