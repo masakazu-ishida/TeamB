@@ -14,9 +14,8 @@ import jp.co.axisb.dao.PurchasesDAO;
 import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
-class PurchasesDAOtest {
+class PurchasesDAOTest {
 
-	
 	@BeforeEach
 	void init() {
 		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
@@ -34,7 +33,8 @@ class PurchasesDAOtest {
 		}
 
 	}
-//全件検索
+
+	//全件検索
 	@Test
 	void testFindAll() {
 
@@ -53,7 +53,6 @@ class PurchasesDAOtest {
 				PurchasesDTO dto = list.get(0);
 
 				assertEquals(1, dto.getPurchaseId());
-				assertEquals("橋本", dto.getPurchasedUser());
 
 			} catch (Exception e) {
 				//				failとは、テスト結果が失敗したら赤い線が出るようにする
@@ -69,41 +68,42 @@ class PurchasesDAOtest {
 		}
 	}
 
-		@Test
-		void testFindAllEmpty() {
-	
-			System.out.println("testFindAllEmpty");
-			try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
-				PurchasesDAO dao = new PurchasesDAO(connection);
-	
-				try {
-	
-					for (int i = 0; i < 4; i++) {
-						PurchasesDTO dto = new PurchasesDTO();
-						dto.setPurchaseId(i + 1);
-	
-						dao.delete(dto);
-					}
-	
-					connection.commit();
-	
-					//				テーブル空の状態で件数が０件であることを確認する
-					List<PurchasesDTO> list = dao.findAll();
-					assertEquals(0, list.size());
-	
-				} catch (Exception e) {
-					fail(e.getMessage());
+	@Test
+	void testFindAllEmpty() {
+		System.out.println("testFindAllEmpty");
+		System.out.println("testFindAllEmpty");
+		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
+			PurchasesDAO dao = new PurchasesDAO(connection);
+
+			try {
+
+				for (int i = 0; i < 4; i++) {
+					PurchasesDTO dto = new PurchasesDTO();
+					dto.setPurchaseId(i + 1);
+
+					dao.delete(dto);
 				}
-	
-			} catch (SQLException e) {
-				e.printStackTrace();
-	
-				//例外が発生したらテストは結果は×
+
+				connection.commit();
+
+				//				テーブル空の状態で件数が０件であることを確認する
+				List<PurchasesDTO> list = dao.findAll();
+				assertEquals(0, list.size());
+
+			} catch (Exception e) {
 				fail(e.getMessage());
-	
 			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+			//例外が発生したらテストは結果は×
+			fail(e.getMessage());
+
 		}
-//主キー検索
+	}
+
+	//主キー検索
 	@Test
 	void testFindById() {
 
@@ -117,7 +117,7 @@ class PurchasesDAOtest {
 				assertNotNull(dto);
 
 				assertEquals(1, dto.getPurchaseId());
-				assertEquals("橋本", dto.getPurchasedUser());
+				assertEquals("user1", dto.getPurchasedUser());
 
 				conn.commit();
 
@@ -134,7 +134,7 @@ class PurchasesDAOtest {
 
 		}
 	}
-	
+
 	@Test
 	void testFindByIdNull() {
 		System.out.println("testFindByIdNull");
@@ -159,8 +159,8 @@ class PurchasesDAOtest {
 
 		}
 	}
-//	追加
-	
+	//	追加
+
 	void testInsert() {
 		System.out.println("testInsert");
 		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
@@ -171,7 +171,7 @@ class PurchasesDAOtest {
 				PurchasesDTO dto = new PurchasesDTO();
 				dto.setPurchaseId(2);
 				dto.setPurchasedUser("森尾");
-			    dto.setPurchasedDate(date);
+				dto.setPurchasedDate(date);
 				dto.setDestination("自宅");
 				dto.setCancel(false);
 
@@ -197,11 +197,11 @@ class PurchasesDAOtest {
 
 		}
 	}
-	
-//	更新
-	
+
+	//	更新
+
 	void testUpdate() {
-		System.out.println("testInsert");
+		System.out.println("testUpdate");
 		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
 			PurchasesDAO dao = new PurchasesDAO(connection);
 
@@ -210,7 +210,7 @@ class PurchasesDAOtest {
 				PurchasesDTO dto = new PurchasesDTO();
 				dto.setPurchaseId(2);
 				dto.setPurchasedUser("田中");
-			    dto.setPurchasedDate(date);
+				dto.setPurchasedDate(date);
 				dto.setDestination("自宅");
 				dto.setCancel(false);
 

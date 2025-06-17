@@ -1,11 +1,29 @@
 package jp.co.axisb.dto;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class PurchasesDTO {
 
 	private int purchaseId;
+	private String userId;
+
+	public List<PurchasesDetailsDTO> getPurchasesDetails() {
+		return purchasesDetails;
+	}
+
+	public void setPurchasesDetails(List<PurchasesDetailsDTO> purchasesDetails) {
+		this.purchasesDetails = purchasesDetails;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	private String purchasedUser;
 	private UsersDTO users;
 	private Date purchasedDate;
