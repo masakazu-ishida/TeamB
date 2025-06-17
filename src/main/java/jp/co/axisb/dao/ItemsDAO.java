@@ -48,10 +48,10 @@ public class ItemsDAO extends BaseDAO{
 
 	}
 		
-	public List<ItemsDTO> findByItemName(String keyword) throws SQLException{
+	public List<ItemsDTO> findByItemName(String keyword, int categoryId) throws SQLException{
 		
 		String sql = "SELECT * FROM items INNER JOIN categories "
-				+ "ON items.category_id = categories.category_id WHERE items.name LIKE ?";
+				+ "ON items.category_id = categories.category_id WHERE items.name LIKE ? and categories.category_id = ?";
 
 		List<ItemsDTO> list = new ArrayList<>();
 
@@ -59,6 +59,7 @@ public class ItemsDAO extends BaseDAO{
 
 			
 			ps.setString(1, "%" + keyword + "%");
+			ps.setInt(2, categoryId);
 
 			ResultSet rs = ps.executeQuery();
 

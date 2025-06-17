@@ -68,7 +68,7 @@ public class ItemsDAOTest {
 			 ItemsDAO dao  = new ItemsDAO(conn);
 	            
 	         //正しくDTOにレコードの値を詰めてるか確認する
-	         List<ItemsDTO> itemsDTO = dao.findByItemName("麦わら");
+	         List<ItemsDTO> itemsDTO = dao.findByItemName("麦わら", 1);
 
 	         
 	         assertEquals(2, itemsDTO.size());
@@ -85,8 +85,29 @@ public class ItemsDAOTest {
 	         assertEquals("帽子", dto.getCategories().getName());
 	            
 	         //存在しない主キーを指定した場合、NULLを返す事を確認する
-	         itemsDTO = dao.findByItemName("田中");
+	         itemsDTO = dao.findByItemName("田中", 1);
 	         assertEquals(0, itemsDTO.size());
+	         
+	       //存在しない主キーを指定した場合、NULLを返す事を確認する
+	         itemsDTO = dao.findByItemName("麦わら", 9999);
+	         assertEquals(0, itemsDTO.size());
+	         
+	         //キーワードがない場合
+	         itemsDTO = dao.findByItemName("", 1);
+	         
+	         assertEquals(11, itemsDTO.size());
+	         
+	         ItemsDTO dto2 = itemsDTO.get(0);
+		     assertEquals(1, dto2.getItemId());
+		     assertEquals("麦わら帽子", dto2.getName());
+		     assertEquals("日本帽子製造", dto2.getManufacturer());
+		     assertEquals(1, dto2.getCategoryId());
+	         assertEquals("黄色", dto2.getColor());
+	         assertEquals(4980, dto2.getPrice());
+	         assertEquals(12, dto2.getStock());
+	         assertEquals(false, dto2.isRecommended());
+	         assertEquals("帽子", dto2.getCategories().getName());
+	         
 	           
 		 }catch(Exception e) {
 	            fail(e.getMessage());
