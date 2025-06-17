@@ -111,15 +111,12 @@ public class PurchasesDAO extends BaseDAO {
 	// 全件検索
 	public List<PurchasesDTO> findAll() throws SQLException {
 		String sql = "SELECT purchases.purchase_id, purchases.purchased_user, purchases.purchased_date, purchases.destination, purchases.cancel,\n"
-				+ "       purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,\n"
-				+ "	   items.item_id, items.name, items.manufacturer,items.category_id\n"
-				+ "       \n"
-				+ "	  \n"
-				+ "	FROM purchases inner join purchase_details\n"
-				+ "	ON purchases.purchase_id = purchase_details.purchase_id\n"
-				+ "\n"
-				+ "	inner join items\n"
-				+ "	ON purchase_details.item_id = items.item_id"
+				+ "purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,\n"
+				+ "items.item_id, items.name, items.manufacturer,items.category_id\n"
+				+ "FROM purchases inner join purchase_details\n"
+				+ "ON purchases.purchase_id = purchase_details.purchase_id\n"
+				+ "inner join items\n"
+				+ "ON purchase_details.item_id = items.item_id\n"
 				+ "where purchases.cancel = false";
 
 		List<PurchasesDTO> list = new ArrayList<>();
@@ -127,6 +124,7 @@ public class PurchasesDAO extends BaseDAO {
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ResultSet rs = ps.executeQuery();
+			System.out.println(rs);
 
 			while (rs.next()) {
 				PurchasesDetailsDAO dao = new PurchasesDetailsDAO(conn);
@@ -143,7 +141,6 @@ public class PurchasesDAO extends BaseDAO {
 				dto.setUsers(users);
 
 				for (PurchasesDetailsDTO pd : list2) {
-					dto = new PurchasesDTO();
 					ItemsDTO items = new ItemsDTO();
 					pd.setPurchasesDetailsId(rs.getInt("purchase_detail_id"));
 					pd.setPurchasesId(rs.getInt("purchase_id"));
@@ -151,6 +148,8 @@ public class PurchasesDAO extends BaseDAO {
 					pd.setAmount(rs.getInt("amount"));
 					pd.setItems(items);
 				}
+
+				list.add(dto);
 
 			}
 		}

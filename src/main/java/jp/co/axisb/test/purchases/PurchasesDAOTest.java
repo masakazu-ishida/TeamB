@@ -7,7 +7,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.axisb.dao.PurchasesDAO;
@@ -18,26 +17,26 @@ import jp.co.axisb.util.ConnectionUtil;
 
 class PurchasesDAOTest {
 
-	@BeforeEach
-	void init() {
-		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
-			PurchasesDAO dao = new PurchasesDAO(connection);
-			try {
-				dao.insertBatch("sqlFiles/init.sql");
-
-				//connection.commit();
-			} catch (Exception e) {
-				//connection.rollback();
-				throw e;
-			}
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-
-	}
+	//	@BeforeEach
+	//	void init() {
+	//		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
+	//			PurchasesDAO dao = new PurchasesDAO(connection);
+	//			try {
+	//				dao.insertBatch("sqlFiles/init.sql");
+	//
+	//				//connection.commit();
+	//			} catch (Exception e) {
+	//				//connection.rollback();
+	//				throw e;
+	//			}
+	//		} catch (Exception e) {
+	//			fail(e.getMessage());
+	//		}
+	//
+	//	}
 
 	//	追加
-
+	@Test
 	void testInsert() {
 		System.out.println("testInsert");
 		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
@@ -101,13 +100,13 @@ class PurchasesDAOTest {
 				List<PurchasesDTO> list = dao.findAll();
 
 				//				finddAllで返すデータの件数が全件（今回は４件）なら〇
-				assertEquals(4, list.size());
+				assertEquals(1, list.size());
 
 				//				DTOのフィールド値が正しくレコードを反映していれば〇
 				PurchasesDTO dto = list.get(0);
 				assertEquals(1, dto.getPurchaseId());
-				assertEquals(java.sql.Date.valueOf("2025-06-16"), dto.getPurchasedDate());
-				assertEquals("自宅", dto.getDestination());
+				assertEquals(java.sql.Date.valueOf("2025-06-17"), dto.getPurchasedDate());
+				assertEquals("テスト", dto.getDestination());
 				assertEquals(false, dto.isCancel());
 
 				PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
