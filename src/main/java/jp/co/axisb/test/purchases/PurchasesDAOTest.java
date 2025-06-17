@@ -14,7 +14,7 @@ import jp.co.axisb.dao.PurchasesDAO;
 import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
-class PurchasesDAOtest {
+class PurchasesDAOTest {
 
 	@BeforeEach
 	void init() {
@@ -70,7 +70,7 @@ class PurchasesDAOtest {
 
 	@Test
 	void testFindAllEmpty() {
-
+		System.out.println("testFindAllEmpty");
 		System.out.println("testFindAllEmpty");
 		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
 			PurchasesDAO dao = new PurchasesDAO(connection);
@@ -201,7 +201,7 @@ class PurchasesDAOtest {
 	//	更新
 
 	void testUpdate() {
-		System.out.println("testInsert");
+		System.out.println("testUpdate");
 		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
 			PurchasesDAO dao = new PurchasesDAO(connection);
 
