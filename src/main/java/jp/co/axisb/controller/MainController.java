@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MainController
  */
-@WebServlet(name = "main", urlPatterns = { "/main" })
+@WebServlet(name = "mainController", urlPatterns = { "/mainController" })
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class MainController extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		//メインへの遷移
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/main.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/main/WEB-INF/main.jsp");
 		rd.forward(request, response);
 	}
 
