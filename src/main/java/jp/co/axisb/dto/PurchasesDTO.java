@@ -30,6 +30,15 @@ public class PurchasesDTO {
 	private String destination;
 	private boolean cancel;
 	private List<PurchasesDetailsDTO> purchasesDetails;
+	private ItemsDTO items;
+
+	public ItemsDTO getItems() {
+		return items;
+	}
+
+	public void setItems(ItemsDTO items) {
+		this.items = items;
+	}
 
 	public int getPurchaseId() {
 		return purchaseId;

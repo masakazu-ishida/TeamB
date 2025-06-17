@@ -111,12 +111,15 @@ public class PurchasesDAO extends BaseDAO {
 	// 全件検索
 	public List<PurchasesDTO> findAll() throws SQLException {
 		String sql = "SELECT purchases.purchase_id, purchases.purchased_user, purchases.purchased_date, purchases.destination, purchases.cancel,\n"
-				+ "purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,\n"
-				+ "items.item_id, items.name, items.manufacturer,items.category_id\n"
+				+ "purchase_details.purchase_detail_id, purchase_details.item_id AS purchaseDetailsItemId, purchase_details.amount, purchase_details.purchase_id AS purchaseDetailsPurchaseId, \n"
+				+ "items.item_id AS itemsItemId, items.name, items.manufacturer,items.category_id, \n"
+				+ "users.user_id \n"
 				+ "FROM purchases inner join purchase_details\n"
 				+ "ON purchases.purchase_id = purchase_details.purchase_id\n"
 				+ "inner join items\n"
 				+ "ON purchase_details.item_id = items.item_id\n"
+				+ "inner join users\n"
+				+ "ON purchases.purchased_user = users.user_id\n"
 				+ "where purchases.cancel = false";
 
 		List<PurchasesDTO> list = new ArrayList<>();
@@ -131,23 +134,34 @@ public class PurchasesDAO extends BaseDAO {
 
 				PurchasesDTO dto = new PurchasesDTO();
 
+				ItemsDTO items = new ItemsDTO();
 				UsersDTO users = new UsersDTO();
 
 				List<PurchasesDetailsDTO> list2 = dao.findById(rs.getInt("purchase_id"));
+
+				items.setCategoryId(rs.getInt("category_id"));
+				items.setItemId(rs.getInt("itemsItemId"));
+				items.setManufacturer(rs.getString("manufacturer"));
+				items.setName(rs.getString("name"));
+
+				users.setUserId(rs.getString("user_id"));
+
 				dto.setPurchaseId(rs.getInt("purchase_id"));
 				dto.setPurchasedDate(rs.getDate("purchased_date"));
 				dto.setDestination(rs.getString("destination"));
 				dto.setCancel(rs.getBoolean("cancel"));
 				dto.setUsers(users);
+				dto.setItems(items);
 
 				for (PurchasesDetailsDTO pd : list2) {
-					ItemsDTO items = new ItemsDTO();
+					PurchasesDetailsDTO purchasesDetails = new PurchasesDetailsDTO();
 					pd.setPurchasesDetailsId(rs.getInt("purchase_detail_id"));
 					pd.setPurchasesId(rs.getInt("purchase_id"));
-					pd.setItemId(rs.getInt("item_id"));
+					pd.setItemId(rs.getInt("purchaseDetailsItemId"));
 					pd.setAmount(rs.getInt("amount"));
 					pd.setItems(items);
 				}
+				dto.setPurchaseDetailDTO(list2);
 
 				list.add(dto);
 
