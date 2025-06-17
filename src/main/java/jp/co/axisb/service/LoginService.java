@@ -1,4 +1,4 @@
-package Service;
+package jp.co.axisb.service;
 
 import java.sql.Connection;
 
