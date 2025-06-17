@@ -3,6 +3,7 @@ package jp.co.axisb.test.purchases;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import jp.co.axisb.dao.PurchasesDAO;
 import jp.co.axisb.dto.PurchasesDTO;
+import jp.co.axisb.dto.PurchasesDetailsDTO;
+import jp.co.axisb.dto.UsersDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
 class PurchasesDAOTest {
@@ -33,6 +36,58 @@ class PurchasesDAOTest {
 
 	}
 
+	//	追加
+
+	void testInsert() {
+		System.out.println("testInsert");
+		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
+			PurchasesDAO dao = new PurchasesDAO(connection);
+
+			try {
+				Date date = Date.valueOf("2025-10-21");
+				PurchasesDTO purchases = new PurchasesDTO();
+				UsersDTO users = new UsersDTO();
+				PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
+				purchases.setPurchaseId(2);
+				purchases.setPurchasedUser("user");
+				purchases.setPurchasedDate(date);
+				purchases.setDestination("自宅");
+				purchases.setCancel(false);
+				users.setUserId("user2");
+				users.setPassword("user2");
+				users.setName("user2");
+				users.setAddress("鳥取県鳥取市河原町６丁目１０８");
+				pd.setPurchasesDetailsId(1);
+				pd.setPurchasesId(1111111111);
+				pd.setItemId(1);
+				pd.setAmount(2);
+
+				int result = dao.insert(purchases);
+
+				//				SQLのinsertが成功しているのかをテスト。件数が1ならテスト〇
+				assertEquals(1, result);
+
+				PurchasesDTO search = dao.findById(result);
+
+				//				登録直後のデータを取得し、レコードに正しく反映されているか
+				assertEquals(2, search.getPurchaseId());
+				assertEquals("user2", search.getPurchasedUser());
+				assertEquals(date, search.getPurchasedDate());
+				assertEquals("自宅", search.getDestination());
+				assertEquals(false, search.isCancel());
+
+			} catch (SQLException e) {
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+			//例外が発生したらテストは結果は×
+			fail(e.getMessage());
+
+		}
+	}
+
 	//全件検索
 	@Test
 	void testFindAll() {
@@ -50,8 +105,22 @@ class PurchasesDAOTest {
 
 				//				DTOのフィールド値が正しくレコードを反映していれば〇
 				PurchasesDTO dto = list.get(0);
-
 				assertEquals(1, dto.getPurchaseId());
+				assertEquals(java.sql.Date.valueOf("2025-06-16"), dto.getPurchasedDate());
+				assertEquals("自宅", dto.getDestination());
+				assertEquals(false, dto.isCancel());
+
+				PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
+				assertEquals(1, pd.getPurchasesDetailsId());
+				assertEquals(1, pd.getItemId());
+				assertEquals(2, pd.getAmount());
+
+				for (int i = 1; i < 4; i++) {
+					dto.setPurchaseId(i);
+					dao.delete(dto);
+				}
+				list = dao.findAll();
+				assertEquals(0, list.size());
 
 			} catch (Exception e) {
 				//				failとは、テスト結果が失敗したら赤い線が出るようにする
@@ -158,44 +227,7 @@ class PurchasesDAOTest {
 	
 		}
 	}
-	//	追加
 	
-	void testInsert() {
-		System.out.println("testInsert");
-		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
-			PurchasesDAO dao = new PurchasesDAO(connection);
-	
-			try {
-				Date date = Date.valueOf("2025-10-21");
-				PurchasesDTO dto = new PurchasesDTO();
-				dto.setPurchaseId(2);
-				dto.setPurchasedUser("森尾");
-				dto.setPurchasedDate(date);
-				dto.setDestination("自宅");
-				dto.setCancel(false);
-	
-				int result = dao.insert(dto);
-	
-				//				SQLのinsertが成功しているのかをテスト。件数が1ならテスト〇
-				assertEquals(1, result);
-	
-				PurchasesDTO searchDTO = dao.findById(2);
-	
-				//				登録直後のデータを取得し、レコードに正しく反映されているか
-				assertEquals(2, searchDTO.getPurchaseId());
-				assertEquals("森尾", searchDTO.getPurchasedUser());
-	
-			} catch (SQLException e) {
-	
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-	
-			//例外が発生したらテストは結果は×
-			fail(e.getMessage());
-	
-		}
-	}
 	
 	//	更新
 	

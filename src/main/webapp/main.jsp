@@ -6,15 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>商品検索</title>
-<script type="text/javascript">
-function login(){
-	if()
-}
+
 </head>
 <body>
 	<h3>商品の検索を行います。</h3>
 		<br />
-	<form action='' method='POST'>
+	<form action='検索結果表示のコントローラーのパスを入れる' method='POST'>
 		キーワード<br />
 		<input type='text' name='keyword' /><br />
 			カテゴリ<br />
@@ -26,15 +23,15 @@ function login(){
 		<input type='submit' value='検索' /><br />
 	</form>
 	
-	<a href='cart.html'>ショッピングカートを見る</a><br /><br />
+	<a href='カート一覧表示のコントローラーのパスを入れる'>ショッピングカートを見る</a><br /><br />
 	<%
-		String a = request.getParameter();
-		if(a == null){
-			<div id="conn"><a href='login.html'>ログイン</a></div>
+		String userId = request.getParameter("userId");
+		if(userId == ""){
+			<div id="conn"><a href='ログイン画面のコントローラーのパスを入れる'>ログイン</a></div>
 		}
-
-		<a href='updateUser.html'>会員情報の変更</a><br />
 	%>
+
+	<a href='updateUser.html'>会員情報の変更</a><br />
 
 </body>
 </html>

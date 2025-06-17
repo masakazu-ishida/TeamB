@@ -10,30 +10,33 @@ import java.util.List;
 import jp.co.axisb.dto.CategoriesDTO;
 import jp.co.axisb.dto.ItemsDTO;
 
-public class ItemsDAO extends BaseDAO{
-	
+public class ItemsDAO extends BaseDAO {
+
 	public ItemsDAO(Connection conn) {
 		super(conn);
 	}
 
 	public ItemsDTO findById(int itemId) throws SQLException {
-		
-		String sql = "SELECT * FROM items INNER JOIN categories "
+
+		String sql = "SELECT items.item_id, items.name AS itemsName, items.manufacturer, items.category_id, items.color, items.price, items.stock, items.recommended, "
+				+ "categories.category_id, categories.name AS categoriesName "
+				+ "FROM items INNER JOIN categories "
 				+ "ON items.category_id = categories.category_id WHERE item_id = ?";
 		ItemsDTO dto = null;
-		
+
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, itemId);
-				
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
 				dto = new ItemsDTO();
-				CategoriesDAO dao = new CategoriesDAO(conn);
-				CategoriesDTO categories = dao.findById(rs.getInt("category_id"));
+				CategoriesDTO categories = new CategoriesDTO();
+				categories.setCotegoryId(rs.getInt("category_id"));
+				categories.setName(rs.getString("categoriesName"));
 
 				dto.setItemId(rs.getInt("item_id"));
-				dto.setName(rs.getString("name"));
+				dto.setName(rs.getString("itemsName"));
 				dto.setManufacturer(rs.getString("manufacturer"));
 				dto.setCategoryId(rs.getInt("category_id"));
 				dto.setColor(rs.getString("color"));
@@ -47,32 +50,32 @@ public class ItemsDAO extends BaseDAO{
 		return dto;
 
 	}
-		
-	public List<ItemsDTO> findByItemName(String keyword, int categoryId) throws SQLException{
-		
-		String sql = "SELECT * FROM items INNER JOIN categories "
+
+	public List<ItemsDTO> findByItemName(String keyword, int categoryId) throws SQLException {
+
+		String sql = "SELECT items.item_id, items.name AS itemsName, items.manufacturer, items.category_id, items.color, items.price, items.stock, items.recommended, "
+				+ "categories.category_id, categories.name AS categoriesName "
+				+ "FROM items INNER JOIN categories "
 				+ "ON items.category_id = categories.category_id WHERE items.name LIKE ? and categories.category_id = ?";
 
 		List<ItemsDTO> list = new ArrayList<>();
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			
 			ps.setString(1, "%" + keyword + "%");
 			ps.setInt(2, categoryId);
 
 			ResultSet rs = ps.executeQuery();
 
-			
-			
 			while (rs.next()) {
 				ItemsDTO dto = new ItemsDTO();
-				CategoriesDAO dao = new CategoriesDAO(conn);
-				CategoriesDTO categories = dao.findById(rs.getInt("category_id"));
 
-				
+				CategoriesDTO categories = new CategoriesDTO();
+				categories.setCotegoryId(rs.getInt("category_id"));
+				categories.setName(rs.getString("categoriesName"));
+
 				dto.setItemId(rs.getInt("item_id"));
-				dto.setName(rs.getString("name"));
+				dto.setName(rs.getString("itemsName"));
 				dto.setManufacturer(rs.getString("manufacturer"));
 				dto.setCategoryId(rs.getInt("category_id"));
 				dto.setColor(rs.getString("color"));
@@ -88,11 +91,12 @@ public class ItemsDAO extends BaseDAO{
 
 		return list;
 	}
-	
+
 	public List<ItemsDTO> findALL() throws SQLException {
 
-		String sql = "SELECT * FROM items INNER JOIN categories "
-				+ "ON items.category_id = categories.category_id";
+		String sql = "SELECT items.item_id, items.name AS itemsName, items.manufacturer, items.category_id, items.color, items.price, items.stock, items.recommended, "
+				+ "categories.category_id, categories.name AS categoriesName "
+				+ "FROM items INNER JOIN categories ON items.category_id = categories.category_id";
 
 		List<ItemsDTO> list = new ArrayList<>();
 
@@ -103,9 +107,11 @@ public class ItemsDAO extends BaseDAO{
 			while (rs.next()) {
 				ItemsDTO dto = new ItemsDTO();
 				CategoriesDTO categories = new CategoriesDTO();
+				categories.setCotegoryId(rs.getInt("category_id"));
+				categories.setName(rs.getString("categoriesName"));
 
 				dto.setItemId(rs.getInt("item_id"));
-				dto.setName(rs.getString("name"));
+				dto.setName(rs.getString("itemsName"));
 				dto.setManufacturer(rs.getString("manufacturer"));
 				dto.setCategoryId(rs.getInt("category_id"));
 				dto.setColor(rs.getString("color"));
@@ -113,7 +119,7 @@ public class ItemsDAO extends BaseDAO{
 				dto.setStock(rs.getInt("stock"));
 				dto.setRecommended(rs.getBoolean("recommended"));
 				dto.setCategories(categories);
-					
+
 				list.add(dto);
 			}
 		}
@@ -121,7 +127,7 @@ public class ItemsDAO extends BaseDAO{
 		return list;
 
 	}
-		
+
 	public int update(ItemsDTO dto) throws SQLException {
 
 		String sql = "UPDATE items SET stock = (stock - ?) where item_id = ?";
@@ -134,8 +140,8 @@ public class ItemsDAO extends BaseDAO{
 			ps.setInt(2, dto.getItemId());
 
 			updateLowNum = ps.executeUpdate();
-		}	
-		
+		}
+
 		return updateLowNum;
 
 	}
