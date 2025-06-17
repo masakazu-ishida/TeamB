@@ -48,19 +48,18 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		//セッションパラメータ
 		HttpSession session = request.getSession(true);
 		//カートJSPの商品IDを取得
-		String parameter = request.getParameter(itemId);
+		request.getParameter(itemId);
 		//カートJSPのユーザーIDを取得
 		String attribute = (String) session.getAttribute("userId");
 		//RemoveFromCartConfirmServiceをインスタンス化
 		RemoveFromCartConfirmService rfccservice = new RemoveFromCartConfirmService();
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出す
-
+		rfccservice.getItem();
 		//RemoveFromCartConfirmServiceからの戻り値をセットアトリビュートする
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
 
 	}
-
 }
