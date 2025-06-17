@@ -1,50 +1,28 @@
 package jp.co.axisb.service;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.jsp.tagext.TryCatchFinally;
-import javax.sql.rowset.serial.SerialException;
-
-import org.junit.platform.commons.function.Try;
 
 import jp.co.axisb.dao.ItemsInCartDAO;
 import jp.co.axisb.dto.ItemsInCartDTO;
+import jp.co.axisb.util.CommonConstants;
 import jp.co.axisb.util.ConnectionUtil;
 
 public class RemoveFromCartConfirmService {
 
-	public List<ItemsInCartDTO> removefromcartconfirmservice() throws SQLException, ServletException{
-		String lookupString = "java:comp/env/jdbc/ecsite";
-		try(Connection conn = ConnectionUtil.getConnection(lookupString)){
-		
-			
+	public ItemsInCartDTO getitem(String userId, int itemId) {
+
+		ItemsInCartDTO dto = null;
+
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			//DAOクラスのインスタンス化
-			ItemsInCartDAO itemsDao = new ItemsInCartDAO(conn);
-			
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
 
-			//DTOのインスタンス化とDAOクラスのfindByIdメソッド呼び出し
-			ItemsInCartDTO itemsDto = itemsDao.findById(null, searhItemId);
-			
-			
-			
+			return dao.findById(userId, itemId);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 
-			//リターンでDTOを返す
-
-			}
-			
-		
 	}
-	
-	
-	
-		
-		
-
-}
-
 }

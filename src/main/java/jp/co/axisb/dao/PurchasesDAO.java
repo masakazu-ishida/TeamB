@@ -22,16 +22,14 @@ public class PurchasesDAO extends BaseDAO {
 	public PurchasesDTO findById(int purchaseId) throws SQLException {
 
 		String sql = "SELECT purchases.purchase_id, purchases.purchased_user, purchases.purchased_date, purchases.destination, purchases.cancel,\n"
-				+ "       purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,\n"
-				+ "	   items.item_id, items.name, items.manufacturer,items.category_id\n"
-				+ "       \n"
-				+ "	  \n"
-				+ "	FROM purchases inner join purchase_details\n"
-				+ "	ON purchases.purchase_id = purchase_details.purchase_id\n"
+				+ "purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,\n"
+				+ "items.item_id, items.name, items.manufacturer,items.category_id\n"
+				+ "FROM purchases inner join purchase_details\n"
+				+ "ON purchases.purchase_id = purchase_details.purchase_id\n"
 				+ "\n"
-				+ "	inner join items\n"
-				+ "	ON purchase_details.item_id = items.item_id\n"
-				+ "	where purchases.purchase_id = ?";
+				+ "inner join items\n"
+				+ "ON purchase_details.item_id = items.item_id\n"
+				+ "where purchases.cancel = false";
 
 		PurchasesDTO dto = null;
 
@@ -121,7 +119,8 @@ public class PurchasesDAO extends BaseDAO {
 				+ "	ON purchases.purchase_id = purchase_details.purchase_id\n"
 				+ "\n"
 				+ "	inner join items\n"
-				+ "	ON purchase_details.item_id = items.item_id";
+				+ "	ON purchase_details.item_id = items.item_id"
+				+ "where purchases.cancel = false";
 
 		List<PurchasesDTO> list = new ArrayList<>();
 
@@ -139,7 +138,6 @@ public class PurchasesDAO extends BaseDAO {
 				List<PurchasesDetailsDTO> list2 = dao.findById(rs.getInt("purchase_id"));
 				dto.setPurchaseId(rs.getInt("purchase_id"));
 				dto.setPurchasedDate(rs.getDate("purchased_date"));
-
 				dto.setDestination(rs.getString("destination"));
 				dto.setCancel(rs.getBoolean("cancel"));
 				dto.setUsers(users);
@@ -171,6 +169,19 @@ public class PurchasesDAO extends BaseDAO {
 			ps.setDate(3, dto.getPurchasedDate());
 			ps.setString(4, dto.getDestination());
 			ps.setBoolean(5, dto.isCancel());
+
+			UsersDTO users = new UsersDTO();
+			ps.setString(1, users.getUserId());
+			ps.setString(2, users.getPassword());
+			ps.setString(3, users.getName());
+			ps.setString(4, users.getAddress());
+
+			PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
+			ps.setInt(1, pd.getPurchasesDetailsId());
+			ps.setInt(2, pd.getPurchasesId());
+			ps.setInt(3, pd.getItemId());
+			ps.setInt(4, pd.getAmount());
+
 			updateNum = ps.executeUpdate();
 		}
 		return updateNum;
