@@ -15,31 +15,28 @@ import jp.co.axisb.util.ConnectionUtil;
 public class SearchService {
 
 	public static List<ItemsDTO> search(String keyword, int categoriesId) throws SQLException, ServletException {//スロー宣言でいい？
-		//daoのfindbyItemnameの呼び出し
-		//ItemsDAO dao = new ItemsDAO();
-
-		//引数を渡す
-		//引数の渡し方がわからん！
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 
 			ItemsDAO dao = new ItemsDAO(conn);
 
+			List<ItemsDTO> list = dao.findByItemName(keyword, categoriesId);
+
 			if (categoriesId == 0) {
 				List<ItemsDTO> list1 = dao.findByItemName(keyword, 1);
 				List<ItemsDTO> list2 = dao.findByItemName(keyword, 2);
-				List<ItemsDTO> list = new ArrayList<>();
+				List<ItemsDTO> list3 = new ArrayList<>();
 
-				list.addAll(list1);
-				list.addAll(list2);
+				list3.addAll(list1);
+				list3.addAll(list2);
 
-				return list;
+				return list3;
 
 			}
 
 			else {
-				List<ItemsDTO> list = dao.findByItemName(keyword, categoriesId);
+				List<ItemsDTO> list4 = dao.findByItemName(keyword, categoriesId);
 
-				return list;
+				return list4;
 
 			}
 		}
