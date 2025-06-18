@@ -73,7 +73,7 @@ insert into purchase_details values(1,1,20,1);
 
 
 
-/*insert into purchases values(1,'user1',current_date,'テスト',false);*/
-/*insert into purchase_details values(1,1,20,1);*/
+insert into purchases values(1,'user',current_date,'テスト',false);
+insert into purchase_details values(1,1,20,1);
 
 

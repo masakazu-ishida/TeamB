@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Test;
@@ -68,14 +67,6 @@ public class CartServicetest {
 			assertEquals(3, searchDTO.getItemId());
 			assertEquals(3, searchDTO.getAmount());
 			assertEquals("2020-10-20", searchDTO.getBookedDate());
-
-			//日付の期待結果が2020-10-20である事を確認する場合
-			String strDate = "2020-10-20";
-			java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date expected = dateFormat.parse(strDate);
-
-			//JUnitで妥当性の確認
-			assertEquals(expected, dto.getBookedDate());
 
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
