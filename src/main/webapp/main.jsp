@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +16,7 @@
 		<input type='text' name='keyword' /><br />
 			カテゴリ<br />
 			<select name='category'>
-				<option selected value=0'>すべて</option>
+				<option selected value='0'>すべて</option>
 				<option value='1'>帽子</option>
 				<option value='2'>鞄</option>
 			</select><br />
