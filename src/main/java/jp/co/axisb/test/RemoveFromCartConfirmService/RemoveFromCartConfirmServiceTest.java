@@ -7,28 +7,30 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import jp.co.axisb.dao.BaseDAO;
 import jp.co.axisb.dao.ItemsInCartDAO;
 import jp.co.axisb.dto.ItemsInCartDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
 class RemoveFromCartConfirmServiceTest {
 
-	//	@BeforeEach
-	//	void init() {
-	//		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
-	//		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-	//			BaseDAO dao = new BaseDAO(conn);
-	//			try {
-	//				dao.insertBatch("sqlFiles/init.sql");
-	//			} catch (Exception e) {
-	//				throw e;
-	//			}
-	//		} catch (Exception e) {
-	//			fail(e.getMessage());
-	//		}
-	//	}
+	@BeforeEach
+	void init() {
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			BaseDAO dao = new BaseDAO(conn);
+			try {
+				dao.insertBatch("sqlFiles/init.sql");
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 
 	@Test
 	void testgetItem() {

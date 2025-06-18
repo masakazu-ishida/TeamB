@@ -44,15 +44,21 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 
-		String path = "";
-		//セッションパラメータ
-		HttpSession session = request.getSession(true);
-		//カートJSPの商品IDを取得
-		request.getParameter(itemId);
-		//カートJSPのユーザーIDを取得
-		String attribute = (String) session.getAttribute("userId");
+		String path = "削除確認JSP";
+
 		//RemoveFromCartConfirmServiceをインスタンス化
 		RemoveFromCartConfirmService rfccservice = new RemoveFromCartConfirmService();
+
+		//セッションオブジェクトの取得
+		HttpSession session = request.getSession(true);
+
+		String key = "";
+
+		//カートJSPの商品IDを取得
+		request.getParameter(itemId);
+
+		//カートJSPのユーザーIDを取得
+		String attribute = (String) session.getAttribute("userId");
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出す
 		rfccservice.getItem();

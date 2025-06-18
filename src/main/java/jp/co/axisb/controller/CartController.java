@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Service.CartService;
+import jp.co.axisb.service.CartService;
 
 /**
  * Servlet implementation class CartController
@@ -46,8 +46,9 @@ public class CartController extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 		CartService cs = new CartService();
-		cs.findById();
-		cs.CartSum();
+
+		cs.findById(userId);
+		cs.CartSum(userId);
 
 		String path = "/WEB-INF/cart.jsp";
 
