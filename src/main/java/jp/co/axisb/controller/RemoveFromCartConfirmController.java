@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.co.axisb.dto.ItemsInCartDTO;
 import jp.co.axisb.service.RemoveFromCartConfirmService;
 
 /**
@@ -33,7 +34,12 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String path = "/WEB-INF/removefromcartconfirm.jsp";
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
+
 	}
 
 	/**
@@ -44,7 +50,7 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 
-		String path = "削除確認JSP";
+		String path = "/WEB-INF/removefromcartconfirm.jsp";
 
 		//RemoveFromCartConfirmServiceをインスタンス化
 		RemoveFromCartConfirmService rfccservice = new RemoveFromCartConfirmService();
@@ -52,17 +58,29 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		//セッションオブジェクトの取得
 		HttpSession session = request.getSession(true);
 
-		String key = "";
-
-		//カートJSPの商品IDを取得
-		request.getParameter(itemId);
+		//	String key = "userId";
 
 		//カートJSPのユーザーIDを取得
-		String attribute = (String) session.getAttribute("userId");
+		String userId = (String) session.getAttribute("userId");
+
+		//カートJSPの商品IDを取得
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出す
-		rfccservice.getItem();
-		//RemoveFromCartConfirmServiceからの戻り値をセットアトリビュートする
+		ItemsInCartDTO dto = rfccservice.getItem(userId, itemId);
+
+		if (dto != null) {
+			session.setAttribute("userId", userId);
+			session.setAttribute("itemId", itemId);
+			session.setAttribute("dto", dto);
+		} else {
+			request.setAttribute("error", "対象商品はすでにカートから削除されています");
+		}
+
+		//		//RemoveFromCartConfirmServiceからの戻り値をセットアトリビュートする
+		//		request.setAttribute(dto.getUserId(), dto.getItemId());
+
+		//session.setAttribute(key, attribute);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
