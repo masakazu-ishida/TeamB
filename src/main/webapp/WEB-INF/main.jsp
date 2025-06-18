@@ -11,7 +11,7 @@
 <body>
 	<h3>商品の検索を行います。</h3>
 		<br />
-	<form action='検索結果表示のコントローラーのパスを入れる' method='POST'>
+	<form action='検索結果表示のサーブレットのパスを入れる' method='POST'>
 		キーワード<br />
 		<input type='text' name='keyword' /><br />
 			カテゴリ<br />
@@ -23,12 +23,12 @@
 		<input type='submit' value='検索' /><br />
 	</form>
 	
-	<a href='カート一覧表示のコントローラーのパスを入れる'>ショッピングカートを見る</a><br /><br />
+	<a href='カート一覧表示のサーブレットのパスを入れる'>ショッピングカートを見る</a><br /><br />
 	<%
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getParameter("userId");
 		if(userId == null){
 	%>
-		<div id="conn"><a href='ログイン画面のコントローラーのパスを入れる'>ログイン</a></div>
+		<div id="conn"><a href='ログイン画面のサーブレットのパスを入れる'>ログイン</a></div>
 	<%	
 		}
 	%>
