@@ -22,14 +22,16 @@ public class PurchasesDAO extends BaseDAO {
 	public PurchasesDTO findById(int purchaseId) throws SQLException {
 
 		String sql = "SELECT purchases.purchase_id, purchases.purchased_user, purchases.purchased_date, purchases.destination, purchases.cancel,\n"
-				+ "purchase_details.purchase_detail_id, purchase_details.item_id, purchase_details.amount,\n"
-				+ "items.item_id, items.name, items.manufacturer,items.category_id\n"
+				+ "purchase_details.purchase_detail_id, purchase_details.item_id AS purchaseDetailsItemId, purchase_details.amount, purchase_details.purchase_id AS purchaseDetailsPurchaseId,\n"
+				+ "items.item_id AS itemsItemId, items.name, items.manufacturer,items.category_id,\n"
+				+ "users.user_id\n"
 				+ "FROM purchases inner join purchase_details\n"
 				+ "ON purchases.purchase_id = purchase_details.purchase_id\n"
-				+ "\n"
 				+ "inner join items\n"
 				+ "ON purchase_details.item_id = items.item_id\n"
-				+ "where purchases.cancel = false";
+				+ "inner join users\n"
+				+ "ON purchases.purchased_user = users.user_id\n"
+				+ "where purchases.cancel = false and purchases.purchase_id = ?";
 
 		PurchasesDTO dto = null;
 
@@ -39,29 +41,39 @@ public class PurchasesDAO extends BaseDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				dto = new PurchasesDTO();
-				UsersDTO users = new UsersDTO();
-				PurchasesDetailsDAO pddto = new PurchasesDetailsDAO(conn);
-				List<PurchasesDetailsDTO> purchasesDetails = pddto.findById(purchaseId);
+				PurchasesDetailsDAO dao = new PurchasesDetailsDAO(conn);
 
-				dto.setUserId(rs.getString("user_id"));
+				dto = new PurchasesDTO();
+
+				ItemsDTO items = new ItemsDTO();
+				UsersDTO users = new UsersDTO();
+
+				List<PurchasesDetailsDTO> list2 = dao.findById(rs.getInt("purchase_id"));
+
+				items.setCategoryId(rs.getInt("category_id"));
+				items.setItemId(rs.getInt("itemsItemId"));
+				items.setManufacturer(rs.getString("manufacturer"));
+				items.setName(rs.getString("name"));
+
+				users.setUserId(rs.getString("user_id"));
+
 				dto.setPurchaseId(rs.getInt("purchase_id"));
 				dto.setPurchasedDate(rs.getDate("purchased_date"));
-
 				dto.setDestination(rs.getString("destination"));
 				dto.setCancel(rs.getBoolean("cancel"));
 				dto.setUsers(users);
-				dto.setPurchaseDetailDTO(purchasesDetails);
+				dto.setItems(items);
 
-				for (PurchasesDetailsDTO pd : purchasesDetails) {
-					dto = new PurchasesDTO();
-					ItemsDTO items = new ItemsDTO();
+				for (PurchasesDetailsDTO pd : list2) {
+					PurchasesDetailsDTO purchasesDetails = new PurchasesDetailsDTO();
 					pd.setPurchasesDetailsId(rs.getInt("purchase_detail_id"));
 					pd.setPurchasesId(rs.getInt("purchase_id"));
-					pd.setItemId(rs.getInt("item_id"));
+					pd.setItemId(rs.getInt("purchaseDetailsItemId"));
 					pd.setAmount(rs.getInt("amount"));
 					pd.setItems(items);
+
 				}
+				dto.setPurchaseDetailDTO(list2);
 
 			}
 		}
@@ -160,6 +172,7 @@ public class PurchasesDAO extends BaseDAO {
 					pd.setItemId(rs.getInt("purchaseDetailsItemId"));
 					pd.setAmount(rs.getInt("amount"));
 					pd.setItems(items);
+
 				}
 				dto.setPurchaseDetailDTO(list2);
 
@@ -214,6 +227,20 @@ public class PurchasesDAO extends BaseDAO {
 			ps.setDate(3, dto.getPurchasedDate());
 			ps.setString(4, dto.getDestination());
 			ps.setBoolean(5, dto.isCancel());
+			ps.setInt(6, dto.getPurchaseId());
+
+			UsersDTO users = new UsersDTO();
+			ps.setString(1, users.getUserId());
+			ps.setString(2, users.getPassword());
+			ps.setString(3, users.getName());
+			ps.setString(4, users.getAddress());
+
+			PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
+			ps.setInt(1, pd.getPurchasesDetailsId());
+			ps.setInt(2, pd.getPurchasesId());
+			ps.setInt(3, pd.getItemId());
+			ps.setInt(4, pd.getAmount());
+
 			updateNum = ps.executeUpdate();
 
 		}
