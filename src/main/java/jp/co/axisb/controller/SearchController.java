@@ -50,18 +50,16 @@ public class SearchController extends HttpServlet {
 
 		//リクエストパラメータを取り出す
 		String keyword = request.getParameter("keyword");
-		String categoriesId = request.getParameter("categoriesId");
+
+		int categoriesId = Integer.parseInt(request.getParameter("categoriesId"));
 
 		//サーチサービスのサーチメソッドを呼び出す
 		//引数には検索キーワードとカテゴリIDを渡す
 		SearchService.search(keyword, categoriesId);
 
 		//サービスからの戻り値をセットアトリビュートする
-		List<ItemsDTO> s = SearchService.search(keyword, categoriesId);
-		なんでDTOのリスト？
-		
-
-		request.setAttribute("value", s);
+		List<ItemsDTO> list = SearchService.search(keyword, categoriesId);
+		request.setAttribute("value", list);
 
 		//フォワード
 		RequestDispatcher rd = request.getRequestDispatcher(path);
