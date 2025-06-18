@@ -185,28 +185,28 @@ public class PurchasesDAO extends BaseDAO {
 
 	// 追加
 	public int insert(PurchasesDTO dto) throws SQLException {
-		String sql = "insert into purchases(purchase_id, purchased_user, purchased_date, destination, cancel) values(?, ?, ?, ?, ?)";
+		String sql = "insert into purchases(purchased_user, purchased_date, destination, cancel) values(?, ?, ?, ?)";
 		int updateNum = 0;
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			ps.setInt(1, dto.getPurchaseId());
-			ps.setString(2, dto.getPurchasedUser());
-			ps.setDate(3, dto.getPurchasedDate());
-			ps.setString(4, dto.getDestination());
-			ps.setBoolean(5, dto.isCancel());
+			//			ps.setInt(1, dto.getPurchaseId());
+			ps.setString(1, dto.getPurchasedUser());
+			ps.setDate(2, dto.getPurchasedDate());
+			ps.setString(3, dto.getDestination());
+			ps.setBoolean(4, dto.isCancel());
 
-			UsersDTO users = new UsersDTO();
-			ps.setString(1, users.getUserId());
-			ps.setString(2, users.getPassword());
-			ps.setString(3, users.getName());
-			ps.setString(4, users.getAddress());
-
-			PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
-			ps.setInt(1, pd.getPurchasesDetailsId());
-			ps.setInt(2, pd.getPurchasesId());
-			ps.setInt(3, pd.getItemId());
-			ps.setInt(4, pd.getAmount());
+			//			UsersDTO users = new UsersDTO();
+			//			ps.setString(1, users.getUserId());
+			//			ps.setString(2, users.getPassword());
+			//			ps.setString(3, users.getName());
+			//			ps.setString(4, users.getAddress());
+			//
+			//			PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
+			//			ps.setInt(1, pd.getPurchasesDetailsId());
+			//			ps.setInt(2, pd.getPurchasesId());
+			//			ps.setInt(3, pd.getItemId());
+			//			ps.setInt(4, pd.getAmount());
 
 			updateNum = ps.executeUpdate();
 		}
@@ -216,30 +216,30 @@ public class PurchasesDAO extends BaseDAO {
 
 	// 更新
 	public int update(PurchasesDTO dto) throws SQLException {
-		String sql = "update purchases set purchase_id = ?, purchased_user = ?,  purchased_date = ?, destination = ?, cancel = ? where purchase_id = ?";
+		String sql = "update purchases set purchased_user = ?,  purchased_date = ?, destination = ?, cancel = ? where purchase_id = ?";
 
 		int updateNum = 0;
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			ps.setInt(1, dto.getPurchaseId());
-			ps.setString(2, dto.getPurchasedUser());
-			ps.setDate(3, dto.getPurchasedDate());
-			ps.setString(4, dto.getDestination());
-			ps.setBoolean(5, dto.isCancel());
-			ps.setInt(6, dto.getPurchaseId());
+			//			ps.setInt(1, dto.getPurchaseId());
+			ps.setString(1, dto.getPurchasedUser());
+			ps.setDate(2, dto.getPurchasedDate());
+			ps.setString(3, dto.getDestination());
+			ps.setBoolean(4, dto.isCancel());
+			ps.setInt(5, dto.getPurchaseId());
 
-			UsersDTO users = new UsersDTO();
-			ps.setString(1, users.getUserId());
-			ps.setString(2, users.getPassword());
-			ps.setString(3, users.getName());
-			ps.setString(4, users.getAddress());
-
-			PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
-			ps.setInt(1, pd.getPurchasesDetailsId());
-			ps.setInt(2, pd.getPurchasesId());
-			ps.setInt(3, pd.getItemId());
-			ps.setInt(4, pd.getAmount());
+			//			UsersDTO users = new UsersDTO();
+			//			ps.setString(1, users.getUserId());
+			//			ps.setString(2, users.getPassword());
+			//			ps.setString(3, users.getName());
+			//			ps.setString(4, users.getAddress());
+			//
+			//			PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
+			//			ps.setInt(1, pd.getPurchasesDetailsId());
+			//			ps.setInt(2, pd.getPurchasesId());
+			//			ps.setInt(3, pd.getItemId());
+			//			ps.setInt(4, pd.getAmount());
 
 			updateNum = ps.executeUpdate();
 

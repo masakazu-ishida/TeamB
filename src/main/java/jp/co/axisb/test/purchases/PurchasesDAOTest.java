@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import jp.co.axisb.dao.PurchasesDAO;
 import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.dto.PurchasesDetailsDTO;
-import jp.co.axisb.dto.UsersDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
 class PurchasesDAOTest {
@@ -197,21 +196,17 @@ class PurchasesDAOTest {
 			try {
 				Date date = Date.valueOf("2025-10-21");
 				PurchasesDTO purchases = new PurchasesDTO();
-				UsersDTO users = new UsersDTO();
-				PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
+				//				UsersDTO users = new UsersDTO();
+
 				purchases.setPurchaseId(2);
 				purchases.setPurchasedUser("user");
 				purchases.setPurchasedDate(date);
 				purchases.setDestination("自宅");
 				purchases.setCancel(false);
-				users.setUserId("user2");
-				users.setPassword("user2");
-				users.setName("user2");
-				users.setAddress("鳥取県鳥取市河原町６丁目１０８");
-				pd.setPurchasesDetailsId(1);
-				pd.setPurchasesId(1111111111);
-				pd.setItemId(1);
-				pd.setAmount(2);
+				//				users.setUserId("user2");
+				//				users.setPassword("user2");
+				//				users.setName("user2");
+				//				users.setAddress("鳥取県鳥取市河原町６丁目１０８");
 
 				int result = dao.insert(purchases);
 
@@ -221,8 +216,8 @@ class PurchasesDAOTest {
 				PurchasesDTO search = dao.findById(result);
 
 				//				登録直後のデータを取得し、レコードに正しく反映されているか
-				assertEquals(2, search.getPurchaseId());
-				assertEquals("user2", search.getPurchasedUser());
+				assertEquals(1, search.getPurchaseId());
+				assertEquals("user", search.getPurchasedUser());
 				assertEquals(date, search.getPurchasedDate());
 				assertEquals("自宅", search.getDestination());
 				assertEquals(false, search.isCancel());
@@ -249,21 +244,22 @@ class PurchasesDAOTest {
 			try {
 				Date date = Date.valueOf("2025-10-31");
 				PurchasesDTO purchases = new PurchasesDTO();
-				UsersDTO users = new UsersDTO();
-				PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
-				purchases.setPurchaseId(1);
-				purchases.setPurchasedUser("user");
+				//				UsersDTO users = new UsersDTO();
+				//				PurchasesDetailsDTO pd = new PurchasesDetailsDTO();
+
+				purchases.setPurchasedUser("user3");
 				purchases.setPurchasedDate(date);
 				purchases.setDestination("自宅");
 				purchases.setCancel(false);
-				users.setUserId("user3");
-				users.setPassword("user3");
-				users.setName("user3");
-				users.setAddress("鳥取県鳥取市河原町６丁目300");
-				pd.setPurchasesDetailsId(1);
-				pd.setPurchasesId(90);
-				pd.setItemId(1);
-				pd.setAmount(2);
+				purchases.setPurchaseId(1);
+				//				users.setUserId("user3");
+				//				users.setPassword("user3");
+				//				users.setName("user3");
+				//				users.setAddress("鳥取県鳥取市河原町６丁目300");
+				//				pd.setPurchasesDetailsId(1);
+				//				pd.setPurchasesId(90);
+				//				pd.setItemId(1);
+				//				pd.setAmount(2);
 
 				int result = dao.update(purchases);
 
@@ -273,11 +269,12 @@ class PurchasesDAOTest {
 				PurchasesDTO search = dao.findById(result);
 
 				//				登録直後のデータを取得し、レコードに正しく反映されているか
-				assertEquals(1, search.getPurchaseId());
+
 				assertEquals("user3", search.getPurchasedUser());
 				assertEquals(date, search.getPurchasedDate());
 				assertEquals("自宅", search.getDestination());
-				assertEquals(true, search.isCancel());
+				assertEquals(false, search.isCancel());
+				assertEquals(1, search.getPurchaseId());
 
 			} catch (SQLException e) {
 
