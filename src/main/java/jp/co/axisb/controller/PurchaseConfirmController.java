@@ -15,16 +15,16 @@ import jp.co.axisb.dto.ItemsInCartDTO;
 import jp.co.axisb.service.CartService;
 
 /**
- * Servlet implementation class CartController
+ * Servlet implementation class PurchaseConfirmController
  */
-@WebServlet(name = "cart", urlPatterns = { "/cart" })
-public class CartController extends HttpServlet {
+@WebServlet("/PurchaseConfirmController")
+public class PurchaseConfirmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CartController() {
+	public PurchaseConfirmController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,13 +37,6 @@ public class CartController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		//		request.setAttribute("userId", "user");
-		//
-		//		String path = "/WEB-INF/cart.jsp";
-		//
-		//		RequestDispatcher rd = request.getRequestDispatcher(path);
-		//		rd.forward(request, response);
-		doPost(request, response);
 	}
 
 	/**
@@ -52,7 +45,7 @@ public class CartController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 
 		HttpSession session = request.getSession(true);
 		String userId = (String) session.getAttribute("userId");
@@ -73,7 +66,6 @@ public class CartController extends HttpServlet {
 			rd.forward(request, response);
 
 		}
-
 	}
 
 }
