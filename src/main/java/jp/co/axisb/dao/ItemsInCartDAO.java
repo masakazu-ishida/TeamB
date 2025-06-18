@@ -54,7 +54,7 @@ public class ItemsInCartDAO extends BaseDAO {
 				dto.setUserId(rs.getString("itemsInCartUserId"));
 				dto.setItemId(rs.getInt("itemsInCartItemId"));
 				dto.setAmount(rs.getInt("amount"));
-				dto.setBookedDate(rs.getDate("booked_date"));
+				dto.setBookedDate((java.util.Date) rs.getDate("booked_date"));
 				dto.setUsers(users);
 				dto.setItems(items);
 
@@ -103,7 +103,7 @@ public class ItemsInCartDAO extends BaseDAO {
 				dto.setUserId(rs.getString("itemsInCartUserId"));
 				dto.setItemId(rs.getInt("itemsInCartItemId"));
 				dto.setAmount(rs.getInt("amount"));
-				dto.setBookedDate(rs.getDate("booked_date"));
+				dto.setBookedDate((java.util.Date) rs.getDate("booked_date"));
 				dto.setUsers(users);
 				dto.setItems(items);
 
@@ -150,7 +150,7 @@ public class ItemsInCartDAO extends BaseDAO {
 				dto.setUserId(rs.getString("itemsInCartUserId"));
 				dto.setItemId(rs.getInt("itemsInCartItemId"));
 				dto.setAmount(rs.getInt("amount"));
-				dto.setBookedDate(rs.getDate("booked_date"));
+				dto.setBookedDate((java.util.Date) rs.getDate("booked_date"));
 				dto.setUsers(users);
 				dto.setItems(items);
 
@@ -173,7 +173,7 @@ public class ItemsInCartDAO extends BaseDAO {
 			ps.setString(1, dto.getUserId());
 			ps.setInt(2, dto.getItemId());
 			ps.setInt(3, dto.getAmount());
-			ps.setDate(4, dto.getBookedDate());
+			ps.setDate(4, (java.sql.Date) dto.getBookedDate());
 
 			updateLowNum = ps.executeUpdate();
 		}
@@ -190,7 +190,7 @@ public class ItemsInCartDAO extends BaseDAO {
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ps.setInt(1, dto.getAmount());
-			ps.setDate(2, dto.getBookedDate());
+			ps.setDate(2, (java.sql.Date) dto.getBookedDate());
 			ps.setString(3, dto.getUserId());
 			ps.setInt(4, dto.getItemId());
 

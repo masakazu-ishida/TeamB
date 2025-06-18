@@ -9,20 +9,20 @@ import jp.co.axisb.util.ConnectionUtil;
 
 public class RemoveFromCartConfirmService {
 
-	public ItemsInCartDTO getitem(String userId, int itemId) {
+	public ItemsInCartDTO getItem(String userId, int itemId) {
 
-		ItemsInCartDTO dto = null;
+		//ItemsInCartDTO dto = null;
 
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			//DAOクラスのインスタンス化
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-
+			//findByIdメソッドに実引数を渡して、返す
 			return dao.findById(userId, itemId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return dto;
+		return null;
 
 	}
 }
