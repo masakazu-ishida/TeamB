@@ -33,7 +33,7 @@ public class PurchasesServiseTest {
 	}
 
 	@Test
-	void testgetPurchaseServiseTest() {
+	void PurchaseServiseTest() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			PurchasesDAO dao = new PurchasesDAO(conn);
 

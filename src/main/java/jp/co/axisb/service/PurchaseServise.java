@@ -9,7 +9,7 @@ import jp.co.axisb.util.ConnectionUtil;
 
 public class PurchaseServise {
 
-	public PurchasesDTO getPurchases(int purchaseId) {
+	public PurchasesDTO PurchasesServise(int purchaseId) {
 
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			//			DAOのインスタンス化
