@@ -10,16 +10,15 @@
 <body>
 <h3>以下の商品をショッピングカートから削除してよろしいですか？</h3>
 		<br />
-		
-		
 	    <c:out value="${dto.items.name}"/><br />
 		<c:out value="${dto.items.manufacturer}"/><br />
-		<c:out value="${dto.items.price*dto.amount}"/><br />
-		<c:out value="${dto.amount}"/><br /> 
+		<c:out value="${dto.items.price*dto.amount}"/>円<br />
+		<p>数量<c:out value="${dto.amount}"/>個<br /> 
 		<form action='removeFromCartCommit.html' method='POST'>
 			<input type='hidden' name='itemId' value='123' />
 			<input type='submit' value='削除する' /><br />
-		</form>
+		</form><br>
+		
 		<a href='main.html'>商品検索</a>へ<br />
 
 </body>

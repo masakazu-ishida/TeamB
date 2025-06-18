@@ -14,9 +14,7 @@ public class UsersDAO extends BaseDAO {
 	public UsersDAO(Connection conn) {
 		super(conn);
 	}
-		// TODO 自動生成されたコンストラクター・スタブ
-
-
+	// TODO 自動生成されたコンストラクター・スタブ
 
 	public UsersDTO findById(String userId) throws SQLException {
 
@@ -45,6 +43,34 @@ public class UsersDAO extends BaseDAO {
 		return dto;
 	}
 
+	public UsersDTO findById(String userId, String password) throws SQLException {
+
+		String sql = "SELECT * FROM users WHERE user_id=? AND password=?";
+
+		UsersDTO dto = null;
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setString(1, userId);
+			ps.setString(2, password);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				dto = new UsersDTO();
+
+				dto.setUserId(rs.getString("user_id"));
+				dto.setPassword(rs.getString("password"));
+				dto.setName(rs.getString("name"));
+				dto.setAddress(rs.getString("address"));
+
+			}
+
+		}
+
+		return dto;
+	}
+
 	public List<UsersDTO> findAll() throws SQLException {
 
 		String sql = "SELECT * FROM users";
@@ -54,22 +80,22 @@ public class UsersDAO extends BaseDAO {
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
 
-			UsersDTO dto = new UsersDTO();
+			while (rs.next()) {
 
-			dto.setUserId(rs.getString("user_id"));
-			dto.setPassword(rs.getString("password"));
-			dto.setName(rs.getString("name"));
-			dto.setAddress(rs.getString("address"));
+				UsersDTO dto = new UsersDTO();
 
-			list.add(dto);
+				dto.setUserId(rs.getString("user_id"));
+				dto.setPassword(rs.getString("password"));
+				dto.setName(rs.getString("name"));
+				dto.setAddress(rs.getString("address"));
+
+				list.add(dto);
+
+			}
+			return list;
 
 		}
-		return list;
-
 	}
-		}
 
 }
