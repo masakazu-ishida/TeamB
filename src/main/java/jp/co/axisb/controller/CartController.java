@@ -1,6 +1,7 @@
 package jp.co.axisb.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.co.axisb.dto.ItemsInCartDTO;
 import jp.co.axisb.service.CartService;
 
 /**
@@ -45,10 +47,21 @@ public class CartController extends HttpServlet {
 		doGet(request, response);
 
 		HttpSession session = request.getSession(true);
-		CartService cs = new CartService();
+		String userId = (String) session.getAttribute("usedId");
 
-		cs.findById(userId);
-		cs.CartSum(userId);
+		if (userId == null) {
+			response.sendRedirect("/WEB-INF/login.jsp");
+
+		} else {
+			CartService cs = new CartService();
+			List<ItemsInCartDTO> cs = CartService.getCartItems(userId);
+			List<ItemsInCartDTO> dtoList = cs.findById(userId);
+			int sum = CartService.cartSum(userId);
+
+			request.setAttribute("dtoList", dtoList);
+			request.setAttribute("sum", sum);
+
+		}
 
 		String path = "/WEB-INF/cart.jsp";
 
