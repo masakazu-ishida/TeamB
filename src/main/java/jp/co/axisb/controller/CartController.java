@@ -58,7 +58,7 @@ public class CartController extends HttpServlet {
 		String userId = (String) session.getAttribute("userId");
 
 		if (userId == null) {
-			response.sendRedirect("/WEB-INF/login.jsp");
+			response.sendRedirect("/LoginController");
 
 		} else {
 			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);

@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ショッピングカート</title>
+<title>商品の購入確認</title>
 </head>
 <body>
-	<h3>ショッピングカート内の商品一覧</h3><br>
+	<h3>以下の商品を購入しますか？</h3>
 	<table>
 	<tr><th>商品名</th><th>商品の色</th><th>メーカー名</th><th>単価</th><th>数量</th><th>　</th></tr>
 	<tr><c:forEach var="dto" items="${dtoList}">
@@ -21,13 +21,25 @@
 		</c:forEach>
 	</tr>
 	</table><br>
-	<p>合計<c:out value="${sum}"/>円</p><br>
-	<form action = "/axis_b/PurchaseConfirmController" method="post">
+	<p>合計<c:out value="${sum}"/>円</p><br><br>
+	
+	<p>清算方法</p>
+	<select name="payment">
+		<option selected>代金引換</option>
+	</select><br><br>
+	
+	<p>配送先</p>
+	<input type ="radio" name="distination" value="home" checked>ご自宅<br><br>
+	<input type= "radio" name="distination" value="another">配送先を指定<br>
+	ご住所<br>
+	<input type="text" name="address"><br><br>
+	
+	<p>購入しますか？</p>
+	<form action = "/axis_b/purchaseCommit" method="post">
 		<input type="submit" value="購入する">
 	</form>
 	<br>
 	<br>
 	<p><a href ="/axis_b/mainController">商品検索</a>へ</p>
-	
 </body>
 </html>
