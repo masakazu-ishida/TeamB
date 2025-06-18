@@ -47,26 +47,25 @@ public class CartController extends HttpServlet {
 		doGet(request, response);
 
 		HttpSession session = request.getSession(true);
-		String userId = (String) session.getAttribute("usedId");
+		String userId = (String) session.getAttribute("userId");
 
 		if (userId == null) {
 			response.sendRedirect("/WEB-INF/login.jsp");
 
 		} else {
 			CartService cs = new CartService();
-			List<ItemsInCartDTO> cs = CartService.getCartItems(userId);
-			List<ItemsInCartDTO> dtoList = cs.findById(userId);
-			int sum = CartService.cartSum(userId);
+			List<ItemsInCartDTO> dtoList = cs.getCartItems(userId);
+			int sum = cs.CartSum(userId);
 
 			request.setAttribute("dtoList", dtoList);
 			request.setAttribute("sum", sum);
 
+			String path = "/WEB-INF/cart.jsp";
+
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+
 		}
-
-		String path = "/WEB-INF/cart.jsp";
-
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
 
 	}
 

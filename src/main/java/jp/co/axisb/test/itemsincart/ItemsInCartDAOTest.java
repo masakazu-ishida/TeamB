@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -44,12 +45,16 @@ public class ItemsInCartDAOTest {
 			//正しくDTOにレコードの値を詰めてるか確認する
 			ItemsInCartDTO itemsDTO = dao.findById("user", 1);
 
+			String strDate = "2020-10-20";
+			java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date expected = dateFormat.parse(strDate);
+
 			assertNotNull(itemsDTO);
 
 			assertEquals("user", itemsDTO.getUserId());
 			assertEquals(1, itemsDTO.getItemId());
 			assertEquals(5, itemsDTO.getAmount());
-			assertEquals(java.sql.Date.valueOf("2020-10-20"), itemsDTO.getBookedDate());
+			assertEquals(expected, itemsDTO.getBookedDate());
 			assertEquals("userpass", itemsDTO.getUsers().getPassword());
 			assertEquals("鳥取一郎", itemsDTO.getUsers().getName());
 			assertEquals("鳥取県鳥取市河原町６丁目１０７", itemsDTO.getUsers().getAddress());
@@ -84,12 +89,16 @@ public class ItemsInCartDAOTest {
 
 			assertEquals(3, itemsDTO.size());
 
+			String strDate = "2020-10-20";
+			java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date expected = dateFormat.parse(strDate);
+
 			//正しくDTOにレコードの値を詰めてるか確認する
 			ItemsInCartDTO dto = itemsDTO.get(0);
 			assertEquals("user", dto.getUserId());
 			assertEquals(1, dto.getItemId());
 			assertEquals(5, dto.getAmount());
-			assertEquals(java.sql.Date.valueOf("2020-10-20"), dto.getBookedDate());
+			assertEquals(expected, dto.getBookedDate());
 			assertEquals("userpass", dto.getUsers().getPassword());
 			assertEquals("鳥取一郎", dto.getUsers().getName());
 			assertEquals("鳥取県鳥取市河原町６丁目１０７", dto.getUsers().getAddress());
@@ -118,12 +127,16 @@ public class ItemsInCartDAOTest {
 
 			assertEquals(3, itemsDTO.size());
 
+			String strDate = "2020-10-20";
+			java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date expected = dateFormat.parse(strDate);
+
 			//正しくDTOにレコードの値を詰めてるか確認する
 			ItemsInCartDTO dto = itemsDTO.get(0);
 			assertEquals("user", dto.getUserId());
 			assertEquals(1, dto.getItemId());
 			assertEquals(5, dto.getAmount());
-			assertEquals(java.sql.Date.valueOf("2020-10-20"), dto.getBookedDate());
+			assertEquals(expected, dto.getBookedDate());
 			assertEquals("userpass", dto.getUsers().getPassword());
 			assertEquals("鳥取一郎", dto.getUsers().getName());
 			assertEquals("鳥取県鳥取市河原町６丁目１０７", dto.getUsers().getAddress());

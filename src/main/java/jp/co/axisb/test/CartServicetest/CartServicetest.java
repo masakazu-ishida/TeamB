@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -45,13 +46,7 @@ public class CartServicetest {
 			List<ItemsInCartDTO> dto = dao.findById("user");
 			assertEquals(3, dto.size());
 
-			//カート内に存在しないユーザーIDを指定した場合
-			dto = dao.findById("a");
-			assertEquals(0, dto.size());
-
-			List<ItemsInCartDTO> list = dao.findById("user");
-
-			ItemsInCartDTO searchDTO = list.get(0);
+			ItemsInCartDTO searchDTO = dto.get(0);
 
 			//登録直後のデータを取得し、レコードに正しく反映されているかを確認
 			assertEquals("user", searchDTO.getUserId());
@@ -66,17 +61,11 @@ public class CartServicetest {
 			//JUnitで妥当性の確認
 			assertEquals(expected, searchDTO.getBookedDate());
 
-			assertEquals("user", searchDTO.getUserId());
-			assertEquals(2, searchDTO.getItemId());
-			assertEquals(1, searchDTO.getAmount());
-			assertEquals("2020-10-20", searchDTO.getBookedDate());
+			//カート内に存在しないユーザーIDを指定した場合
+			dto = dao.findById("a");
+			assertEquals(0, dto.size());
 
-			assertEquals("user", searchDTO.getUserId());
-			assertEquals(3, searchDTO.getItemId());
-			assertEquals(3, searchDTO.getAmount());
-			assertEquals("2020-10-20", searchDTO.getBookedDate());
-
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			// TODO 自動生成された catch ブロック
 			fail(e.getMessage());
 		}
@@ -85,6 +74,7 @@ public class CartServicetest {
 	//金額が正しいか確認
 	@Test
 	public void testCartSum() {
+		init();
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
 
