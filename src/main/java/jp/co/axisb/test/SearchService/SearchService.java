@@ -3,14 +3,12 @@ package jp.co.axisb.test.SearchService;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import jp.co.axisb.dao.BaseDAO;
-import jp.co.axisb.dao.ItemsDAO;
 import jp.co.axisb.dto.ItemsDTO;
 import jp.co.axisb.util.ConnectionUtil;
 
@@ -36,21 +34,20 @@ public class SearchService {
 	@Test
 	public void testFindById() {
 
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-			ItemsDAO dao = new ItemsDAO(conn);
+		//キーワード＝NULL　カテゴリ＝すべて
+		List<ItemsDTO> dto = SearchService.search("", 0);
+		assertEquals(20, dto.size());
 
-			//キーワードとカテゴリを入力したとき
-			List<ItemsDTO> dto = dao.findByItemName("麦わら帽子", 1);
-			assertEquals(2, dto.size());//麦わら帽子と子ども用麦わら帽子の２つ
+		//キーワード＝麦わら　カテゴリ＝すべて
+		List<ItemsDTO> dto1 = SearchService.search("麦わら", 0);
+		assertEquals(2, dto1.size());
 
-			//カテゴリのみ入力したとき
-			List<ItemsDTO> dto2 = dao.findByItemName("", 1);
-			assertEquals(3, dto2.size());
+		List<ItemsDTO> dto2 = dao1.findByItemName("", 1);
+		assertEquals(11, dto2.size());
 
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		List<ItemsDTO> dto3 = dao1.findByItemName("", 2);
+		assertEquals(9, dto3.size());
 
 	}
+
 }
