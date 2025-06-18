@@ -74,7 +74,6 @@ public class CartServicetest {
 	//金額が正しいか確認
 	@Test
 	public void testCartSum() {
-		init();
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
 
