@@ -23,7 +23,7 @@
 		<input type='submit' value='検索' /><br />
 	</form>
 	
-	<a href="/axis_b/cart">ショッピングカートを見る</a><br /><br />
+	<a href="/axis_b/CartController">ショッピングカートを見る</a><br /><br />
 	<%
 		String userId = (String)request.getParameter("userId");
 		if(userId == null){
