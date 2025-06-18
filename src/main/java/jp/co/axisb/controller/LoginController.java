@@ -1,7 +1,6 @@
 package jp.co.axisb.controller;
 
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,26 +56,24 @@ public class LoginController extends HttpServlet {
 		if (dto != null) {
 			if ("カート追加時のパラメータ".equals(a)) {
 				session.setAttribute("userId", userId);
-				
+
 				RequestDispatcher rd = request.getRequestDispatcher("ショッピングカート一覧画面のサーブレットのパス");
 				rd.forward(request, response);
 			} else if ("メイン画面からのパラメータ".equals(a)) {
 				session.setAttribute("userId", userId);
-				
+
 				RequestDispatcher rd = request.getRequestDispatcher("メイン画面のコントロールのパス");
 				rd.forward(request, response);
 			}
 		} else {
 			request.setAttribute("message", "会員IDまたはパスワードが違います。");
-			String path = "ログイン画面のコントロールのパス";
-			
-			request.getSession().setAttribute(, a)
-			response.sendRedirect("ログイン画面のコントロールのパス");
-			
-			
+
+			request.setAttribute("遷移元で設定するパラメータ", a);
+			RequestDispatcher rd = request.getRequestDispatcher("ログイン画面のコントロールのパス");
+			rd.forward(request, response);
+
 		}
 
-		.forward(request, response);
 	}
 
 }

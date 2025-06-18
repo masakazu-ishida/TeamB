@@ -8,6 +8,25 @@
 </head>
 <body>
 
+<h3>ログインしてください。</h3>
+		<br />
+		<form action='main.html' method='POST'>
+			<table>
+				<tr>
+					<th>会員ID</th>
+					<td><input type='text' class='id' name='会員Id' /></td>
+				</tr>
+				<tr>
+					<th>パスワード</th>
+					<td><input type='password' class='password' name='パスワード' /></td>
+				</tr>
+				<tr>
+					<td colspan='2'><input type='submit' value='ログイン' /></td>
+				</tr>
+			</table>
+		</form>
+		<a href='registerUser.html'>会員登録</a><br />
+
 
 </body>
 </html>
