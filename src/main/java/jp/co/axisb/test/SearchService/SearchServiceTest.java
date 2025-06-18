@@ -10,9 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 
 import jp.co.axisb.dao.BaseDAO;
 import jp.co.axisb.dto.ItemsDTO;
+import jp.co.axisb.service.SearchService;
 import jp.co.axisb.util.ConnectionUtil;
 
-public class SearchService {
+public class SearchServiceTest {
 
 	@BeforeEach
 	void init() {
@@ -39,7 +40,7 @@ public class SearchService {
 		assertEquals(20, dto.size());
 
 		//キーワード＝麦わら　カテゴリ＝すべて
-		List<ItemsDTO> dto1 = SearchService.search("麦わら", 0);
+		List<ItemsDTO> dto1 = SearchServiceTest.search("麦わら", 0);
 		assertEquals(2, dto1.size());
 
 		List<ItemsDTO> dto2 = dao1.findByItemName("", 1);

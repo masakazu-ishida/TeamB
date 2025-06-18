@@ -2,11 +2,13 @@ package jp.co.axisb.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.axisb.dto.UsersDTO;
 import jp.co.axisb.service.LoginService;
@@ -45,13 +47,29 @@ public class LoginController extends HttpServlet {
 
 		String userId = (String) request.getParameter("userId");
 		String password = (String) request.getParameter("password");
-		String path = (String) request.getParameter("path");
+		String a = (String) request.getParameter("遷移元で設定するパラメータ");
 
-		UsersDTO dto = LoginService.login(userId);
+		UsersDTO dto = LoginService.login(userId, password);
+
+		HttpSession session = request.getSession(true);
+		
+		String path = "";
 
 		if (dto != null) {
-
+			if ("カート追加時のパラメータ".equals(a)) {
+				session.setAttribute("userId", userId);
+				path = "ショッピングカート一覧画面のコントロールのパス";
+			} else if ("メイン画面からのパラメータ".equals(a)) {
+				session.setAttribute("userId", userId);
+				String path = "メイン画面のコントロールのパス";
+			}
+		} else {
+			request.setAttribute("message", "会員IDまたはパスワードが違います。");
+			String path = "ログイン画面のコントロールのパス";
 		}
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 	}
 
 }

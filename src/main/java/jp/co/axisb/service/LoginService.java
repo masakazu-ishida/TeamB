@@ -11,9 +11,8 @@ public class LoginService {
 	public static UsersDTO login(String userId, String password) {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			UsersDAO dao = new UsersDAO(conn);
-			UsersDTO dto = dao.findById(userId);
 
-			return dao.findById(userId);
+			return dao.findById(userId, password);
 
 		} catch (Exception e) {
 			return null;
