@@ -36,6 +36,14 @@ public class CartController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		//		request.setAttribute("userId", "user");
+		//
+		//		String path = "/WEB-INF/cart.jsp";
+		//
+		//		RequestDispatcher rd = request.getRequestDispatcher(path);
+		//		rd.forward(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -44,7 +52,7 @@ public class CartController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 
 		HttpSession session = request.getSession(true);
 		String userId = (String) session.getAttribute("userId");
@@ -53,9 +61,8 @@ public class CartController extends HttpServlet {
 			response.sendRedirect("/WEB-INF/login.jsp");
 
 		} else {
-			CartService cs = new CartService();
-			List<ItemsInCartDTO> dtoList = cs.getCartItems(userId);
-			int sum = cs.CartSum(userId);
+			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
+			int sum = CartService.CartSum(userId);
 
 			request.setAttribute("dtoList", dtoList);
 			request.setAttribute("sum", sum);
