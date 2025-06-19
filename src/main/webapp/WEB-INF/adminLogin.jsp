@@ -7,24 +7,22 @@
 <title>会員ログイン</title>
 </head>
 <body>
-
-<h3>ログインしてください。</h3>
+	<h3>管理者ログイン</h3>
 		<br />
-		<form action='/axis_b/LoginConfirmController' method='POST'>
+		<form action='/axis_b/AdminMainController' method='POST'>
 			<table>
 				<tr>
-					<th>会員ID</th>
-					<td><input type='text' class='id' name='会員Id' /></td>
+					<th>管理者ID</th>
+					<td><input type='text' class='id' name='id' /></td>
 				</tr>
 				<tr>
 					<th>パスワード</th>
-					<td><input type='password' class='password' name='パスワード' /></td>
+					<td><input type='password' class='password' name='password' /></td>
 				</tr>
 				<tr>
 					<td colspan='2'><input type='submit' value='ログイン' /></td>
 				</tr>
 			</table>
-			<input type="hidden" name="遷移元" value="${ 遷移元 }">
 		</form>
 	<%
 		String message = (String)request.getAttribute("message");
@@ -34,6 +32,6 @@
 	<%	
 		}
 	%>
-		
+
 </body>
 </html>
