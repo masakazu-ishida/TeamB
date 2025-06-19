@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.axisb.dto.UsersDTO;
-import jp.co.axisb.service.LoginService;
+import jp.co.axisb.dto.AdministratorsDTO;
+import jp.co.axisb.service.AdminMainService;
 
 /**
- * Servlet implementation class LoginConfirmController
+ * Servlet implementation class AdminMainController
  */
-@WebServlet("/LoginConfirmController")
-public class LoginConfirmController extends HttpServlet {
+@WebServlet("/AdminMainController")
+public class AdminMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginConfirmController() {
+	public AdminMainController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -47,40 +47,21 @@ public class LoginConfirmController extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 
-		String userId = (String) request.getParameter("会員Id");
+		String adminId = (String) request.getParameter("管理Id");
 		String password = (String) request.getParameter("パスワード");
-		String a = (String) request.getParameter("遷移元で設定するパラメータ");
 
-		UsersDTO dto = LoginService.login(userId, password);
+		AdministratorsDTO dto = AdminMainService.login(adminId, password);
 
 		if (dto != null) {
-			if ("カート一覧画面に行くときのパラメータ".equals(a)) {
-				session.setAttribute("会員Id", userId);
+			session.setAttribute("管理Id", adminId);
 
-				RequestDispatcher rd = request.getRequestDispatcher("ショッピングカート一覧画面のサーブレットのパス");
-				rd.forward(request, response);
-
-			} else if ("メイン画面からのパラメータ".equals(a)) {
-				session.setAttribute("会員Id", userId);
-
-				RequestDispatcher rd = request.getRequestDispatcher("メイン画面のサーブレットのパス");
-				rd.forward(request, response);
-
-			} else if ("カート追加のときのパラメータ".equals(a)) {
-				session.setAttribute("会員Id", userId);
-
-				RequestDispatcher rd = request.getRequestDispatcher("カート追加のためのサーブレットのパス");
-				rd.forward(request, response);
-			}
-
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/adminMain.jsp");
+			rd.forward(request, response);
 		} else {
-			request.setAttribute("message", "会員IDまたはパスワードが違います。");
-
-			request.setAttribute("遷移元", a);
+			request.setAttribute("message", "管理者IDまたはパスワードが違います。");
 
 			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/LoginController");
 			rd.forward(request, response);
-
 		}
 	}
 
