@@ -19,7 +19,7 @@
 			<input type='submit' value='削除する' /><br />
 		</form><br>
 		
-		<a href='/SearchController'>商品検索</a>へ<br />
+		<a href='/axis_b//SearchController'>商品検索</a>へ<br />
 
 </body>
 </html>

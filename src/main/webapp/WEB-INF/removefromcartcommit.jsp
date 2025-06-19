@@ -14,6 +14,6 @@
 		<c:out value="${dto.items.manufacturer}"/><br />
 		<c:out value="${dto.items.price*dto.amount}"/>円<br />
 		<p>数量<c:out value="${dto.amount}"/>個<br />
-		<a href='/CartController'>ショッピングカート内一覧</a>へ<br /></body>
-		<a href='/SearchController'>商品検索</a>へ<br /></body>
+		<a href='/axis_b//CartController'>ショッピングカート内一覧</a>へ<br /></body>
+		<a href='/axis_b//SearchController'>商品検索</a>へ<br /></body>
 </html>
