@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.axisb.dto.ItemsInCartDTO;
 import jp.co.axisb.service.RemoveFromCartCommitService;
 
 /**
@@ -36,10 +35,10 @@ public class RemoveFromCartCommitController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//	response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		//削除確認画面JSPへのパス
+		//削除完了画面JSPへのパス
 		String path = "/WEB-INF/removefromcartcommit.jsp";
 
-		//RemoveFromCartConfirmServiceをインスタンス化
+		//RemoveFromCartCommitServiceをインスタンス化
 		RemoveFromCartCommitService commitservice = new RemoveFromCartCommitService();
 
 		//セッションオブジェクトの取得
@@ -53,7 +52,7 @@ public class RemoveFromCartCommitController extends HttpServlet {
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 
 		//RemoveFromCartcommitServiceのメソッドを呼び出し、DTOに詰める
-		ItemsInCartDTO dto = commitservice.deleteItem(userId, itemId);
+		int dto = commitservice.deleteItem(dto);
 
 		//フォワード
 		RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -67,7 +66,7 @@ public class RemoveFromCartCommitController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//	doGet(request, response);
 	}
 
 }

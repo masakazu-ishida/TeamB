@@ -9,18 +9,21 @@ import jp.co.axisb.util.ConnectionUtil;
 
 public class RemoveFromCartCommitService {
 
-	public int deleteItem(ItemsInCartDTO dto) {
+	public int deleteItem(String userId, int itemId) {
 
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			//DAOクラスのインスタンス化
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+			ItemsInCartDTO dto = new ItemsInCartDTO();
+			dto.setUserId(userId);
+			dto.setItemId(itemId);
 			//findByIdメソッドに実引数を渡して、返す
 			return dao.delete(dto);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return (Integer) null;
+		return 0;
 	}
 
 }
