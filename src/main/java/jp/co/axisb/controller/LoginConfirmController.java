@@ -47,27 +47,27 @@ public class LoginConfirmController extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 
-		String userId = (String) request.getParameter("会員Id");
-		String password = (String) request.getParameter("パスワード");
-		String a = (String) request.getParameter("遷移元で設定するパラメータ");
+		String userId = request.getParameter("会員Id");
+		String password = request.getParameter("パスワード");
+		String a = request.getParameter("遷移元で設定するパラメータ");
 
 		UsersDTO dto = LoginService.login(userId, password);
 
 		if (dto != null) {
-			if ("カート一覧画面に行くときのパラメータ".equals(a)) {
-				session.setAttribute("会員Id", userId);
+			session.setAttribute("会員Id", userId);
 
-				RequestDispatcher rd = request.getRequestDispatcher("ショッピングカート一覧画面のサーブレットのパス");
-				rd.forward(request, response);
+			if ("カート一覧画面に行くときのパラメータ".equals(a)) {
+
+				response.sendRedirect("ショッピングカート一覧画面のサーブレットのパス");
 
 			} else if ("メイン画面からのパラメータ".equals(a)) {
-				session.setAttribute("会員Id", userId);
 
-				RequestDispatcher rd = request.getRequestDispatcher("メイン画面のサーブレットのパス");
-				rd.forward(request, response);
+				response.sendRedirect("メイン画面のサーブレットのパス");
 
 			} else if ("カート追加のときのパラメータ".equals(a)) {
-				session.setAttribute("会員Id", userId);
+				//商品IDと数量をセット
+				request.setAttribute("商品Id", request.getParameter("商品Id"));
+				request.setAttribute("数量", request.getParameter("数量"));
 
 				RequestDispatcher rd = request.getRequestDispatcher("カート追加のためのサーブレットのパス");
 				rd.forward(request, response);
@@ -77,9 +77,11 @@ public class LoginConfirmController extends HttpServlet {
 			request.setAttribute("message", "会員IDまたはパスワードが違います。");
 
 			request.setAttribute("遷移元", a);
+			//商品IDと数量をセット
+			request.setAttribute("商品Id", request.getParameter("商品Id"));
+			request.setAttribute("数量", request.getParameter("数量"));
 
-			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/LoginController");
-			rd.forward(request, response);
+			response.sendRedirect("/axis_b/LoginController");
 
 		}
 	}
