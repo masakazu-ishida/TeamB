@@ -8,13 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import jp.co.axisb.dto.AdministratorsDTO;
-import jp.co.axisb.service.AdminMainService;
 
 /**
- * Servlet implementation class AdminMainController
+ * Servlet implementation class AdminMain
  */
 @WebServlet("/AdminMainController")
 public class AdminMainController extends HttpServlet {
@@ -35,6 +31,10 @@ public class AdminMainController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/adminMain.jsp");
+		rd.forward(request, response);
+
 	}
 
 	/**
@@ -44,25 +44,6 @@ public class AdminMainController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-
-		HttpSession session = request.getSession(true);
-
-		String adminId = (String) request.getParameter("管理Id");
-		String password = (String) request.getParameter("パスワード");
-
-		AdministratorsDTO dto = AdminMainService.login(adminId, password);
-
-		if (dto != null) {
-			session.setAttribute("管理Id", adminId);
-
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/adminMain.jsp");
-			rd.forward(request, response);
-		} else {
-			request.setAttribute("message", "管理者IDまたはパスワードが違います。");
-
-			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/LoginController");
-			rd.forward(request, response);
-		}
 	}
 
 }

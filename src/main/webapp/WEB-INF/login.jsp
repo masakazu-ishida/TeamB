@@ -25,6 +25,8 @@
 				</tr>
 			</table>
 			<input type="hidden" name="遷移元" value="${ 遷移元 }">
+			<input type="hidden" name="商品Id" value="${ 商品Id }">
+			<input type="hidden" name="数量" value="${ 数量 }">
 		</form>
 	<%
 		String message = (String)request.getAttribute("message");

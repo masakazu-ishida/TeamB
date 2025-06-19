@@ -11,15 +11,17 @@
 	<h3>以下の商品を購入しますか？</h3>
 	<table>
 	<tr><th>商品名</th><th>商品の色</th><th>メーカー名</th><th>単価</th><th>数量</th></tr>
-	<tr><c:forEach var="dto" items="${dtoList}">
-    	<p><c:out value="${dto.name}" /></p>
-    	<p><c:out value="${dto.color}"/></p>
-    	<p><c:out value="${dto.manufacturer}"/></p>
-    	<p><c:out value="${dto.price}"/></p>
-    	<p><c:out value="${dto.amount}"/></p>
+	<c:forEach var="dto" items="${dtoList}">
+		<tr>
+    	<td><c:out value="${dto.getItems().name}" /></td>
+    	<td><c:out value="${dto.getItems().color}"/></td>
+    	<td><c:out value="${dto.getItems().manufacturer}"/></td>
+    	<td><c:out value="${dto.getItems().price}"/></td>
+    	<td><c:out value="${dto.amount}"/></td>
+    	</tr>
 		</c:forEach>
-	</tr>
-	</table><br>
+	
+	</table>
 	<p>合計<c:out value="${sum}"/>円</p><br><br>
 	
 	<p>清算方法</p>

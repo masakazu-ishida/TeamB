@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.co.axisb.dto.ItemsInCartDTO;
-import jp.co.axisb.service.PurchaseConfirmService;
+import jp.co.axisb.service.CartService;
 
 /**
  * Servlet implementation class PurchaseConfirmController
@@ -35,11 +35,7 @@ public class PurchaseConfirmController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		//		String path = "/WEB-INF/purchaseConfirm.jsp";
-		//
-		//		RequestDispatcher rd = request.getRequestDispatcher(path);
-		//		rd.forward(request, response);
+
 		//		doPost(request, response);
 	}
 
@@ -49,8 +45,10 @@ public class PurchaseConfirmController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//		doGet(request, response);
 
+		//		String userid = "user";
+		//		session.setAttribute("userId", userid);
 		HttpSession session = request.getSession(true);
 		String userId = (String) session.getAttribute("userId");
 
@@ -58,18 +56,16 @@ public class PurchaseConfirmController extends HttpServlet {
 			response.sendRedirect("/axis_b/LoginController");
 
 		} else {
-			List<ItemsInCartDTO> dtoList = PurchaseConfirmService.getCartItems(userId);
-			int sum = PurchaseConfirmService.CartSum(userId);
+			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
+			int sum = CartService.CartSum(userId);
 
 			request.setAttribute("dtoList", dtoList);
 			request.setAttribute("sum", sum);
 
-			String path = "/WEB-INF/cart.jsp";
+			String path = "/WEB-INF/purchaseConfirm.jsp";
 
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-
 		}
 	}
-
 }

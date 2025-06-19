@@ -31,6 +31,9 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -41,8 +44,6 @@ public class LoginController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
-		rd.forward(request, response);
 	}
 
 }
