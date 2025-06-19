@@ -7,7 +7,7 @@ import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.util.CommonConstants;
 import jp.co.axisb.util.ConnectionUtil;
 
-public class PurchaseServise {
+public class AdminPurchaseService {
 
 	public PurchasesDTO purchasesCancelComfirmServise(int purchaseId) {
 
@@ -25,11 +25,22 @@ public class PurchaseServise {
 		return null;
 	}
 
-	public PurchasesDTO purchasesCancelCommitServise(PurchasesDTO dto) {
-
+	public int purchasesCancelCommitServise(int purchaseId) {
+		
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
-
+//			DAOクラスのインスタンス化
+			PurchasesDAO dao = new PurchasesDAO(conn);
+//			DTOクラスのインスタンス化
+			PurchasesDTO dto = new PurchasesDTO();
+			dto.setPurchaseId(purchaseId);
+			return dao.
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
+		return 0;
+
+		
 	}
 
 }

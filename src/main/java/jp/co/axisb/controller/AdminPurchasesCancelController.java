@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jp.co.axisb.dto.PurchasesDTO;
-import jp.co.axisb.service.PurchaseServise;
+import jp.co.axisb.service.AdminPurchaseService;
 
 /**
  * Servlet implementation class PurchaseConfirmController
@@ -38,7 +38,7 @@ public class AdminPurchasesCancelController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		//PurchaseServiseをインスタンス化
-		PurchaseServise purchaseservice = new PurchaseServise();
+		AdminPurchaseService purchaseservice = new AdminPurchaseService();
 
 		//purcahseCancelComfirmJSPの注文IDを取得
 		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
