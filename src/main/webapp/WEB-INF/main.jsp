@@ -11,7 +11,7 @@
 <body>
 	<h3>商品の検索を行います。</h3>
 		<br />
-	<form action='/TeamB/axisb/controller/SearchController' method='POST'>
+	<form action="/axis_b/SearchController" method='POST'>
 		キーワード<br />
 		<input type='text' name='keyword' /><br />
 			カテゴリ<br />
@@ -28,7 +28,7 @@
 		String userId = (String)request.getParameter("userId");
 		if(userId == null){
 	%>
-		<div id="conn"><a href='/SearchController'>ログイン</a></div>
+		<div id="conn"><a href="/axis_b/LoginController">ログイン</a></div>
 	<%	
 		}
 	%>
