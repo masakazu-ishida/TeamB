@@ -50,11 +50,7 @@ public class PurchaseConfirmController extends HttpServlet {
 		//		String userid = "user";
 		//		session.setAttribute("userId", userid);
 		HttpSession session = request.getSession(true);
-		String userid = "user";
-		session.setAttribute("userId", userid);
-
 		String userId = (String) session.getAttribute("userId");
-		String path = "注文キャンセル確認画面JSPへのパス";
 
 		if (userId == null) {
 			response.sendRedirect("/axis_b/LoginController");
