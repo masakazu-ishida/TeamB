@@ -3,28 +3,18 @@ package jp.co.axisb.service;
 import java.sql.Connection;
 import java.util.List;
 
+import jp.co.axisb.dao.ItemsDAO;
 import jp.co.axisb.dao.ItemsInCartDAO;
-import jp.co.axisb.dto.ItemsDTO;
+import jp.co.axisb.dao.PurchasesDAO;
+import jp.co.axisb.dao.PurchasesDetailsDAO;
 import jp.co.axisb.dto.ItemsInCartDTO;
+import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.util.CommonConstants;
 import jp.co.axisb.util.ConnectionUtil;
 
 public class PurchaseCommitService {
-	public static List<ItemsInCartDTO> getCartItems(String usedId) {
-		List<ItemsInCartDTO> dto = null;
 
-		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
-			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-			return dao.findById(usedId);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-
-	}
-
-	public static int CartSum(String userId) {
+	public static int cartSum(String userId) {
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
 
@@ -46,18 +36,25 @@ public class PurchaseCommitService {
 
 	}
 
-	public static int StockUpdate(ItemsDTO dto) {
+	public static int insertCart(String userId, String payment, String distination) {
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
-			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+			ItemsDAO itemsdao = new ItemsDAO(conn);
+			ItemsInCartDAO itemsincartdao = new ItemsInCartDAO(conn);
+			PurchasesDAO purchasesdao = new PurchasesDAO(conn);
+			PurchasesDetailsDAO purchasesdetaildao = new PurchasesDetailsDAO(conn);
 
-			int num = 0;
-			
-			}
-			return num;
+			//トランザクションオフ
+
+			conn.setAutoCommit(false);
+
+			PurchasesDTO purchasesdto = new PurchasesDTO();
+			purchasesdto.set
+			List<ItemsInCartDTO> cartitemsdto = itemsincartdao
+					.findById(purchasesdto.getUsers().getUserId());
 
 		} catch (Exception e) {
-			return 0;
 
 		}
-
 	}
+
+}

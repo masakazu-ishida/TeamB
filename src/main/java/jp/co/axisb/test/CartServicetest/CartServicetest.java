@@ -85,12 +85,12 @@ public class CartServicetest {
 
 	//金額が正しいか確認
 	@Test
-	public void testCartSum() {
+	public void testcartSum() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
 
 			//idがuserのカート内を取得する
-			int sum = CartService.CartSum("user");
+			int sum = CartService.cartSum("user");
 			assertEquals(37320, sum);
 
 		} catch (SQLException e) {
