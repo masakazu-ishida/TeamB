@@ -31,7 +31,8 @@
 		
 		<input type="hidden" value="${page}" name ="current">
 		
-	<p><a href ="メインに飛ばすパスを入れる">商品検索</a>へ</p>
+	<a href='/axis_b/mainController'>商品検索</a>へ<br />
+
 	
 </body>
 </html>

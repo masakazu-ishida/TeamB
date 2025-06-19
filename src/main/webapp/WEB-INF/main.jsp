@@ -11,7 +11,7 @@
 <body>
 	<h3>商品の検索を行います。</h3>
 		<br />
-	<form action='/TeamB/axisb/SearchController' method='POST'>
+	<form action='/TeamB/axisb/controller/SearchController' method='POST'>
 		キーワード<br />
 		<input type='text' name='keyword' /><br />
 			カテゴリ<br />
