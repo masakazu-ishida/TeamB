@@ -17,7 +17,7 @@ import jp.co.axisb.service.CartService;
 /**
  * Servlet implementation class CartController
  */
-@WebServlet(name = "cart", urlPatterns = { "/cart" })
+@WebServlet(name = "CartController", urlPatterns = { "/CartController" })
 public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -58,7 +58,7 @@ public class CartController extends HttpServlet {
 		String userId = (String) session.getAttribute("userId");
 
 		if (userId == null) {
-			response.sendRedirect("/WEB-INF/login.jsp");
+			response.sendRedirect("/axis_b/LoginController");
 
 		} else {
 			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
