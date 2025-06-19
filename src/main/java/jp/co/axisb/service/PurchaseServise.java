@@ -9,7 +9,7 @@ import jp.co.axisb.util.ConnectionUtil;
 
 public class PurchaseServise {
 
-	public PurchasesDTO PurchasesCancelComfirmServise(int purchaseId) {
+	public PurchasesDTO purchasesCancelComfirmServise(int purchaseId) {
 
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			//			DAOのインスタンス化
@@ -19,9 +19,17 @@ public class PurchaseServise {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public PurchasesDTO purchasesCancelCommitServise(PurchasesDTO dto) {
+
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+
+		}
 	}
 
 }
