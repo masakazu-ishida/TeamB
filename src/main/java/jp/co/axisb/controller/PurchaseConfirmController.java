@@ -47,16 +47,12 @@ public class PurchaseConfirmController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//		doGet(request, response);
 
-<<<<<<< HEAD
-		HttpSession session = request.getSession(true);
 
 		//		String userid = "user";
 		//		session.setAttribute("userId", userid);
 
 		String userId = (String) session.getAttribute("userId");
-=======
 		String path = "注文キャンセル確認画面JSPへのパス";
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 
 		request.setCharacterEncoding("UTF-8");
 		//PurchaseServiseをインスタンス化
