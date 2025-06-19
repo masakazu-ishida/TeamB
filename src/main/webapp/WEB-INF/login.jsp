@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>会員ログイン</title>
 </head>
 <body>
 
@@ -24,9 +24,9 @@
 					<td colspan='2'><input type='submit' value='ログイン' /></td>
 				</tr>
 			</table>
+			<input tyoe='hidden' name='リダイレクト' value='login'/>
 		</form>
-		<a href='registerUser.html'>会員登録</a><br />
-
+		<p>
 
 </body>
 </html>
