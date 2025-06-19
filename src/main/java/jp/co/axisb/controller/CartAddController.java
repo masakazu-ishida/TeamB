@@ -47,17 +47,16 @@ public class CartAddController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		String userId = (String) request.getAttribute("会員ID");
-		int itemId = (int)request.getAttribute("商品ID");
-		Date bookedDate = (Date)request.getAttribute("購入日");
-		int amount = (int)request.getAttribute("数量");
-		
+		int itemId = (int) request.getAttribute("商品ID");
+		Date bookedDate = (Date) request.getAttribute("購入日");
+		int amount = (int) request.getAttribute("数量");
 
 		if (userId == null) {
 			response.sendRedirect("/axis_b/LoginController");
 
 		} else {
-			
-			CartService.Cartadd(userId, 0, null, 0)
+
+			CartService.Cartadd(userId, amount, bookedDate, itemId);
 
 			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/CartController");
 			rd.forward(request, response);
