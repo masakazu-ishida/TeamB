@@ -8,18 +8,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class CartAddController
  */
-@WebServlet(name = "LoginController", urlPatterns = { "/LoginController" })
-public class LoginController extends HttpServlet {
+@WebServlet("/CartAddController")
+public class CartAddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginController() {
+	public CartAddController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,9 +32,6 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
-		rd.forward(request, response);
 	}
 
 	/**
@@ -43,7 +41,19 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		HttpSession session = request.getSession(true);
 
+		String userId = (String) session.getAttribute("会員ID");
+
+		if (userId == null) {
+			response.sendRedirect("/axis_b/LoginController");
+
+		} else {
+
+			RequestDispatcher rd = request.getRequestDispatcher("カート一覧表示のサーブレットのパス");
+			rd.forward(request, response);
+
+		}
 	}
 
 }

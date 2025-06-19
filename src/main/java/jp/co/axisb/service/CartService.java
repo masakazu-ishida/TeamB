@@ -1,6 +1,7 @@
 package jp.co.axisb.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 import jp.co.axisb.dao.ItemsInCartDAO;
@@ -45,6 +46,25 @@ public class CartService {
 
 		}
 
+	}
+
+	public static int Cartadd(String userId, int amount, Date bookedDate, int itemId) {
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+
+			ItemsInCartDTO dto = new ItemsInCartDTO();
+
+			dto.setUserId(userId);
+			dto.setAmount(amount);
+			dto.setBookedDate(bookedDate);
+			dto.setItemId(itemId);
+
+			return dao.insert(dto);
+
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 }
