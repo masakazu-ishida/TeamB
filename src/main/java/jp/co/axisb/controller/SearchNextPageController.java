@@ -17,13 +17,13 @@ import jp.co.axisb.service.SearchService;
  * Servlet implementation class Searchcontroller2
  */
 @WebServlet("/Searchcontroller2")
-public class Searchcontroller2 extends HttpServlet {
+public class SearchNextPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Searchcontroller2() {
+	public SearchNextPageController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -42,16 +42,22 @@ public class Searchcontroller2 extends HttpServlet {
 		//リクエストパラメータを取り出す
 		String keyword = request.getParameter("keyword");
 
+		String next = request.getParameter("next");
+
 		int page = Integer.parseInt(request.getParameter("page"));
 
 		int categoriesId = Integer.parseInt(request.getParameter("categoriesId"));
 
+		if (next == "0") { //nextがおされたとき
+
+			page = page + 1;
+
+		}
+
 		//サーチサービスのサーチメソッドを呼び出す
 		//引数には検索キーワードとカテゴリIDを渡す
-		SearchService.search2(keyword, categoriesId, page);
-
 		//サービスからの戻り値をセットアトリビュートする
-		List<ItemsDTO> list = SearchService.search(keyword, categoriesId);
+		List<ItemsDTO> list = SearchService.search2(keyword, categoriesId, page);
 
 		request.setAttribute("value1", categoriesId);
 		request.setAttribute("value2", keyword);
