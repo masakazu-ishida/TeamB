@@ -72,11 +72,14 @@ insert into purchases values(1,'user','2025-06-17','テスト',false);
 
 insert into purchase_details values(1,1,20,4);
 
+<<<<<<< HEAD
 --INSERT INTO public.purchase_details(purchase_detail_id, purchase_id, item_id, amount) VALUES (1, 1, 20, 4);
 --INSERT INTO public.purchase_details(purchase_detail_id, purchase_id, item_id, amount) VALUES (1, 1, 20, 4);
 
 --insert into purchases values(1,'user',current_date,'テスト',false);
 --insert into purchase_details values(1,1,20,1);
+=======
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 
 /*insert into purchases values(1,'user',current_date,'テスト',false);*/
 /*insert into purchase_details values(1,1,20,1);*/

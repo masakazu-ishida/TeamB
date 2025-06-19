@@ -1,7 +1,6 @@
 package jp.co.axisb.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.axisb.dto.ItemsInCartDTO;
-import jp.co.axisb.service.CartService;
+import jp.co.axisb.dto.AdministratorsDTO;
+import jp.co.axisb.service.AdminMainService;
 
 /**
- * Servlet implementation class CartController
+ * Servlet implementation class AdminMainController
  */
-@WebServlet(name = "CartController", urlPatterns = { "/CartController" })
-public class CartController extends HttpServlet {
+@WebServlet("/AdminMainController")
+public class AdminMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CartController() {
+	public AdminMainController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,14 +35,6 @@ public class CartController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		//		request.setAttribute("userId", "user");
-		//
-		//		String path = "/WEB-INF/cart.jsp";
-		//
-		//		RequestDispatcher rd = request.getRequestDispatcher(path);
-		//		rd.forward(request, response);
-		doPost(request, response);
 	}
 
 	/**
@@ -55,25 +46,23 @@ public class CartController extends HttpServlet {
 		//doGet(request, response);
 
 		HttpSession session = request.getSession(true);
-		String userId = (String) session.getAttribute("userId");
 
-		if (userId == null) {
-			response.sendRedirect("/axis_b/LoginController");
+		String adminId = (String) request.getParameter("管理Id");
+		String password = (String) request.getParameter("パスワード");
 
-		} else {
-			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
-			int sum = CartService.CartSum(userId);
+		AdministratorsDTO dto = AdminMainService.login(adminId, password);
 
-			request.setAttribute("dtoList", dtoList);
-			request.setAttribute("sum", sum);
+		if (dto != null) {
+			session.setAttribute("管理Id", adminId);
 
-			String path = "/WEB-INF/cart.jsp";
-
-			RequestDispatcher rd = request.getRequestDispatcher(path);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/adminMain.jsp");
 			rd.forward(request, response);
+		} else {
+			request.setAttribute("message", "管理者IDまたはパスワードが違います。");
 
+			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/LoginController");
+			rd.forward(request, response);
 		}
-
 	}
 
 }

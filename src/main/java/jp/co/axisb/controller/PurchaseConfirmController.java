@@ -9,8 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.service.PurchaseServise;
+=======
+import jp.co.axisb.dto.ItemsInCartDTO;
+import jp.co.axisb.service.PurchaseConfirmService;
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 
 /**
  * Servlet implementation class PurchaseConfirmController
@@ -34,7 +39,11 @@ public class PurchaseConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		//		String path = "/WEB-INF/purchaseConfirm.jsp";
+		//
+		//		RequestDispatcher rd = request.getRequestDispatcher(path);
+		//		rd.forward(request, response);
+		//		doPost(request, response);
 	}
 
 	/**
@@ -47,9 +56,14 @@ public class PurchaseConfirmController extends HttpServlet {
 
 		String path = "注文キャンセル確認画面JSPへのパス";
 
+<<<<<<< HEAD
 		request.setCharacterEncoding("UTF-8");
 		//PurchaseServiseをインスタンス化
 		PurchaseServise purchaseservice = new PurchaseServise();
+=======
+		if (userId == null) {
+			response.sendRedirect("/axis_b/LoginController");
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 
 		//purcahseCancelComfirmJSPの注文IDを取得
 		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
@@ -64,8 +78,22 @@ public class PurchaseConfirmController extends HttpServlet {
 			request.setAttribute("purchaseId", purchaseId);
 			request.setAttribute("dto", dto);
 		} else {
+<<<<<<< HEAD
 			path = "注文一覧表示画面JSPのパス";
 			request.setAttribute("error", "対象商品はすでに注文がキャンセルされています");
+=======
+			List<ItemsInCartDTO> dtoList = PurchaseConfirmService.getCartItems(userId);
+			int sum = PurchaseConfirmService.CartSum(userId);
+
+			request.setAttribute("dtoList", dtoList);
+			request.setAttribute("sum", sum);
+
+			String path = "/WEB-INF/cart.jsp";
+
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 		}
 
 		//フォワード

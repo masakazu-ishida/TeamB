@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class AdminLoginController
  */
-@WebServlet(name = "LoginController", urlPatterns = { "/LoginController" })
-public class LoginController extends HttpServlet {
+@WebServlet("/AdminLoginController")
+public class AdminLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginController() {
+	public AdminLoginController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,6 +31,8 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/adminLogin.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -39,10 +41,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
-		rd.forward(request, response);
+		doGet(request, response);
 	}
 
 }
