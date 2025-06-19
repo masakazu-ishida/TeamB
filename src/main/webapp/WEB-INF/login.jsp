@@ -24,9 +24,8 @@
 					<td colspan='2'><input type='submit' value='ログイン' /></td>
 				</tr>
 			</table>
-			<input tyoe='hidden' name='リダイレクト' value='login'/>
+			<input type='hidden' name='リダイレクト' value='login'/>
 		</form>
-		<p>
-
+		
 </body>
 </html>
