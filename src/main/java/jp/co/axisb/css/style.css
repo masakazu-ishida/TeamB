@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+table {
+  border-collapse: collapse; /* 二重線を一本にする */
+  border: 1px  black solid ; /* テーブル全体に線を引く */
+}
+
+th, td {
+  border: 1px  black  solid; /* セルにも線を引く */
+  padding: 8px; /* セルのpadding */
+}

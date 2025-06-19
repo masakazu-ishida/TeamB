@@ -35,11 +35,7 @@ public class PurchaseConfirmController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		//		String path = "/WEB-INF/purchaseConfirm.jsp";
-		//
-		//		RequestDispatcher rd = request.getRequestDispatcher(path);
-		//		rd.forward(request, response);
+
 		//		doPost(request, response);
 	}
 
@@ -52,6 +48,10 @@ public class PurchaseConfirmController extends HttpServlet {
 		doGet(request, response);
 
 		HttpSession session = request.getSession(true);
+
+		//		String userid = "user";
+		//		session.setAttribute("userId", userid);
+
 		String userId = (String) session.getAttribute("userId");
 
 		if (userId == null) {
@@ -64,7 +64,7 @@ public class PurchaseConfirmController extends HttpServlet {
 			request.setAttribute("dtoList", dtoList);
 			request.setAttribute("sum", sum);
 
-			String path = "/WEB-INF/cart.jsp";
+			String path = "/WEB-INF/purchaseConfirm.jsp";
 
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
