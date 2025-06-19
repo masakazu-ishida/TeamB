@@ -40,13 +40,15 @@ public class SearchServiceTest {
 		assertEquals(20, dto.size());
 
 		//キーワード＝麦わら　カテゴリ＝すべて
-		List<ItemsDTO> dto1 = SearchServiceTest.search("麦わら", 0);
+		List<ItemsDTO> dto1 = SearchService.search("麦わら", 0);
 		assertEquals(2, dto1.size());
 
-		List<ItemsDTO> dto2 = dao1.findByItemName("", 1);
+		//カテゴリが帽子のとき
+		List<ItemsDTO> dto2 = SearchService.search("", 1);
 		assertEquals(11, dto2.size());
 
-		List<ItemsDTO> dto3 = dao1.findByItemName("", 2);
+		//カテゴリが鞄のとき
+		List<ItemsDTO> dto3 = SearchService.search("", 2);
 		assertEquals(9, dto3.size());
 
 	}

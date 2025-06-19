@@ -15,7 +15,7 @@
 		キーワード<br />
 		<input type='text' name='keyword' /><br />
 			カテゴリ<br />
-			<select name='category'>
+			<select name='categoriesId'>
 				<option selected value='0'>すべて</option>
 				<option value='1'>帽子</option>
 				<option value='2'>鞄</option>
