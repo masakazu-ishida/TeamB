@@ -25,7 +25,7 @@ public class CartService {
 
 	}
 
-	public static int CartSum(String userId) {
+	public static int cartSum(String userId) {
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
 

@@ -47,8 +47,8 @@ public class LoginConfirmController extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 
-		String userId = request.getParameter("会員Id");
-		String password = request.getParameter("パスワード");
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
 		String a = request.getParameter("遷移元で設定するパラメータ");
 
 		UsersDTO dto = LoginService.login(userId, password);

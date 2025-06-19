@@ -47,25 +47,21 @@ public class PurchaseConfirmController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//		doGet(request, response);
 
+		HttpSession session = request.getSession(true);
 		//		String userid = "user";
 		//		session.setAttribute("userId", userid);
-		HttpSession session = request.getSession(true);
 		String userId = (String) session.getAttribute("userId");
 
-		if (userId == null) {
-			response.sendRedirect("/axis_b/LoginController");
+		List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
+		int sum = CartService.CartSum(userId);
 
-		} else {
-			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
-			int sum = CartService.CartSum(userId);
+		request.setAttribute("dtoList", dtoList);
+		request.setAttribute("sum", sum);
 
-			request.setAttribute("dtoList", dtoList);
-			request.setAttribute("sum", sum);
+		String path = "/WEB-INF/purchaseConfirm.jsp";
 
-			String path = "/WEB-INF/purchaseConfirm.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-		}
 	}
 }
