@@ -62,9 +62,9 @@ public class SearchController extends HttpServlet {
 		//サービスからの戻り値をセットアトリビュートする
 		List<ItemsDTO> list = SearchService.search(keyword, categoriesId);
 
-		request.setAttribute("value1", categoriesId);
-		request.setAttribute("value2", keyword);
-		request.setAttribute("value3", list);
+		request.setAttribute("categoriesId1", categoriesId);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("list", list);
 
 		//フォワード
 		RequestDispatcher rd = request.getRequestDispatcher(path);

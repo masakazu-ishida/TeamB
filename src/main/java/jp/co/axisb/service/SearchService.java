@@ -41,7 +41,7 @@ public class SearchService {
 
 	}
 
-	//２-5ページ
+	//２-５ページ
 	public static List<ItemsDTO> search2(String keyword, int categoriesId, int page) {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
