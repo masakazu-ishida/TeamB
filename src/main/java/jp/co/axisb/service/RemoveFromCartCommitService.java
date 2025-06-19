@@ -17,7 +17,7 @@ public class RemoveFromCartCommitService {
 			ItemsInCartDTO dto = new ItemsInCartDTO();
 			dto.setUserId(userId);
 			dto.setItemId(itemId);
-			//findByIdメソッドに実引数を渡して、返す
+			//deleteメソッドに実引数を渡して、削除
 			return dao.delete(dto);
 
 		} catch (Exception e) {
