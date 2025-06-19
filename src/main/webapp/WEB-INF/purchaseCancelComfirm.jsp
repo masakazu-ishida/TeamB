@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 				<td colspan='2'>
-					<form action="purchaseCancelCommit.jsp" method="POST">
+					<form action="/axis_b/PurchaseConfirmController" method="POST">
 						<input type='hidden' name='purchaseId' value='1234' />
 						<input type='submit' value='キャンセル' /><br />
 					</form>
