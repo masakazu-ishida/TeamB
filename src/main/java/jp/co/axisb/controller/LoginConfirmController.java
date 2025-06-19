@@ -14,7 +14,7 @@ import jp.co.axisb.dto.UsersDTO;
 import jp.co.axisb.service.LoginService;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class LoginConfirmController
  */
 @WebServlet("/LoginConfirmController")
 public class LoginConfirmController extends HttpServlet {
@@ -35,8 +35,6 @@ public class LoginConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher rd = request.getRequestDispatcher("/LoginController");
-		rd.forward(request, response);
 	}
 
 	/**
@@ -51,36 +49,39 @@ public class LoginConfirmController extends HttpServlet {
 
 		String userId = (String) request.getParameter("会員Id");
 		String password = (String) request.getParameter("パスワード");
-		String a = (String) session.getAttribute("遷移元で設定するパラメータ");
+		String a = (String) request.getParameter("遷移元で設定するパラメータ");
 
 		UsersDTO dto = LoginService.login(userId, password);
-
-		String path = "";
 
 		if (dto != null) {
 			if ("カート一覧画面に行くときのパラメータ".equals(a)) {
 				session.setAttribute("会員Id", userId);
 
-				path = "ショッピングカート一覧画面のサーブレットのパス";
+				RequestDispatcher rd = request.getRequestDispatcher("ショッピングカート一覧画面のサーブレットのパス");
+				rd.forward(request, response);
 
 			} else if ("メイン画面からのパラメータ".equals(a)) {
 				session.setAttribute("会員Id", userId);
 
-				path = "メイン画面のサーブレットのパス";
+				RequestDispatcher rd = request.getRequestDispatcher("メイン画面のサーブレットのパス");
+				rd.forward(request, response);
 
+			} else if ("カート追加のときのパラメータ".equals(a)) {
+				session.setAttribute("会員Id", userId);
+
+				RequestDispatcher rd = request.getRequestDispatcher("カート追加のためのサーブレットのパス");
+				rd.forward(request, response);
 			}
 
 		} else {
 			request.setAttribute("message", "会員IDまたはパスワードが違います。");
 
-			request.setAttribute("遷移元で設定するパラメータ", a);
-			path = "/LoginController";
+			request.setAttribute("遷移元", a);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/LoginController");
+			rd.forward(request, response);
 
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
-
 	}
 
 }

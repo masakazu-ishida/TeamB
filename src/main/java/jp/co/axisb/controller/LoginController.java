@@ -8,12 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/LoginController")
+@WebServlet(name = "LoginController", urlPatterns = { "/LoginController" })
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,8 +31,6 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
-		rd.forward(request, response);
 	}
 
 	/**
@@ -43,12 +40,6 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-
-		String a = (String) request.getParameter("遷移元で設定するパラメータ");
-
-		HttpSession session = request.getSession(true);
-
-		session.setAttribute("遷移元で設定するパラメータ", a);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
 		rd.forward(request, response);

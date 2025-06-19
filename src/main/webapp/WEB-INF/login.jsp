@@ -24,8 +24,16 @@
 					<td colspan='2'><input type='submit' value='ログイン' /></td>
 				</tr>
 			</table>
-			<input type='hidden' name='リダイレクト' value='login'/>
+			<input type="hidden" name="遷移元" value="${ 遷移元 }">
 		</form>
+	<%
+		String message = (String)request.getAttribute("message");
+		if(message != null){
+	%>
+		<%= message %>
+	<%	
+		}
+	%>
 		
 </body>
 </html>
