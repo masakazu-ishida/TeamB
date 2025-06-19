@@ -36,29 +36,6 @@ public class RemoveFromCartCommitController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//	response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		//削除確認画面JSPへのパス
-		String path = "/WEB-INF/removefromcartcommit.jsp";
-
-		//RemoveFromCartConfirmServiceをインスタンス化
-		RemoveFromCartCommitService commitservice = new RemoveFromCartCommitService();
-
-		//セッションオブジェクトの取得
-		HttpSession session = request.getSession(true);
-
-		//confirmJSPのユーザーIDを取得
-		//String "ユーザーIDのセッション、キー名" = (String) session.getAttribute("userId");
-		String userId = (String) session.getAttribute("userId");
-		//confirmJSPの商品IDを取得
-		//int "カート内JSPのパラメータ、itemId" = Integer.parseInt(request.getParameter("itemId"));
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
-
-		//RemoveFromCartcommitServiceのメソッドを呼び出し、DTOに詰める
-		ItemsInCartDTO dto = commitservice.deleteItem(userId, itemId);
-
-		//フォワード
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
-
 	}
 
 	/**
@@ -67,7 +44,33 @@ public class RemoveFromCartCommitController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		//	doGet(request, response);
 
+		//削除完了画面JSPへのパス
+		String path = "/WEB-INF/removefromcartcommit.jsp";
+
+		//RemoveFromCartCommitServiceをインスタンス化
+		RemoveFromCartCommitService commitservice = new RemoveFromCartCommitService();
+
+		//セッションオブジェクトの取得
+		HttpSession session = request.getSession(true);
+
+		//confirmJSPのユーザーIDと商品IDを取得
+		String userId = (String) session.getAttribute("userId");
+		ItemsInCartDTO dto = (ItemsInCartDTO) session.getAttribute("dto");
+
+		/*RemoveFromCartcommitServiceのメソッドを呼び出し、
+		DELETEメソッドで該当商品を削除*/
+		commitservice.deleteItem(userId, dto.getItemId());
+
+		//sessionの商品情報のみポイする。
+		session.removeAttribute("dto");
+
+		request.setAttribute("dto", dto);
+
+		//フォワード
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
+
+	}
 }
