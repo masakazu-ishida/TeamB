@@ -37,12 +37,6 @@ public class CartController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		//		request.setAttribute("userId", "user");
-		//
-		//		String path = "/WEB-INF/cart.jsp";
-		//
-		//		RequestDispatcher rd = request.getRequestDispatcher(path);
-		//		rd.forward(request, response);
 		doPost(request, response);
 	}
 
@@ -55,6 +49,9 @@ public class CartController extends HttpServlet {
 		//doGet(request, response);
 
 		HttpSession session = request.getSession(true);
+		//		String userid = "user";
+		//		session.setAttribute("userId", userid);
+
 		String userId = (String) session.getAttribute("userId");
 
 		if (userId == null) {

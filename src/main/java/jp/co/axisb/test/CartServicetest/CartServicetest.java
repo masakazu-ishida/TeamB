@@ -61,6 +61,18 @@ public class CartServicetest {
 			//JUnitで妥当性の確認
 			assertEquals(expected, searchDTO.getBookedDate());
 
+			assertEquals("userpass", searchDTO.getUsers().getPassword());
+			assertEquals("鳥取一郎", searchDTO.getUsers().getName());
+			assertEquals("鳥取県鳥取市河原町６丁目１０７", searchDTO.getUsers().getAddress());
+			assertEquals(1, searchDTO.getItems().getItemId());
+			assertEquals("麦わら帽子", searchDTO.getItems().getName());
+			assertEquals("日本帽子製造", searchDTO.getItems().getManufacturer());
+			assertEquals(1, searchDTO.getItems().getCategoryId());
+			assertEquals("黄色", searchDTO.getItems().getColor());
+			assertEquals(4980, searchDTO.getItems().getPrice());
+			assertEquals(12, searchDTO.getItems().getStock());
+			assertEquals(false, searchDTO.getItems().isRecommended());
+
 			//カート内に存在しないユーザーIDを指定した場合
 			dto = dao.findById("a");
 			assertEquals(0, dto.size());

@@ -85,41 +85,56 @@ class PurchasesDAOTest {
 
 		}
 	}
-	/*
+
+	//	主キーリスト検索
 	@Test
-	void testFindAllEmpty() {
-		System.out.println("testFindAllEmpty");
-		System.out.println("testFindAllEmpty");
+	void testfindListById() {
+
+		System.out.println("testfindListById");
 		try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
 			PurchasesDAO dao = new PurchasesDAO(connection);
-	
+
 			try {
-	
-				for (int i = 0; i < 4; i++) {
-					PurchasesDTO dto = new PurchasesDTO();
-					dto.setPurchaseId(i + 1);
-	
-					dao.delete(dto);
-				}
-	
-				connection.commit();
-	
-				//				テーブル空の状態で件数が０件であることを確認する
-				List<PurchasesDTO> list = dao.findAll();
-				assertEquals(0, list.size());
-	
+
+				List<PurchasesDTO> list = dao.findListById(1);
+
+				//				finddAllで返すデータの件数が全件（今回は４件）なら〇
+				assertEquals(1, list.size());
+
+				//				DTOのフィールド値が正しくレコードを反映していれば〇
+				PurchasesDTO dto = list.get(0);
+				assertEquals(1, dto.getPurchaseId());
+				assertEquals(java.sql.Date.valueOf("2025-06-17"), dto.getPurchasedDate());
+				assertEquals("テスト", dto.getDestination());
+				assertEquals(false, dto.isCancel());
+
+				List<PurchasesDetailsDTO> purchasesDetails = dto.getPurchasesDetails();
+				PurchasesDetailsDTO pd = purchasesDetails.get(0);
+				assertEquals(1, pd.getPurchasesDetailsId());
+				assertEquals(1, pd.getPurchasesId());
+				assertEquals(20, pd.getItemId());
+				assertEquals(4, pd.getAmount());
+
+				//				for (int i = 1; i < 4; i++) {
+				//					dto.setPurchaseId(i);
+				//					dao.delete(dto);
+				//				}
+				//				list = dao.findAll();
+				//				assertEquals(0, list.size());
+
 			} catch (Exception e) {
+				//				failとは、テスト結果が失敗したら赤い線が出るようにする
 				fail(e.getMessage());
 			}
-	
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-	
+
 			//例外が発生したらテストは結果は×
 			fail(e.getMessage());
-	
+
 		}
-	}*/
+	}
 
 	//主キー検索
 	@Test
@@ -160,32 +175,6 @@ class PurchasesDAOTest {
 		}
 	}
 
-	/*
-			@Test
-			void testFindByIdNull() {
-				System.out.println("testFindByIdNull");
-				try (Connection connection = ConnectionUtil.getConnectionForJUnit()) {
-					PurchasesDAO dao = new PurchasesDAO(connection);
-			
-					try {
-			
-						PurchasesDTO dto = dao.findById(5);
-						//中身がnullのものをtrueで返す
-						assertNull(dto);
-			
-					} catch (Exception e) {
-						fail(e.getMessage());
-					}
-			
-				} catch (SQLException e) {
-					e.printStackTrace();
-			
-					//例外が発生したらテストは結果は×
-					fail(e.getMessage());
-			
-				}
-			}
-			*/
 	//	追加
 	@Test
 	void testInsert() {
