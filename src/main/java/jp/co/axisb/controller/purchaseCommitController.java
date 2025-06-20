@@ -47,34 +47,42 @@ public class purchaseCommitController extends HttpServlet {
 		doGet(request, response);
 
 		HttpSession session = request.getSession(true);
-		//		String userid = "user";
-		//		session.setAttribute("userId", userid);
+		String userid = "user";
+		session.setAttribute("userId", userid);
 
 		String userId = (String) session.getAttribute("userId");
+
 		String payment = request.getParameter("payment");
+		if (payment.equals("daikin")) {
+			payment = "代金引換";
+			request.setAttribute("payment", payment);
+		}
+
 		String destination = request.getParameter("destination");
 		String address = request.getParameter("address");
 		if (destination == "another") {
+			destination = "配送先を指定";
+			request.setAttribute("setdestination", destination);
+			destination = (String) session.getAttribute("address");
+			session.removeAttribute("address");
 			request.setAttribute("address", address);
-		}
-
-		if (userId == null) {
 
 		} else {
-			List<ItemsInCartDTO> dtoList = PurchaseCommitService.getCartItems(userId);
-			int sum = PurchaseCommitService.cartSum(userId);
-			int cart = PurchaseCommitService.commitCartPurchase(userId, destination);
-
-			request.setAttribute("payment", payment);
-			request.setAttribute("destination", destination);
-			request.setAttribute("dtoList", dtoList);
-			request.setAttribute("sum", sum);
-
-			String path = "/WEB-INF/purchaseCommit.jsp";
-
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
+			destination = "ご自宅";
+			request.setAttribute("setdestination", destination);
 		}
+
+		List<ItemsInCartDTO> dtoList = PurchaseCommitService.getCartItems(userId);
+		int sum = PurchaseCommitService.cartSum(userId);
+		int cart = PurchaseCommitService.commitCartPurchase(userId, destination);
+
+		request.setAttribute("dtoList", dtoList);
+		request.setAttribute("sum", sum);
+
+		String path = "/WEB-INF/purchaseCommit.jsp";
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 
 	}
 }
