@@ -17,6 +17,7 @@ import jp.co.axisb.util.ConnectionUtil;
 public class PurchasesDetailsDAOtest {
 	@BeforeEach
 	void init() {
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
 			BaseDAO dao = new BaseDAO(conn);
@@ -33,7 +34,7 @@ public class PurchasesDetailsDAOtest {
 
 	@Test //Idがある場合
 	public void testFindById() {
-
+		init();
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
 			PurchasesDetailsDAO dao = new PurchasesDetailsDAO(conn);
@@ -49,7 +50,7 @@ public class PurchasesDetailsDAOtest {
 				assertEquals(1, dto.getPurchasesDetailsId());
 				assertEquals(1, dto.getPurchasesId());
 				assertEquals(20, dto.getItemId());
-				assertEquals(1, dto.getAmount());
+				assertEquals(4, dto.getAmount());
 
 			} catch (SQLException e) {
 				fail(e.getMessage());
@@ -67,6 +68,7 @@ public class PurchasesDetailsDAOtest {
 
 	@Test
 	public void testFindByIdNull() {
+		init();
 		System.out.println("testFindByIdNull");
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			PurchasesDetailsDAO dao = new PurchasesDetailsDAO(conn);
@@ -91,16 +93,16 @@ public class PurchasesDetailsDAOtest {
 
 	@Test //更新
 	public void testInsert() {
+		init();
 		System.out.println("testInsert");
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			PurchasesDetailsDAO dao = new PurchasesDetailsDAO(conn);
 			try {
 				//登録するデータ
 				PurchasesDetailsDTO dto = new PurchasesDetailsDTO();
-				dto.setPurchasesDetailsId(2);
-				dto.setPurchasesId(2);
+				dto.setPurchasesId(1);
 				dto.setItemId(20);
-				dto.setAmount(1);
+				dto.setAmount(4);
 
 				int result = dao.insert(dto);
 
@@ -109,15 +111,15 @@ public class PurchasesDetailsDAOtest {
 
 				//PurchasesDetailsDTO searchDTO = new PurchasesDetailsDTO();
 
-				List<PurchasesDetailsDTO> list = dao.findById(2);
+				List<PurchasesDetailsDTO> list = dao.findById(1);
 
 				PurchasesDetailsDTO searchDTO = list.get(0);
 
 				//登録直後のデータを取得し、レコードに正しく反映されているかを確認
-				assertEquals(2, searchDTO.getPurchasesDetailsId());
-				assertEquals(2, searchDTO.getPurchasesId());
+				assertEquals(1, searchDTO.getPurchasesDetailsId());
+				assertEquals(1, searchDTO.getPurchasesId());
 				assertEquals(20, searchDTO.getItemId());
-				assertEquals(1, searchDTO.getAmount());
+				assertEquals(4, searchDTO.getAmount());
 
 			} catch (SQLException e) {
 

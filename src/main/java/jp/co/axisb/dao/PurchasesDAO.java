@@ -212,7 +212,7 @@ public class PurchasesDAO extends BaseDAO {
 		String sql = "insert into purchases(purchased_user, purchased_date, destination, cancel) values(?, ?, ?, ?)";
 		int updateNum = 0;
 
-		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
 			//			ps.setInt(1, dto.getPurchaseId());
 			ps.setString(1, dto.getPurchasedUser());
@@ -233,6 +233,14 @@ public class PurchasesDAO extends BaseDAO {
 			//			ps.setInt(4, pd.getAmount());
 
 			updateNum = ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			int purchaseId = -1;//適当な初期値
+			if (rs.next()) {
+				// シーケンス名を指定して取得（プロジェクト指定）
+				purchaseId = rs.getInt("purchase_id");
+				dto.setPurchaseId(purchaseId);
+			}
+
 		}
 		return updateNum;
 
