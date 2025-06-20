@@ -49,8 +49,8 @@ public class CartController extends HttpServlet {
 		//doGet(request, response);
 
 		HttpSession session = request.getSession(true);
-		//		String userid = "user";
-		//		session.setAttribute("userId", userid);
+		String userid = "user";
+		session.setAttribute("userId", userid);
 
 		String userId = (String) session.getAttribute("userId");
 
@@ -60,8 +60,14 @@ public class CartController extends HttpServlet {
 		} else {
 			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
 			int sum = CartService.cartSum(userId);
-			
-			
+
+			String error = (String) session.getAttribute("error");
+			if (error == null) {
+				error = "";
+			} else {
+				request.setAttribute("error", error);
+				session.removeAttribute("error");
+			}
 
 			request.setAttribute("dtoList", dtoList);
 			request.setAttribute("sum", sum);

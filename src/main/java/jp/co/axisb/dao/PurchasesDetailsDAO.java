@@ -45,16 +45,15 @@ public class PurchasesDetailsDAO extends BaseDAO {
 
 	public int insert(PurchasesDetailsDTO dto) throws SQLException {
 
-		String sql = "insert into purchase_details(purchase_detail_id,purchase_id,item_id,amount) values(?,?,?,?)";
+		String sql = "insert into purchase_details(purchase_id,item_id,amount) values(?,?,?)";
 
 		int updateLowNum = 0;
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			ps.setInt(1, dto.getPurchasesDetailsId());
-			ps.setInt(2, dto.getPurchasesId());
-			ps.setInt(3, dto.getItemId());
-			ps.setInt(4, dto.getAmount());
+			ps.setInt(1, dto.getPurchasesId());
+			ps.setInt(2, dto.getItemId());
+			ps.setInt(3, dto.getAmount());
 
 			updateLowNum = ps.executeUpdate();
 

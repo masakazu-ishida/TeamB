@@ -19,6 +19,7 @@
 			<input type='submit' value='削除する' /><br />
 		</form><br>
 		
+		<a href='/axis_b/CartController'>ショッピングカート内一覧</a>へ<br /></body>
 		<a href='/axis_b/SearchController'>商品検索</a>へ<br />
 
 </body>

@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.co.axisb.dto.ItemsInCartDTO;
-import jp.co.axisb.service.CartService;
+import jp.co.axisb.service.PurchaseCommitService;
 
 /**
- * Servlet implementation class PurchaseConfirmController
+ * Servlet implementation class purchaseCommitController
  */
-@WebServlet("/PurchaseConfirmController")
-public class PurchaseConfirmController extends HttpServlet {
+@WebServlet("/purchaseCommitController")
+public class purchaseCommitController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchaseConfirmController() {
+	public purchaseCommitController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,8 +35,7 @@ public class PurchaseConfirmController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		//		doPost(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -50,15 +49,37 @@ public class PurchaseConfirmController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String userid = "user";
 		session.setAttribute("userId", userid);
+
 		String userId = (String) session.getAttribute("userId");
 
-		List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
-		int sum = CartService.cartSum(userId);
+		String payment = request.getParameter("payment");
+		if (payment.equals("daikin")) {
+			payment = "代金引換";
+			request.setAttribute("payment", payment);
+		}
+
+		String destination = request.getParameter("destination");
+		String address = request.getParameter("address");
+		if (destination == "another") {
+			destination = "配送先を指定";
+			request.setAttribute("setdestination", destination);
+			destination = (String) session.getAttribute("address");
+			session.removeAttribute("address");
+			request.setAttribute("address", address);
+
+		} else {
+			destination = "ご自宅";
+			request.setAttribute("setdestination", destination);
+		}
+
+		List<ItemsInCartDTO> dtoList = PurchaseCommitService.getCartItems(userId);
+		int sum = PurchaseCommitService.cartSum(userId);
+		int cart = PurchaseCommitService.commitCartPurchase(userId, destination);
 
 		request.setAttribute("dtoList", dtoList);
 		request.setAttribute("sum", sum);
 
-		String path = "/WEB-INF/purchaseConfirm.jsp";
+		String path = "/WEB-INF/purchaseCommit.jsp";
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);

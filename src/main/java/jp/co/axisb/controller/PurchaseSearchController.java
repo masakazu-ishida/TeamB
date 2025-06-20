@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.axisb.dto.ItemsInCartDTO;
-import jp.co.axisb.service.CartService;
+import jp.co.axisb.dto.PurchasesDTO;
+import jp.co.axisb.service.PurchaseSearchService;
 
 /**
- * Servlet implementation class PurchaseConfirmController
+ * Servlet implementation class PurchaseSearchService
  */
-@WebServlet("/PurchaseConfirmController")
-public class PurchaseConfirmController extends HttpServlet {
+@WebServlet("/PurchaseSearchService")
+public class PurchaseSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchaseConfirmController() {
+	public PurchaseSearchController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,8 +35,8 @@ public class PurchaseConfirmController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		//		doPost(request, response);
 	}
 
 	/**
@@ -45,23 +45,31 @@ public class PurchaseConfirmController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 
+		//注文一覧表示画面へのパス
+		String path = "/WEB-INF/adminPurchaseSearch.jsp";
+
+		//セッションオブジェクトの取得
 		HttpSession session = request.getSession(true);
-		String userid = "user";
-		session.setAttribute("userId", userid);
+
+		//mainJSPの管理者IDを取得
 		String userId = (String) session.getAttribute("userId");
 
-		List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
-		int sum = CartService.cartSum(userId);
+		//mainJSPの注文IDを取得
+		String purchaseId = (String) session.getAttribute("purchaseId");
 
-		request.setAttribute("dtoList", dtoList);
-		request.setAttribute("sum", sum);
+		List<PurchasesDTO> list = PurchaseSearchService.search(purchaseId);
 
-		String path = "/WEB-INF/purchaseConfirm.jsp";
+		//ユーザーID、注文ID、リストの情報をそれぞれセット
+		session.setAttribute("userId", userId);
+		session.setAttribute("purchaseId", purchaseId);
+		request.setAttribute("list", list);
 
+		//フォワード
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
 
 	}
+
 }
