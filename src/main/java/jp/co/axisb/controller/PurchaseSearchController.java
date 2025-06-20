@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.axisb.dto.ItemsInCartDTO;
-import jp.co.axisb.service.CartService;
+import jp.co.axisb.dto.PurchasesDTO;
+import jp.co.axisb.service.PurchaseSearchService;
 
 /**
- * Servlet implementation class CartController
+ * Servlet implementation class PurchaseSearchService
  */
-@WebServlet(name = "CartController", urlPatterns = { "/CartController" })
-public class CartController extends HttpServlet {
+@WebServlet("/PurchaseSearchService")
+public class PurchaseSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CartController() {
+	public PurchaseSearchController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,7 +37,6 @@ public class CartController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		doPost(request, response);
 	}
 
 	/**
@@ -48,36 +47,28 @@ public class CartController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 
-		HttpSession session = request.getSession(true);
-		String userid = "user";
-		session.setAttribute("userId", userid);
+		//注文一覧表示画面へのパス
+		String path = "/WEB-INF/adminPurchaseSearch.jsp";
 
+		//セッションオブジェクトの取得
+		HttpSession session = request.getSession(true);
+
+		//mainJSPの管理者IDを取得
 		String userId = (String) session.getAttribute("userId");
 
-		if (userId == null) {
-			response.sendRedirect("/axis_b/LoginController");
+		//mainJSPの注文IDを取得
+		String purchaseId = (String) session.getAttribute("purchaseId");
 
-		} else {
-			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
-			int sum = CartService.cartSum(userId);
+		List<PurchasesDTO> list = PurchaseSearchService.search(purchaseId);
 
-			String error = (String) session.getAttribute("error");
-			if (error == null) {
-				error = "";
-			} else {
-				request.setAttribute("error", error);
-				session.removeAttribute("error");
-			}
+		//ユーザーID、注文ID、リストの情報をそれぞれセット
+		session.setAttribute("userId", userId);
+		session.setAttribute("purchaseId", purchaseId);
+		request.setAttribute("list", list);
 
-			request.setAttribute("dtoList", dtoList);
-			request.setAttribute("sum", sum);
-
-			String path = "/WEB-INF/cart.jsp";
-
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
-
-		}
+		//フォワード
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 
 	}
 
