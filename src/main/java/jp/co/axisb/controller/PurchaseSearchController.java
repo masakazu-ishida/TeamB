@@ -48,7 +48,7 @@ public class PurchaseSearchController extends HttpServlet {
 		//doGet(request, response);
 
 		//注文一覧表示画面へのパス
-		String path = "/WEB-INF/PurchaseSearch.jsp";
+		String path = "/WEB-INF/adminPurchaseSearch.jsp";
 
 		//セッションオブジェクトの取得
 		HttpSession session = request.getSession(true);
