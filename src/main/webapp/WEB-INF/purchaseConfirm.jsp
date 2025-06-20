@@ -26,7 +26,7 @@
 	
 	<p>清算方法</p>
 	<select name="payment">
-		<option selected>代金引換</option>
+		<option value="1" selected>代金引換</option>
 	</select><br><br>
 	
 	<p>配送先</p>
@@ -36,7 +36,7 @@
 	<input type="text" name="address"><br><br>
 	
 	<p>購入しますか？</p>
-	<form action = "/axis_b/purchaseCommit" method="post">
+	<form action = "/axis_b/purchaseCommitController" method="post">
 		<input type="submit" value="購入する">
 	</form>
 	<br>
