@@ -6,12 +6,13 @@ import java.util.List;
 
 import jp.co.axisb.dao.ItemsDAO;
 import jp.co.axisb.dto.ItemsDTO;
+import jp.co.axisb.util.CommonConstants;
 import jp.co.axisb.util.ConnectionUtil;
 
 public class SearchService {
 
 	public static List<ItemsDTO> search(String keyword, int categoriesId) {
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 
 			ItemsDAO dao = new ItemsDAO(conn);
 
@@ -23,14 +24,24 @@ public class SearchService {
 				list.addAll(list1);
 				list.addAll(list2);
 
-				return list.subList(0, 9);
+				int max = 9;
+				if (list.size() < max) {
+					max = list.size();
+				}
+
+				return list.subList(0, max);
 
 			}
 
 			else {
 				List<ItemsDTO> list = dao.findByItemName(keyword, categoriesId);
 
-				return list.subList(0, 9);
+				int max = 9;
+				if (list.size() < max) {
+					max = list.size();
+				}
+
+				return list.subList(0, max);
 
 			}
 		} catch (Exception e) {

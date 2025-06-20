@@ -12,6 +12,7 @@ import jp.co.axisb.dao.BaseDAO;
 import jp.co.axisb.dto.ItemsDTO;
 import jp.co.axisb.service.SearchService;
 import jp.co.axisb.util.ConnectionUtil;
+import jp.co.axisb.util.ConnectionUtil.MODE;
 
 public class SearchServiceTest {
 
@@ -35,17 +36,18 @@ public class SearchServiceTest {
 	@Test
 	public void testFindById() {
 
+		ConnectionUtil.mode = MODE.TEST;
 		//キーワード＝NULL　カテゴリ＝すべて
 		List<ItemsDTO> dto = SearchService.search("", 0);
-		assertEquals(20, dto.size());
+		assertEquals(9, dto.size());
 
 		//キーワード＝麦わら　カテゴリ＝すべて
-		List<ItemsDTO> dto1 = SearchService.search("麦わら", 0);
+		List<ItemsDTO> dto1 = SearchService.search("麦わら", 1);
 		assertEquals(2, dto1.size());
 
 		//カテゴリが帽子のとき
 		List<ItemsDTO> dto2 = SearchService.search("", 1);
-		assertEquals(11, dto2.size());
+		assertEquals(9, dto2.size());
 
 		//カテゴリが鞄のとき
 		List<ItemsDTO> dto3 = SearchService.search("", 2);
