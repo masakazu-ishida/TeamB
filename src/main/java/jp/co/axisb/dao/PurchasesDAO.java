@@ -58,6 +58,7 @@ public class PurchasesDAO extends BaseDAO {
 				users.setUserId(rs.getString("user_id"));
 
 				dto.setPurchaseId(rs.getInt("purchase_id"));
+				dto.setPurchasedUser(rs.getString("user_id"));
 				dto.setPurchasedDate(rs.getDate("purchased_date"));
 				dto.setDestination(rs.getString("destination"));
 				dto.setCancel(rs.getBoolean("cancel"));
@@ -121,6 +122,7 @@ public class PurchasesDAO extends BaseDAO {
 				users.setUserId(rs.getString("user_id"));
 
 				dto.setPurchaseId(rs.getInt("purchase_id"));
+				dto.setPurchasedUser(rs.getString("user_id"));
 				dto.setPurchasedDate(rs.getDate("purchased_date"));
 				dto.setDestination(rs.getString("destination"));
 				dto.setCancel(rs.getBoolean("cancel"));
@@ -183,6 +185,7 @@ public class PurchasesDAO extends BaseDAO {
 				users.setUserId(rs.getString("user_id"));
 
 				dto.setPurchaseId(rs.getInt("purchase_id"));
+				dto.setPurchasedUser(rs.getString("user_id"));
 				dto.setPurchasedDate(rs.getDate("purchased_date"));
 				dto.setDestination(rs.getString("destination"));
 				dto.setCancel(rs.getBoolean("cancel"));

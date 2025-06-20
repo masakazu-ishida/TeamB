@@ -1,19 +1,17 @@
 package jp.co.axisb.test.PurchasesServise;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.axisb.dao.BaseDAO;
-import jp.co.axisb.dao.PurchasesDAO;
 import jp.co.axisb.dto.PurchasesDTO;
+import jp.co.axisb.service.AdminPurchaseService;
 import jp.co.axisb.util.ConnectionUtil;
+import jp.co.axisb.util.ConnectionUtil.MODE;
 
 public class PurchasesServiseTest {
 
@@ -33,22 +31,33 @@ public class PurchasesServiseTest {
 	}
 
 	@Test
-	void PurchaseServiseTest() {
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-			PurchasesDAO dao = new PurchasesDAO(conn);
+	void purchaseCancelConfirmtest() {
+		ConnectionUtil.mode = MODE.TEST;
+		AdminPurchaseService aps = new AdminPurchaseService();
 
-			//注文確認一覧に正しく値が詰め込まれているかを確認する。
-			PurchasesDTO dto = dao.findById(1);
-			assertNotNull(dto);
+		PurchasesDTO dto = aps.purchasesCancelComfirmServise(1);
+		assertEquals("user", dto.getUsers().getUserId());
+		assertEquals(1, dto.getPurchaseId());
+		assertEquals(java.sql.Date.valueOf("2025-06-17"), dto.getPurchasedDate());
+		assertEquals("テスト", dto.getDestination());
+		assertEquals(false, dto.isCancel());
 
-			//注文確認一覧に存在しない注文IDを指定した場合、NULLを返すことを確認する
-			dto = dao.findById(8);
-			assertNull(dto);
+	}
 
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			fail(e.getMessage());
-		}
+	@Test
+	void purchaseCancelCommittest() {
+
+		ConnectionUtil.mode = MODE.TEST;
+
+		AdminPurchaseService aps = new AdminPurchaseService();
+
+		aps.purchasesCancelCommitServise(1);
+
+		PurchasesDTO dto = aps.purchasesCancelComfirmServise(1);
+
+		//		serviceに在庫を戻す作業がいる
+		assertNull(dto);
+
 	}
 
 }

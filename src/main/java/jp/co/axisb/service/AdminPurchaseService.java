@@ -33,11 +33,13 @@ public class AdminPurchaseService {
 			//			DAOクラスのインスタンス化
 			PurchasesDAO dao = new PurchasesDAO(conn);
 			//			DTOクラスのインスタンス化
-			PurchasesDTO dto = new PurchasesDTO();
+			//PurchasesDTO dto = new PurchasesDTO();
 
-			dto.setPurchaseId(purchaseId);
-			//			Cancelをtrueにした状態をセットする
+			PurchasesDTO dto = dao.findById(purchaseId);
+
 			dto.setCancel(true);
+			//			ItemsのstockとItems_in_cartのamountを取得して足す
+			dto.setPurchaseDetailDTO(dto.getItems().get);
 			//			DAO処理の更新処理を呼び出す
 			return dao.update(dto);
 		} catch (Exception e) {

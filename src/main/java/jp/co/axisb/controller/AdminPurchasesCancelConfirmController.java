@@ -34,7 +34,7 @@ public class AdminPurchasesCancelConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String path = "注文キャンセル確認画面JSPへのパス";
+		String path = "/WEB-INF/purchaseCancelConfirm.jsp";
 
 		request.setCharacterEncoding("UTF-8");
 		//PurchaseServiseをインスタンス化
