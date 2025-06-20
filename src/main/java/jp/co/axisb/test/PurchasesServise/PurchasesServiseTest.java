@@ -33,6 +33,7 @@ public class PurchasesServiseTest {
 		}
 	}
 
+	//	キャンセル確認画面テスト
 	@Test
 	void purchaseCancelConfirmtest() {
 		ConnectionUtil.mode = MODE.TEST;
@@ -47,28 +48,31 @@ public class PurchasesServiseTest {
 
 	}
 
+	//キャンセル完了画面
 	@Test
 	void purchaseCancelCommittest() {
 
 		ConnectionUtil.mode = MODE.TEST;
-
+		//		AdminPurchaseServiceのインスタンス化
 		AdminPurchaseService aps = new AdminPurchaseService();
 
-		aps.purchasesCancelCommitServise(1);
-
-		PurchasesDTO dto = aps.purchasesCancelComfirmServise(1);
-
-		//		assertNull(dto);
-
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+
 			ItemsDAO dao = new ItemsDAO(conn);
-			ItemsDTO item = dao.findById(20);
+			ItemsDTO item = dao.findById(1);
 
 			//		在庫数を確認するテストをしたい
 			assertEquals(5, item.getStock());
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		//purchaseDTOのCancelをfalseからtrueにする（trueにするとnullが戻り値として返される）
+		aps.purchasesCancelCommitServise(1);
+		//findByIdと同じ処理をしている
+		PurchasesDTO dto = aps.purchasesCancelComfirmServise(1);
+
+		assertNull(dto);
 
 	}
 }
