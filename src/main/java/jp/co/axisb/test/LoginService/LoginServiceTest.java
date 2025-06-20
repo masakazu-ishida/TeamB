@@ -32,7 +32,11 @@ public class LoginServiceTest {
 
 	@Test
 	public void testFindById() {
-		UsersDTO search = LoginService.login("user", "userpass");
+
+		String userId = "user";
+		String password = "userpass";
+
+		UsersDTO search = LoginService.login(userId, password);
 		assertNotNull(search);
 
 		search = LoginService.login("aaaaaaaaa", "userpass");
