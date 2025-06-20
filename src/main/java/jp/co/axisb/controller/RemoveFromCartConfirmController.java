@@ -65,7 +65,6 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		String userId = (String) session.getAttribute("userId");
 
 		//カートJSPの商品IDを取得
-		//int "カート内JSPのパラメータ、itemId" = Integer.parseInt(request.getParameter("itemId"));
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出し、DTOに詰める
@@ -78,7 +77,7 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 			session.setAttribute("userId", userId);
 			session.setAttribute("dto", dto);
 		} else {
-			response.sendRedirect("カート内一覧のサーブレット");
+			response.sendRedirect("/axis_b/CartController");
 			request.setAttribute("error", "対象商品はすでにカートから削除されています");
 		}
 

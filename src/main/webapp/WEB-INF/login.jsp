@@ -14,11 +14,11 @@
 			<table>
 				<tr>
 					<th>会員ID</th>
-					<td><input type='text' class='id' name='会員Id' /></td>
+					<td><input type='text' class='id' name="userId" /></td>
 				</tr>
 				<tr>
 					<th>パスワード</th>
-					<td><input type='password' class='password' name='パスワード' /></td>
+					<td><input type='password' class='password' name="password" /></td>
 				</tr>
 				<tr>
 					<td colspan='2'><input type='submit' value='ログイン' /></td>

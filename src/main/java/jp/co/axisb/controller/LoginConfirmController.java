@@ -44,32 +44,37 @@ public class LoginConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+
+		response.setContentType("text/html;charset=UTF-8");
 
 		HttpSession session = request.getSession(true);
 
-		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
-		String a = request.getParameter("遷移元で設定するパラメータ");
+		//String userId = request.getParameter("userId");
+		//String password = request.getParameter("password");
+		String userId = "user";
+		String password = "userpass";
+		String a = request.getParameter("");
 
 		UsersDTO dto = LoginService.login(userId, password);
 
 		if (dto != null) {
-			session.setAttribute("会員Id", userId);
+			session.setAttribute("userId", userId);
 
-			if ("カート一覧画面に行くときのパラメータ".equals(a)) {
+			if ("cart".equals(a)) {
 
-				response.sendRedirect("ショッピングカート一覧画面のサーブレットのパス");
+				response.sendRedirect("/CartController");
 
-			} else if ("メイン画面からのパラメータ".equals(a)) {
+			} else if ("main".equals(a)) {
 
-				response.sendRedirect("メイン画面のサーブレットのパス");
+				response.sendRedirect("/mainController");
 
-			} else if ("カート追加のときのパラメータ".equals(a)) {
+			} else if ("cartadd".equals(a)) {
 				//商品IDと数量をセット
-				request.setAttribute("商品Id", request.getParameter("商品Id"));
-				request.setAttribute("数量", request.getParameter("数量"));
+				request.setAttribute("itemId", request.getParameter("itemId"));
+				request.setAttribute("amount", request.getParameter("amount"));
 
-				RequestDispatcher rd = request.getRequestDispatcher("カート追加のためのサーブレットのパス");
+				RequestDispatcher rd = request.getRequestDispatcher("/CartAddController");
 				rd.forward(request, response);
 			}
 
@@ -78,10 +83,11 @@ public class LoginConfirmController extends HttpServlet {
 
 			request.setAttribute("遷移元", a);
 			//商品IDと数量をセット
-			request.setAttribute("商品Id", request.getParameter("商品Id"));
-			request.setAttribute("数量", request.getParameter("数量"));
+			request.setAttribute("userId", request.getParameter("userId"));
+			request.setAttribute("amount", request.getParameter("amount"));
 
-			response.sendRedirect("/axis_b/LoginController");
+			RequestDispatcher rd = request.getRequestDispatcher("/LoginController");
+			rd.forward(request, response);
 
 		}
 	}

@@ -14,12 +14,12 @@
 		<c:out value="${dto.items.manufacturer}"/><br />
 		<c:out value="${dto.items.price*dto.amount}"/>円<br />
 		<p>数量<c:out value="${dto.amount}"/>個<br /> 
-		<form action='removeFromCartCommit.html' method='POST'>
+		<form action='/axis_b/RemoveFromCartCommitController' method='POST'>
 			<input type='hidden' name='itemId' value='123' />
 			<input type='submit' value='削除する' /><br />
 		</form><br>
 		
-		<a href='/SearchController'>商品検索</a>へ<br />
+		<a href='/axis_b/SearchController'>商品検索</a>へ<br />
 
 </body>
 </html>

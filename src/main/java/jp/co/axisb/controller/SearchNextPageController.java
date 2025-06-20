@@ -16,7 +16,7 @@ import jp.co.axisb.service.SearchService;
 /**
  * Servlet implementation class Searchcontroller2
  */
-@WebServlet("/Searchcontroller2")
+@WebServlet("/SearchNextPageController")
 public class SearchNextPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

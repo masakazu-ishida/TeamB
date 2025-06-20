@@ -2,6 +2,7 @@ package jp.co.axisb.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,8 +47,8 @@ public class AdminLoginConfirmController extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 
-		String adminId = (String) request.getParameter("管理Id");
-		String password = (String) request.getParameter("パスワード");
+		String adminId = (String) request.getParameter("id");
+		String password = (String) request.getParameter("password");
 
 		AdministratorsDTO dto = AdminMainService.login(adminId, password);
 
@@ -58,7 +59,8 @@ public class AdminLoginConfirmController extends HttpServlet {
 		} else {
 			request.setAttribute("message", "管理者IDまたはパスワードが違います。");
 
-			response.sendRedirect("/axis_b/AdminLoginController");
+			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/AdminLoginController");
+			rd.forward(request, response);
 		}
 	}
 
