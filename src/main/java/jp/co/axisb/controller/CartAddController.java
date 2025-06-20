@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.axisb.dto.ItemsDTO;
 import jp.co.axisb.service.CartService;
 
 /**
@@ -52,7 +51,7 @@ public class CartAddController extends HttpServlet {
 		Date bookedDate = (Date) request.getAttribute("購入日");
 		int amount = (int) request.getAttribute("数量");
 
-		ItemsDTO dto = (ItemsDTO) request.getAttribute("dto");
+		//ItemsDTO dto = (ItemsDTO) request.getAttribute("dto");
 
 		if (userId == null) {
 			response.sendRedirect("/axis_b/LoginController");
