@@ -2,8 +2,11 @@ package jp.co.axisb.service;
 
 import java.sql.Connection;
 
+import jp.co.axisb.dao.ItemsDAO;
 import jp.co.axisb.dao.PurchasesDAO;
+import jp.co.axisb.dto.ItemsDTO;
 import jp.co.axisb.dto.PurchasesDTO;
+import jp.co.axisb.dto.PurchasesDetailsDTO;
 import jp.co.axisb.util.CommonConstants;
 import jp.co.axisb.util.ConnectionUtil;
 
@@ -30,18 +33,35 @@ public class AdminPurchaseService {
 	public int purchasesCancelCommitServise(int purchaseId) {
 
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
-			//			DAOクラスのインスタンス化
-			PurchasesDAO dao = new PurchasesDAO(conn);
-			//			DTOクラスのインスタンス化
-			//PurchasesDTO dto = new PurchasesDTO();
+			conn.setAutoCommit(false);
+			try {
+				//			DAOクラスのインスタンス化
 
-			PurchasesDTO dto = dao.findById(purchaseId);
+				PurchasesDAO dao = new PurchasesDAO(conn);
+				//			DTOクラスのインスタンス化
+				//PurchasesDTO dto = new PurchasesDTO();
 
-			dto.setCancel(true);
-			//			ItemsのstockとItems_in_cartのamountを取得して足す
-			dto.setPurchaseDetailDTO(dto.getItems().get);
-			//			DAO処理の更新処理を呼び出す
-			return dao.update(dto);
+				PurchasesDTO dto = dao.findById(purchaseId);
+
+				ItemsDAO dao1 = new ItemsDAO(conn);
+
+				dto.setCancel(true);
+				//			ItemsのstockとItems_in_cartのamountを取得して足す
+				for (PurchasesDetailsDTO pd : dto.getPurchaseDetailDTO()) {
+					ItemsDTO dto1 = dao1.findById(pd.getItemId());
+					int stock = dto1.getStock();
+					stock = stock + pd.getAmount();
+					dto1.setStock(stock);
+
+				}
+				conn.commit();
+				//			DAO処理の更新処理を呼び出す
+				return dao.update(dto);
+			} catch (Exception e) {
+				// TODO: handle exception
+				conn.rollback();
+			}
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

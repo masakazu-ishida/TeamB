@@ -8,8 +8,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.axisb.dao.BaseDAO;
+import jp.co.axisb.dao.ItemsDAO;
+import jp.co.axisb.dto.ItemsDTO;
 import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.service.AdminPurchaseService;
+import jp.co.axisb.util.CommonConstants;
 import jp.co.axisb.util.ConnectionUtil;
 import jp.co.axisb.util.ConnectionUtil.MODE;
 
@@ -55,9 +58,17 @@ public class PurchasesServiseTest {
 
 		PurchasesDTO dto = aps.purchasesCancelComfirmServise(1);
 
-		//		serviceに在庫を戻す作業がいる
-		assertNull(dto);
+		//		assertNull(dto);
+
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+			ItemsDAO dao = new ItemsDAO(conn);
+			ItemsDTO item = dao.findById(20);
+
+			//		在庫数を確認するテストをしたい
+			assertEquals(5, item.getStock());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 	}
-
 }
