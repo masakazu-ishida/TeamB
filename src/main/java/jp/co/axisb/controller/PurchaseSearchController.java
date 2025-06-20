@@ -61,7 +61,7 @@ public class PurchaseSearchController extends HttpServlet {
 
 		List<PurchasesDTO> list = PurchaseSearchService.search(purchaseId);
 
-		//
+		//ユーザーID、注文ID、リストの情報をそれぞれセット
 		session.setAttribute("userId", userId);
 		session.setAttribute("purchaseId", purchaseId);
 		request.setAttribute("list", list);
