@@ -2,11 +2,15 @@ package jp.co.axisb.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import jp.co.axisb.dto.ItemsDTO;
+import jp.co.axisb.service.ItemDetailService;
 
 /**
  * Servlet implementation class itemDetailController
@@ -44,7 +48,14 @@ public class ItemDetailController extends HttpServlet {
 		String path = "/WEB-INF/ItemDetail.jsp";
 
 		//リクエストパラメータを取り出す
-		int categoriesId = Integer.parseInt(request.getParameter("categoriesId"));
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
+
+		ItemsDTO item = ItemDetailService.detail(itemId);
+
+		request.setAttribute("itemId", item);
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 
 	}
 

@@ -65,7 +65,8 @@ public class SearchController extends HttpServlet {
 
 		if (categoriesId == 0) {
 			String japanesecategories = "すべて";
-			request.setAttribute("categoriesId", japanesecategories);
+			request.setAttribute("japanesecategories", japanesecategories);
+			request.setAttribute("categoriesId", categoriesId);
 
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
@@ -75,7 +76,8 @@ public class SearchController extends HttpServlet {
 			rd.forward(request, response);
 		} else if (categoriesId == 1) {
 			String japanesecategories = "帽子";
-			request.setAttribute("categoriesId", japanesecategories);
+			request.setAttribute("japanesecategories", japanesecategories);
+			request.setAttribute("categoriesId", categoriesId);
 
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
@@ -85,11 +87,11 @@ public class SearchController extends HttpServlet {
 			rd.forward(request, response);
 		} else {
 			String japanesecategories = "鞄";
-			request.setAttribute("categoriesId", japanesecategories);
+			request.setAttribute("japanesecategories", japanesecategories);
+			request.setAttribute("categoriesId", categoriesId);
 
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("list", list);
-
 			//フォワード
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
