@@ -44,17 +44,12 @@ public class LoginConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		request.setCharacterEncoding("UTF-8");
-
-		response.setContentType("text/html;charset=UTF-8");
 
 		HttpSession session = request.getSession(true);
 
-		//String userId = request.getParameter("userId");
-		//String password = request.getParameter("password");
-		String userId = "user";
-		String password = "userpass";
-		String a = request.getParameter("");
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
+		String a = request.getParameter("cartdelete");
 
 		UsersDTO dto = LoginService.login(userId, password);
 
@@ -75,6 +70,11 @@ public class LoginConfirmController extends HttpServlet {
 				request.setAttribute("amount", request.getParameter("amount"));
 
 				RequestDispatcher rd = request.getRequestDispatcher("/CartAddController");
+				rd.forward(request, response);
+			} else if ("cartdelete".equals(a)) {
+				request.setAttribute("itemId", 1);
+
+				RequestDispatcher rd = request.getRequestDispatcher("/RemoveFromCartConfirmController");
 				rd.forward(request, response);
 			}
 

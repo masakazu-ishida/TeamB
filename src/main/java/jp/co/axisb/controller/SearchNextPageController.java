@@ -59,13 +59,37 @@ public class SearchNextPageController extends HttpServlet {
 		//サービスからの戻り値をセットアトリビュートする
 		List<ItemsDTO> list = SearchService.search2(keyword, categoriesId, page);
 
-		request.setAttribute("value1", categoriesId);
-		request.setAttribute("value2", keyword);
-		request.setAttribute("value3", list);
+		if (categoriesId == 0) {
+			String japanesecategories = "すべて";
+			request.setAttribute("categoriesId", japanesecategories);
 
-		//フォワード
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("list", list);
+
+			//フォワード
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		} else if (categoriesId == 1) {
+			String japanesecategories = "帽子";
+			request.setAttribute("categoriesId", japanesecategories);
+
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("list", list);
+
+			//フォワード
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		} else {
+			String japanesecategories = "鞄";
+			request.setAttribute("categoriesId", japanesecategories);
+
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("list", list);
+
+			//フォワード
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		}
 
 	}
 
@@ -75,7 +99,7 @@ public class SearchNextPageController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

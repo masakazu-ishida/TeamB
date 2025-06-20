@@ -11,6 +11,7 @@ import jp.co.axisb.dao.BaseDAO;
 import jp.co.axisb.dto.UsersDTO;
 import jp.co.axisb.service.LoginService;
 import jp.co.axisb.util.ConnectionUtil;
+import jp.co.axisb.util.ConnectionUtil.MODE;
 
 public class LoginServiceTest {
 
@@ -36,6 +37,7 @@ public class LoginServiceTest {
 		String userId = "user";
 		String password = "userpass";
 
+		ConnectionUtil.mode = MODE.TEST;
 		UsersDTO search = LoginService.login(userId, password);
 		assertNotNull(search);
 
