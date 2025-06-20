@@ -48,8 +48,8 @@ public class PurchaseConfirmController extends HttpServlet {
 		doGet(request, response);
 
 		HttpSession session = request.getSession(true);
-		String userid = "user";
-		session.setAttribute("userId", userid);
+		//String userid = "user";
+		//session.setAttribute("userId", userid);
 		String userId = (String) session.getAttribute("userId");
 
 		List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);

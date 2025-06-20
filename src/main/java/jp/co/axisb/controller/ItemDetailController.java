@@ -8,22 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import jp.co.axisb.dto.AdministratorsDTO;
-import jp.co.axisb.service.AdminMainService;
+import jp.co.axisb.dto.ItemsDTO;
+import jp.co.axisb.service.ItemDetailService;
 
 /**
- * Servlet implementation class AdminMainController
+ * Servlet implementation class itemDetailController
  */
-@WebServlet("/AdminLoginConfirmController")
-public class AdminLoginConfirmController extends HttpServlet {
+@WebServlet("/itemDetailController")
+public class ItemDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdminLoginConfirmController() {
+	public ItemDetailController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,6 +34,7 @@ public class AdminLoginConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -45,23 +45,19 @@ public class AdminLoginConfirmController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 
-		HttpSession session = request.getSession(true);
+		//path
+		String path = "/WEB-INF/ItemDetail.jsp";
 
-		String adminId = (String) request.getParameter("adminId");
-		String password = (String) request.getParameter("password");
+		//リクエストパラメータを取り出す
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
 
-		AdministratorsDTO dto = AdminMainService.login(adminId, password);
+		ItemsDTO item = ItemDetailService.detail(itemId);
 
-		if (dto != null) {
-			session.setAttribute("adminId", adminId);
+		request.setAttribute("itemId", item);
 
-			response.sendRedirect("/axis_b/AdminMainController");
-		} else {
-			request.setAttribute("message", "管理者IDまたはパスワードが違います。");
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 
-			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/AdminLoginController");
-			rd.forward(request, response);
-		}
 	}
 
 }
