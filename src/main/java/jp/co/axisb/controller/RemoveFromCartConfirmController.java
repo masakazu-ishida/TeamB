@@ -35,10 +35,6 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		//		String path = "/WEB-INF/removefromcartconfirm.jsp";
-		//
-		//		RequestDispatcher rd = request.getRequestDispatcher(path);
-		//		rd.forward(request, response);
 		doPost(request, response);
 	}
 
@@ -49,7 +45,7 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-
+		//
 		//削除確認画面JSPへのパス
 		String path = "/WEB-INF/removefromcartconfirm.jsp";
 
@@ -60,12 +56,11 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		//カートJSPのユーザーIDを取得
-		//userIdでいいのか確認する
-		//		String "ユーザーIDのセッション、キー名" = (String) session.getAttribute("userId");
 		String userId = (String) session.getAttribute("userId");
 
 		//カートJSPの商品IDを取得
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		//int itemId = Integer.parseInt(request.getParameter ("itemId"));
+		int itemId = 1;
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出し、DTOに詰める
 		ItemsInCartDTO dto = rfccservice.getItem(userId, itemId);
@@ -76,14 +71,15 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		if (dto != null) {
 			session.setAttribute("userId", userId);
 			session.setAttribute("dto", dto);
+
+			//フォワード
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+
 		} else {
 			response.sendRedirect("/axis_b/CartController");
 			request.setAttribute("error", "対象商品はすでにカートから削除されています");
 		}
-
-		//フォワード
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
 
 	}
 }

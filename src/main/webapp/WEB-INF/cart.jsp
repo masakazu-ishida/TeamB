@@ -19,7 +19,7 @@
     	<td><c:out value="${dto.getItems().manufacturer}"/></td>
     	<td><c:out value="${dto.getItems().price}"/></td>
     	<td><c:out value="${dto.amount}"/></td>
-    	<td><a href="/axis_b/RemoveFromCartConfirmController?itemId=${dto.itemId }">削除</a></td>
+    	<td><a href="/axis_b/RemoveFromCartConfirmController itemId=${dto.itemId }">削除</a></td>
 		</tr>
 		</c:forEach>
 	
