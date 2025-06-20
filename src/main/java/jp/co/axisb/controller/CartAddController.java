@@ -46,8 +46,8 @@ public class CartAddController extends HttpServlet {
 		//doGet(request, response);
 		HttpSession session = request.getSession(true);
 
-		String userId = (String) session.getAttribute("会員ID");
-		int itemId = (int) request.getAttribute("商品ID");
+		String userId = (String) session.getAttribute("userId");
+		int itemId = (int) request.getAttribute("itemId");
 		Date bookedDate = (Date) request.getAttribute("購入日");
 		int amount = (int) request.getAttribute("数量");
 
