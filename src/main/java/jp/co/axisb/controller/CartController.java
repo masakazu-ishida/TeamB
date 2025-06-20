@@ -60,8 +60,14 @@ public class CartController extends HttpServlet {
 		} else {
 			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
 			int sum = CartService.cartSum(userId);
-			
-			
+
+			String error = (String) session.getAttribute("error");
+			if (error == null) {
+				error = "";
+			} else {
+				request.setAttribute("error", error);
+				session.removeAttribute("error");
+			}
 
 			request.setAttribute("dtoList", dtoList);
 			request.setAttribute("sum", sum);
