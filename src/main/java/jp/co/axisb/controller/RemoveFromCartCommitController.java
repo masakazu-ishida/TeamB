@@ -59,13 +59,13 @@ public class RemoveFromCartCommitController extends HttpServlet {
 		String userId = (String) session.getAttribute("userId");
 		ItemsInCartDTO dto = (ItemsInCartDTO) session.getAttribute("dto");
 
-		/*RemoveFromCartcommitServiceのメソッドを呼び出し、
-		DELETEメソッドで該当商品を削除*/
+		/*RemoveFromCartcommitServiceの
+		DELETEメソッドを呼び出し、該当商品を削除*/
 		commitservice.deleteItem(userId, dto.getItemId());
 
-		//sessionの商品情報のみポイする。
+		//sessionオブジェクトの商品情報のみポイする。
 		session.removeAttribute("dto");
-
+		//requestオブジェクトに商品情報をセット
 		request.setAttribute("dto", dto);
 
 		//フォワード
