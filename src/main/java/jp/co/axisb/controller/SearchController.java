@@ -36,9 +36,9 @@ public class SearchController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		String path = "/WEB-INF/search.jsp";
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+		//		String path = "/WEB-INF/search.jsp";
+		//		RequestDispatcher rd = request.getRequestDispatcher(path);
+		//		rd.forward(request, response);
 
 	}
 
@@ -50,6 +50,7 @@ public class SearchController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);]
 
+		//path
 		String path = "/WEB-INF/search.jsp";
 
 		//リクエストパラメータを取り出す
@@ -62,13 +63,38 @@ public class SearchController extends HttpServlet {
 		//サービスからの戻り値をセットアトリビュートする
 		List<ItemsDTO> list = SearchService.search(keyword, categoriesId);
 
-		request.setAttribute("categoriesId1", categoriesId);
-		request.setAttribute("keyword", keyword);
-		request.setAttribute("list", list);
+		if (categoriesId == 0) {
+			String japanesecategories = "すべて";
+			request.setAttribute("categoriesId", japanesecategories);
 
-		//フォワード
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("list", list);
+
+			//フォワード
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		} else if (categoriesId == 1) {
+			String japanesecategories = "帽子";
+			request.setAttribute("categoriesId", japanesecategories);
+
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("list", list);
+
+			//フォワード
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		} else {
+			String japanesecategories = "鞄";
+			request.setAttribute("categoriesId", japanesecategories);
+
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("list", list);
+
+			//フォワード
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+		}
+
 	}
 
 }

@@ -18,19 +18,19 @@ public class SearchService {
 			if (categoriesId == 0) {
 				List<ItemsDTO> list1 = dao.findByItemName(keyword, 1);
 				List<ItemsDTO> list2 = dao.findByItemName(keyword, 2);
-				List<ItemsDTO> list3 = new ArrayList<>();
+				List<ItemsDTO> list = new ArrayList<>();
 
-				list3.addAll(list1);
-				list3.addAll(list2);
+				list.addAll(list1);
+				list.addAll(list2);
 
-				return list3.subList(0, 9);
+				return list.subList(0, 9);
 
 			}
 
 			else {
-				List<ItemsDTO> list4 = dao.findByItemName(keyword, categoriesId);
+				List<ItemsDTO> list = dao.findByItemName(keyword, categoriesId);
 
-				return list4.subList(0, 9);
+				return list.subList(0, 9);
 
 			}
 		} catch (Exception e) {
@@ -50,19 +50,19 @@ public class SearchService {
 			if (categoriesId == 0) {
 				List<ItemsDTO> list1 = dao.findByItemName(keyword, 1);
 				List<ItemsDTO> list2 = dao.findByItemName(keyword, 2);
-				List<ItemsDTO> list3 = new ArrayList<>();
+				List<ItemsDTO> list = new ArrayList<>();
 
-				list3.addAll(list1);
-				list3.addAll(list2);
+				list.addAll(list1);
+				list.addAll(list2);
 
-				return list3.subList(10 * (page - 1), 10 * page - 1);
+				return list.subList(10 * (page - 1), 10 * page - 1);
 
 			}
 
 			else {
-				List<ItemsDTO> list4 = dao.findByItemName(keyword, categoriesId);
+				List<ItemsDTO> list = dao.findByItemName(keyword, categoriesId);
 
-				return list4.subList(10 * (page - 1), 10 * page - 1);
+				return list.subList(10 * (page - 1), 10 * page - 1);
 
 			}
 		} catch (Exception e) {

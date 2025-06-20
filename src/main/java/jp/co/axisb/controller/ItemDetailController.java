@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class itemDetailController
  */
 @WebServlet("/itemDetailController")
-public class itemDetailController extends HttpServlet {
+public class ItemDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public itemDetailController() {
+    public ItemDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
