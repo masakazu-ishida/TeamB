@@ -37,11 +37,11 @@ public class PurchasesServiseTest {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			PurchasesDAO dao = new PurchasesDAO(conn);
 
-			//カート内に正しく値が詰め込まれているかを確認する。
+			//注文確認一覧に正しく値が詰め込まれているかを確認する。
 			PurchasesDTO dto = dao.findById(1);
 			assertNotNull(dto);
 
-			//カート内に存在しないユーザーIDと商品IDを指定した場合、NULLを返すことを確認する
+			//注文確認一覧に存在しない注文IDを指定した場合、NULLを返すことを確認する
 			dto = dao.findById(8);
 			assertNull(dto);
 

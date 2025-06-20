@@ -16,13 +16,13 @@ import jp.co.axisb.service.AdminPurchaseService;
  * Servlet implementation class PurchaseConfirmController
  */
 @WebServlet("/adminPurchasesCancelController")
-public class AdminPurchasesCancelController extends HttpServlet {
+public class AdminPurchasesCancelConfirmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdminPurchasesCancelController() {
+	public AdminPurchasesCancelConfirmController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

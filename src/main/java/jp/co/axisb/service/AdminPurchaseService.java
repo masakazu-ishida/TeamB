@@ -9,6 +9,7 @@ import jp.co.axisb.util.ConnectionUtil;
 
 public class AdminPurchaseService {
 
+	//	キャンセル確認画面のサービス処理
 	public PurchasesDTO purchasesCancelComfirmServise(int purchaseId) {
 
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
@@ -25,22 +26,26 @@ public class AdminPurchaseService {
 		return null;
 	}
 
+	//	 キャンセル完了画面のサービス処理
 	public int purchasesCancelCommitServise(int purchaseId) {
-		
+
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
-//			DAOクラスのインスタンス化
+			//			DAOクラスのインスタンス化
 			PurchasesDAO dao = new PurchasesDAO(conn);
-//			DTOクラスのインスタンス化
+			//			DTOクラスのインスタンス化
 			PurchasesDTO dto = new PurchasesDTO();
+
 			dto.setPurchaseId(purchaseId);
-			return dao.
-		}catch (Exception e) {
+			//			Cancelをtrueにした状態をセットする
+			dto.setCancel(true);
+			//			DAO処理の更新処理を呼び出す
+			return dao.update(dto);
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return 0;
 
-		
 	}
 
 }
