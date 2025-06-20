@@ -53,7 +53,7 @@ public class purchaseCommitController extends HttpServlet {
 		String userId = (String) session.getAttribute("userId");
 
 		String payment = request.getParameter("payment");
-		if (payment == "1") {
+		if (payment.equals("daikin")) {
 			payment = "代金引換";
 			request.setAttribute("payment", payment);
 		}
