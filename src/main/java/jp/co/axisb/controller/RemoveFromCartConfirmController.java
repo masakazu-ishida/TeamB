@@ -56,17 +56,18 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		//カートJSPのユーザーIDを取得
-		String userId = (String) session.getAttribute("userId");
+		//String userId = (String) session.getAttribute("userId");
+		String userId = "user";
 
 		//カートJSPの商品IDを取得
 		//int itemId = Integer.parseInt(request.getParameter ("itemId"));
-		int itemId = 1;
+		int itemId = 3;
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出し、DTOに詰める
 		ItemsInCartDTO dto = rfccservice.getItem(userId, itemId);
 
 		/*ItemsInCartDTOに詰められているカート内商品が存在すれば、
-		ユーザーID、商品ID、DTOをキーと値で登録する
+		ユーザーID、DTO(商品IDに紐づいている情報）をキーと値で登録する
 		nullであれば、カート内一覧画面に遷移し、エラーメッセージを出力する*/
 		if (dto != null) {
 			session.setAttribute("userId", userId);
@@ -78,7 +79,7 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 
 		} else {
 			response.sendRedirect("/axis_b/CartController");
-			request.setAttribute("error", "対象商品はすでにカートから削除されています");
+			session.setAttribute("error", "対象商品はすでにカートから削除されています");
 		}
 
 	}
