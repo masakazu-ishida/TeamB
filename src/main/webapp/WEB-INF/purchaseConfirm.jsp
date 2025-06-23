@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h3>以下の商品を購入しますか？</h3>
-	<table>
+	<table border = "1">
 	<tr><th>商品名</th><th>商品の色</th><th>メーカー名</th><th>単価</th><th>数量</th></tr>
 	<c:forEach var="dto" items="${dtoList}">
 		<tr>

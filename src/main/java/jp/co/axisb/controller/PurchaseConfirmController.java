@@ -36,7 +36,7 @@ public class PurchaseConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		//		doPost(request, response);
+		//doPost(request, response);
 	}
 
 	/**
