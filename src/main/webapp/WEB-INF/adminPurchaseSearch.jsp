@@ -39,7 +39,7 @@
     	</table>
     	
     	<td><c:out value="${list.destination}"/></td>
-    	<td><a href="キャンセルのサーブレットのパス">キャンセル</a>
+    	<td><a href="/axis_b/adminPurchasesCancelController">キャンセル</a>
 
 	<a href='/axis_b/AdminMainController'>管理者メインページ</a>へ<br />
 	

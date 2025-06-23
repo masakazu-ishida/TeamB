@@ -49,6 +49,33 @@ public class PurchasesServiseTest {
 	}
 
 	//キャンセル完了画面
+	//	@Test
+	//	void purchaseCancelCommittest() {
+	//
+	//		ConnectionUtil.mode = MODE.TEST;
+	//		//		AdminPurchaseServiceのインスタンス化
+	//		AdminPurchaseService aps = new AdminPurchaseService();
+	//
+	//		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+	//
+	//			ItemsDAO dao = new ItemsDAO(conn);
+	//			ItemsDTO item = dao.findById(1);
+	//
+	//			//		在庫数を確認するテストをしたい
+	//			assertEquals(12, item.getStock());
+	//
+	//		} catch (Exception e) {
+	//			// TODO: handle exception
+	//		}
+	//		//purchaseDTOのCancelをfalseからtrueにする（trueにするとnullが戻り値として返される）
+	//		aps.purchasesCancelCommitServise(1);
+	//		//findByIdと同じ処理をしている
+	//		PurchasesDTO dto = aps.purchasesCancelComfirmServise(1);
+	//
+	//		assertNull(dto);
+	//
+	//	}
+
 	@Test
 	void purchaseCancelCommittest() {
 
@@ -60,19 +87,22 @@ public class PurchasesServiseTest {
 
 			ItemsDAO dao = new ItemsDAO(conn);
 			ItemsDTO item = dao.findById(1);
+			//在庫数を確認するテストをしたい
+			assertEquals(12, item.getStock());
 
-			//		在庫数を確認するテストをしたい
-			assertEquals(5, item.getStock());
+			//更新した件数の比較
+			int count = aps.purchasesCancelCommitServise(1);
+			assertEquals(1, count);
+
+			//purchaseIdがないとき、dtoにはnullが入る
+			PurchasesDTO dto = aps.purchasesCancelComfirmServise(2);
+			assertNull(dto);
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
+			fail(e.getMessage());
 		}
-		//purchaseDTOのCancelをfalseからtrueにする（trueにするとnullが戻り値として返される）
-		aps.purchasesCancelCommitServise(1);
-		//findByIdと同じ処理をしている
-		PurchasesDTO dto = aps.purchasesCancelComfirmServise(1);
-
-		assertNull(dto);
 
 	}
 }

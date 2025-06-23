@@ -52,7 +52,7 @@ public class AdminPurchasesCancelConfirmController extends HttpServlet {
 		if (dto != null) {
 			request.setAttribute("dto", dto);
 		} else {
-			path = "注文一覧表示画面JSPのパス";
+			path = "/WEB-INF/adminPurchaseSearch.jsp";
 			request.setAttribute("error", "対象商品はすでに注文がキャンセルされています");
 
 		}
