@@ -10,7 +10,7 @@
 <body>
 <h3>商品の詳細表示</h3>
 		<form action='/axis_b/CartAddController' method='POST'>
-		<table>
+		<table birder = "1">
 			<tr>
 				<th>商品名</th>
 				<td><c:out value="${item.name}"/></td>
