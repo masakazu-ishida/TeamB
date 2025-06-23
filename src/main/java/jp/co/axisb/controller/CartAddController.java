@@ -46,10 +46,14 @@ public class CartAddController extends HttpServlet {
 		//doGet(request, response);
 		HttpSession session = request.getSession(true);
 
+		//String userid = "user";
+		//session.setAttribute("userId", userid);
+
 		String userId = (String) session.getAttribute("userId");
-		int itemId = (int) request.getAttribute("itemId");
-		Date bookedDate = (Date) request.getAttribute("購入日");
-		int amount = (int) request.getAttribute("数量");
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
+
+		Date bookedDate = java.sql.Date.valueOf(java.time.LocalDate.now());
+		int amount = Integer.parseInt(request.getParameter("amount"));
 
 		//ItemsDTO dto = (ItemsDTO) request.getAttribute("dto");
 
@@ -63,7 +67,7 @@ public class CartAddController extends HttpServlet {
 			session.setAttribute("userId", userId);
 			session.setAttribute("itemId", itemId);
 
-			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/CartController");
+			RequestDispatcher rd = request.getRequestDispatcher("/CartController");
 			rd.forward(request, response);
 
 		}

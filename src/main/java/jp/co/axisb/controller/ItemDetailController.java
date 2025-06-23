@@ -48,12 +48,15 @@ public class ItemDetailController extends HttpServlet {
 		//path
 		String path = "/WEB-INF/ItemDetail.jsp";
 
+		//HttpSession session = request.getSession(true);
+
 		//リクエストパラメータを取り出す
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		//session.setAttribute("itemId", itemId);
 
 		ItemsDTO item = ItemDetailService.detail(itemId);
 
-		request.setAttribute("itemId", item);
+		request.setAttribute("item", item);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
