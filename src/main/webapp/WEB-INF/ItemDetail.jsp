@@ -8,7 +8,6 @@
 <title>検索結果</title>
 </head>
 <body>
-<<<<<<< HEAD
 	<h3>カテゴリ"<c:out value="${japanesecategories}"/>"
 		/キーワード"<c:out value="${keyword}"/>"の検索結果</h3> 
 	
@@ -37,7 +36,6 @@
 		
 	<a href='/axis_b/mainController'>商品検索</a>へ<br />
 
-=======
 <h3>商品の詳細表示</h3>
 		<form action='/axis_b/CartAddController' method='POST'>
 		<table birder = "1">
@@ -61,11 +59,7 @@
 				<th>在庫数</th>
 				<td><c:out value="${item.stock}"/></td>
 			</tr>
-		</table>
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
-	
-<<<<<<< HEAD
-=======
+
 	
 
 			数量
@@ -85,6 +79,5 @@
 </table>
 	
 
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 </body>
 </html>
