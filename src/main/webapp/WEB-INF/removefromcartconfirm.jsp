@@ -20,7 +20,7 @@
 		</form><br>
 		
 		<a href='/axis_b/CartController'>ショッピングカート内一覧</a>へ<br /></body>
-		<a href='axis_b/mainController'>商品検索</a>へ<br />
+		<a href='/axis_b/mainController'>商品検索</a>へ<br />
 
 </body>
 </html>
