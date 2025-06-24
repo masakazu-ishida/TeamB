@@ -3,6 +3,8 @@ package jp.co.axisb.test.PurchaseSearchService;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -36,6 +38,35 @@ class PurchaseSearchServiceTest {
 		AdminPurchaseSearchService.search("user");
 		List<PurchasesDTO> list = AdminPurchaseSearchService.search("user");
 		assertNotNull(list);
+
+		PurchasesDTO searchDTO = list.get(0);
+		String strDate = "2025-06-17";
+		java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		java.util.Date expected;
+		try {
+			expected = dateFormat.parse(strDate);
+			//JUnitで妥当性の確認
+			assertEquals(expected, searchDTO.getPurchasedDate());
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		assertEquals(1, searchDTO.getPurchaseId());
+		assertEquals("user", searchDTO.getPurchasedUser());
+		//assertEquals("2025-06-17", searchDTO.getPurchasedDate());
+		assertEquals("テスト", searchDTO.getDestination());
+		assertEquals(false, searchDTO.isCancel());
+		assertEquals(1, searchDTO.getPurchasesDetails().get(0).getPurchasesId());
+		assertEquals(19, searchDTO.getPurchasesDetails().get(0).getItemId());
+		assertEquals(4, searchDTO.getPurchasesDetails().get(0).getAmount());
+		assertEquals(1, searchDTO.getPurchasesDetails().get(0).getPurchasesDetailsId());
+		assertEquals(19, searchDTO.getItems().getItemId());
+		assertEquals("鞄D", searchDTO.getItems().getName());
+		assertEquals("東京鞄店", searchDTO.getItems().getManufacturer());
+		assertEquals(2, searchDTO.getItems().getCategoryId());
+		assertEquals("user", searchDTO.getUsers().getUserId());
 
 		list = AdminPurchaseSearchService.search("aaa");
 		assertEquals(0, list.size());
