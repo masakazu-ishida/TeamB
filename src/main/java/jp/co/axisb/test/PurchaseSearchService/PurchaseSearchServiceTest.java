@@ -67,6 +67,8 @@ class PurchaseSearchServiceTest {
 		assertEquals("東京鞄店", searchDTO.getItems().getManufacturer());
 		assertEquals(2, searchDTO.getItems().getCategoryId());
 		assertEquals("user", searchDTO.getUsers().getUserId());
+		assertEquals("緑色", searchDTO.getItems().getColor());
+		assertEquals(1980, searchDTO.getItems().getPrice());
 
 		list = AdminPurchaseSearchService.search("aaa");
 		assertEquals(0, list.size());

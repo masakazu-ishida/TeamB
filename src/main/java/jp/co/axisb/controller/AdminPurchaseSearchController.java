@@ -36,7 +36,7 @@ public class AdminPurchaseSearchController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		doPost(request, response);
+		//doPost(request, response);
 
 	}
 
@@ -55,21 +55,21 @@ public class AdminPurchaseSearchController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		//mainJSPの管理者IDを取得
-		String userid = "user";
-		session.setAttribute("userId", userid);
+		//String userid = "user";
+		//session.setAttribute("userId", userid);
 		String userId = (String) session.getAttribute("userId");
 
 		//mainJSPの注文IDを取得
-		String purchaseid = "1";
-		session.setAttribute("purchaseId", purchaseid);
+		//String purchaseid = "1";
+		//session.setAttribute("purchaseId", purchaseid);
 		String purchaseId = (String) session.getAttribute("purchaseId");
 
 		//searchメソッドを呼び出し、リストに詰める
-		List<PurchasesDTO> list = AdminPurchaseSearchService.search(userid);
+		List<PurchasesDTO> list = AdminPurchaseSearchService.search(userId);
 
 		//ユーザーID、注文ID、リストの情報をそれぞれセット
-		session.setAttribute("userId", userid);
-		session.setAttribute("purchaseId", purchaseid);
+		session.setAttribute("userId", userId);
+		session.setAttribute("purchaseId", purchaseId);
 		request.setAttribute("list", list);
 
 		//フォワード
