@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ショッピングカート</title>
+
 </head>
 <body>
 	<h3>ショッピングカート内の商品一覧</h3><br>
@@ -19,7 +20,7 @@
     	<td><c:out value="${dto.getItems().manufacturer}"/></td>
     	<td><c:out value="${dto.getItems().price}"/></td>
 
-    	<td><c:out value="${dto.getItems().stock}"/></td>
+    	
 
     	<td><c:out value="${dto.amount}"/></td>
     	<td><a href="/axis_b/RemoveFromCartConfirmController?itemId=${dto.itemId }">削除</a></td>
