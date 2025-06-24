@@ -50,7 +50,7 @@ public class LoginConfirmController extends HttpServlet {
 
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
-		String a = request.getParameter("hidden");
+		String a = request.getParameter("h");
 
 		UsersDTO dto = LoginService.login(userId, password);
 
@@ -82,7 +82,7 @@ public class LoginConfirmController extends HttpServlet {
 		} else {
 			request.setAttribute("message", "会員IDまたはパスワードが違います。");
 
-			request.setAttribute("遷移元", a);
+			request.setAttribute("h", a);
 			//商品IDと数量をセット
 			request.setAttribute("userId", request.getParameter("userId"));
 			request.setAttribute("amount", request.getParameter("amount"));
