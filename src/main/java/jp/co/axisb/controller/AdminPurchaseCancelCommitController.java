@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.service.AdminPurchaseService;
@@ -34,6 +35,7 @@ public class AdminPurchaseCancelCommitController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -49,14 +51,17 @@ public class AdminPurchaseCancelCommitController extends HttpServlet {
 
 		AdminPurchaseService aps = new AdminPurchaseService();
 
-		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+		//int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+		//int purchaseid = 1;
+		HttpSession session = request.getSession(true);
+		int purchaseId = (int) session.getAttribute("purchaseId");
 
 		PurchasesDTO dto = aps.purchasesCancelComfirmServise(purchaseId);
 		request.setAttribute("dto", dto);
 
 		int result = aps.purchasesCancelCommitServise(purchaseId);
 
-		//		request.setAttribute("result", result);
+		request.setAttribute("result", result);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);

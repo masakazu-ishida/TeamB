@@ -36,7 +36,7 @@ public class AdminPurchaseSearchController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		//doPost(request, response);
+		doPost(request, response);
 
 	}
 
@@ -55,9 +55,12 @@ public class AdminPurchaseSearchController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		//mainJSPの管理者IDを取得
+		//		String userid = "user";
+		//	session.setAttribute("userId", userId);
+
 		//String userid = "user";
 		//session.setAttribute("userId", userid);
-		String userId = (String) session.getAttribute("userId");
+		String userId = (String) request.getParameter("userId");
 
 		//mainJSPの注文IDを取得
 		//String purchaseid = "1";
