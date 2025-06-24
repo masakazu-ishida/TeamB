@@ -8,7 +8,7 @@
 		<title>注文キャンセル確認画面</title>
 	</head>
 <body>
-<h3>以下の注文をキャンセルしてよろしいですか？</h3>
+<h3>以下の注文をキャンセルしました。</h3>
 		<br />
 		<table>
 			<tr>
@@ -49,10 +49,7 @@
 			</tr>
 			<tr>
 				<td colspan='2'>
-					<form action="/axis_b/adminPurchasesCancelController" method="POST">
-						<input type='hidden' name='purchaseId' value='${dto.purchaseId}' />
-						<input type='submit' value='キャンセル' /><br />
-					</form>
+					
 				</td>
 			</tr>
 		</table>

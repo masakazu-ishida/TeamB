@@ -2,12 +2,14 @@ package jp.co.axisb.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.service.AdminPurchaseService;
 
 /**
@@ -41,7 +43,7 @@ public class AdminPurchaseCancelCommitController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//		doGet(request, response);
-		String path = "注文キャンセル完了画面JSPへのパス";
+		String path = "/WEB-INF/purchaseCancelCommit.jsp";
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -49,9 +51,15 @@ public class AdminPurchaseCancelCommitController extends HttpServlet {
 
 		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
 
+		PurchasesDTO dto = aps.purchasesCancelComfirmServise(purchaseId);
+		request.setAttribute("dto", dto);
+
 		int result = aps.purchasesCancelCommitServise(purchaseId);
 
-		request.setAttribute("result", result);
+		//		request.setAttribute("result", result);
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 
 	}
 

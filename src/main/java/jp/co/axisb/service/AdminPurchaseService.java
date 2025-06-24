@@ -45,6 +45,8 @@ public class AdminPurchaseService {
 
 				ItemsDAO dao1 = new ItemsDAO(conn);
 
+				int count = 0; //update件数
+
 				dto.setCancel(true);
 				//			ItemsのstockとItems_in_cartのamountを取得して足す
 				for (PurchasesDetailsDTO pd : dto.getPurchaseDetailDTO()) {
@@ -53,10 +55,13 @@ public class AdminPurchaseService {
 					stock = stock + pd.getAmount();
 					dto1.setStock(stock);
 
+					count += 1;
+
 				}
 				conn.commit();
 				//			DAO処理の更新処理を呼び出す
-				return dao.update(dto);
+				//return dao.update(dto);
+				return count;
 			} catch (Exception e) {
 				// TODO: handle exception
 				conn.rollback();

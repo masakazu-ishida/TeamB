@@ -18,6 +18,7 @@ public class ItemDetailService {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return null;
 		}
 

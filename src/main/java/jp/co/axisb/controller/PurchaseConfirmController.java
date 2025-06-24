@@ -36,7 +36,7 @@ public class PurchaseConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		//		doPost(request, response);
+		//doPost(request, response);
 	}
 
 	/**
@@ -46,6 +46,9 @@ public class PurchaseConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 
 		HttpSession session = request.getSession(true);
 		//String userid = "user";
