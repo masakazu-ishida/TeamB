@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.co.axisb.dto.ItemsDTO;
-import jp.co.axisb.service.ItemDetailService;
+import jp.co.axisb.dto.PurchasesDTO;
+import jp.co.axisb.service.AdminPurchaseService;
 
 /**
- * Servlet implementation class itemDetailController
+ * Servlet implementation class AdminPurchaseCancelCommitController
  */
-@WebServlet("/itemDetailController")
-public class ItemDetailController extends HttpServlet {
+@WebServlet(name = "adminPurchaseCancelCommitController", urlPatterns = { "/adminPurchaseCancelCommitController" })
+public class AdminPurchaseCancelCommitController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ItemDetailController() {
+	public AdminPurchaseCancelCommitController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,8 +33,7 @@ public class ItemDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		doPost(request, response);
+		//		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -43,20 +42,21 @@ public class ItemDetailController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		//		doGet(request, response);
+		String path = "/WEB-INF/purchaseCancelCommit.jsp";
 
-		//path
-		String path = "/WEB-INF/ItemDetail.jsp";
+		request.setCharacterEncoding("UTF-8");
 
-		//HttpSession session = request.getSession(true);
+		AdminPurchaseService aps = new AdminPurchaseService();
 
-		//リクエストパラメータを取り出す
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
-		//session.setAttribute("itemId", itemId);
+		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
 
-		ItemsDTO item = ItemDetailService.detail(itemId);
+		PurchasesDTO dto = aps.purchasesCancelComfirmServise(purchaseId);
+		request.setAttribute("dto", dto);
 
-		request.setAttribute("item", item);
+		int result = aps.purchasesCancelCommitServise(purchaseId);
+
+		//		request.setAttribute("result", result);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
