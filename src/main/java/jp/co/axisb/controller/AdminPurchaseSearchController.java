@@ -17,7 +17,7 @@ import jp.co.axisb.service.AdminPurchaseSearchService;
 /**
  * Servlet implementation class PurchaseSearchService
  */
-@WebServlet("/PurchaseSearchService")
+@WebServlet("/PurchaseSearchController")
 public class AdminPurchaseSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -65,11 +65,11 @@ public class AdminPurchaseSearchController extends HttpServlet {
 		String purchaseId = (String) session.getAttribute("purchaseId");
 
 		//searchメソッドを呼び出し、リストに詰める
-		List<PurchasesDTO> list = AdminPurchaseSearchService.search(purchaseId);
+		List<PurchasesDTO> list = AdminPurchaseSearchService.search(userid);
 
 		//ユーザーID、注文ID、リストの情報をそれぞれセット
-		session.setAttribute("userId", userId);
-		session.setAttribute("purchaseId", purchaseId);
+		session.setAttribute("userId", userid);
+		session.setAttribute("purchaseId", purchaseid);
 		request.setAttribute("list", list);
 
 		//フォワード

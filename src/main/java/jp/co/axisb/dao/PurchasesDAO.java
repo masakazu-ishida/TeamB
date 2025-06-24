@@ -166,6 +166,7 @@ public class PurchasesDAO extends BaseDAO {
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, userId);
+			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 
