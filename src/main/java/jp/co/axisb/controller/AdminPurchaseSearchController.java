@@ -57,7 +57,7 @@ public class AdminPurchaseSearchController extends HttpServlet {
 		//mainJSPの管理者IDを取得
 		//String userid = "user";
 		//session.setAttribute("userId", userid);
-		String userId = (String) session.getAttribute("userId");
+		String userId = (String) request.getParameter("userId");
 
 		//mainJSPの注文IDを取得
 		//String purchaseid = "1";
@@ -65,7 +65,7 @@ public class AdminPurchaseSearchController extends HttpServlet {
 		String purchaseId = (String) session.getAttribute("purchaseId");
 
 		//searchメソッドを呼び出し、リストに詰める
-		List<PurchasesDTO> list = AdminPurchaseSearchService.search(purchaseId);
+		List<PurchasesDTO> list = AdminPurchaseSearchService.search(userId);
 
 		//ユーザーID、注文ID、リストの情報をそれぞれセット
 		session.setAttribute("userId", userId);
