@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.service.AdminPurchaseService;
 
 /**
@@ -51,10 +50,10 @@ public class AdminPurchaseCancelCommitController extends HttpServlet {
 
 		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
 
-		PurchasesDTO dto = aps.purchasesCancelComfirmServise(purchaseId);
-		request.setAttribute("dto", dto);
+		//PurchasesDTO dto = aps.purchasesCancelComfirmServise(purchaseId);
+		//request.setAttribute("dto", dto);
 
-		int result = aps.purchasesCancelCommitServise(purchaseId);
+		//int result = aps.purchasesCancelCommitServise(purchaseId);
 
 		//		request.setAttribute("result", result);
 
