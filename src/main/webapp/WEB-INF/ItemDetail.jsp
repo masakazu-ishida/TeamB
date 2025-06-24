@@ -72,6 +72,7 @@
 			</select><br />
 			<input type='hidden' name='itemId' value='${item.itemId}'/>
 			<input type='submit' value='ショッピングカートに入れる' /><br />
+			<input tyoe='hidden' name='hidden' value='cartadd'>
 			<a href='/axis_b/LoginController'>ログイン画面</a><br />
 		</form>
 	

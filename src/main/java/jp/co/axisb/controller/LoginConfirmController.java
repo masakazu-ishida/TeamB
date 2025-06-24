@@ -35,6 +35,7 @@ public class LoginConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -49,7 +50,7 @@ public class LoginConfirmController extends HttpServlet {
 
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
-		String a = request.getParameter("cartdelete");
+		String a = request.getParameter("hidden");
 
 		UsersDTO dto = LoginService.login(userId, password);
 
