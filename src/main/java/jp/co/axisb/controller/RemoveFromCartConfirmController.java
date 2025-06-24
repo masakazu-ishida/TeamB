@@ -56,12 +56,12 @@ public class RemoveFromCartConfirmController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		//カートJSPのユーザーIDを取得
-		//String userId = (String) session.getAttribute("userId");
-		String userId = "user";
+		//String userId = "user";
+		String userId = (String) session.getAttribute("userId");
 
 		//カートJSPの商品IDを取得
-		//int itemId = Integer.parseInt(request.getParameter ("itemId"));
-		int itemId = 3;
+		//int itemId = 3;
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出し、DTOに詰める
 		ItemsInCartDTO dto = rfccservice.getItem(userId, itemId);

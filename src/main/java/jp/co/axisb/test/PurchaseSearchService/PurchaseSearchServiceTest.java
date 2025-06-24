@@ -33,10 +33,12 @@ class PurchaseSearchServiceTest {
 
 	@Test
 	void searchtest() {
+		//カート内に正しく値が詰め込まれているかを確認する。
 		AdminPurchaseSearchService.search("user");
 		List<PurchasesDTO> list = AdminPurchaseSearchService.search("user");
 		assertNotNull(list);
 
+		//カート内に存在しないユーザーIDを指定した場合
 		list = AdminPurchaseSearchService.search("aaa");
 		assertEquals(0, list.size());
 	}
