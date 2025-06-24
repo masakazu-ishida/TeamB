@@ -13,7 +13,7 @@
 			<table>
 				<tr>
 					<th>管理者ID</th>
-					<td><input type='text' class='id' name='id' /></td>
+					<td><input type='text' class='id' name='adminId' /></td>
 				</tr>
 				<tr>
 					<th>パスワード</th>

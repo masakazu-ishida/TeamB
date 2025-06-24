@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h3>以下の商品を購入しますか？</h3>
-	<table>
+	<table border = "1">
 	<tr><th>商品名</th><th>商品の色</th><th>メーカー名</th><th>単価</th><th>数量</th></tr>
 	<c:forEach var="dto" items="${dtoList}">
 		<tr>
@@ -23,10 +23,10 @@
 	
 	</table>
 	<p>合計<c:out value="${sum}"/>円</p><br><br>
-	
+	<form action = "/axis_b/purchaseCommitController" method="post">
 	<p>清算方法</p>
 	<select name="payment">
-		<option value="1" selected>代金引換</option>
+		<option value="daikin" selected>代金引換</option>
 	</select><br><br>
 	
 	<p>配送先</p>
@@ -36,7 +36,7 @@
 	<input type="text" name="address"><br><br>
 	
 	<p>購入しますか？</p>
-	<form action = "/axis_b/purchaseCommitController" method="post">
+	
 		<input type="submit" value="購入する">
 	</form>
 	<br>

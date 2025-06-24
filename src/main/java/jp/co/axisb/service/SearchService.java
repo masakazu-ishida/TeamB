@@ -24,6 +24,12 @@ public class SearchService {
 				list.addAll(list1);
 				list.addAll(list2);
 
+				//リストに何もない時の処理　NULLを返
+				if (list.size() == 0) {
+					return null;
+				}
+
+				//リストサイズが９より小さいときにリストサイズをmaxに入れる
 				int max = 9;
 				if (list.size() < max) {
 					max = list.size();
@@ -36,13 +42,18 @@ public class SearchService {
 			else {
 				List<ItemsDTO> list = dao.findByItemName(keyword, categoriesId);
 
+				//リストに何もない時の処理　NULLを返
+				if (list.size() == 0) {
+					return null;
+				}
+
+				//リストサイズが９より小さいときにリストサイズをmaxに入れる
 				int max = 9;
 				if (list.size() < max) {
 					max = list.size();
 				}
 
 				return list.subList(0, max);
-
 			}
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
@@ -66,14 +77,40 @@ public class SearchService {
 				list.addAll(list1);
 				list.addAll(list2);
 
-				return list.subList(10 * (page - 1), 10 * page - 1);
+				//リストに何もない時の処理　NULLを返す
+				int min = 10 * (page - 1);
+				if (list.size() < min) {
+					return null;
+				}
+
+				//２ページ以降MAXの処理を書く
+				int max = 10 * page - 1;
+				if (list.size() < max) {
+					max = list.size();
+
+				}
+
+				return list.subList(min, max);
 
 			}
 
 			else {
 				List<ItemsDTO> list = dao.findByItemName(keyword, categoriesId);
 
-				return list.subList(10 * (page - 1), 10 * page - 1);
+				//リストに何もない時の処理　NULLを返す
+				int min = 10 * (page - 1);
+				if (list.size() < min) {
+					return null;
+				}
+
+				//２ページ以降MAXの処理を書く
+				int max = 10 * page - 1;
+				if (list.size() < max) {
+					max = list.size();
+
+				}
+
+				return list.subList(min, max);
 
 			}
 		} catch (Exception e) {

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.axisb.dto.ItemsDTO;
 import jp.co.axisb.service.CartService;
 
 /**
@@ -47,12 +46,16 @@ public class CartAddController extends HttpServlet {
 		//doGet(request, response);
 		HttpSession session = request.getSession(true);
 
-		String userId = (String) session.getAttribute("会員ID");
-		int itemId = (int) request.getAttribute("商品ID");
-		Date bookedDate = (Date) request.getAttribute("購入日");
-		int amount = (int) request.getAttribute("数量");
+		//String userid = "user";
+		//session.setAttribute("userId", userid);
 
-		ItemsDTO dto = (ItemsDTO) request.getAttribute("dto");
+		String userId = (String) session.getAttribute("userId");
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
+
+		Date bookedDate = java.sql.Date.valueOf(java.time.LocalDate.now());
+		int amount = Integer.parseInt(request.getParameter("amount"));
+
+		//ItemsDTO dto = (ItemsDTO) request.getAttribute("dto");
 
 		if (userId == null) {
 			response.sendRedirect("/axis_b/LoginController");
@@ -64,7 +67,7 @@ public class CartAddController extends HttpServlet {
 			session.setAttribute("userId", userId);
 			session.setAttribute("itemId", itemId);
 
-			RequestDispatcher rd = request.getRequestDispatcher("/axis_b/CartController");
+			RequestDispatcher rd = request.getRequestDispatcher("/CartController");
 			rd.forward(request, response);
 
 		}

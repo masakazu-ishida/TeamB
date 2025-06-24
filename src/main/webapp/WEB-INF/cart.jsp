@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h3>ショッピングカート内の商品一覧</h3><br>
-	<table>
+	<table border = "1">
 	<tr><th>商品名</th><th>商品の色</th><th>メーカー名</th><th>単価</th><th>数量</th><th>　</th></tr>
 
 		<c:forEach var="dto" items="${dtoList}">
@@ -18,8 +18,12 @@
     	<td><c:out value="${dto.getItems().color}"/></td>
     	<td><c:out value="${dto.getItems().manufacturer}"/></td>
     	<td><c:out value="${dto.getItems().price}"/></td>
+
+    	<td><c:out value="${dto.getItems().stock}"/></td>
+
     	<td><c:out value="${dto.amount}"/></td>
     	<td><a href="/axis_b/RemoveFromCartConfirmController?itemId=${dto.itemId }">削除</a></td>
+
 		</tr>
 		</c:forEach>
 	

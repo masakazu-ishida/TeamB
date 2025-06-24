@@ -47,13 +47,13 @@ public class AdminLoginConfirmController extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 
-		String adminId = (String) request.getParameter("id");
+		String adminId = (String) request.getParameter("adminId");
 		String password = (String) request.getParameter("password");
 
 		AdministratorsDTO dto = AdminMainService.login(adminId, password);
 
 		if (dto != null) {
-			session.setAttribute("管理Id", adminId);
+			session.setAttribute("adminId", adminId);
 
 			response.sendRedirect("/axis_b/AdminMainController");
 		} else {
