@@ -59,6 +59,7 @@ public class PurchaseSearchController extends HttpServlet {
 		//mainJSPの注文IDを取得
 		String purchaseId = (String) session.getAttribute("purchaseId");
 
+		//searchメソッドを呼び出し、リストに詰める
 		List<PurchasesDTO> list = PurchaseSearchService.search(purchaseId);
 
 		//ユーザーID、注文ID、リストの情報をそれぞれセット

@@ -65,8 +65,9 @@ public class CartController extends HttpServlet {
 			if (error == null) {
 				error = "";
 			} else {
-				request.setAttribute("error", error);
 				session.removeAttribute("error");
+				request.setAttribute("error", error);
+
 			}
 
 			request.setAttribute("dtoList", dtoList);
