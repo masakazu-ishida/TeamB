@@ -9,7 +9,7 @@
 <body>
 	<h3>管理者ログイン</h3>
 		<br />
-		<form action='/axis_b/AdminMainController' method='POST'>
+		<form action='/axis_b/AdminLoginConfirmController' method='POST'>
 			<table>
 				<tr>
 					<th>管理者ID</th>

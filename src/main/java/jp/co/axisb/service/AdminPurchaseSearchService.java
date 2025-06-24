@@ -8,7 +8,7 @@ import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.util.CommonConstants;
 import jp.co.axisb.util.ConnectionUtil;
 
-public class PurchaseSearchService {
+public class AdminPurchaseSearchService {
 
 	public static List<PurchasesDTO> search(String purchaseId) {
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {

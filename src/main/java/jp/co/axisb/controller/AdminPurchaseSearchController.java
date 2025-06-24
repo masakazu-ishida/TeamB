@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.co.axisb.dto.PurchasesDTO;
-import jp.co.axisb.service.PurchaseSearchService;
+import jp.co.axisb.service.AdminPurchaseSearchService;
 
 /**
  * Servlet implementation class PurchaseSearchService
  */
 @WebServlet("/PurchaseSearchService")
-public class PurchaseSearchController extends HttpServlet {
+public class AdminPurchaseSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchaseSearchController() {
+	public AdminPurchaseSearchController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -64,7 +64,8 @@ public class PurchaseSearchController extends HttpServlet {
 		//session.setAttribute("purchaseId", purchaseid);
 		String purchaseId = (String) session.getAttribute("purchaseId");
 
-		List<PurchasesDTO> list = PurchaseSearchService.search(purchaseId);
+		//searchメソッドを呼び出し、リストに詰める
+		List<PurchasesDTO> list = AdminPurchaseSearchService.search(purchaseId);
 
 		//ユーザーID、注文ID、リストの情報をそれぞれセット
 		session.setAttribute("userId", userId);
