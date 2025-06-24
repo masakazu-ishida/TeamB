@@ -54,7 +54,7 @@ public class ItemDetailController extends HttpServlet {
 		ItemsDTO item = ItemDetailService.detail(itemId);
 
 		request.setAttribute("itemId", item);
-
+		
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
 
