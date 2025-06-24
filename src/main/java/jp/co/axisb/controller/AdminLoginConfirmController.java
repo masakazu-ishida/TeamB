@@ -55,7 +55,7 @@ public class AdminLoginConfirmController extends HttpServlet {
 		if (dto != null) {
 			session.setAttribute("adminId", adminId);
 
-			response.sendRedirect("/AdminMainController");
+			response.sendRedirect("/axis_b/AdminMainController");
 		} else {
 			request.setAttribute("message", "管理者IDまたはパスワードが違います。");
 
