@@ -43,13 +43,13 @@ public class AdminPurchasesCancelConfirmController extends HttpServlet {
 
 		//purcahseCancelComfirmJSPの注文IDを取得
 		HttpSession session = request.getSession(true);
-		int purchaseid = 1;
-		session.setAttribute("purchaseId", purchaseid);
+		//int purchaseid = 1;
+		//session.setAttribute("purchaseId", purchaseid);
 
-		//String purchaseId = (String) session.getAttribute("purchaseId");
+		int purchaseId = (int) session.getAttribute("purchaseId");
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出し、注文DTOに詰める
-		PurchasesDTO dto = purchaseservice.purchasesCancelComfirmServise(purchaseid);
+		PurchasesDTO dto = purchaseservice.purchasesCancelComfirmServise(purchaseId);
 
 		/*PurchasesDTOに詰められているキャンセル一覧内に注文内容が存在すれば、
 		注文ID、DTOをキーと値で登録する
