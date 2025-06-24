@@ -1,20 +1,21 @@
 package jp.co.axisb.service;
 
 import java.sql.Connection;
+import java.util.List;
 
-import jp.co.axisb.dao.ItemsDAO;
-import jp.co.axisb.dto.ItemsDTO;
+import jp.co.axisb.dao.PurchasesDAO;
+import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.util.CommonConstants;
 import jp.co.axisb.util.ConnectionUtil;
 
-public class ItemDetailService {
+public class AdminPurchaseSearchService {
 
-	public static ItemsDTO detail(int itemId) {
+	public static List<PurchasesDTO> search(String purchaseId) {
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 
-			ItemsDAO dao = new ItemsDAO(conn);
+			PurchasesDAO dao = new PurchasesDAO(conn);
 
-			return dao.findById(itemId);
+			return dao.findListByUserId(purchaseId);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -23,4 +24,5 @@ public class ItemDetailService {
 		}
 
 	}
+
 }
