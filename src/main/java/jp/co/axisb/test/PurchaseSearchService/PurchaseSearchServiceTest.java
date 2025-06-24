@@ -40,9 +40,6 @@ class PurchaseSearchServiceTest {
 		List<PurchasesDTO> list = AdminPurchaseSearchService.search("user");
 		assertNotNull(list);
 
-<<<<<<< HEAD
-		//カート内に存在しないユーザーIDを指定した場合
-=======
 		PurchasesDTO searchDTO = list.get(0);
 		String strDate = "2025-06-17";
 		java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -74,7 +71,6 @@ class PurchaseSearchServiceTest {
 		assertEquals("緑色", searchDTO.getItems().getColor());
 		assertEquals(1980, searchDTO.getItems().getPrice());
 
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 		list = AdminPurchaseSearchService.search("aaa");
 		assertEquals(0, list.size());
 	}
