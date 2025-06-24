@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.axisb.dto.PurchasesDTO;
 import jp.co.axisb.service.AdminPurchaseService;
@@ -34,17 +35,21 @@ public class AdminPurchasesCancelConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String path = "/WEB-INF/purchaseCancelConfirm.jsp";
+		String path = "/WEB-INF/purchaseCancelComfirm.jsp";
 
 		request.setCharacterEncoding("UTF-8");
 		//PurchaseServiseをインスタンス化
 		AdminPurchaseService purchaseservice = new AdminPurchaseService();
 
 		//purcahseCancelComfirmJSPの注文IDを取得
-		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+		HttpSession session = request.getSession(true);
+		int purchaseid = 1;
+		session.setAttribute("purchaseId", purchaseid);
+
+		//String purchaseId = (String) session.getAttribute("purchaseId");
 
 		//RemoveFromCartConfirmServiceのメソッドを呼び出し、注文DTOに詰める
-		PurchasesDTO dto = purchaseservice.purchasesCancelComfirmServise(purchaseId);
+		PurchasesDTO dto = purchaseservice.purchasesCancelComfirmServise(purchaseid);
 
 		/*PurchasesDTOに詰められているキャンセル一覧内に注文内容が存在すれば、
 		注文ID、DTOをキーと値で登録する

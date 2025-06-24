@@ -34,6 +34,7 @@ public class AdminPurchaseCancelCommitController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -49,14 +50,15 @@ public class AdminPurchaseCancelCommitController extends HttpServlet {
 
 		AdminPurchaseService aps = new AdminPurchaseService();
 
-		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+		//int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+		int purchaseid = 1;
 
-		PurchasesDTO dto = aps.purchasesCancelComfirmServise(purchaseId);
+		PurchasesDTO dto = aps.purchasesCancelComfirmServise(purchaseid);
 		request.setAttribute("dto", dto);
 
-		int result = aps.purchasesCancelCommitServise(purchaseId);
+		int result = aps.purchasesCancelCommitServise(purchaseid);
 
-		//		request.setAttribute("result", result);
+		request.setAttribute("result", result);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);

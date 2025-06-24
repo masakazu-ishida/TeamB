@@ -21,7 +21,7 @@
 	<tr>
 		<td><c:out value="${list.purchasedUser}"/></td>
 	    <td><c:out value="${list.purchasedDate}"/></td>
-    </tr>
+    	<td>
     	<table border="1">
     		<tr>
 	    		<th>商品名</th>
@@ -40,10 +40,13 @@
 				</tr>
 			</c:forEach>
     	</table>
+    	</td>
     	
     	<td><c:out value="${list.destination}"/></td>
-    	<td><a href="/axis_b/adminPurchasesCancelController">キャンセル</a>
+    	<td><a href="/axis_b/adminPurchasesCancelController">キャンセル</a></td>
+    	</tr>
     </c:forEach>
+    <br>
 
 	<a href='/axis_b/AdminMainController'>管理者メインページ</a>へ<br />
 	
