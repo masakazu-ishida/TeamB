@@ -55,6 +55,9 @@ public class AdminPurchaseSearchController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		//mainJSPの管理者IDを取得
+		//		String userid = "user";
+		//	session.setAttribute("userId", userId);
+
 		//String userid = "user";
 		//session.setAttribute("userId", userid);
 		String userId = (String) session.getAttribute("userId");
