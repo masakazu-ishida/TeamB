@@ -32,10 +32,10 @@
 						</tr>
 						<c:forEach var="detailItem" items="${dto.purchasesDetails}">
 						<tr>
-							<td><c:out value="${detailItem.items.name}"/></td>
-							<td><c:out value="${detailItem.items.color}"/></td>
-							<td><c:out value="${detailItem.items.manufacturer}"/></td>
-							<td><c:out value="${detailItem.items.price}"/>円</td>
+							<td><c:out value="${detailItem.getItems().name}"/></td>
+							<td><c:out value="${detailItem.getItems().color}"/></td>
+							<td><c:out value="${detailItem.getItems().manufacturer}"/></td>
+							<td><c:out value="${detailItem.getItems().price}"/>円</td>
 							<td><c:out value="${detailItem.amount}"/>個</td>
 						</tr>
 						</c:forEach>
@@ -45,11 +45,11 @@
 			</tr>
 			<tr>
 				<th>配送先</th>
-				<td><c:out value="${dto.items.destination}"/></td>
+				<td><c:out value="${dto.destination}"/></td>
 			</tr>
 			<tr>
 				<td colspan='2'>
-					<form action="/axis_b/adminPurchasesCancelController" method="POST">
+					<form action="/axis_b/adminPurchaseCancelCommitController" method="POST">
 						<input type='hidden' name='purchaseId' value='${dto.purchaseId}' />
 						<input type='submit' value='キャンセル' /><br />
 					</form>

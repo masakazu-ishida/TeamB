@@ -36,7 +36,7 @@ public class AdminPurchaseSearchController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		//doPost(request, response);
+		doPost(request, response);
 
 	}
 
