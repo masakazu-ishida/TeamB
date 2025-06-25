@@ -49,7 +49,7 @@ public class CartController extends HttpServlet {
 		//doGet(request, response);
 
 		HttpSession session = request.getSession(true);
-		//	String userid = "user";
+		//String userid = "user";
 		//session.setAttribute("userId", userid);
 
 		String userId = (String) session.getAttribute("userId");
