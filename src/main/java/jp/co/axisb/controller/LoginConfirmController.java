@@ -48,11 +48,11 @@ public class LoginConfirmController extends HttpServlet {
 
 			if ("cart".equals(a)) {
 
-				response.sendRedirect("/CartController");
+				response.sendRedirect("/axis_b/CartController");
 
 			} else if ("main".equals(a)) {
 
-				response.sendRedirect("/mainController");
+				response.sendRedirect("/axis_b/mainController");
 
 			} else if ("cartadd".equals(a)) {
 				//商品IDと数量をセット
