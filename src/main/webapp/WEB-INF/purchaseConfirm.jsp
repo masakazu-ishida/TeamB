@@ -6,8 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>商品の購入確認</title>
+<style>
+.error{color: red;}
+</style>
 </head>
 <body>
+	<p class=error>
+	<c:if test="${not empty error }">
+	<c:out value="${error}" />
+	</c:if>
+	</p>
+
 	<h3>以下の商品を購入しますか？</h3>
 	<table border = "1">
 	<tr><th>商品名</th><th>商品の色</th><th>メーカー名</th><th>単価</th><th>数量</th></tr>
@@ -39,6 +48,8 @@
 	
 		<input type="submit" value="購入する">
 	</form>
+	
+	
 	<br>
 	<br>
 	<p><a href ="/axis_b/mainController">商品検索</a>へ</p>
