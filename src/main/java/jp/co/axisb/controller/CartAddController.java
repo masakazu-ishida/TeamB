@@ -59,7 +59,9 @@ public class CartAddController extends HttpServlet {
 		//ItemsDTO dto = (ItemsDTO) request.getAttribute("dto");
 
 		if (userId == null) {
-			response.sendRedirect("/axis_b/LoginController");
+			request.setAttribute("h", "cartadd");
+			RequestDispatcher rd = request.getRequestDispatcher("/LoginController");
+			rd.forward(request, response);
 
 		} else {
 
