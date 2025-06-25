@@ -37,7 +37,7 @@ public class CartController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		doPost(request, response);
+		//doPost(request, response);
 	}
 
 	/**
@@ -46,11 +46,11 @@ public class CartController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 
 		HttpSession session = request.getSession(true);
-		String userid = "user";
-		session.setAttribute("userId", userid);
+		//String userid = "user";
+		//session.setAttribute("userId", userid);
 
 		String userId = (String) session.getAttribute("userId");
 

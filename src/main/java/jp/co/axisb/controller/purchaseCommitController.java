@@ -37,7 +37,7 @@ public class purchaseCommitController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		doPost(request, response);
+		//doPost(request, response);
 
 	}
 
@@ -47,7 +47,7 @@ public class purchaseCommitController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 
 		HttpSession session = request.getSession(true);
 		//String userid = "user";
@@ -61,7 +61,7 @@ public class purchaseCommitController extends HttpServlet {
 			request.setAttribute("payment", payment);
 		}
 
-		String destination = request.getParameter("destination");
+		String destination = request.getParameter("distination");
 		String address = request.getParameter("address");
 		if (destination.equals("another")) {
 			destination = "配送先を指定";
