@@ -26,7 +26,7 @@
 	
 	
 	前へ
-		<a href='/axis_b/SearchController?page=1'>1</a> 
+		<a href='/axis_b/SearchController?page=1&keyword=${ keyword}&categoriesId=${categoriesId}'>1</a> 
 		<a href='/axis_b/SearchNextPageController?page=2&keyword=${ keyword}&categoriesId=${categoriesId}'>2</a> 
 		<a href='/axis_b/SearchNextPageController?page=3&keyword=${ keyword}&categoriesId=${categoriesId}'>3</a> 
 		<a href='/axis_b/SearchNextPageController?page=4&keyword=${ keyword}&categoriesId=${categoriesId}'>4</a> 
