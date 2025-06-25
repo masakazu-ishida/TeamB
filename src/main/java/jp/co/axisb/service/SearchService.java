@@ -30,7 +30,7 @@ public class SearchService {
 				}
 
 				//リストサイズが９より小さいときにリストサイズをmaxに入れる
-				int max = 9;
+				int max = 10;
 				if (list.size() < max) {
 					max = list.size();
 				}
@@ -48,7 +48,7 @@ public class SearchService {
 				}
 
 				//リストサイズが９より小さいときにリストサイズをmaxに入れる
-				int max = 9;
+				int max = 10;
 				if (list.size() < max) {
 					max = list.size();
 				}
@@ -84,7 +84,7 @@ public class SearchService {
 				}
 
 				//２ページ以降MAXの処理を書く
-				int max = 10 * page - 1;
+				int max = 10 * page;
 				if (list.size() < max) {
 					max = list.size();
 
@@ -104,7 +104,7 @@ public class SearchService {
 				}
 
 				//２ページ以降MAXの処理を書く
-				int max = 10 * page - 1;
+				int max = 10 * page;
 				if (list.size() < max) {
 					max = list.size();
 
