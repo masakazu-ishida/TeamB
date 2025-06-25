@@ -130,7 +130,7 @@ public class LoginConfirmController extends HttpServlet {
 
 			request.setAttribute("h", a);
 			//商品IDと数量をセット
-			request.setAttribute("userId", request.getParameter("userId"));
+			request.setAttribute("itemId", request.getParameter("itemId"));
 			request.setAttribute("amount", request.getParameter("amount"));
 
 			RequestDispatcher rd = request.getRequestDispatcher("/LoginController");
