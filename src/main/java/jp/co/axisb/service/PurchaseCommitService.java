@@ -82,7 +82,7 @@ public class PurchaseCommitService {
 					PurchasesDetailsDTO detailsdto = new PurchasesDetailsDTO();
 					detailsdto.setPurchasesId(purchaseId);
 					detailsdto.setItemId(incart.getItemId());
-					detailsdto.setItemId(incart.getAmount());
+					detailsdto.setAmount(incart.getAmount());
 					purchasesdetaildao.insert(detailsdto);
 
 					//在庫の更新
