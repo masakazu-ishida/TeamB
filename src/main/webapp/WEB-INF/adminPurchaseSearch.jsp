@@ -43,7 +43,11 @@
     	</td>
     	
     	<td><c:out value="${list.destination}"/></td>
-    	<td><a href="/axis_b/adminPurchasesCancelController">キャンセル</a></td>
+    	<td>
+    	<c:if test="${!list.cancel}">
+    		<a href="/axis_b/adminPurchasesCancelController">キャンセル</a>
+    	</c:if>
+    	</td>
     	</tr>
     </c:forEach>
     <br>

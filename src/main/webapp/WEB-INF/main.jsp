@@ -23,12 +23,12 @@
 		<input type='submit' value='検索' /><br />
 	</form>
 	
-	<a href="/axis_b/CartController">ショッピングカートを見る</a><br /><br />
+	<a href="/axis_b/CartController?h=cart">ショッピングカートを見る</a><br /><br />
 	<%
-		String userId = (String)request.getParameter("userId");
+		String userId = (String)session.getAttribute("userId");
 		if(userId == null){
 	%>
-		<div id="conn"><a href="/axis_b/LoginController">ログイン</a></div>
+		<div id="conn"><a href='/axis_b/LoginController?h=main'>ログイン</a></div>
 	<%	
 		}
 	%>

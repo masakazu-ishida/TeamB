@@ -74,5 +74,4 @@ class PurchaseSearchServiceTest {
 		list = AdminPurchaseSearchService.search("aaa");
 		assertEquals(0, list.size());
 	}
-
 }
