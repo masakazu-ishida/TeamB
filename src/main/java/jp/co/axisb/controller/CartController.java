@@ -55,7 +55,10 @@ public class CartController extends HttpServlet {
 		String userId = (String) session.getAttribute("userId");
 
 		if (userId == null) {
-			response.sendRedirect("/axis_b/LoginController");
+			String h = request.getParameter("h");
+			request.setAttribute("h", h);
+			RequestDispatcher rd = request.getRequestDispatcher("/LoginController");
+			rd.forward(request, response);
 
 		} else {
 			List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);

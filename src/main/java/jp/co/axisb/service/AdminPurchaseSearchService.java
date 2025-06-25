@@ -25,4 +25,18 @@ public class AdminPurchaseSearchService {
 
 	}
 
+	public static List<PurchasesDTO> allSearch() {
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+
+			PurchasesDAO dao = new PurchasesDAO(conn);
+
+			return dao.findAll();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
