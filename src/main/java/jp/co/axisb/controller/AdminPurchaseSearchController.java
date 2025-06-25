@@ -1,6 +1,7 @@
 package jp.co.axisb.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -68,7 +69,13 @@ public class AdminPurchaseSearchController extends HttpServlet {
 		//String purchaseId = (String) session.getAttribute("purchaseId");
 
 		//searchメソッドを呼び出し、リストに詰める
-		List<PurchasesDTO> list = AdminPurchaseSearchService.search(userId);
+
+		List<PurchasesDTO> list = new ArrayList<>();
+		if (userId == "") {
+			list = AdminPurchaseSearchService.allSearch();
+		} else {
+			list = AdminPurchaseSearchService.search(userId);
+		}
 
 		for (PurchasesDTO li : list) {
 			int purchaseId = li.getPurchaseId();

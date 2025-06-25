@@ -51,15 +51,27 @@ public class CartAddController extends HttpServlet {
 		//session.setAttribute("userId", userid);
 
 		String userId = (String) session.getAttribute("userId");
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		int itemId = 0;
+		if (request.getParameter("itemId") != null) {
+			itemId = Integer.parseInt(request.getParameter("itemId"));
+		} else {
+			itemId = (int) request.getAttribute("itemId");
+		}
 
 		Date bookedDate = java.sql.Date.valueOf(java.time.LocalDate.now());
-		int amount = Integer.parseInt(request.getParameter("amount"));
+		int amount = 0;
+		if (request.getParameter("amount") != null) {
+			amount = Integer.parseInt(request.getParameter("amount"));
+		} else {
+			itemId = (int) request.getAttribute("amount");
+		}
 
 		//ItemsDTO dto = (ItemsDTO) request.getAttribute("dto");
 
 		if (userId == null) {
 			request.setAttribute("h", "cartadd");
+			request.setAttribute("itemId", itemId);
+			request.setAttribute("amount", amount);
 			RequestDispatcher rd = request.getRequestDispatcher("/LoginController");
 			rd.forward(request, response);
 
