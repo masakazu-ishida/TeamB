@@ -67,6 +67,15 @@ public class PurchaseCommitService {
 
 				//カート内の情報取得
 				List<ItemsInCartDTO> itemsincartdto = itemsincartdao.findById(userId);
+				for (ItemsInCartDTO cart : itemsincartdto) {
+					ItemsDTO item = itemsdao.findById(cart.getItemId());
+					if (item.getStock() < cart.getAmount()) {
+						int errorMsg = 0;
+						return errorMsg;
+
+					}
+
+				}
 
 				//注文テーブルに登録
 				PurchasesDTO purchasesdto = new PurchasesDTO();
@@ -79,6 +88,7 @@ public class PurchaseCommitService {
 
 				//注文明細に登録
 				for (ItemsInCartDTO incart : itemsincartdto) {
+
 					PurchasesDetailsDTO detailsdto = new PurchasesDetailsDTO();
 					detailsdto.setPurchasesId(purchaseId);
 					detailsdto.setItemId(incart.getItemId());

@@ -75,10 +75,23 @@ public class purchaseCommitController extends HttpServlet {
 
 		List<ItemsInCartDTO> dtoList = PurchaseCommitService.getCartItems(userId);
 		int sum = PurchaseCommitService.cartSum(userId);
-		int cart = PurchaseCommitService.commitCartPurchase(userId, destination);
-
-		request.setAttribute("dtoList", dtoList);
 		request.setAttribute("sum", sum);
+
+		int errorMsg = PurchaseCommitService.commitCartPurchase(userId, destination);
+		if (errorMsg == 0) {
+			String error = "在庫が不足しています";
+			request.setAttribute("error", error);
+			request.setAttribute("dtoList", dtoList);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/purchaseConfirm.jsp");
+			rd.forward(request, response);
+
+			return;
+		}
+
+		//List<ItemsInCartDTO> dtoList = PurchaseCommitService.getCartItems(userId);
+		request.setAttribute("dtoList", dtoList);
+
+		//int cart = PurchaseCommitService.commitCartPurchase(userId, destination);
 
 		String path = "/WEB-INF/purchaseCommit.jsp";
 
