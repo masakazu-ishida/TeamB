@@ -86,16 +86,19 @@ public class PurchasesServiseTest {
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 
 			ItemsDAO dao = new ItemsDAO(conn);
-			ItemsDTO item = dao.findById(1);
+			ItemsDTO item = dao.findById(19);
 			//在庫数を確認するテストをしたい
-			assertEquals(12, item.getStock());
+			assertEquals(2, item.getStock());
 
 			//更新した件数の比較
 			int count = aps.purchasesCancelCommitServise(1);
 			assertEquals(1, count);
 
+			item = dao.findById(19);
+			assertEquals(3, item.getStock());
+
 			//purchaseIdがないとき、dtoにはnullが入る
-			PurchasesDTO dto = aps.purchasesCancelComfirmServise(2);
+			PurchasesDTO dto = aps.purchasesCancelComfirmServise(1);
 			assertNull(dto);
 
 		} catch (Exception e) {

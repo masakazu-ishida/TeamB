@@ -73,7 +73,7 @@ insert into items_in_cart values('user',3,3,'2020/10/20');
 
 insert into purchases (purchased_user,purchased_date,destination,cancel) values('user','2025-06-17','テスト',false);
 
-insert into purchase_details(purchase_id,item_id,amount) values(1,19,4);
+insert into purchase_details(purchase_id,item_id,amount) values(1,19,1);
 
 
 

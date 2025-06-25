@@ -52,15 +52,18 @@ public class AdminPurchaseService {
 				for (PurchasesDetailsDTO pd : dto.getPurchaseDetailDTO()) {
 					ItemsDTO dto1 = dao1.findById(pd.getItemId());
 					int stock = dto1.getStock();
-					stock = stock + pd.getAmount();
+					stock = -(pd.getAmount());
 					dto1.setStock(stock);
 
 					count += 1;
 
+					dao1.update(dto1);
 				}
+				dao.update(dto);
+
 				conn.commit();
 				//			DAO処理の更新処理を呼び出す
-				//				return dao.update(dto);
+
 				return count;
 			} catch (Exception e) {
 				// TODO: handle exception
