@@ -91,7 +91,7 @@ public class purchaseCommitController extends HttpServlet {
 		//List<ItemsInCartDTO> dtoList = PurchaseCommitService.getCartItems(userId);
 		request.setAttribute("dtoList", dtoList);
 
-		//int cart = PurchaseCommitService.commitCartPurchase(userId, destination);
+		int cart = PurchaseCommitService.commitCartPurchase(userId, destination);
 
 		String path = "/WEB-INF/purchaseCommit.jsp";
 
