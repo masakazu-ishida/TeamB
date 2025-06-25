@@ -25,12 +25,13 @@
 	</table><br>
 	
 	
-	前へ
+
+	<a href='/axis_b/SearchNextPageController?page=${page - 1}&keyword=${ keyword}&categoriesId=${categoriesId}'>前へ</a> 
 		<a href='/axis_b/SearchController?page=1&keyword=${ keyword}&categoriesId=${categoriesId}'>1</a> 
 		<a href='/axis_b/SearchNextPageController?page=2&keyword=${ keyword}&categoriesId=${categoriesId}'>2</a> 
 		<a href='/axis_b/SearchNextPageController?page=3&keyword=${ keyword}&categoriesId=${categoriesId}'>3</a> 
 		<a href='/axis_b/SearchNextPageController?page=4&keyword=${ keyword}&categoriesId=${categoriesId}'>4</a> 
-		<a href='/axis_b/SearchNextPageController?page=0&keyword=${ keyword}&categoriesId=${categoriesId}'>次へ</a> 
+		<a href='/axis_b/SearchNextPageController?page=${page + 1}&keyword=${ keyword}&categoriesId=${categoriesId}'>次へ</a> 
 		
 		<input type="hidden" value="${page}" name ="current">
 		

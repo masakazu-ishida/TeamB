@@ -64,6 +64,8 @@ public class SearchController extends HttpServlet {
 		//サービスからの戻り値をセットアトリビュートする
 		List<ItemsDTO> list = SearchService.search(keyword, categoriesId);
 
+		request.setAttribute("page", 1);
+
 		if (categoriesId == 0) {
 			String japanesecategories = "すべて";
 			request.setAttribute("japanesecategories", japanesecategories);

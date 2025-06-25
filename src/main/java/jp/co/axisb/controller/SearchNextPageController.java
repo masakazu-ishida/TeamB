@@ -45,14 +45,9 @@ public class SearchNextPageController extends HttpServlet {
 		//String next = request.getParameter("next");
 
 		int page = Integer.parseInt(request.getParameter("page"));
+		request.setAttribute("page", page);
 
 		int categoriesId = Integer.parseInt(request.getParameter("categoriesId"));
-
-		if (page == 0) { //nextがおされたとき
-
-			page = page + 1;
-
-		}
 
 		//サーチサービスのサーチメソッドを呼び出す
 		//引数には検索キーワードとカテゴリIDを渡す
