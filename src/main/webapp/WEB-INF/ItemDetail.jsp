@@ -35,7 +35,7 @@
 				<th>在庫数</th>
 				<td><c:out value="${item.stock}"/></td>
 			</tr>
-
+</table>
 	
 
 			数量
@@ -53,7 +53,7 @@
 		</form>
 	
 	
-</table>
+
 	
 <a href='/axis_b/mainController'>商品検索</a>へ<br />
 </body>
