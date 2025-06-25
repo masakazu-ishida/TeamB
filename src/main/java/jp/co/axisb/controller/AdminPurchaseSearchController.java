@@ -65,14 +65,19 @@ public class AdminPurchaseSearchController extends HttpServlet {
 		//mainJSPの注文IDを取得
 		//String purchaseid = "1";
 		//session.setAttribute("purchaseId", purchaseid);
-		String purchaseId = (String) session.getAttribute("purchaseId");
+		//String purchaseId = (String) session.getAttribute("purchaseId");
 
 		//searchメソッドを呼び出し、リストに詰める
 		List<PurchasesDTO> list = AdminPurchaseSearchService.search(userId);
 
+		for (PurchasesDTO li : list) {
+			int purchaseId = li.getPurchaseId();
+			session.setAttribute("purchaseId", purchaseId);
+		}
+
 		//ユーザーID、注文ID、リストの情報をそれぞれセット
 		session.setAttribute("userId", userId);
-		session.setAttribute("purchaseId", purchaseId);
+
 		request.setAttribute("list", list);
 
 		//フォワード

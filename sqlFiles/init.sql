@@ -66,6 +66,9 @@ insert into items_in_cart values('user',1,5,'2020/10/20');
 insert into items_in_cart values('user',2,1,'2020/10/20');
 insert into items_in_cart values('user',3,3,'2020/10/20');
 
+/*テスト用　購入完了処理の在庫不足用*/
+/*insert into items_in_cart values('user',4,7,'2020/10/20')*/
+
 /*purchases、purchase_detailsのテスト用レコード*/
 
 insert into purchases (purchased_user,purchased_date,destination,cancel) values('user','2025-06-17','テスト',false);

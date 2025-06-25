@@ -35,7 +35,53 @@ public class LoginConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		doPost(request, response);
+		HttpSession session = request.getSession(true);
+
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
+		String a = request.getParameter("h");
+
+		UsersDTO dto = LoginService.login(userId, password);
+
+		if (dto != null) {
+			session.setAttribute("userId", userId);
+
+			if ("cart".equals(a)) {
+
+				RequestDispatcher rd = request.getRequestDispatcher("/CartController");
+				rd.forward(request, response);
+
+			} else if ("main".equals(a)) {
+
+				RequestDispatcher rd = request.getRequestDispatcher("/mainController");
+				rd.forward(request, response);
+
+			} else if ("cartadd".equals(a)) {
+				//商品IDと数量をセット
+				request.setAttribute("itemId", request.getParameter("itemId"));
+				request.setAttribute("amount", request.getParameter("amount"));
+
+				RequestDispatcher rd = request.getRequestDispatcher("/CartAddController");
+				rd.forward(request, response);
+			} else if ("cartdelete".equals(a)) {
+				request.setAttribute("itemId", 1);
+
+				RequestDispatcher rd = request.getRequestDispatcher("/RemoveFromCartConfirmController");
+				rd.forward(request, response);
+			}
+
+		} else {
+			request.setAttribute("message", "会員IDまたはパスワードが違います。");
+
+			request.setAttribute("h", a);
+			//商品IDと数量をセット
+			request.setAttribute("userId", request.getParameter("userId"));
+			request.setAttribute("amount", request.getParameter("amount"));
+
+			RequestDispatcher rd = request.getRequestDispatcher("/LoginController");
+			rd.forward(request, response);
+
+		}
 	}
 
 	/**
@@ -59,11 +105,11 @@ public class LoginConfirmController extends HttpServlet {
 
 			if ("cart".equals(a)) {
 
-				response.sendRedirect("/CartController");
+				response.sendRedirect("/axis_b/CartController");
 
 			} else if ("main".equals(a)) {
 
-				response.sendRedirect("/mainController");
+				response.sendRedirect("/axis_b/mainController");
 
 			} else if ("cartadd".equals(a)) {
 				//商品IDと数量をセット
