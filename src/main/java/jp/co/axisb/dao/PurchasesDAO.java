@@ -222,7 +222,7 @@ public class PurchasesDAO extends BaseDAO {
 	public List<PurchasesDTO> findAll() throws SQLException {
 		String sql = "SELECT purchases.purchase_id, purchases.purchased_user, purchases.purchased_date, purchases.destination, purchases.cancel,\n"
 				+ "purchase_details.purchase_detail_id, purchase_details.item_id AS purchaseDetailsItemId, purchase_details.amount, purchase_details.purchase_id AS purchaseDetailsPurchaseId, \n"
-				+ "items.item_id AS itemsItemId, items.name, items.manufacturer,items.category_id, \n"
+				+ "items.item_id AS itemsItemId, items.name, items.manufacturer,items.category_id, items.color,items.price,\n"
 				+ "users.user_id \n"
 				+ "FROM purchases inner join purchase_details\n"
 				+ "ON purchases.purchase_id = purchase_details.purchase_id\n"
@@ -253,6 +253,8 @@ public class PurchasesDAO extends BaseDAO {
 				items.setItemId(rs.getInt("itemsItemId"));
 				items.setManufacturer(rs.getString("manufacturer"));
 				items.setName(rs.getString("name"));
+				items.setColor(rs.getString("color"));
+				items.setPrice(rs.getInt("price"));
 
 				users.setUserId(rs.getString("user_id"));
 
