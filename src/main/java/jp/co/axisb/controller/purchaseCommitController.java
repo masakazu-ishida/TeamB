@@ -61,13 +61,11 @@ public class purchaseCommitController extends HttpServlet {
 			request.setAttribute("payment", payment);
 		}
 
-		String destination = request.getParameter("destination");
+		String destination = request.getParameter("distination");
 		String address = request.getParameter("address");
-		if (destination == "another") {
+		if (destination.equals("another")) {
 			destination = "配送先を指定";
 			request.setAttribute("setdestination", destination);
-			destination = (String) session.getAttribute("address");
-			session.removeAttribute("address");
 			request.setAttribute("address", address);
 
 		} else {

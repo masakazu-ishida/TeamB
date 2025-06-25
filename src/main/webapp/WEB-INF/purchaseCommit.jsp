@@ -28,7 +28,9 @@
 	<br>
 	<p>清算方法　<c:out value="${payment}" /></p><br>
 	<p>配送先　<c:out value="${setdestination}" /></p>
+	<c:if test="${not empty address }">
 	<c:out value="${address}" />
+	</c:if>
 	<p><a href ="/axis_b/mainController">商品検索</a>へ</p>
 	
 </body>
