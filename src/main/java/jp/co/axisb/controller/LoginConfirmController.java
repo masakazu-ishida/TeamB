@@ -48,11 +48,13 @@ public class LoginConfirmController extends HttpServlet {
 
 			if ("cart".equals(a)) {
 
-				response.sendRedirect("/axis_b/CartController");
+				RequestDispatcher rd = request.getRequestDispatcher("/CartController");
+				rd.forward(request, response);
 
 			} else if ("main".equals(a)) {
 
-				response.sendRedirect("/axis_b/mainController");
+				RequestDispatcher rd = request.getRequestDispatcher("/mainController");
+				rd.forward(request, response);
 
 			} else if ("cartadd".equals(a)) {
 				//商品IDと数量をセット
@@ -88,7 +90,7 @@ public class LoginConfirmController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 
 		HttpSession session = request.getSession(true);
 
@@ -103,11 +105,11 @@ public class LoginConfirmController extends HttpServlet {
 
 			if ("cart".equals(a)) {
 
-				response.sendRedirect("/CartController");
+				response.sendRedirect("/axis_b/CartController");
 
 			} else if ("main".equals(a)) {
 
-				response.sendRedirect("/mainController");
+				response.sendRedirect("/axis_b/mainController");
 
 			} else if ("cartadd".equals(a)) {
 				//商品IDと数量をセット
