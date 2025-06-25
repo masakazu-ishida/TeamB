@@ -6,11 +6,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>注文キャンセル確認画面</title>
+		<style>
+		 td{text-align: center;}
+		</style>
 	</head>
 <body>
 <h3>以下の注文をキャンセルしてよろしいですか？</h3>
 		<br />
-		<table>
+		<table border="1">
 			<tr>
 				<th>注文者ID</th>
 				<td><c:out value="${dto.purchasedUser}"/></td>
@@ -22,7 +25,7 @@
 			<tr>
 				<th>購入商品</th>
 				<td>
-					<table>
+					<table border="1">
 						<tr>
 							<th>商品名</th>
 							<th>色</th>
