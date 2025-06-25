@@ -39,6 +39,7 @@ public class SearchController extends HttpServlet {
 		//		String path = "/WEB-INF/search.jsp";
 		//		RequestDispatcher rd = request.getRequestDispatcher(path);
 		//		rd.forward(request, response);
+		doPost(request, response);
 
 	}
 
