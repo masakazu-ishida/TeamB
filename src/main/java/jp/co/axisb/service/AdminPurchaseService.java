@@ -60,8 +60,8 @@ public class AdminPurchaseService {
 				}
 				conn.commit();
 				//			DAO処理の更新処理を呼び出す
-				return dao.update(dto);
-				//				return count;
+				//				return dao.update(dto);
+				return count;
 			} catch (Exception e) {
 				// TODO: handle exception
 				conn.rollback();
