@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="style.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>検索結果</title>
 </head>
@@ -47,7 +48,11 @@
 				<option value='5'>5</option>
 			</select><br />
 			<input type='hidden' name='itemId' value='${item.itemId}'/>
+			
+	
 			<input type='submit' value='ショッピングカートに入れる' /><br />
+	
+			
 			<input type='hidden' name='hidden' value='cartadd'>
 			
 		</form>

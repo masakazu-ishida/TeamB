@@ -41,7 +41,7 @@ INSERT INTO categories (category_id,name) VALUES (1,'帽子');
 INSERT INTO categories (category_id,name) VALUES (2,'鞄');
 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('麦わら帽子','日本帽子製造',1,'黄色',4980,12,FALSE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ストローハット','(株)ストローハットジャパン',1,'茶色',3480,15,TRUE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ボーラーハット','(株)ボーラーハットジャパン',1,'茶色',3480,15,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('子ども用麦わら帽子','東京帽子店',1,'赤色',2980,3,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ストローハット PART2','(株)ストローハットジャパン',1,'青色',4480,6,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('野球帽','日本帽子製造',1,'緑色',2500,17,TRUE);

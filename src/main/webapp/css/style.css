@@ -9,3 +9,7 @@ th, td {
   border: 1px  black  solid; /* セルにも線を引く */
   padding: 8px; /* セルのpadding */
 }
+
+body{
+	background-color:aqua;
+	}
