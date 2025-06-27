@@ -54,6 +54,7 @@ class PurchasesDAOTest {
 				//				DTOのフィールド値が正しくレコードを反映していれば〇
 				PurchasesDTO dto = list.get(0);
 				assertEquals(1, dto.getPurchaseId());
+				assertEquals("user", dto.getPurchasedUser());
 				assertEquals(java.sql.Date.valueOf("2025-06-17"), dto.getPurchasedDate());
 				assertEquals("テスト", dto.getDestination());
 				assertEquals(false, dto.isCancel());
