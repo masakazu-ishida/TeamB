@@ -11,7 +11,65 @@
 
 
 <style type="text/css">
+    body{
+      text-align: center;
+    }
 
+p {
+  font-size: 30px; /* ルート要素と同じサイズ */
+  
+     font-family: "Nikukyu";
+
+}
+
+select {
+  font-size: 18px; /* ルート要素と同じサイズ */
+}
+
+input {
+  font-size: 18px; /* ルート要素と同じサイズ */
+}
+
+.cp_keyframes {
+	margin: 60px auto;
+	color: #ffffff;
+	background: #29b6f6;
+	border-radius: 6px;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	-webkit-animation: keyframes 3s 0.5s infinite alternate;
+	        animation: keyframes 3s 0.5s infinite alternate;
+}
+@-webkit-keyframes keyframes {
+	0% {
+		-webkit-transform: translate3d(-135px, 0, 0) rotate3d(0, 0, 1, 0deg) scale3d(1, 1, 1);
+		        transform: translate3d(-135px, 0, 0) rotate3d(0, 0, 1, 0deg) scale3d(1, 1, 1);
+	}
+	50% {
+		-webkit-transform: translate3d(0, 0, 0) rotate3d(0, 0, 1, 180deg) scale3d(0.5, 0.5, 0.5);
+		        transform: translate3d(0, 0, 0) rotate3d(0, 0, 1, 180deg) scale3d(0.5, 0.5, 0.5);
+	}
+	100% {
+		-webkit-transform: translate3d(135px, 0, 0) rotate3d(0, 0, 1, 360deg) scale3d(1, 1, 1);
+		        transform: translate3d(135px, 0, 0) rotate3d(0, 0, 1, 360deg) scale3d(1, 1, 1);
+	}
+}
+@keyframes keyframes {
+	0% {
+		-webkit-transform: translate3d(-135px, 0, 0) rotate3d(0, 0, 1, 0deg) scale3d(1, 1, 1);
+		        transform: translate3d(-135px, 0, 0) rotate3d(0, 0, 1, 0deg) scale3d(1, 1, 1);
+	}
+	50% {
+		-webkit-transform: translate3d(0, 0, 0) rotate3d(0, 0, 1, 180deg) scale3d(0.5, 0.5, 0.5);
+		        transform: translate3d(0, 0, 0) rotate3d(0, 0, 1, 180deg) scale3d(0.5, 0.5, 0.5);
+	}
+	100% {
+		-webkit-transform: translate3d(135px, 0, 0) rotate3d(0, 0, 1, 360deg) scale3d(1, 1, 1);
+		        transform: translate3d(135px, 0, 0) rotate3d(0, 0, 1, 360deg) scale3d(1, 1, 1);
+	}
+}
 
 table {
   border-collapse: collapse; /* 二重線を一本にする */
@@ -79,7 +137,12 @@ h1 {
   width: 100%;
 }
 
-	
+body {
+	background-color: #dedede;
+	background-image:
+	 linear-gradient(#ecebeb 50%, transparent 50%, transparent);
+	background-size: 10px 10px;
+}
 
 
 </style>
@@ -98,9 +161,9 @@ h1 {
 		<input type='text' name='keyword' /><br />
 		
 		<br>
-			カテゴリ<br />
+			<p>カテゴリ</p>
 			<select name='categoriesId'>
-				<option selected value='0'>すべて</option>
+				<option selected value='0' class="cp_ipselect05">すべて</option>
 				<option value='1'>帽子</option>
 				<option value='2'>鞄</option>
 			</select><br />
@@ -110,7 +173,7 @@ h1 {
 	<br>
 	<br>
 	
-	<a href=  "/axis_b/CartController?h=cart " class = "cp_link">ショッピングカートを見る </a><br /><br />
+	<p><a href=  "/axis_b/CartController?h=cart " class = "cp_link">ショッピングカートを見る </a></p><br /><br />
 	<%
 		String userId = (String)session.getAttribute("userId");
 		if(userId == null){
@@ -119,6 +182,6 @@ h1 {
 	<%	
 		}
 	%>
-
+<div class="cp_keyframes">axis_b</div>
 </body>
 </html>
