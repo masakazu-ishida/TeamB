@@ -1,4 +1,7 @@
 @charset "UTF-8";
+body{
+	background-color:aqua;
+	}
 
 table {
   border-collapse: collapse; /* 二重線を一本にする */
@@ -10,6 +13,3 @@ th, td {
   padding: 8px; /* セルのpadding */
 }
 
-body{
-	background-color:aqua;
-	}
