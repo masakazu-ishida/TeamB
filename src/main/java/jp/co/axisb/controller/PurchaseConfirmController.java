@@ -36,7 +36,7 @@ public class PurchaseConfirmController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		//doPost(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -45,15 +45,14 @@ public class PurchaseConfirmController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
 		HttpSession session = request.getSession(true);
-		String userid = "user";
-		session.setAttribute("userId", userid);
 		String userId = (String) session.getAttribute("userId");
+		session.setAttribute("userId", userId);
 
 		List<ItemsInCartDTO> dtoList = CartService.getCartItems(userId);
 		int sum = CartService.cartSum(userId);
