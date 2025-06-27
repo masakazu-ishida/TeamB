@@ -33,8 +33,8 @@ ALTER TABLE items  ALTER COLUMN "item_id" SET DEFAULT nextval('SEQ_ITEMS_ITEMID'
 ALTER TABLE purchases ALTER COLUMN "purchase_id" SET DEFAULT nextval('SEQ_PURCHASE_ID');
 ALTER TABLE purchase_details ALTER COLUMN "purchase_detail_id" SET DEFAULT nextval('SEQ_PUR_DETAIL_ID');
 
-INSERT INTO administrators (admin_id, password, name) VALUES ('admin', 'admin', '管理者');
-INSERT INTO public.users(user_id,password,name,address) VALUES ('user','userpass','橋本広大','鳥取県鳥取市河原町');
+INSERT INTO administrators (admin_id, password, name) VALUES ('terasawa', 'teratu', '寺澤');
+INSERT INTO public.users(user_id,password,name,address) VALUES ('hashimoto@axis_b.jp','hashimoto','橋本広大','鳥取県鳥取市河原町');
 
 INSERT INTO categories (category_id,name) VALUES (0,'すべて');
 INSERT INTO categories (category_id,name) VALUES (1,'帽子');
