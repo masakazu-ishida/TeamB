@@ -42,11 +42,8 @@ INSERT INTO categories (category_id,name) VALUES (2,'鞄');
 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('麦わら帽子','日本帽子製造',1,'黄色',4980,12,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ストローハット','(株)ストローハットジャパン',1,'茶色',3480,15,TRUE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('子ども用麦わら帽子','鳥取帽子店',1,'赤色',2980,3,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('つくつくぼうし','(株)ツクツクボウシジャパン',1,'青色',4480,6,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ボーラーハット','(株)ボーラーハットジャパン',1,'茶色',3480,15,TRUE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('子ども用麦わら帽子','東京帽子店',1,'赤色',2980,3,FALSE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('','(株)ストローハットジャパン',1,'青色',4480,6,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('野球帽','日本帽子製造',1,'緑色',2500,17,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ニットキャップ','日本帽子製造',1,'紺色',1800,9,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ハンチング帽','日本帽子製造',1,'黄色',1980,20,FALSE);
@@ -65,23 +62,20 @@ INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ラガシャの鞄','ラガシャ',2,'茶色',690,1,FALSE);
 
 
-/*insert into items_in_cart values('user',1,5,'2020/10/20');
-insert into items_in_cart values('user',2,1,'2020/10/20');
-insert into items_in_cart values('user',3,3,'2020/10/20');*/
+
+/*insert into items_in_cart values('user',1,5,'2020/10/20');*/
+/*insert into items_in_cart values('user',2,1,'2020/10/20');*/
+/*insert into items_in_cart values('user',3,3,'2020/10/20');*/
 
 /*テスト用　購入完了処理の在庫不足用*/
 /*insert into items_in_cart values('user',4,7,'2020/10/20')*/
 
 /*purchases、purchase_detailsのテスト用レコード*/
 
-/*insert into purchases (purchased_user,purchased_date,destination,cancel) values('user','2025-06-17','テスト',false);
+/*insert into purchases (purchased_user,purchased_date,destination,cancel) values('user','2025-06-27','ご自宅',false);*/
 
-insert into purchase_details(purchase_id,item_id,amount) values(1,19,1);*/
+/*insert into purchase_details(purchase_id,item_id,amount) values(1,3,1);*/
 
-
-
-/*insert into purchases values(1,'user',current_date,'テスト',false);*/
-/*insert into purchase_details values(1,1,20,1);*/
 
 
 
