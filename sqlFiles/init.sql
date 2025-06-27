@@ -62,23 +62,20 @@ INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ラガシャの鞄','ラガシャ',2,'茶色',690,1,FALSE);
 
 
-/*insert into items_in_cart values('user',1,5,'2020/10/20');
-insert into items_in_cart values('user',2,1,'2020/10/20');
-insert into items_in_cart values('user',3,3,'2020/10/20');*/
+
+/*insert into items_in_cart values('user',1,5,'2020/10/20');*/
+/*insert into items_in_cart values('user',2,1,'2020/10/20');*/
+/*insert into items_in_cart values('user',3,3,'2020/10/20');*/
 
 /*テスト用　購入完了処理の在庫不足用*/
 /*insert into items_in_cart values('user',4,7,'2020/10/20')*/
 
 /*purchases、purchase_detailsのテスト用レコード*/
 
-/*insert into purchases (purchased_user,purchased_date,destination,cancel) values('user','2025-06-17','テスト',false);
+/*insert into purchases (purchased_user,purchased_date,destination,cancel) values('user','2025-06-27','ご自宅',false);*/
 
-insert into purchase_details(purchase_id,item_id,amount) values(1,19,1);*/
+/*insert into purchase_details(purchase_id,item_id,amount) values(1,3,1);*/
 
-
-
-/*insert into purchases values(1,'user',current_date,'テスト',false);*/
-/*insert into purchase_details values(1,1,20,1);*/
 
 
 
