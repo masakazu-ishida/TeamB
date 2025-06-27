@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="style.css">
 <meta charset="UTF-8">
 <title>検索結果</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<h3>カテゴリ"<c:out value="${japanesecategories}"/>"
