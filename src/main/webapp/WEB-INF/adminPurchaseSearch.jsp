@@ -51,6 +51,7 @@
     	</td>
     	</tr>
     </c:forEach>
+</table>
     <br>
 
 	<a href='/axis_b/AdminMainController'>管理者メインページ</a>へ<br />
