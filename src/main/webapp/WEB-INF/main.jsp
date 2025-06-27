@@ -33,23 +33,22 @@ h1 {
   background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
 }
 
-.button {
-  display       : inline-block;
-  border-radius : 6%;          /* 角丸       */
-  font-size     : 9pt;        /* 文字サイズ */
-  text-align    : center;      /* 文字位置   */
-  cursor        : pointer;     /* カーソル   */
-  padding       : 12px 12px;   /* 余白       */
-  background    : rgba(26, 26, 255, 0.75);     /* 背景色     */
-  color         : #ffffff;     /* 文字色     */
-  line-height   : 1em;         /* 1行の高さ  */
-  opacity       : 1;           /* 透明度     */
-  transition    : .3s;         /* なめらか変化 */
-  box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
+.button{
+  background-color: #fff;
+  border: solid 2px #191970;
+  color: #191970;
+  border-radius: 20px;
+  padding: 10px 30px;
+  text-decoration: none;
+  font-size: 1em;
+  box-shadow: 0 5px 0 #191970;
+  display: inline-block;
+  transition: .3s;
 }
 .button:hover {
-  box-shadow    : none;        /* カーソル時の影消去 */
-  opacity       : 0.8;         /* カーソル時透明度 */
+  color: #191970;
+  transform: translateY(5px);
+  box-shadow: 0 0 0 #191970;
 }
 	
 	
