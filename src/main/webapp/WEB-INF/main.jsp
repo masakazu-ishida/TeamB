@@ -83,7 +83,7 @@ th, td {
 }
 
 th{
-	background-color: orange;
+	background-color: aqua;
 }
 	
 h1 {

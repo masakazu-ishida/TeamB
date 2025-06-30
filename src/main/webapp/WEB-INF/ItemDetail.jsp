@@ -25,12 +25,16 @@ table{
 }
 
 th{
-	background-color: orange;
+	background-color: aqua;
 }
 
 input{
 	font-family: serif;
 	font-size: 20px;
+}
+select {
+  font-size: 18px; /* ルート要素と同じサイズ */
+  font-family:serif;
 }
 </style>
 
