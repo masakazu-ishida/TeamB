@@ -7,9 +7,6 @@
 <meta charset="UTF-8">
 <title>商品検索</title>
 
-
-
-
 <style type="text/css">
     body{
       text-align: center;
