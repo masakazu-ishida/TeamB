@@ -10,21 +10,24 @@
 <style type="text/css">
     body{
       text-align: center;
+      font-family:sans-serif;
     }
 
 p {
   font-size: 30px; /* ルート要素と同じサイズ */
   
-     font-family: "Nikukyu";
+     font-family:serif;
 
 }
 
 select {
   font-size: 18px; /* ルート要素と同じサイズ */
+  font-family:serif;
 }
 
 input {
   font-size: 18px; /* ルート要素と同じサイズ */
+  font-weight: bold;
 }
 
 .cp_keyframes {
@@ -71,11 +74,16 @@ input {
 table {
   border-collapse: collapse; /* 二重線を一本にする */
   border: 1px  black solid ; /* テーブル全体に線を引く */
+  background-color: white;
 }
 
 th, td {
   border: 1px  black  solid; /* セルにも線を引く */
   padding: 8px; /* セルのpadding */
+}
+
+th{
+	background-color: orange;
 }
 	
 h1 {
@@ -96,6 +104,7 @@ h1 {
   padding: 10px 30px;
   text-decoration: none;
   font-size: 1em;
+  font-family:sans-serif;
 }
 .button04:hover {
   color: #3CB6FC;
@@ -152,10 +161,9 @@ body {
 
 
 	<h1>商品の検索を行います。</h1>
-		<br />
 	<form action="/axis_b/SearchController" method='POST'>
-		<p class = "">キーワード</p><br />
-		<input type='text' name='keyword' /><br />
+		<p class = "">キーワード</p>
+		<input type='text' name='keyword' />
 		
 		<br>
 			<p>カテゴリ</p>
@@ -167,10 +175,8 @@ body {
 			<br>
 		<input type='submit' value='検索' class = "button04" /><br />
 	</form>
-	<br>
-	<br>
 	
-	<p><a href=  "/axis_b/CartController?h=cart " class = "cp_link">ショッピングカートを見る </a></p><br /><br />
+	<p><a href=  "/axis_b/CartController?h=cart " class = "cp_link">ショッピングカートを見る </a></p>
 	<%
 		String userId = (String)session.getAttribute("userId");
 		if(userId == null){

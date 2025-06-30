@@ -6,7 +6,32 @@
 <head>
 <meta charset="UTF-8">
 <title>商品の購入確認</title>
-<style>
+
+<style type="text/css">
+body {
+	background-color: #dedede;
+	background-image:
+	 linear-gradient(#ecebeb 50%, transparent 50%, transparent);
+	background-size: 10px 10px;
+	text-align: center;
+    font-family:serif;
+    font-size: 30px;
+}
+
+table{
+	margin: 0 auto;
+	background-color: white;
+}
+
+th{
+	background-color: orange;
+}
+
+input{
+	font-family: serif;
+	font-size: 20px;
+}
+
 .error{color: red;}
 </style>
 </head>
