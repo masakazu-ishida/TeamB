@@ -5,6 +5,31 @@
 <head>
 <meta charset="UTF-8">
 <title>管理者メインページ</title>
+<style type="text/css">
+body {
+	text-align: center;
+    font-family:serif;
+    font-size: 30px;
+}
+
+table{
+	margin: 0 auto;
+	background-color: white;
+}
+
+th{
+	background-color: aqua;
+}
+
+input{
+	font-family: serif;
+	font-size: 20px;
+}
+select {
+  font-size: 18px; /* ルート要素と同じサイズ */
+  font-family:serif;
+}
+</style>
 </head>
 <body>
 	<h3>管理者メインページ</h3>

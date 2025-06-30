@@ -6,9 +6,32 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>注文キャンセル確認画面</title>
-		<style>
-		 td{text-align: center;}
-		</style>
+		<style type="text/css">
+body {
+	text-align: center;
+    font-family:serif;
+    font-size: 30px;
+}
+
+table{
+	margin: 0 auto;
+	background-color: white;
+}
+
+th{
+	background-color: aqua;
+}
+
+input{
+	font-family: serif;
+	font-size: 20px;
+}
+select {
+  font-size: 18px; /* ルート要素と同じサイズ */
+  font-family:serif;
+}
+</style>
+		
 	</head>
 <body>
 <h3>以下の注文をキャンセルしました。</h3>
