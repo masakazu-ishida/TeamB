@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>会員ログイン</title>
-<<<<<<< HEAD
 <style type="text/css">
 body {
 	text-align: center;
@@ -31,9 +30,6 @@ select {
   font-family:serif;
 }
 </style>
-=======
-
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 </head>
 <body>
 	<h3>管理者ログイン</h3>
