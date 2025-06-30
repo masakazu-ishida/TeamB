@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>管理者メインページ</title>
+
 </head>
 <body>
 	<h3>管理者メインページ</h3>
