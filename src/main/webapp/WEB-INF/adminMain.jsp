@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>管理者メインページ</title>
+<<<<<<< HEAD
 <style type="text/css">
 body {
 	text-align: center;
@@ -30,6 +31,9 @@ select {
   font-family:serif;
 }
 </style>
+=======
+
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamB.git
 </head>
 <body>
 	<h3>管理者メインページ</h3>

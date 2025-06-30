@@ -74,7 +74,6 @@ public class PurchasesDAO extends BaseDAO {
 					pd.setItemId(rs.getInt("purchaseDetailsItemId"));
 					pd.setAmount(rs.getInt("amount"));
 					pd.setItems(items);
-
 				}
 				dto.setPurchaseDetailDTO(list2);
 
