@@ -6,6 +6,7 @@ public class ItemsInCartDTO {
 	private String item_id;
 	private String amount;
 	private String booked_date;
+	private ItemsDTO itemsDto;
 
 	public ItemsInCartDTO(String user_id, String item_id, String amount, String booked_date) {
 		this.user_id = user_id;
@@ -44,6 +45,14 @@ public class ItemsInCartDTO {
 
 	public void setBooked_date(String booked_date) {
 		this.booked_date = booked_date;
+	}
+
+	public ItemsDTO getItemsDto() {
+		return itemsDto;
+	}
+
+	public void setItemsDto(ItemsDTO itemsDto) {
+		this.itemsDto = itemsDto;
 	}
 
 }
