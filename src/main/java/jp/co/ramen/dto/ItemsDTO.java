@@ -23,6 +23,10 @@ public class ItemsDTO {
 		this.recommended = recommended;
 	}
 
+	public ItemsDTO() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
 	public int getItem_id() {
 		return item_id;
 	}
