@@ -24,7 +24,7 @@ public class ItemsDTO {
 	}
 
 	public ItemsDTO() {
-		// TODO 自動生成されたコンストラクター・スタブ
+		// 
 	}
 
 	public int getItem_id() {
