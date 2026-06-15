@@ -1,13 +1,13 @@
 package jp.co.ramen.dto;
 
-public class Items_in_cartDTO {
+public class ItemsInCartDTO {
 
 	private String user_id;
 	private String item_id;
 	private String amount;
 	private String booked_date;
 
-	public Items_in_cartDTO(String user_id, String item_id, String amount, String booked_date) {
+	public ItemsInCartDTO(String user_id, String item_id, String amount, String booked_date) {
 		this.user_id = user_id;
 		this.item_id = item_id;
 		this.amount = amount;

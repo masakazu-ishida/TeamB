@@ -1,17 +1,18 @@
 package jp.co.ramen.dto;
 
 public class ItemsDTO {
-	private String item_id;
+	private int item_id;
 	private String name;
 	private String manufacturer;
-	private String category_id;
+	private int category_id;
 	private String color;
-	private String price;
-	private String stock;
+	private int price;
+	private int stock;
 	private String recommended;
 
-	public ItemsDTO(String item_id, String name, String manufacturer, String category_id, String color, String price,
-			String stock, String recommended) {
+	public ItemsDTO(int item_id, String name, String manufacturer, int category_id, String color, int price, int stock,
+			String recommended) {
+		super();
 		this.item_id = item_id;
 		this.name = name;
 		this.manufacturer = manufacturer;
@@ -22,11 +23,11 @@ public class ItemsDTO {
 		this.recommended = recommended;
 	}
 
-	public String getItem_id() {
+	public int getItem_id() {
 		return item_id;
 	}
 
-	public void setItem_id(String item_id) {
+	public void setItem_id(int item_id) {
 		this.item_id = item_id;
 	}
 
@@ -46,11 +47,11 @@ public class ItemsDTO {
 		this.manufacturer = manufacturer;
 	}
 
-	public String getCategory_id() {
+	public int getCategory_id() {
 		return category_id;
 	}
 
-	public void setCategory_id(String category_id) {
+	public void setCategory_id(int category_id) {
 		this.category_id = category_id;
 	}
 
@@ -62,19 +63,19 @@ public class ItemsDTO {
 		this.color = color;
 	}
 
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
-	public String getStock() {
+	public int getStock() {
 		return stock;
 	}
 
-	public void setStock(String stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 
@@ -85,5 +86,4 @@ public class ItemsDTO {
 	public void setRecommended(String recommended) {
 		this.recommended = recommended;
 	}
-
 }
