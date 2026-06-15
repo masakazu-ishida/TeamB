@@ -59,18 +59,52 @@ public class ItemsDAO {
 	}
 
 	// 全件検索 
-	public List<UserDTO> findAll() throws SQLException {
-		String sql = "SELECT user_id, password, name, address FROM public.users";
-		List<UserDTO> list = new ArrayList<>();
-		try (PreparedStatement ps = con.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery()) {
-			while (rs.next()) {
-				//mapRowはResultSetからDTOへの変換メソッド。複数箇所で利用するので共通化
-				UserDTO user = mapRow(rs);
-				list.add(user);
+	public List<ItemsDTO> findAll(int categoryId, String name) throws SQLException {
+		String sql = null;
+
+		if (categoryId == 3) {
+			if (name == null || name.isEmpty()) {
+				sql = "select name, color, manufacturer, price from items;";
+			} else {
+				sql = "select name, color, manufacturer, price from items where name like ?;";
+			}
+		} else {
+			if (name == null || name.isEmpty()) {
+				sql = "select name, color, manufacturer, price from items where category_id = ?;";
+			} else {
+				sql = "select name, color, manufacturer, price from items where category_id = ? and name like ?;";
 			}
 		}
-		return list;
+
+		List<ItemsDTO> itemsList = new ArrayList<>();
+
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+			if (categoryId == 3) {
+				if (name != null && !name.isEmpty()) {
+					ps.setString(1, "%" + name + "%");
+				}
+			} else {
+				if (name == null || name.isEmpty()) {
+					ps.setInt(1, categoryId);
+				} else {
+					ps.setInt(1, categoryId);
+					ps.setString(2, "%" + name + "%");
+				}
+			}
+
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					ItemsDTO item = new ItemsDTO();
+					item.setName(rs.getString("name"));
+					item.setColor(rs.getString("color"));
+					item.setManufacturer(rs.getString("manufacturer"));
+					item.setPrice(rs.getInt("price"));
+					itemsList.add(item);
+				}
+			}
+		}
+		return itemsList;
 	}
 
 	// データの更新 
