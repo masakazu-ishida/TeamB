@@ -8,10 +8,10 @@ public class ItemsDTO {
 	private String color;
 	private int price;
 	private int stock;
-	private String recommended;
+	private boolean recommended;
 
 	public ItemsDTO(int item_id, String name, String manufacturer, int category_id, String color, int price, int stock,
-			String recommended) {
+			boolean recommended) {
 		super();
 		this.item_id = item_id;
 		this.name = name;
@@ -79,11 +79,11 @@ public class ItemsDTO {
 		this.stock = stock;
 	}
 
-	public String getRecommended() {
+	public boolean getRecommended() {
 		return recommended;
 	}
 
-	public void setRecommended(String recommended) {
+	public void setRecommended(boolean recommended) {
 		this.recommended = recommended;
 	}
 }
