@@ -20,13 +20,13 @@ public class ItemsDAO {
 	public int insert(ItemsDTO user) throws SQLException {
 		String sql = "INSERT INTO public.items(item_id, name, manufacturer, category_id, color, price, stock, recommended) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1, user.getItem_id());
+			ps.setInt(1, user.getItem_id());
 			ps.setString(2, user.getName());
 			ps.setString(3, user.getManufacturer());
-			ps.setString(4, user.getCategory_id());
+			ps.setInt(4, user.getCategory_id());
 			ps.setString(5, user.getColor());
-			ps.setString(6, user.getPrice());
-			ps.setString(7, user.getStock());
+			ps.setInt(6, user.getPrice());
+			ps.setInt(7, user.getStock());
 			ps.setString(8, user.getRecommended());
 			return ps.executeUpdate();
 		}
@@ -34,17 +34,22 @@ public class ItemsDAO {
 
 	//-----------------以下、UserDAOをコピペ----------------------------
 	// 主キーによる検索 
-	public UserDTO findById(String userId) throws SQLException {
-		String sql = "SELECT user_id, password, name, address FROM public.users WHERE user_id = ?";
-		UserDTO user = null;
+	public ItemsDTO findById(int itemId) throws SQLException {
+		String sql = "SELECT item_id, name, color, manufacture, price, stock FROM items WHERE item_id = ?";
+		ItemsDTO Idto = null;
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1, userId);
+			ps.setInt(1, itemId);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 
 					//mapRowはResultSetからDTOへの変換メソッド。複数箇所で利用するので共通化
-					user = mapRow(rs);
-					return user;
+					Idto.setItem_id(rs.getInt("ItemId"));
+					Idto.setName(rs.getString("name"));
+					Idto.setColor(rs.getString("color"));
+					Idto.setManufacturer(rs.getString("manufacturer"));
+					Idto.setPrice(rs.getInt("price"));
+					Idto.setStock(rs.getInt("stock"));
+					return Idto;
 				}
 			}
 		}
