@@ -20,7 +20,6 @@ public class ItemsInCartDTO {
 	}
 
 	public ItemsInCartDTO() {
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public int getUser_id() {
