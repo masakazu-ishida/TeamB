@@ -23,6 +23,10 @@ public class ItemsDTO {
 		this.recommended = recommended;
 	}
 
+	public ItemsDTO() {
+		// 
+	}
+
 	public int getItem_id() {
 		return item_id;
 	}
