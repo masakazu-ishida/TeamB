@@ -42,8 +42,10 @@ public class ItemsDAO {
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 
+					Idto = new ItemsDTO();
+
 					//mapRowはResultSetからDTOへの変換メソッド。複数箇所で利用するので共通化
-					Idto.setItem_id(rs.getInt("ItemId"));
+					Idto.setItem_id(rs.getInt("item_id"));
 					Idto.setName(rs.getString("name"));
 					Idto.setColor(rs.getString("color"));
 					Idto.setManufacturer(rs.getString("manufacturer"));
