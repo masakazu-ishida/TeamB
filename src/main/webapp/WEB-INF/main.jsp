@@ -21,13 +21,14 @@
 		</form>
 		
 		
-		<a href="cart.jsp">ショッピングカートを見る</a><br>
-		<c:if test="${empty SESSION}">
+		<a href="${pageContext.request.contextPath}/cart">ショッピングカートを見る</a><br>
+		<c:if test="${empty loginUser}">
 		<!-- ※ログインしていない場合 --><br>
-		<a href="login.jsp">ログイン</a><br></c:if>
-		<c:if test="${not empty SESSION}">
+		<a href="${pageContext.request.contextPath}/login">ログイン</a><br></c:if>
+		
+		<c:if test="${not empty loginUser}">
 		<!-- ※ログイン済の場合には以下を表示--><br>
-		<a href="updateUser.jsp">会員情報の変更</a><br></c:if>
+		<a href="${pageContext.request.contextPath}/userInfo">会員情報の変更</a><br></c:if>
 
 </body>
 </html>
