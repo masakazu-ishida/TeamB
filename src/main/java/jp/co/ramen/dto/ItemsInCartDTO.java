@@ -1,49 +1,57 @@
 package jp.co.ramen.dto;
 
+import java.sql.Date;
+
 public class ItemsInCartDTO {
 
-	private String user_id;
-	private String item_id;
-	private String amount;
-	private String booked_date;
+	private int user_id;
+	private int item_id;
+	private int amount;
+	private Date booked_date;
 	private ItemsDTO itemsDto;
 
-	public ItemsInCartDTO(String user_id, String item_id, String amount, String booked_date) {
+	public ItemsInCartDTO(int user_id, int item_id, int amount, Date booked_date, ItemsDTO itemsDto) {
+		super();
 		this.user_id = user_id;
 		this.item_id = item_id;
 		this.amount = amount;
 		this.booked_date = booked_date;
+		this.itemsDto = itemsDto;
 	}
 
-	public String getUser_id() {
+	public ItemsInCartDTO() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public int getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(String user_id) {
+	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
 
-	public String getItem_id() {
+	public int getItem_id() {
 		return item_id;
 	}
 
-	public void setItem_id(String item_id) {
+	public void setItem_id(int item_id) {
 		this.item_id = item_id;
 	}
 
-	public String getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
-	public String getBooked_date() {
+	public Date getBooked_date() {
 		return booked_date;
 	}
 
-	public void setBooked_date(String booked_date) {
+	public void setBooked_date(Date booked_date) {
 		this.booked_date = booked_date;
 	}
 
