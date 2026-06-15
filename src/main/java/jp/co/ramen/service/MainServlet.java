@@ -30,7 +30,7 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+		//request.setCharacterEncoding("UTF-8");
 		String path = "/WEB-INF/main.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);

@@ -49,11 +49,11 @@ public class ItemsDAO {
 					Idto.setManufacturer(rs.getString("manufacturer"));
 					Idto.setPrice(rs.getInt("price"));
 					Idto.setStock(rs.getInt("stock"));
-					return Idto;
+
 				}
 			}
 		}
-		return null; // 見つからない場合はnullを返す
+		return Idto; // 見つからない場合はnullを返す
 	}
 
 	// 全件検索 
