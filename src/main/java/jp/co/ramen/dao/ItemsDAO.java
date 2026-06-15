@@ -35,7 +35,7 @@ public class ItemsDAO {
 	//-----------------以下、UserDAOをコピペ----------------------------
 	// 主キーによる検索 
 	public ItemsDTO findById(int itemId) throws SQLException {
-		String sql = "SELECT item_id, name, color, manufacture, price, stock FROM items WHERE item_id = ?";
+		String sql = "SELECT item_id, name, color, manufacturer, price, stock FROM items WHERE item_id = ?";
 		ItemsDTO Idto = null;
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, itemId);
