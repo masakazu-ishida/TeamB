@@ -57,7 +57,8 @@ class ItemsInCartDAOTest extends TestBase {
 	}
 
 	@Test
-	void testFindAllItemInCart() {
+	//	カート内商品を取得できているかを確認
+	void testFindAll() {
 
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
