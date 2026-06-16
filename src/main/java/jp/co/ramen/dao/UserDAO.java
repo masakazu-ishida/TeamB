@@ -20,7 +20,7 @@ public class UserDAO {
 	public int insert(UserDTO user) throws SQLException {
 		String sql = "INSERT INTO public.users (user_id, password, name, address) VALUES (?, ?, ?, ?)";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1, user.getUserId());
+			//ps.setString(1, user.getUserId());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getName());
 			ps.setString(4, user.getAddress());
@@ -68,7 +68,7 @@ public class UserDAO {
 			ps.setString(1, user.getPassword());
 			ps.setString(2, user.getName());
 			ps.setString(3, user.getAddress());
-			ps.setString(4, user.getUserId());
+			//	ps.setString(4, user.getUserId());
 			return ps.executeUpdate();
 		}
 	}
@@ -86,7 +86,7 @@ public class UserDAO {
 	//主キー検索と全件検索で重複を防ぐため
 	private UserDTO mapRow(ResultSet rs) throws SQLException {
 		UserDTO user = new UserDTO();
-		user.setUserId(rs.getString("user_id"));
+		//	user.setUserId(rs.getString("user_id"));
 		user.setPassword(rs.getString("password"));
 		user.setName(rs.getString("name"));
 		user.setAddress(rs.getString("address"));
