@@ -59,20 +59,20 @@ public class ItemsDAO {
 	}
 
 	// 全件検索 
-	public List<ItemsDTO> findAll(int categoryId, String name) throws SQLException {
+	public List<ItemsDTO> findByCondision(int categoryId, String name) throws SQLException {
 		String sql = null;
 
 		if (categoryId == 3) {
 			if (name == null || name.isEmpty()) {
-				sql = "select name, color, manufacturer, price from items;";
+				sql = "select item_id,name, color, manufacturer, price from items;";
 			} else {
-				sql = "select name, color, manufacturer, price from items where name like ?;";
+				sql = "select item_id,name, color, manufacturer, price from items where name like ?;";
 			}
 		} else {
 			if (name == null || name.isEmpty()) {
-				sql = "select name, color, manufacturer, price from items where category_id = ?;";
+				sql = "select item_id,name, color, manufacturer, price from items where category_id = ?;";
 			} else {
-				sql = "select name, color, manufacturer, price from items where category_id = ? and name like ?;";
+				sql = "select item_id,name, color, manufacturer, price from items where category_id = ? and name like ?;";
 			}
 		}
 
@@ -96,6 +96,7 @@ public class ItemsDAO {
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 					ItemsDTO item = new ItemsDTO();
+					item.setItem_id(rs.getInt("item_id"));
 					item.setName(rs.getString("name"));
 					item.setColor(rs.getString("color"));
 					item.setManufacturer(rs.getString("manufacturer"));
