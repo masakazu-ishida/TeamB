@@ -79,6 +79,6 @@ public class PurchasesDTO {
 
 	public void setPurchaseDetaillsDto(PurchaseDetailsDTO purchaseDetaillsDto) {
 		this.purchaseDetaillsDto = purchaseDetaillsDto;
-	}//コミットしたい
+	}
 
 }
