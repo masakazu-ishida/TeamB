@@ -24,7 +24,7 @@ public class ItemsDTO {
 	}
 
 	public ItemsDTO() {
-		// 
+		// test
 	}
 
 	public int getItem_id() {
