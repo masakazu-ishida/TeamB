@@ -32,7 +32,7 @@
 				<td><c:out value="${item.stock}"/>個</td>
 			</tr>
 		</table>
-		<form action="cart.jsp" method="POST">
+		<form action="${pageContext.request.contextPath}/cart" method="POST">
 			数量
 			<select name="amount">
 				<option selected value='1'>1</option>
