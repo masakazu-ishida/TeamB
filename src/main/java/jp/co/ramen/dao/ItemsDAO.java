@@ -27,7 +27,7 @@ public class ItemsDAO {
 			ps.setString(5, user.getColor());
 			ps.setInt(6, user.getPrice());
 			ps.setInt(7, user.getStock());
-			ps.setString(8, user.getRecommended());
+			//			ps.setString(8, user.getRecommended());
 			return ps.executeUpdate();
 		}
 	}
