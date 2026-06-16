@@ -58,22 +58,21 @@ class ItemsDAOTest extends TestBase {
 	}
 
 	@Test
-	void testFindByAll() {
+	//カテゴリ：すべて　キーワード：空
+	void testFindByAll1() {
 
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
-			UserDAO dao = new UserDAO(conn);
-			List<UserDTO> userList = dao.findAll();
+			ItemsDAO dao = new ItemsDAO(conn);
 
-			assertNotNull(userList);
-			assertEquals(4, userList.size());
+			List<ItemsDTO> itemsList = dao.findAll(3, "");
 
-			for (UserDTO user : userList) {
-				assertEquals("user1", user.getUserId());
-				assertEquals("userpass1", user.getPassword());
-				assertEquals("鳥取一郎", user.getName());
-				assertEquals("鳥取県鳥取市河原町６丁目１０７", user.getAddress());
-				//先頭だけDTOの中身をチェック
+			assertNotNull(itemsList);
+			assertEquals(20, itemsList.size(), "全件取得");
+
+			for (ItemsDTO item : itemsList) {
+				assertNotNull(item.getName());
+				assertNotNull(item.getPrice());
 				break;
 			}
 
@@ -81,7 +80,78 @@ class ItemsDAOTest extends TestBase {
 			e.printStackTrace();
 			fail(e);
 		}
+	}
 
+	@Test
+	//カテゴリ：すべて　キーワード：あり
+	void testFindByAll2() {
+
+		//JUnitテストでは引数はNULLでよい。
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			List<ItemsDTO> itemsList = dao.findAll(3, "麦");
+
+			assertNotNull(itemsList);
+			assertEquals(2, itemsList.size(), "キーワードのみ");
+
+			if (!itemsList.isEmpty()) {
+				ItemsDTO firstItem = itemsList.get(0);
+				assertTrue(firstItem.getName().contains("麦"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	@Test
+	//カテゴリ：1　キーワード：空
+	void testFindByAll3() {
+
+		//JUnitテストでは引数はNULLでよい。
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			List<ItemsDTO> itemsList = dao.findAll(1, "");
+
+			assertNotNull(itemsList);
+			assertEquals(11, itemsList.size(), "カテゴリのみ");
+
+			for (ItemsDTO item : itemsList) {
+				assertNotNull(item.getName());
+				assertNotNull(item.getPrice());
+				break;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	@Test
+	//カテゴリ：1　キーワード：あり
+	void testFindByAll4() {
+
+		//JUnitテストでは引数はNULLでよい。
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			List<ItemsDTO> itemsList = dao.findAll(1, "	麦");
+
+			assertNotNull(itemsList);
+
+			if (!itemsList.isEmpty()) {
+				ItemsDTO firstItem = itemsList.get(0);
+				assertTrue(firstItem.getName().contains("麦"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
 	}
 
 	/**
