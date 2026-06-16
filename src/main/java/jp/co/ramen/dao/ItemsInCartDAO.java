@@ -39,16 +39,13 @@ public class ItemsInCartDAO {
 					iicDto.setAmount(rs.getInt("amount"));
 					iicList.add(iicDto);
 				}
-			} catch (Exception e) {
-				System.out.println("SQLエラー");
 			}
-		} catch (Exception e) {
-			System.out.println("２でエラー");
+
+			return iicList;// 見つからない場合はnullを返す
 		}
-		return iicList; // 見つからない場合はnullを返す
 	}
 
-	//	以下、開発途中
+	//	以下、開発途中（最上担当？）
 	public ItemsInCartDTO findBySingleID(String SESSION) throws SQLException {
 		String sql = "SELECT items.name, items.manufacturer, items.price, items_in_cart.amount \n"
 				+ "FROM items_in_cart \n"
