@@ -37,11 +37,11 @@ public class PurchasesDAO {
 	//-----------------以下、UserDAOをコピペ----------------------------
 	// 主キーによる検索 
 	public List<PurchasesDTO> findHistoryByUserId(String userId) throws SQLException {
-		String sql = "SELECT p.purchase_id,p.purchase_date,d.amount,i.name as item_name,i.price as item_price\r\n"
+		String sql = "SELECT p.purchase_id,p.purchased_date,d.amount,i.name as item_name,i.price as item_price\r\n"
 				+ "FROM purchases p\r\n"
 				+ "INNER JOIN purchase_details d ON p.purchase_id=d.purchase_id\r\n"
 				+ "INNER JOIN items i ON d.item_id=i.item_id\r\n"
-				+ "WHERE p.user_id=? ORDER BY p.purchase_date DESC";
+				+ "WHERE p.purchased_user='user1' ORDER BY p.purchased_date DESC";
 		List<PurchasesDTO> list = new ArrayList<>();
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, userId);
