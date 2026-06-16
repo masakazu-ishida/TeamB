@@ -84,7 +84,7 @@ public class ItemsInCartDAO {
 	}
 
 	//	以下、開発途中(？2つ）（村尾担当）
-	public ArrayList<ItemsInCartDTO> findByDoubleID(String SESSION) throws SQLException {
+	public ArrayList<ItemsInCartDTO> findByUserIdAndItemId(String SESSION) throws SQLException {
 		String sql = "SELECT items.item_id,items.name,items.manufacturer, items.category_id, items.color,"
 				+ " items.price, items.stock, items.recommended,"
 				+ "items_in_cart.user_id, items_in_cart.item_id,"
