@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h3>商品の検索を行います。</h3><br>
-		<form action="searchResult.jsp" method="GET">
+		<form action="${pageContext.request.contextPath}/search" method="GET">
 			キーワード<br>
 			<input type="text" name="keyword"><br>
 			カテゴリ<br>
