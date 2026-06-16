@@ -48,6 +48,6 @@ public class PurchaseDetailsDTO {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
-	}
+	}//コミットしたい
 
 }

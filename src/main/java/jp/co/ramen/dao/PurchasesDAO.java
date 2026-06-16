@@ -70,7 +70,7 @@ public class PurchasesDAO {
 
 					list.add(Pdto);
 
-				}
+				} //コミットしたい
 			}
 		}
 		return list;
