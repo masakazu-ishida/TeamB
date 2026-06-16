@@ -1,14 +1,22 @@
 package jp.co.ramen.dto;
 
+import java.sql.Date;
+
 public class PurchasesDTO {
 
-	private String purchase_id;
+	private int purchase_id;
 	private String purchased_user;
-	private String purchased_date;
+	private Date purchased_date;
 	private String destination;
 	private String cancel;
+	private ItemsDTO itemsDto;
+	private PurchaseDetailsDTO purchaseDetaillsDto;
 
-	public PurchasesDTO(String purchase_id, String purchased_user, String purchased_date, String destination,
+	public PurchasesDTO() {
+
+	}
+
+	public PurchasesDTO(int purchase_id, String purchased_user, Date purchased_date, String destination,
 			String cancel) {
 		this.purchase_id = purchase_id;
 		this.purchased_user = purchased_user;
@@ -17,11 +25,11 @@ public class PurchasesDTO {
 		this.cancel = cancel;
 	}
 
-	public String getPurchase_id() {
+	public int getPurchase_id() {
 		return purchase_id;
 	}
 
-	public void setPurchase_id(String purchase_id) {
+	public void setPurchase_id(int purchase_id) {
 		this.purchase_id = purchase_id;
 	}
 
@@ -33,11 +41,11 @@ public class PurchasesDTO {
 		this.purchased_user = purchased_user;
 	}
 
-	public String getPurchased_date() {
+	public Date getPurchased_date() {
 		return purchased_date;
 	}
 
-	public void setPurchased_date(String purchased_date) {
+	public void setPurchased_date(Date purchased_date) {
 		this.purchased_date = purchased_date;
 	}
 
@@ -55,6 +63,22 @@ public class PurchasesDTO {
 
 	public void setCancel(String cancel) {
 		this.cancel = cancel;
+	}
+
+	public ItemsDTO getItemsDto() {
+		return itemsDto;
+	}
+
+	public void setItemsDto(ItemsDTO itemsDto) {
+		this.itemsDto = itemsDto;
+	}
+
+	public PurchaseDetailsDTO getPurchaseDetaillsDto() {
+		return purchaseDetaillsDto;
+	}
+
+	public void setPurchaseDetaillsDto(PurchaseDetailsDTO purchaseDetaillsDto) {
+		this.purchaseDetaillsDto = purchaseDetaillsDto;
 	}
 
 }
