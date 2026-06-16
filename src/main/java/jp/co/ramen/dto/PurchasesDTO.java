@@ -3,6 +3,7 @@ package jp.co.ramen.dto;
 import java.sql.Date;
 import java.util.List;
 
+//リスト追加
 public class PurchasesDTO {
 
 	private int purchase_id;
