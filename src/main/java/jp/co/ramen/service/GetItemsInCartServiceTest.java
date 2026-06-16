@@ -1,30 +1,31 @@
-package jp.co.ramen.dao;
+package jp.co.ramen.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
+import jakarta.servlet.ServletException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
-import jp.co.ramen.util.ConnectionUtil;
 import jp.co.ramen.util.TestBase;
 
 /**
- * DAOの単体テスト
+ * サービスの単体テスト
  * スーパークラスに必ずTestBaseを指定する。
- * 
  * 単体テストの観点
  * ・網羅率：ブランチカバレッジ
  * ・検索系：DTOのフィールドに値が期待どおり格納されるか？Listの場合期待する件数が格納されるか？
  * ・更新系：DBの状態が期待どおりか？
  * 
+ * サービスの場合、処理内容によっては単純に検索メソッドを読んで戻り値を返すだけなど）単体テストと
+ * ほぼ同じになるケースもあるが、それでも実施する。
+ * DAOテストのテストコードの流用ができるはず。
+ * 
  */
-class ItemsInCartDAOTest extends TestBase {
+class GetItemsInCartServiceTest extends TestBase {
 
 	/**
 	 * 
@@ -33,42 +34,32 @@ class ItemsInCartDAOTest extends TestBase {
 	 * DBの中身が初期化される
 	 * */
 	@BeforeEach
-	public void setUp() throws Exception {
+	void setUp() throws Exception {
 		String sqlFilePath = "/init_data.sql";
 		super.initSQLFiles(sqlFilePath);
 	}
 
 	/**
-	以下の後始末メソッドは何も考えずまるごとコピー
-	 * テストメソッドが全て完了した後、必ず実行され、
-	 * DBのコネクションがクローズされる。なお、クローズされるのは
-	 * /init_data.sqlで初期化するコネクション
-	 * */
-	@AfterAll
-	public static void cleanUp() {
-		if (con != null) {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-		}
-	}
-
+	 * ショッピングカート一覧の情報が合致しているかを確認
+	 */
 	@Test
-	//	カート内商品を取得できているかを確認
-	void testFindAll() {
+	void testExecute() {
 
-		//JUnitテストでは引数はNULLでよい。
-		try (Connection conn = ConnectionUtil.getConnection(null)) {
-			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-			List<ItemsInCartDTO> allItemInCart = dao.findAll("user1");
+		//		ユーザーID設定
+		String LoginID = "user1";
 
-			assertNotNull(allItemInCart);
-			assertEquals(3, allItemInCart.size());
+		//		サービスインスタンス化
+		GetItemsInCartService getItemsInCartService = new GetItemsInCartService();
 
-			for (ItemsInCartDTO item : allItemInCart) {
+		//		ユーザーID渡してカート情報取得
+		try {
+			List<ItemsInCartDTO> cartList = getItemsInCartService.execute(LoginID);
+			assertNotNull(cartList);
+			assertEquals(3, cartList.size());
+
+			//			取得したリストの1行目を検証
+
+			for (ItemsInCartDTO item : cartList) {
 				assertEquals("子ども用麦わら帽子", item.getItemsDto().getName());
 				assertEquals("赤色", item.getItemsDto().getColor());
 				assertEquals("東京帽子店", item.getItemsDto().getManufacturer());
@@ -78,7 +69,12 @@ class ItemsInCartDAOTest extends TestBase {
 				break;
 			}
 
+		} catch (ServletException e) {
+			e.printStackTrace();
+			fail(e);
+
 		} catch (Exception e) {
+
 			e.printStackTrace();
 			fail(e);
 		}
