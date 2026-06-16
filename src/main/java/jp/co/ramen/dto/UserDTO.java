@@ -1,7 +1,7 @@
 package jp.co.ramen.dto;
 
 public class UserDTO {
-	private String userId;
+	private int userId;
 	private String password;
 	private String name;
 	private String address;
@@ -10,18 +10,18 @@ public class UserDTO {
 	public UserDTO() {
 	}
 
-	public UserDTO(String userId, String password, String name, String address) {
+	public UserDTO(int userId, String password, String name, String address) {
 		this.userId = userId;
 		this.password = password;
 		this.name = name;
 		this.address = address;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
