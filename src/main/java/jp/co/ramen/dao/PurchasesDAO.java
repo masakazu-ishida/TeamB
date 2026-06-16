@@ -51,6 +51,7 @@ public class PurchasesDAO {
 					PurchasesDTO Pdto = new PurchasesDTO();
 					Pdto.setPurchase_id(rs.getInt("purchase_id"));
 					Pdto.setPurchased_date(rs.getDate("purchased_date"));
+					Pdto.setDestination(rs.getString("destination"));
 
 					ItemsDTO Idto = new ItemsDTO();
 
