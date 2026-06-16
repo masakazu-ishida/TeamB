@@ -18,7 +18,7 @@ public class ItemsInCartDAO {
 		this.con = con;
 	}
 
-	public List<ItemsInCartDTO> findAllItemInCart(String SESSION) throws SQLException {
+	public List<ItemsInCartDTO> findAll(String SESSION) throws SQLException {
 		String sql = "SELECT items.name, items.color, items.manufacturer, items.price, items_in_cart.amount \n"
 				+ "FROM items_in_cart \n"
 				+ "INNER JOIN items ON items_in_cart.item_id = items.item_id\n"
@@ -48,7 +48,33 @@ public class ItemsInCartDAO {
 		return iicList; // 見つからない場合はnullを返す
 	}
 
-	public ItemsInCartDTO findSingleItemInCart(String SESSION) throws SQLException {
+	//	以下、開発途中
+	public ItemsInCartDTO findBySingleID(String SESSION) throws SQLException {
+		String sql = "SELECT items.name, items.manufacturer, items.price, items_in_cart.amount \n"
+				+ "FROM items_in_cart \n"
+				+ "INNER JOIN items ON items_in_cart.item_id = items.item_id\n"
+				+ "WHERE items_in_cart.user_id = ?";
+		ItemsInCartDTO IicDto = null;
+		ItemsDTO Idto = null;
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, SESSION);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					//mapRowはResultSetからDTOへの変換メソッド。複数箇所で利用するので共通化
+					Idto.setName(rs.getString("name"));
+					Idto.setManufacturer(rs.getString("manufacturer"));
+					Idto.setPrice(rs.getInt("amount"));
+					IicDto.setItemsDto(Idto);
+					IicDto.setAmount(rs.getInt("amount"));
+					return IicDto;
+				}
+			}
+		}
+		return null; // 見つからない場合はnullを返す
+	}
+
+	//	以下、開発途中(？2つ）（村尾担当）
+	public ItemsInCartDTO findByDoubleID(String SESSION) throws SQLException {
 		String sql = "SELECT items.name, items.manufacturer, items.price, items_in_cart.amount \n"
 				+ "FROM items_in_cart \n"
 				+ "INNER JOIN items ON items_in_cart.item_id = items.item_id\n"

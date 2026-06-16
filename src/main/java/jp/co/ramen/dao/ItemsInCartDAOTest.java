@@ -62,7 +62,7 @@ class ItemsInCartDAOTest extends TestBase {
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-			List<ItemsInCartDTO> allItemInCart = dao.findAllItemInCart("user1");
+			List<ItemsInCartDTO> allItemInCart = dao.findAll("user1");
 
 			assertNotNull(allItemInCart);
 			assertEquals(3, allItemInCart.size());
