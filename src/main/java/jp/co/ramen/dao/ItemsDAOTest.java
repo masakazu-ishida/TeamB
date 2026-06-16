@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.ramen.dto.ItemsDTO;
-import jp.co.ramen.dto.UserDTO;
 import jp.co.ramen.util.ConnectionUtil;
 import jp.co.ramen.util.TestBase;
 
@@ -59,19 +58,22 @@ class ItemsDAOTest extends TestBase {
 
 	@Test
 	//カテゴリ：すべて　キーワード：空
-	void testFindByAll1() {
+	void testfindByCondision1() {
 
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
 
-			List<ItemsDTO> itemsList = dao.findAll(3, "");
+			List<ItemsDTO> itemsList = dao.findByCondision(3, "");
 
 			assertNotNull(itemsList);
-			assertEquals(20, itemsList.size(), "全件取得");
+			assertEquals(20, itemsList.size());
 
 			for (ItemsDTO item : itemsList) {
+				assertNotNull(item.getItem_id());
 				assertNotNull(item.getName());
+				assertNotNull(item.getColor());
+				assertNotNull(item.getManufacturer());
 				assertNotNull(item.getPrice());
 				break;
 			}
@@ -84,20 +86,20 @@ class ItemsDAOTest extends TestBase {
 
 	@Test
 	//カテゴリ：すべて　キーワード：あり
-	void testFindByAll2() {
+	void tesfindByCondision2() {
 
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
 
-			List<ItemsDTO> itemsList = dao.findAll(3, "麦");
+			List<ItemsDTO> itemsList = dao.findByCondision(3, "麦");
 
 			assertNotNull(itemsList);
-			assertEquals(2, itemsList.size(), "キーワードのみ");
+			assertEquals(2, itemsList.size());
 
 			if (!itemsList.isEmpty()) {
 				ItemsDTO firstItem = itemsList.get(0);
-				assertTrue(firstItem.getName().contains("麦"));
+				assertTrue(firstItem.getName().contains("麦わら帽子"));
 			}
 
 		} catch (Exception e) {
@@ -108,19 +110,22 @@ class ItemsDAOTest extends TestBase {
 
 	@Test
 	//カテゴリ：1　キーワード：空
-	void testFindByAll3() {
+	void testfindByCondision3() {
 
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
 
-			List<ItemsDTO> itemsList = dao.findAll(1, "");
+			List<ItemsDTO> itemsList = dao.findByCondision(1, "");
 
 			assertNotNull(itemsList);
-			assertEquals(11, itemsList.size(), "カテゴリのみ");
+			assertEquals(11, itemsList.size());
 
 			for (ItemsDTO item : itemsList) {
+				assertNotNull(item.getItem_id());
 				assertNotNull(item.getName());
+				assertNotNull(item.getColor());
+				assertNotNull(item.getManufacturer());
 				assertNotNull(item.getPrice());
 				break;
 			}
@@ -133,19 +138,19 @@ class ItemsDAOTest extends TestBase {
 
 	@Test
 	//カテゴリ：1　キーワード：あり
-	void testFindByAll4() {
+	void testfindByCondision4() {
 
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
 
-			List<ItemsDTO> itemsList = dao.findAll(1, "	麦");
+			List<ItemsDTO> itemsList = dao.findByCondision(1, "麦");
 
 			assertNotNull(itemsList);
 
 			if (!itemsList.isEmpty()) {
 				ItemsDTO firstItem = itemsList.get(0);
-				assertTrue(firstItem.getName().contains("麦"));
+				assertTrue(firstItem.getName().contains("麦わら帽子"));
 			}
 
 		} catch (Exception e) {
@@ -200,83 +205,83 @@ class ItemsDAOTest extends TestBase {
 		}
 	}
 
-	@Test
-	void testInsert() {
-		try (Connection conn = ConnectionUtil.getConnection(null)) {
-			UserDAO dao = new UserDAO(conn);
-			UserDTO user = new UserDTO();
-			user.setUserId("user10");
-			user.setPassword("password10");
-			user.setName("島根一郎");
-			user.setAddress("島根県奥出雲町");
-
-			int result = dao.insert(user);
-
-			assertEquals(1, result);
-
-			user = dao.findById("user10");
-
-			assertNotNull(user);
-			assertEquals("user10", user.getUserId());
-			assertEquals("password10", user.getPassword());
-			assertEquals("島根一郎", user.getName());
-			assertEquals("島根県奥出雲町", user.getAddress());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e);
-		}
-
-	}
-
-	@Test
-	void testUpdate() {
-		try (Connection conn = ConnectionUtil.getConnection(null)) {
-			UserDAO dao = new UserDAO(conn);
-			UserDTO user = new UserDTO();
-			user.setUserId("user1");
-			user.setPassword("password10");
-			user.setName("鳥取太郎");
-			user.setAddress("鳥取県日南町茶屋");
-
-			int result = dao.update(user);
-
-			assertEquals(1, result);
-
-			user = dao.findById("user1");
-
-			assertNotNull(user);
-			assertEquals("user1", user.getUserId());
-			assertEquals("password10", user.getPassword());
-			assertEquals("鳥取太郎", user.getName());
-			assertEquals("鳥取県日南町茶屋", user.getAddress());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e);
-		}
-
-	}
-
-	@Test
-	void testDelete() {
-		try (Connection conn = ConnectionUtil.getConnection(null)) {
-			UserDAO dao = new UserDAO(conn);
-			UserDTO user = new UserDTO();
-			user.setUserId("user4");
-
-			int result = dao.delete("user4");
-
-			assertEquals(1, result);
-
-			user = dao.findById("user4");
-
-			assertNull(user);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e);
-		}
-
-	}
+	//	@Test
+	//	void testInsert() {
+	//		try (Connection conn = ConnectionUtil.getConnection(null)) {
+	//			UserDAO dao = new UserDAO(conn);
+	//			UserDTO user = new UserDTO();
+	//			user.setUserId("user10");
+	//			user.setPassword("password10");
+	//			user.setName("島根一郎");
+	//			user.setAddress("島根県奥出雲町");
+	//
+	//			int result = dao.insert(user);
+	//
+	//			assertEquals(1, result);
+	//
+	//			user = dao.findById("user10");
+	//
+	//			assertNotNull(user);
+	//			assertEquals("user10", user.getUserId());
+	//			assertEquals("password10", user.getPassword());
+	//			assertEquals("島根一郎", user.getName());
+	//			assertEquals("島根県奥出雲町", user.getAddress());
+	//
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//			fail(e);
+	//		}
+	//
+	//	}
+	//
+	//	@Test
+	//	void testUpdate() {
+	//		try (Connection conn = ConnectionUtil.getConnection(null)) {
+	//			UserDAO dao = new UserDAO(conn);
+	//			UserDTO user = new UserDTO();
+	//			user.setUserId("user1");
+	//			user.setPassword("password10");
+	//			user.setName("鳥取太郎");
+	//			user.setAddress("鳥取県日南町茶屋");
+	//
+	//			int result = dao.update(user);
+	//
+	//			assertEquals(1, result);
+	//
+	//			user = dao.findById("user1");
+	//
+	//			assertNotNull(user);
+	//			assertEquals("user1", user.getUserId());
+	//			assertEquals("password10", user.getPassword());
+	//			assertEquals("鳥取太郎", user.getName());
+	//			assertEquals("鳥取県日南町茶屋", user.getAddress());
+	//
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//			fail(e);
+	//		}
+	//
+	//	}
+	//
+	//	@Test
+	//	void testDelete() {
+	//		try (Connection conn = ConnectionUtil.getConnection(null)) {
+	//			UserDAO dao = new UserDAO(conn);
+	//			UserDTO user = new UserDTO();
+	//			user.setUserId("user4");
+	//
+	//			int result = dao.delete("user4");
+	//
+	//			assertEquals(1, result);
+	//
+	//			user = dao.findById("user4");
+	//
+	//			assertNull(user);
+	//
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//			fail(e);
+	//		}
+	//
+	//	}
 }

@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class ItemsInCartDTO {
 
-	private int user_id;
+	private String user_id;
 	private int item_id;
 	private int amount;
 	private Date booked_date;
 	private ItemsDTO itemsDto;
 
-	public ItemsInCartDTO(int user_id, int item_id, int amount, Date booked_date, ItemsDTO itemsDto) {
+	public ItemsInCartDTO(String user_id, int item_id, int amount, Date booked_date, ItemsDTO itemsDto) {
 		super();
 		this.user_id = user_id;
 		this.item_id = item_id;
@@ -20,13 +20,14 @@ public class ItemsInCartDTO {
 	}
 
 	public ItemsInCartDTO() {
+		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	public int getUser_id() {
+	public String getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
 

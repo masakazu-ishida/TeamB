@@ -36,7 +36,7 @@ public class PurchasesDAO {
 
 	//-----------------以下、UserDAOをコピペ----------------------------
 	// 主キーによる検索 
-	public List<PurchasesDTO> findHistoryByUserId(int userId) throws SQLException {
+	public List<PurchasesDTO> findHistoryByUserId(String userId) throws SQLException {
 		String sql = "SELECT p.purchase_id,p.purchase_date,d.amount,i.name as item_name,i.price as item_price\r\n"
 				+ "FROM purchases p\r\n"
 				+ "INNER JOIN purchase_details d ON p.purchase_id=d.purchase_id\r\n"
@@ -44,7 +44,7 @@ public class PurchasesDAO {
 				+ "WHERE p.user_id=? ORDER BY p.purchase_date DESC";
 		List<PurchasesDTO> list = new ArrayList<>();
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setInt(1, userId);
+			ps.setString(1, userId);
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 
@@ -64,10 +64,15 @@ public class PurchasesDAO {
 					Idto.setStock(rs.getInt("stock"));
 
 					PurchaseDetailsDTO Ddto = new PurchaseDetailsDTO();
+					Ddto.setPurchase_detail_id(rs.getInt("purchase_detail_id"));
+					Ddto.setPurchase_id(rs.getInt("purchase_id"));
+					Ddto.setItem_id(rs.getInt("item_id"));
 					Ddto.setAmount(rs.getInt("amount"));
 
 					Pdto.setItemsDto(Idto);
-					Pdto.setPurchaseDetaillsDto(Ddto);
+					List<PurchaseDetailsDTO> dList = new ArrayList<>();
+					dList.add(Ddto);
+					Pdto.setPurchaseDetaillsDto(dList);
 
 					list.add(Pdto);
 
