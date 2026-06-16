@@ -48,6 +48,7 @@ class ItemDetailServiceTest extends TestBase {
 
 			assertNotNull(result);
 
+			assertEquals(1, result.getItem_id());
 			assertEquals("麦わら帽子", result.getName());
 			assertEquals("黄色", result.getColor());
 			assertEquals("日本帽子製造", result.getManufacturer());
