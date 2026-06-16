@@ -24,7 +24,7 @@
 		<a href="${pageContext.request.contextPath}/cart">ショッピングカートを見る</a><br>
 		<c:if test="${empty loginUser}">
 		<!-- ※ログインしていない場合 --><br>
-		<a href="${pageContext.request.contextPath}/login">ログイン</a><br></c:if>
+		<a href="${pageContext.request.contextPath}/loginShow">ログイン</a><br></c:if>
 		
 		<c:if test="${not empty loginUser}">
 		<!-- ※ログイン済の場合には以下を表示--><br>
