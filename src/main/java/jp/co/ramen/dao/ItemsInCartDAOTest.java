@@ -69,11 +69,17 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals(3, allItemInCart.size());
 
 			for (ItemsInCartDTO item : allItemInCart) {
+				assertEquals(3, item.getItemsDto().getItem_id());
 				assertEquals("子ども用麦わら帽子", item.getItemsDto().getName());
-				assertEquals("赤色", item.getItemsDto().getColor());
 				assertEquals("東京帽子店", item.getItemsDto().getManufacturer());
+				assertEquals(1, item.getItemsDto().getCategory_id());
+				assertEquals("赤色", item.getItemsDto().getColor());
 				assertEquals(2980, item.getItemsDto().getPrice());
+				assertEquals(3, item.getItemsDto().getStock());
+				assertEquals(false, item.getItemsDto().getRecommended());
+				assertEquals("user1", item.getUser_id());
 				assertEquals(3, item.getAmount());
+				assertEquals("2026-06-16", item.getBooked_date().toString());
 				//先頭だけDTOの中身をチェック
 				break;
 			}
