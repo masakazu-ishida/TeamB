@@ -1,6 +1,7 @@
 package jp.co.ramen.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class PurchasesDTO {
 
@@ -10,7 +11,7 @@ public class PurchasesDTO {
 	private String destination;
 	private String cancel;
 	private ItemsDTO itemsDto;
-	private PurchaseDetailsDTO purchaseDetaillsDto;
+	private List<PurchaseDetailsDTO> purchaseDetaillsDto;
 
 	public PurchasesDTO() {
 
@@ -73,11 +74,11 @@ public class PurchasesDTO {
 		this.itemsDto = itemsDto;
 	}
 
-	public PurchaseDetailsDTO getPurchaseDetaillsDto() {
+	public List<PurchaseDetailsDTO> getPurchaseDetaillsDto() {
 		return purchaseDetaillsDto;
 	}
 
-	public void setPurchaseDetaillsDto(PurchaseDetailsDTO purchaseDetaillsDto) {
+	public void setPurchaseDetaillsDto(List<PurchaseDetailsDTO> purchaseDetaillsDto) {
 		this.purchaseDetaillsDto = purchaseDetaillsDto;
 	}
 
