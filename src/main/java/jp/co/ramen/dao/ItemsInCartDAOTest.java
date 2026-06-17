@@ -108,7 +108,7 @@ class ItemsInCartDAOTest extends TestBase {
 		}
 	}
 
-	//	//カート内商品削除
+	//	//カート内商品削除確認
 	//	void testDeleteCartItem() {
 	//		try {
 	//			String userId = "user1";

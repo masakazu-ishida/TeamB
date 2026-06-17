@@ -34,7 +34,7 @@ public class CartDeleteConfirmService {
 
 		} catch (Exception e) {
 
-			//発生した例外は全部独自例外に変換してスロー
+			//発生した例外は全部独自例外に変換してスロー確認
 			//コントローラクラスでは常に独自例外のみキャッチさせる事で、コントローラーの記述を単純化させる
 			throw new ServletException(e.getCause());
 		}
