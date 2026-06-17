@@ -21,7 +21,7 @@
 		</form>
 		
 		
-		<a href="${pageContext.request.contextPath}/cart">ショッピングカートを見る</a><br>
+		<a href="${pageContext.request.contextPath}/ItemsInCartReferenceServlet">ショッピングカートを見る</a><br>
 		<c:if test="${empty loginUser}">
 		<!-- ※ログインしていない場合 --><br>
 		<a href="${pageContext.request.contextPath}/loginShow?returnPath=${pageContext.request.contextPath}/WEB-INF/main.jsp">ログイン</a><br></c:if>
