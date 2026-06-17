@@ -7,6 +7,7 @@ public class PurchaseDetailsDTO {
 	private int item_id;
 	private int amount;
 	private ItemsDTO Idto;
+	private PurchasesDTO pdto;
 
 	public PurchaseDetailsDTO(int purchase_detail_id, int purchase_id, int item_id, int amount) {
 		this.purchase_detail_id = purchase_detail_id;
@@ -21,6 +22,14 @@ public class PurchaseDetailsDTO {
 
 	public ItemsDTO getIdto() {
 		return Idto;
+	}
+
+	public PurchasesDTO getPdto() {
+		return pdto;
+	}
+
+	public void setPdto(PurchasesDTO pdto) {
+		this.pdto = pdto;
 	}
 
 	public void setIdto(ItemsDTO idto) {
