@@ -1,4 +1,4 @@
-package servlet;
+package jp.co.ramen.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

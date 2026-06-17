@@ -1,7 +1,6 @@
-package servlet;
+package jp.co.ramen.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,20 +9,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import jp.co.ramen.dto.ItemsDTO;
-import jp.co.ramen.service.SearchServletService;
-
 /**
- * Servlet implementation class SearchServlet
+ * Servlet implementation class MainServlet
  */
-@WebServlet("/search")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/main")
+public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SearchServlet() {
+	public MainServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,22 +30,11 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-
-		int categoryId = Integer.parseInt(request.getParameter("category"));
-		String name = request.getParameter("keyword");
-
-		SearchServletService itemSerch = new SearchServletService();
-
-		List<ItemsDTO> itemsList = itemSerch.execute(categoryId, name);
-
-		request.setAttribute("category", categoryId);
-		request.setAttribute("keyword", name);
-		request.setAttribute("itemsList", itemsList);
-
-		String path = "/WEB-INF/searchResult.jsp";
+		//request.setCharacterEncoding("UTF-8");
+		String path = "/WEB-INF/main.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
+
 	}
 
 	/**

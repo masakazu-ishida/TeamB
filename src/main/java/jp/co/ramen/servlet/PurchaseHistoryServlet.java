@@ -1,4 +1,4 @@
-package servlet;
+package jp.co.ramen.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,20 +10,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import jp.co.ramen.dto.ItemsInCartDTO;
-import jp.co.ramen.service.GetItemsInCartService;
+import jp.co.ramen.dto.PurchasesDTO;
+import jp.co.ramen.service.PurchaseHistoryService;
 
 /**
- * Servlet implementation class ItemsInCartReferenceServlet
+ * Servlet implementation class PurchaseHistoryServlet
  */
-@WebServlet("/ItemsInCartReferenceServlet")
-public class ItemsInCartReferenceServlet extends HttpServlet {
+@WebServlet("/purchaseHistory")
+public class PurchaseHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ItemsInCartReferenceServlet() {
+	public PurchaseHistoryServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,28 +33,27 @@ public class ItemsInCartReferenceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
+
+		session.setAttribute("loginUser", "user1");//後で消す
+
 		String userId = (String) session.getAttribute("loginUser");
-		request.setAttribute("requestFrom", "/ItemsInCartReferenceServlet");
 
-		//if (userId == null) {
-		//	response.sendRedirect(request.getContextPath() + "/login");
-		//	return;
-		//}
-
-		GetItemsInCartService service = new GetItemsInCartService();
+		if (userId == null) {
+			response.sendRedirect("noSession.html");//ログイン画面できたらmainから変更
+			return;
+		}
 		try {
-			// サービスからカートリストを取得
-			List<ItemsInCartDTO> cartList = service.execute(userId);
-
-			request.setAttribute("cartList", cartList);
-
-			// カート一覧画面（JSP）へフォワード
-			request.getRequestDispatcher("/WEB-INF/cart.jsp").forward(request, response);
-
+			PurchaseHistoryService hService = new PurchaseHistoryService();
+			List<PurchasesDTO> list = hService.getHistory(userId);
+			request.setAttribute("list", list);
+			String value = "/WEB-INF/purchaseHistory.jsp";
+			request.getRequestDispatcher(value).forward(request, response);
 		} catch (Exception e) {
-			throw new ServletException(e);
+			System.out.println("kokodeerror");
+			e.printStackTrace();
 		}
 
 	}

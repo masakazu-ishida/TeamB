@@ -1,29 +1,29 @@
-package servlet;
+package jp.co.ramen.servlet;
 
 import java.io.IOException;
 import java.util.List;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
 import jp.co.ramen.service.GetItemsInCartService;
 
 /**
- * Servlet implementation class PurchaseConfirmServlet
+ * Servlet implementation class ItemsInCartReferenceServlet
  */
-@WebServlet("/purchaseConfirm")
-public class PurchaseConfirmServlet extends HttpServlet {
+@WebServlet("/ItemsInCartReferenceServlet")
+public class ItemsInCartReferenceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchaseConfirmServlet() {
+	public ItemsInCartReferenceServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,36 +33,30 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
+		HttpSession session = request.getSession(false);
+		String userId = (String) session.getAttribute("loginUser");
+		request.setAttribute("requestFrom", "/ItemsInCartReferenceServlet");
+
+		//if (userId == null) {
+		//	response.sendRedirect(request.getContextPath() + "/login");
+		//	return;
+		//}
+
+		GetItemsInCartService service = new GetItemsInCartService();
 		try {
-			//			HttpSession session = request.getSession();
-			//			String loginId = (String) session.getAttribute("loginUser");
+			// サービスからカートリストを取得
+			List<ItemsInCartDTO> cartList = service.execute(userId);
 
-			try {
-				GetItemsInCartService getItemsInCartService = new GetItemsInCartService();
-				List<ItemsInCartDTO> cartList = getItemsInCartService.execute("user1");
+			request.setAttribute("cartList", cartList);
 
-				try {
-					request.setAttribute("cartList", cartList);
-					String path = "/WEB-INF/purchaseConfirm.jsp";
-					RequestDispatcher rd = request.getRequestDispatcher(path);
-					rd.forward(request, response);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					// TODO: handle exception
-				}
-
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
+			// カート一覧画面（JSP）へフォワード
+			request.getRequestDispatcher("/WEB-INF/cart.jsp").forward(request, response);
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			throw new ServletException(e);
 		}
+
 	}
 
 	/**
@@ -72,7 +66,6 @@ public class PurchaseConfirmServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-
 	}
 
 }
