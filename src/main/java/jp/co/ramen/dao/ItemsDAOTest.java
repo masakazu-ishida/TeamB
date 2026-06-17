@@ -70,11 +70,14 @@ class ItemsDAOTest extends TestBase {
 			assertEquals(20, itemsList.size());
 
 			for (ItemsDTO item : itemsList) {
-				assertNotNull(item.getItem_id());
-				assertNotNull(item.getName());
-				assertNotNull(item.getColor());
-				assertNotNull(item.getManufacturer());
-				assertNotNull(item.getPrice());
+				assertEquals(1, item.getItem_id());
+				assertEquals("麦わら帽子", item.getName());
+				assertEquals("日本帽子製造", item.getManufacturer());
+				assertEquals(1, item.getCategory_id());
+				assertEquals("黄色", item.getColor());
+				assertEquals(4980, item.getPrice());
+				assertEquals(12, item.getStock());
+				assertEquals(false, item.getRecommended());
 				break;
 			}
 
@@ -97,9 +100,16 @@ class ItemsDAOTest extends TestBase {
 			assertNotNull(itemsList);
 			assertEquals(2, itemsList.size());
 
-			if (!itemsList.isEmpty()) {
-				ItemsDTO firstItem = itemsList.get(0);
-				assertTrue(firstItem.getName().contains("麦わら帽子"));
+			for (ItemsDTO item : itemsList) {
+				assertEquals(1, item.getItem_id());
+				assertEquals("麦わら帽子", item.getName());
+				assertEquals("日本帽子製造", item.getManufacturer());
+				assertEquals(1, item.getCategory_id());
+				assertEquals("黄色", item.getColor());
+				assertEquals(4980, item.getPrice());
+				assertEquals(12, item.getStock());
+				assertEquals(false, item.getRecommended());
+				break;
 			}
 
 		} catch (Exception e) {
@@ -122,14 +132,16 @@ class ItemsDAOTest extends TestBase {
 			assertEquals(11, itemsList.size());
 
 			for (ItemsDTO item : itemsList) {
-				assertNotNull(item.getItem_id());
-				assertNotNull(item.getName());
-				assertNotNull(item.getColor());
-				assertNotNull(item.getManufacturer());
-				assertNotNull(item.getPrice());
+				assertEquals(1, item.getItem_id());
+				assertEquals("麦わら帽子", item.getName());
+				assertEquals("日本帽子製造", item.getManufacturer());
+				assertEquals(1, item.getCategory_id());
+				assertEquals("黄色", item.getColor());
+				assertEquals(4980, item.getPrice());
+				assertEquals(12, item.getStock());
+				assertEquals(false, item.getRecommended());
 				break;
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e);
@@ -148,9 +160,16 @@ class ItemsDAOTest extends TestBase {
 
 			assertNotNull(itemsList);
 
-			if (!itemsList.isEmpty()) {
-				ItemsDTO firstItem = itemsList.get(0);
-				assertTrue(firstItem.getName().contains("麦わら帽子"));
+			for (ItemsDTO item : itemsList) {
+				assertEquals(1, item.getItem_id());
+				assertEquals("麦わら帽子", item.getName());
+				assertEquals("日本帽子製造", item.getManufacturer());
+				assertEquals(1, item.getCategory_id());
+				assertEquals("黄色", item.getColor());
+				assertEquals(4980, item.getPrice());
+				assertEquals(12, item.getStock());
+				assertEquals(false, item.getRecommended());
+				break;
 			}
 
 		} catch (Exception e) {
