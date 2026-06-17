@@ -25,15 +25,21 @@
 				<td><c:out value="${cart.itemsDto.price }"></c:out></td>
 				<td><c:out value="${cart.amount }"></c:out></td>
 				<td>
-				<a href="${pageContext.request.contextPath}/cart/confirmDelete?itemId=${cart.itemsDto.item_id}">削除</a>
+				<a href="${pageContext.request.contextPath}/cartDeleteConfirm?itemId=${cart.itemsDto.item_id}">削除</a>
 				</td>			
 			</tr>
 			<c:set var="total" value="${total + cart.itemsDto.price * cart.amount}" />
 		</c:forEach>
 	</table>
 	合計 <c:out value="${total}"> </c:out> 円<br>
+	<form action="${pageContext.request.contextPath}/purchaseConfirm" method="POST">
+    <button type="submit">購入する</button>
+	</form>
+	<br>
+	<br>
+	<a href="${pageContext.request.contextPath}/main">商品検索</a>へ
 	
 	
-
+	
 </body>
 </html>

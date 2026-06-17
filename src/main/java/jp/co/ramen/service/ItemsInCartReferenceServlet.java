@@ -36,10 +36,10 @@ public class ItemsInCartReferenceServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("loginUser");
 
-		if (userId == null) {
-			response.sendRedirect(request.getContextPath() + "/login");
-			return;
-		}
+		//if (userId == null) {
+		//	response.sendRedirect(request.getContextPath() + "/login");
+		//	return;
+		//}
 
 		GetItemsInCartService service = new GetItemsInCartService();
 		try {
@@ -49,7 +49,7 @@ public class ItemsInCartReferenceServlet extends HttpServlet {
 			request.setAttribute("cartList", cartList);
 
 			// カート一覧画面（JSP）へフォワード
-			request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/cart.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
