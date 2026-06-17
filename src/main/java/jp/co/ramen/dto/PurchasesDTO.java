@@ -12,7 +12,7 @@ public class PurchasesDTO {
 	private String destination;
 	private boolean cancel;
 	private ItemsDTO itemsDto;
-	private List<PurchaseDetailsDTO> purchaseDetaillsDto;
+	private List<PurchaseDetailsDTO> purchaseDetailsDto;
 
 	public PurchasesDTO() {
 
@@ -75,12 +75,12 @@ public class PurchasesDTO {
 		this.itemsDto = itemsDto;
 	}
 
-	public List<PurchaseDetailsDTO> getPurchaseDetaillsDto() {
-		return purchaseDetaillsDto;
+	public List<PurchaseDetailsDTO> getPurchaseDetailsDto() {
+		return purchaseDetailsDto;
 	}
 
-	public void setPurchaseDetaillsDto(List<PurchaseDetailsDTO> purchaseDetaillsDto) {
-		this.purchaseDetaillsDto = purchaseDetaillsDto;
+	public void setPurchaseDetailsDto(List<PurchaseDetailsDTO> purchaseDetailsDto) {
+		this.purchaseDetailsDto = purchaseDetailsDto;
 	}
 
 }

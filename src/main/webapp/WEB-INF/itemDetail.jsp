@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 			</tr>
 			<tr>
 				<th>価格</th>
-				<td><c:out value="${item.price}"/></td>
+				<td><fmt:formatNumber value="${item.price}"/></td>
 			</tr>
 			<tr>
 				<th>在庫数</th>

@@ -68,7 +68,7 @@ public class PurchasesDAO {
 						currentPdto.setDestination(rs.getString("destination"));
 						currentPdto.setCancel(rs.getBoolean("cancel"));
 
-						currentPdto.setPurchaseDetaillsDto((new ArrayList<PurchaseDetailsDTO>()));
+						currentPdto.setPurchaseDetailsDto((new ArrayList<PurchaseDetailsDTO>()));
 						list.add(currentPdto);
 					}
 
@@ -92,7 +92,7 @@ public class PurchasesDAO {
 					Ddto.setIdto(Idto);
 					//List<PurchaseDetailsDTO> dList = new ArrayList<>();
 
-					currentPdto.getPurchaseDetaillsDto().add(Ddto);
+					currentPdto.getPurchaseDetailsDto().add(Ddto);
 
 				}
 			}
