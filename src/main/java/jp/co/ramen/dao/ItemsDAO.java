@@ -64,15 +64,15 @@ public class ItemsDAO {
 
 		if (categoryId == 3) {
 			if (name == null || name.isEmpty()) {
-				sql = "select item_id,name, color, manufacturer, price from items;";
+				sql = "select item_id,category_id,name, color, manufacturer, price,stock, recommended from items;";
 			} else {
-				sql = "select item_id,name, color, manufacturer, price from items where name like ?;";
+				sql = "select item_id,category_id,name, color, manufacturer, price ,stock, recommended from items where name like ?;";
 			}
 		} else {
 			if (name == null || name.isEmpty()) {
-				sql = "select item_id,name, color, manufacturer, price from items where category_id = ?;";
+				sql = "select item_id,category_id,name, color, manufacturer, price ,stock, recommended from items where category_id = ?;";
 			} else {
-				sql = "select item_id,name, color, manufacturer, price from items where category_id = ? and name like ?;";
+				sql = "select item_id,category_id,name, color, manufacturer, price,stock, recommended from items where category_id = ? and name like ?;";
 			}
 		}
 
@@ -97,10 +97,13 @@ public class ItemsDAO {
 				while (rs.next()) {
 					ItemsDTO item = new ItemsDTO();
 					item.setItem_id(rs.getInt("item_id"));
+					item.setCategory_id(rs.getInt("category_id"));
 					item.setName(rs.getString("name"));
 					item.setColor(rs.getString("color"));
 					item.setManufacturer(rs.getString("manufacturer"));
 					item.setPrice(rs.getInt("price"));
+					item.setStock(rs.getInt("stock"));
+					item.setRecommended(rs.getBoolean("recommended"));
 					itemsList.add(item);
 				}
 			}
