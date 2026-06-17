@@ -41,16 +41,16 @@ public class PurchaseHistoryServlet extends HttpServlet {
 		String userId = (String) session.getAttribute("loginUser");
 
 		if (userId == null) {
-			response.sendRedirect("main");//ログイン画面できたらmainから変更
+			response.sendRedirect("noSession.html");//ログイン画面できたらmainから変更
 			return;
 		}
 		try {
-		PurchaseHistoryService hService = new PurchaseHistoryService();
-		List<PurchasesDTO> list = hService.getHistory(userId);
-		request.setAttribute("list", list);
-		String value = "/WEB-INF/purchaseHistory.jsp";
-		request.getRequestDispatcher(value).forward(request, response);
-		}catch(Exception e) {
+			PurchaseHistoryService hService = new PurchaseHistoryService();
+			List<PurchasesDTO> list = hService.getHistory(userId);
+			request.setAttribute("list", list);
+			String value = "/WEB-INF/purchaseHistory.jsp";
+			request.getRequestDispatcher(value).forward(request, response);
+		} catch (Exception e) {
 			System.out.println("kokodeerror");
 			e.printStackTrace();
 		}
