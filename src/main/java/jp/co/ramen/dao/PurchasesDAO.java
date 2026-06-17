@@ -37,21 +37,38 @@ public class PurchasesDAO {
 	//-----------------以下、UserDAOをコピペ----------------------------
 	// 主キーによる検索 
 	public List<PurchasesDTO> findHistoryByUserId(String userId) throws SQLException {
-		String sql = "SELECT p.purchase_id,p.purchased_date,d.amount,i.name as item_name,i.price as item_price\r\n"
-				+ "FROM purchases p\r\n"
-				+ "INNER JOIN purchase_details d ON p.purchase_id=d.purchase_id\r\n"
-				+ "INNER JOIN items i ON d.item_id=i.item_id\r\n"
-				+ "WHERE p.purchased_user='user1' ORDER BY p.purchased_date DESC";
+		String sql = "SELECT p.purchase_id, p.purchased_date, p.destination, "
+				+ "d.purchase_detail_id, d.amount, "
+				+ "i.item_id, i.name, i.price, i.color, i.manufacturer, i.stock "
+				+ "FROM purchases p "
+				+ "INNER JOIN purchase_details d ON p.purchase_id = d.purchase_id "
+				+ "INNER JOIN items i ON d.item_id = i.item_id "
+				+ "WHERE p.purchased_user = ? "
+				+ "ORDER BY p.purchased_date DESC, p.purchase_id DESC";
 		List<PurchasesDTO> list = new ArrayList<>();
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, userId);
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 
-					PurchasesDTO Pdto = new PurchasesDTO();
-					Pdto.setPurchase_id(rs.getInt("purchase_id"));
-					Pdto.setPurchased_date(rs.getDate("purchased_date"));
-					Pdto.setDestination(rs.getString("destination"));
+					int currentPurchasedId = rs.getInt("purchase_id");
+					PurchasesDTO currentPdto = null;
+					for (PurchasesDTO p : list) {
+						if (p.getPurchase_id() == currentPurchasedId) {
+							currentPdto = p;
+							break;
+						}
+
+					}
+					if (currentPdto == null) {
+						currentPdto = new PurchasesDTO();
+						currentPdto.setPurchase_id(currentPurchasedId);
+						currentPdto.setPurchased_date(rs.getDate("purchased_date"));
+						currentPdto.setDestination(rs.getString("destination"));
+
+						currentPdto.setPurchaseDetaillsDto((new ArrayList<PurchaseDetailsDTO>()));
+						list.add(currentPdto);
+					}
 
 					ItemsDTO Idto = new ItemsDTO();
 
@@ -69,12 +86,10 @@ public class PurchasesDAO {
 					Ddto.setItem_id(rs.getInt("item_id"));
 					Ddto.setAmount(rs.getInt("amount"));
 
-					Pdto.setItemsDto(Idto);
-					List<PurchaseDetailsDTO> dList = new ArrayList<>();
-					dList.add(Ddto);
-					Pdto.setPurchaseDetaillsDto(dList);
+					Ddto.setIdto(Idto);
+					//List<PurchaseDetailsDTO> dList = new ArrayList<>();
 
-					list.add(Pdto);
+					currentPdto.getPurchaseDetaillsDto().add(Ddto);
 
 				}
 			}
