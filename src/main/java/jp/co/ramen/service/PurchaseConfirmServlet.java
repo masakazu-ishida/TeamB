@@ -9,7 +9,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
 
@@ -34,22 +33,14 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		try {
-			HttpSession session = request.getSession();
-			String loginId = (String) session.getAttribute("loginUser");
+			//			HttpSession session = request.getSession();
+			//			String loginId = (String) session.getAttribute("loginUser");
 
 			try {
 				GetItemsInCartService getItemsInCartService = new GetItemsInCartService();
-				List<ItemsInCartDTO> cartList = getItemsInCartService.execute(loginId);
+				List<ItemsInCartDTO> cartList = getItemsInCartService.execute("user1");
 
 				try {
 					request.setAttribute("cartList", cartList);
@@ -58,16 +49,28 @@ public class PurchaseConfirmServlet extends HttpServlet {
 					rd.forward(request, response);
 
 				} catch (Exception e) {
+					e.printStackTrace();
 					// TODO: handle exception
 				}
 
 			} catch (Exception e) {
 				// TODO: handle exception
+				e.printStackTrace();
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 
 	}
 
