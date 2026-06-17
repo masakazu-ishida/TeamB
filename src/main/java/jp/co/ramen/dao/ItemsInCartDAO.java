@@ -18,6 +18,10 @@ public class ItemsInCartDAO {
 		this.con = con;
 	}
 
+	public ItemsInCartDAO() {
+
+	}
+
 	public List<ItemsInCartDTO> findAll(String SESSION) throws SQLException {
 		String sql = "SELECT items.item_id,items.name,items.manufacturer, items.category_id, items.color,"
 				+ " items.price, items.stock, items.recommended,"
@@ -81,6 +85,37 @@ public class ItemsInCartDAO {
 			}
 		}
 		return null; // 見つからない場合はnullを返す
+	}
+
+	//カート内から削除対象の行を取り出す
+
+	public ItemsInCartDTO findById(String userId, int itemId) throws SQLException {
+		String sql = "SELECT * FROM items_in_cart WHERE user_id = ? AND item_id = ?";
+		ItemsInCartDTO dto = null;
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, userId);
+			ps.setInt(2, itemId);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					//mapRowはResultSetからDTOへの変換メソッド。複数箇所で利用するので共通化
+					dto.setUser_id(rs.getString("user_id"));
+					dto.setItem_id(rs.getInt("item_id"));
+					dto.setAmount(rs.getInt("amount"));
+
+				}
+			}
+		}
+		return dto;
+	}
+
+	//カート内削除
+	public void deleteCartItem(String userId, int itemId) throws SQLException {
+		String sql = "delete from items_in_cart where user_id=? and item_id=?";
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, userId);
+			ps.setInt(2, itemId);
+			ps.executeUpdate();
+		}
 	}
 
 }

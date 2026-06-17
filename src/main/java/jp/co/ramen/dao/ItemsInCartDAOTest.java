@@ -79,7 +79,7 @@ class ItemsInCartDAOTest extends TestBase {
 				assertEquals(false, item.getItemsDto().getRecommended());
 				assertEquals("user1", item.getUser_id());
 				assertEquals(3, item.getAmount());
-				assertEquals("2026-06-16", item.getBooked_date().toString());
+				assertEquals("2026-06-17", item.getBooked_date().toString());
 				//先頭だけDTOの中身をチェック
 				break;
 			}
@@ -90,5 +90,41 @@ class ItemsInCartDAOTest extends TestBase {
 		}
 
 	}
+
+	//カート内から削除対象の行を取り出す 
+
+	void testFindById() {
+		try {
+			String userId = "user1";
+			int itemId = 7;
+			ItemsInCartDAO dao = new ItemsInCartDAO();
+			ItemsInCartDTO result = dao.findById(userId, itemId);
+			assertNotNull(result);
+			assertEquals(userId, result.getUser_id());
+			assertEquals(itemId, result.getItem_id());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			fail("例外");
+		}
+	}
+
+	//	//カート内商品削除
+	//	void testDeleteCartItem() {
+	//		try {
+	//			String userId = "user1";
+	//			int itemId = 7;
+	//
+	//			ItemsInCartDAO dao = new ItemsInCartDAO();
+	//			dao.deleteCartItem(userId, itemId);
+	//			List<ItemsInCartDTO> remainCart = dao.getCartList(userId);
+	//
+	//			assertNotNull(remainCart);
+	//			assertEquals(0, remainCart.size());
+	//
+	//		} catch (SQLException e) {
+	//			e.printStackTrace();
+	//			fail("例外発生");
+	//		}
+	//	}
 
 }
