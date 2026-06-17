@@ -87,7 +87,7 @@ public class ItemsInCartDAO {
 		return null; // 見つからない場合はnullを返す
 	}
 
-	//カート内から削除対象の行を取り出す
+	//カート内から削除対象の行を取り出す　←テストクリア
 
 	public ItemsInCartDTO findById(String userId, int itemId) throws SQLException {
 		String sql = "SELECT * FROM items_in_cart WHERE user_id = ? AND item_id = ?";

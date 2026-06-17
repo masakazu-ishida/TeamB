@@ -91,7 +91,7 @@ class ItemsInCartDAOTest extends TestBase {
 
 	}
 
-	//カート内から削除対象の行を取り出す 
+	//カート内から削除対象の行を取り出す ←テストクリア
 
 	void testFindById() {
 		try {
