@@ -1,4 +1,4 @@
-package jp.co.ramen.service;
+package servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
+import jp.co.ramen.service.GetItemsInCartService;
 
 /**
  * Servlet implementation class ItemsInCartReferenceServlet

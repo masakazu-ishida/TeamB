@@ -1,4 +1,4 @@
-package jp.co.ramen.service;
+package servlet;
 
 import java.io.IOException;
 

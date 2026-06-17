@@ -1,7 +1,8 @@
-package jp.co.ramen.service;
+package servlet;
 
 import java.io.IOException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,16 +10,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CartDeleteConfirmServlet
+ * Servlet implementation class MainServlet
  */
-@WebServlet("/cartDeleteConfirm")
-public class CartDeleteConfirmServlet extends HttpServlet {
+@WebServlet("/main")
+public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CartDeleteConfirmServlet() {
+	public MainServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -29,7 +30,11 @@ public class CartDeleteConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//request.setCharacterEncoding("UTF-8");
+		String path = "/WEB-INF/main.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
+
 	}
 
 	/**
@@ -37,7 +42,7 @@ public class CartDeleteConfirmServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub・・
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

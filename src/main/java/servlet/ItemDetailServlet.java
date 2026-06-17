@@ -1,4 +1,4 @@
-package jp.co.ramen.service;
+package servlet;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import jp.co.ramen.dto.ItemsDTO;
+import jp.co.ramen.service.ItemDetailService;
 
 /**
  * Servlet implementation class ItemDetailServlet

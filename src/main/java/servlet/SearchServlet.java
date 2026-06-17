@@ -1,4 +1,4 @@
-package jp.co.ramen.service;
+package servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,19 +10,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import jp.co.ramen.dto.ItemsInCartDTO;
+import jp.co.ramen.dto.ItemsDTO;
+import jp.co.ramen.service.SearchServletService;
 
 /**
- * Servlet implementation class PurchaseConfirmServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet("/purchaseConfirm")
-public class PurchaseConfirmServlet extends HttpServlet {
+@WebServlet("/search")
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchaseConfirmServlet() {
+	public SearchServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,35 +34,22 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 
-		try {
-			//			HttpSession session = request.getSession();
-			//			String loginId = (String) session.getAttribute("loginUser");
+		int categoryId = Integer.parseInt(request.getParameter("category"));
+		String name = request.getParameter("keyword");
 
-			try {
-				GetItemsInCartService getItemsInCartService = new GetItemsInCartService();
-				List<ItemsInCartDTO> cartList = getItemsInCartService.execute("user1");
+		SearchServletService itemSerch = new SearchServletService();
 
-				try {
-					request.setAttribute("cartList", cartList);
-					String path = "/WEB-INF/purchaseConfirm.jsp";
-					RequestDispatcher rd = request.getRequestDispatcher(path);
-					rd.forward(request, response);
+		List<ItemsDTO> itemsList = itemSerch.execute(categoryId, name);
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					// TODO: handle exception
-				}
+		request.setAttribute("category", categoryId);
+		request.setAttribute("keyword", name);
+		request.setAttribute("itemsList", itemsList);
 
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		String path = "/WEB-INF/searchResult.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 	}
 
 	/**
@@ -71,7 +59,6 @@ public class PurchaseConfirmServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-
 	}
 
 }
