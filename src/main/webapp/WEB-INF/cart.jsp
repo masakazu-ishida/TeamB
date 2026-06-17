@@ -32,7 +32,7 @@
 		</c:forEach>
 	</table>
 	合計 <c:out value="${total}"> </c:out> 円<br>
-	<form action="${pageContext.request.contextPath}/purchaseConfirm" method="POST">
+	<form action="${pageContext.request.contextPath}/purchaseConfirm" method="get">
     <button type="submit">購入する</button>
 	</form>
 	<br>

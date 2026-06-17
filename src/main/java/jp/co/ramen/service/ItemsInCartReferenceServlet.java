@@ -35,6 +35,7 @@ public class ItemsInCartReferenceServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("loginUser");
+		request.setAttribute("requestFrom", "/ItemsInCartReferenceServlet");
 
 		//if (userId == null) {
 		//	response.sendRedirect(request.getContextPath() + "/login");
