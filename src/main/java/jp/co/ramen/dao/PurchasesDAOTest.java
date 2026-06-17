@@ -80,7 +80,7 @@ class PurchasesDAOTest extends TestBase {
 			assertEquals("user1", Pdto.getPurchased_user());
 
 			//注文箱の中にある商品明細の数確認
-			List<PurchaseDetailsDTO> detailsList = Pdto.getPurchaseDetaillsDto();
+			List<PurchaseDetailsDTO> detailsList = Pdto.getPurchaseDetailsDto();
 			assertNotNull(detailsList);
 			assertEquals(3, detailsList.size());
 
