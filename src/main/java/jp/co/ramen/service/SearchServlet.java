@@ -35,16 +35,18 @@ public class SearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 
-		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-		String name = request.getParameter("name");
+		int categoryId = Integer.parseInt(request.getParameter("category"));
+		String name = request.getParameter("keyword");
 
-		SearchServletService itemSearch = new SearchServletService();
+		SearchServletService itemSerch = new SearchServletService();
 
-		List<ItemsDTO> itemsList = itemSearch.execute(categoryId, name);
+		List<ItemsDTO> itemsList = itemSerch.execute(categoryId, name);
 
+		request.setAttribute("category", categoryId);
+		request.setAttribute("keyword", name);
 		request.setAttribute("itemsList", itemsList);
 
-		String path = "/itemsResult.jsp";
+		String path = "/WEB-INF/searchResult.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
 	}
