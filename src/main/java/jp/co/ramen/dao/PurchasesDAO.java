@@ -37,9 +37,9 @@ public class PurchasesDAO {
 	//-----------------以下、UserDAOをコピペ----------------------------
 	// 主キーによる検索 
 	public List<PurchasesDTO> findHistoryByUserId(String userId) throws SQLException {
-		String sql = "SELECT p.purchase_id, p.purchased_date, p.destination, "
-				+ "d.purchase_detail_id, d.amount, "
-				+ "i.item_id, i.name, i.price, i.color, i.manufacturer, i.stock "
+		String sql = "SELECT p.purchase_id, p.purchased_user,p.purchased_date, p.destination, p.cancel, "
+				+ "d.purchase_detail_id,d.purchase_id, d.amount, "
+				+ "i.item_id, i.name, i.price, i.category_id, i.color, i.manufacturer, i.stock, i.recommended "
 				+ "FROM purchases p "
 				+ "INNER JOIN purchase_details d ON p.purchase_id = d.purchase_id "
 				+ "INNER JOIN items i ON d.item_id = i.item_id "
@@ -63,8 +63,10 @@ public class PurchasesDAO {
 					if (currentPdto == null) {
 						currentPdto = new PurchasesDTO();
 						currentPdto.setPurchase_id(currentPurchasedId);
+						currentPdto.setPurchased_user(rs.getString("purchased_user"));
 						currentPdto.setPurchased_date(rs.getDate("purchased_date"));
 						currentPdto.setDestination(rs.getString("destination"));
+						currentPdto.setCancel(rs.getBoolean("cancel"));
 
 						currentPdto.setPurchaseDetaillsDto((new ArrayList<PurchaseDetailsDTO>()));
 						list.add(currentPdto);
@@ -78,6 +80,8 @@ public class PurchasesDAO {
 					Idto.setManufacturer(rs.getString("manufacturer"));
 					Idto.setPrice(rs.getInt("price"));
 					Idto.setStock(rs.getInt("stock"));
+					Idto.setCategory_id(rs.getInt("category_id"));
+					Idto.setRecommended(rs.getBoolean("recommended"));
 
 					PurchaseDetailsDTO Ddto = new PurchaseDetailsDTO();
 					Ddto.setPurchase_detail_id(rs.getInt("purchase_detail_id"));

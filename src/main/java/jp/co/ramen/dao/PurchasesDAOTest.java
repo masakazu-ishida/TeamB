@@ -76,6 +76,8 @@ class PurchasesDAOTest extends TestBase {
 
 			assertEquals(1, Pdto.getPurchase_id());
 			assertEquals(Date.valueOf("2026-06-17"), Pdto.getPurchased_date());
+			assertEquals(false, Pdto.getCancel());
+			assertEquals("user1", Pdto.getPurchased_user());
 
 			//注文箱の中にある商品明細の数確認
 			List<PurchaseDetailsDTO> detailsList = Pdto.getPurchaseDetaillsDto();
@@ -91,6 +93,15 @@ class PurchasesDAOTest extends TestBase {
 			assertEquals(4, detailsList.get(0).getAmount());
 			assertEquals(1, detailsList.get(1).getAmount());
 			assertEquals(2, detailsList.get(2).getAmount());
+
+			assertEquals(1, detailsList.get(0).getIdto().getCategory_id());
+			assertEquals(false, detailsList.get(0).getIdto().getRecommended());
+
+			assertEquals(1, detailsList.get(1).getIdto().getCategory_id());
+			assertEquals(false, detailsList.get(1).getIdto().getRecommended());
+
+			assertEquals(1, detailsList.get(2).getIdto().getCategory_id());
+			assertEquals(true, detailsList.get(2).getIdto().getRecommended());
 
 		} catch (Exception e) {
 			e.printStackTrace();
