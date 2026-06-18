@@ -39,7 +39,10 @@ public class ItemsInCartReferenceServlet extends HttpServlet {
 		request.setAttribute("requestFrom", "/ItemsInCartReferenceServlet");
 
 		if (userId == null) {
-			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+
+			request.setAttribute("resuestFrom", "/ItemsInCartReferenceServlet");
+			request.getRequestDispatcher("/loginShow").forward(request, response);
+			//response.sendRedirect(request.getContextPath() + "/loginShow");
 			return;
 		}
 
