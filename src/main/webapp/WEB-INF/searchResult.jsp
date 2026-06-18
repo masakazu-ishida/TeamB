@@ -22,7 +22,7 @@
     <c:forEach items="${itemsList}" var="item">
         <tr>
             <td>
-                <a href="${pageContext.request.contextPath}/itemsDetail?itemId=${item.item_id}">
+                <a href="${pageContext.request.contextPath}/itemDetail?itemId=${item.item_id}">
                     <c:out value="${item.name}" />
                     <c:if test="${item.recommended == true}">
                       <h6 style="color: red;">オススメ！</h6>

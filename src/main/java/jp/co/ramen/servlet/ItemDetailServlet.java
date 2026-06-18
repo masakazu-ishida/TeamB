@@ -32,8 +32,8 @@ public class ItemDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//String value = request.getParameter("itemId");
-		int itemId = 2; //Integer.parseInt(value);
+		String value = request.getParameter("itemId");
+		int itemId = Integer.parseInt(value);
 		try {
 			ItemDetailService iService = new ItemDetailService();
 			ItemsDTO Idto = iService.getItemDetail(itemId);
