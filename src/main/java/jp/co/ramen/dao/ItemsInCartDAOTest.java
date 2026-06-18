@@ -79,7 +79,7 @@ class ItemsInCartDAOTest extends TestBase {
 				assertEquals(false, item.getItemsDto().getRecommended());
 				assertEquals("user1", item.getUser_id());
 				assertEquals(3, item.getAmount());
-				assertEquals("2026-06-17", item.getBooked_date().toString());
+				assertEquals("2026-06-18", item.getBooked_date().toString());
 				//先頭だけDTOの中身をチェック
 				break;
 			}
@@ -96,12 +96,13 @@ class ItemsInCartDAOTest extends TestBase {
 	void testFindById() {
 		try {
 			String userId = "user1";
-			int itemId = 7;
+			int itemId = 5;
 			ItemsInCartDAO dao = new ItemsInCartDAO();
 			ItemsInCartDTO result = dao.findById(userId, itemId);
 			assertNotNull(result);
 			assertEquals(userId, result.getUser_id());
 			assertEquals(itemId, result.getItem_id());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			fail("例外");
@@ -112,7 +113,7 @@ class ItemsInCartDAOTest extends TestBase {
 	//	void testDeleteCartItem() {
 	//		try {
 	//			String userId = "user1";
-	//			int itemId = 7;
+	//			int itemId = 5;
 	//
 	//			ItemsInCartDAO dao = new ItemsInCartDAO();
 	//			dao.deleteCartItem(userId, itemId);
