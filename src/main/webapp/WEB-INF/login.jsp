@@ -8,6 +8,13 @@
 </head>
 <body>
 	<h3>ログインしてください。</h3><br>
+	
+	<c:if test="${not empty errorMsg}">
+		<!-- ※エラーメッセージが存在する場合 --><br>
+		<h4><c:out value="${errorMsg}"></c:out></h4><br>
+	</c:if>
+		
+		
 	<form action="${pageContext.request.contextPath}/LoginServlet" method="GET">
 		<table border="1">
 			<tr>
