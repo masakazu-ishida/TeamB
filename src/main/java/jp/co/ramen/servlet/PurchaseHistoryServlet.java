@@ -37,12 +37,12 @@ public class PurchaseHistoryServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		session.setAttribute("loginUser", "user1");//後で消す
+		//session.setAttribute("loginUser", "user1");//後で消す
 
 		String userId = (String) session.getAttribute("loginUser");
 
 		if (userId == null) {
-			response.sendRedirect("noSession.html");//ログイン画面できたらmainから変更
+			response.sendRedirect("noSession.html");
 			return;
 		}
 		try {

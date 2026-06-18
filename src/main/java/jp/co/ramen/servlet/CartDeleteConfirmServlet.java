@@ -36,7 +36,7 @@ public class CartDeleteConfirmServlet extends HttpServlet {
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 		//int itemId = 5;
 		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("userId");
+		String userId = (String) session.getAttribute("loginUser");
 		//String userId = "user1";
 		CartDeleteConfirmService service = new CartDeleteConfirmService();
 		ItemsInCartDTO targetItem = service.getCartItemForDelete(userId, itemId);
