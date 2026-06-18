@@ -8,23 +8,27 @@
 </head>
 <body>
 	<h3>ログインしてください。</h3><br>
-	<form action="${pageContext.request.contextPath}/main">
+	<form action="${pageContext.request.contextPath}/LoginServlet" method="GET">
 		<table border="1">
-				<tr>
-					<th>会員ID</th>
-					<td><input type='text' class='id' name='id' /></td>
-				</tr>
-				<tr>
-					<th>パスワード</th>
-					<td><input type='password' class='password' name='password' /></td>
-				</tr>
-				<tr>
-			</table>		
-				<td colspan='2'><input type='submit' value='ログイン' /></td>
-				</tr>
+			<tr>
+				<th>会員ID</th>
+				<td><input type='text' class='id' name='id' /></td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td><input type='password' class='password' name='password' /></td>
+			</tr>
+			<tr>
+				<td colspan='2' style="text-align: center;">
+					<input type='submit' value='ログイン' />
+				</td>
+			</tr>
+		</table>
+				<input type="hidden" name="itemId" value="${itemId}">
+				<input type="hidden" name="order"value="${order}">
 			
 		</form>
-		<a href="${pageContext.request.contextPath}/updateUser">会員登録</a><br />
+		<a href="${pageContext.request.contextPath}/updateUser">会員登録</a><br>
 
 </body>
 </html>
