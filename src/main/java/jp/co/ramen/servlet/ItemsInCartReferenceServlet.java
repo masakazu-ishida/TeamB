@@ -50,7 +50,7 @@ public class ItemsInCartReferenceServlet extends HttpServlet {
 
 			request.setAttribute("cartList", cartList);
 
-			// カート一覧画面（JSP）へフォワード
+			//  カート一覧画面（JSP）へフォワード
 			request.getRequestDispatcher("/WEB-INF/cart.jsp").forward(request, response);
 
 		} catch (Exception e) {
