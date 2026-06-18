@@ -1,6 +1,7 @@
 package jp.co.ramen.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 
@@ -20,15 +21,25 @@ public class CartDeleteConfirmService {
 	 * @param userId 画面から入力されたユーザID
 	 * @param password 画面から入力されたパスワード
 	 * @return ユーザのDTO。認証に成功すれば非NULL、認証に失敗すればNULL
-	 * @throws ECSiteException
+	 * @throws ECSiteExceptionSer
 	 */
 
 	public ItemsInCartDTO getCartItemForDelete(String userId, int itemId) throws ServletException {
 
-		try (Connection conn = ConnectionUtil.getConnection(null)) {
+		String jndiName = "java:comp/env/jdbc/ecsite";
+		try (Connection conn = ConnectionUtil.getConnection(jndiName)) {
 
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-			ItemsInCartDTO targetItem = dao.findById(userId, itemId);
+			ItemsInCartDTO targetItem = null;
+
+			List<ItemsInCartDTO> iicList = dao.findAll(userId);
+
+			for (ItemsInCartDTO dto : iicList) {
+				if (dto.getItem_id() == itemId) {
+					targetItem = dto; // 見つけたらキープ！
+					break;
+				}
+			}
 
 			return targetItem;
 

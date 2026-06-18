@@ -11,7 +11,7 @@
 <body>
 	<h3>商品の詳細表示</h3>
 		<br>
-		<table>
+		<table border="1">
 			<tr>
 				<th>商品名</th>
 				<td><c:out value="${item.name}"/></td>

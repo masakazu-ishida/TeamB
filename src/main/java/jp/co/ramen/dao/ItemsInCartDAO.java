@@ -22,6 +22,7 @@ public class ItemsInCartDAO {
 
 	}
 
+	//ユーザIDを指定してそのユーザIDののカート内情報を全て取ってくる←テストOK
 	public List<ItemsInCartDTO> findAll(String SESSION) throws SQLException {
 		String sql = "SELECT items.item_id,items.name,items.manufacturer, items.category_id, items.color,"
 				+ " items.price, items.stock, items.recommended,"
@@ -116,6 +117,64 @@ public class ItemsInCartDAO {
 			ps.setInt(2, itemId);
 			ps.executeUpdate();
 		}
+	}
+
+	//カートから特定のユーザーの特定の商品のカート内情報の取得
+	public ItemsInCartDTO findByUserIdAndItemId(String userId, int itemId) throws SQLException {
+		ItemsInCartDTO dto = null;
+		String sql = "SELECT user_id, item_id, amount, booked_date " +
+				"FROM items_in_cart " +
+				"WHERE user_id = ? AND item_id = ?";
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, userId);
+			ps.setInt(2, itemId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				dto = new ItemsInCartDTO();
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setItem_id(rs.getInt("item_id"));
+				dto.setAmount(rs.getInt("amount"));
+				dto.setBooked_date(rs.getDate("booked_date"));
+			}
+		}
+		return dto;
+	}
+
+	//カート内商品の数量と日付更新
+	public int update(String userId, int itemId, int newAmount, java.sql.Date newBookedDate) throws SQLException {
+
+		String sql = "UPDATE items_in_cart " +
+				"SET amount = ?, booked_date = ?, updated_at = CURRENT_TIMESTAMP " +
+				"WHERE user_id = ? AND item_id = ?";
+
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+			ps.setInt(1, newAmount);
+			ps.setDate(2, newBookedDate);
+			ps.setString(3, userId);
+			ps.setInt(4, itemId);
+
+			return ps.executeUpdate();
+		}
+	}
+
+	//カートへの商品追加
+	public int insert(ItemsInCartDTO dto) throws SQLException {
+
+		String sql = "INSERT INTO items_in_cart " +
+				"(user_id, item_id, amount, booked_date, created_at, updated_at) " +
+				"VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+			ps.setString(1, dto.getUser_id());
+			ps.setInt(2, dto.getItem_id());
+			ps.setInt(3, dto.getAmount());
+			ps.setDate(4, dto.getBooked_date());
+			return ps.executeUpdate();
+
+		}
+
 	}
 
 }
