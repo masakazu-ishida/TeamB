@@ -109,23 +109,24 @@ class ItemsInCartDAOTest extends TestBase {
 		}
 	}
 
-	//	//カート内商品削除確認
-	//	void testDeleteCartItem() {
-	//		try {
-	//			String userId = "user1";
-	//			int itemId = 5;
-	//
-	//			ItemsInCartDAO dao = new ItemsInCartDAO();
-	//			dao.deleteCartItem(userId, itemId);
-	//			List<ItemsInCartDTO> remainCart = dao.getCartList(userId);
-	//
-	//			assertNotNull(remainCart);
-	//			assertEquals(0, remainCart.size());
-	//
-	//		} catch (SQLException e) {
-	//			e.printStackTrace();
-	//			fail("例外発生");
-	//		}
-	//	}
+	//カート内商品削除確認
+	void testDeleteCartItem() {
+		try {
+			String userId = "user1";
+			int itemId = 5;
+
+			ItemsInCartDAO dao = new ItemsInCartDAO();
+			dao.deleteCartItem(userId, itemId);
+			ItemsInCartDTO result2 = dao.deleteCartItem(userId, itemId);
+
+			assertNotNull(result2);
+			assertEquals(userId, result2.getUser_id());
+			assertEquals(itemId, result2.getItem_id());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			fail("例外発生");
+		}
+	}
 
 }
