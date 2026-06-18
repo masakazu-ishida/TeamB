@@ -35,9 +35,9 @@ public class UpdateUserServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(false);
 		String userId = (String) session.getAttribute("userId");
-		//		if (userId == null) {
-		//			userId = "user1";
-		//		}
+		if (userId == null) {
+			userId = "user1";
+		}
 		//String userId = "user1";
 
 		// 2. ユーザー情報を取得
