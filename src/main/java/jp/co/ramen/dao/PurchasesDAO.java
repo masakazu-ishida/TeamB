@@ -19,18 +19,20 @@ public class PurchasesDAO {
 		this.con = con;
 	}
 
-	public int insert(ItemsDTO user) throws SQLException {
-		String sql = "INSERT INTO public.items(item_id, name, manufacturer, category_id, color, price, stock, recommended) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setInt(1, user.getItem_id());
-			ps.setString(2, user.getName());
-			ps.setString(3, user.getManufacturer());
-			ps.setInt(4, user.getCategory_id());
-			ps.setString(5, user.getColor());
-			ps.setInt(6, user.getPrice());
-			ps.setInt(7, user.getStock());
-			//			ps.setString(8, user.getRecommended());
-			return ps.executeUpdate();
+	public void purchaseInsert(PurchasesDTO dto) throws SQLException {
+		String sql = "INSERT INTO public.purchases( purchased_user, purchased_date, destination, cancel) VALUES ( ?, CURRENT_DATE, ?, false)";
+		try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			//			ps.setString(1, );
+			//			ps.setString(2, );
+
+			ps.executeUpdate();
+
+			ResultSet rs = ps.getGeneratedKeys();
+
+			if (rs.next()) {
+				int purchaseId = rs.getInt("purchase_id");
+				dto.setPurchase_id(purchaseId);
+			}
 		}
 	}
 

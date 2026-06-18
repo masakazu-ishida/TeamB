@@ -11,21 +11,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
-import jp.co.ramen.dto.UserDTO;
 import jp.co.ramen.service.GetItemsInCartService;
-import jp.co.ramen.service.UpdateUserService;
 
 /**
  * Servlet implementation class PurchaseConfirmServlet
  */
-@WebServlet("/purchaseConfirm")
-public class PurchaseConfirmServlet extends HttpServlet {
+@WebServlet("/purchaseCommit")
+public class PurchaseCommitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchaseConfirmServlet() {
+	public PurchaseCommitServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,25 +35,31 @@ public class PurchaseConfirmServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		//		パラメータ設定
+		//パラメータ取得
 		try {
-			//			HttpSession session = request.getSession();
-			//			String loginId = (String) session.getAttribute("loginUser");
+			HttpServletRequest session = request;
+			String loginId = (String) session.getAttribute("loginUser");
 
-			UpdateUserService updateUserService = new UpdateUserService();
-			UserDTO userInformation = updateUserService.getUserInformation("user1");
-			String address = userInformation.getAddress();
-			request.setAttribute("address", address);
+			String payment = request.getParameter("payment");
 
+			//カート情報の取得
 			try {
 				GetItemsInCartService getItemsInCartService = new GetItemsInCartService();
-				List<ItemsInCartDTO> cartList = getItemsInCartService.execute("user1");
+				List<ItemsInCartDTO> cartList = getItemsInCartService.execute(loginId);
 
+				//購入確定サービスの実行
 				try {
-					request.setAttribute("cartList", cartList);
+
+					try {
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						// TODO: handle exception
+					}
+					session.setAttribute("cartList", cartList);
 					String path = "/WEB-INF/purchaseConfirm.jsp";
-					RequestDispatcher rd = request.getRequestDispatcher(path);
-					rd.forward(request, response);
+					RequestDispatcher rd = session.getRequestDispatcher(path);
+					rd.forward(session, response);
 
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -112,13 +112,11 @@ public class ItemsDAO {
 	}
 
 	// データの更新 
-	public int update(UserDTO user) throws SQLException {
-		String sql = "UPDATE public.users SET password = ?, name = ?, address = ? WHERE user_id = ?";
+	public int purchaseUpdate(int amount, int itemId) throws SQLException {
+		String sql = "update items set stock = (sotck - ?) where items.item_id = ?";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1, user.getPassword());
-			ps.setString(2, user.getName());
-			ps.setString(3, user.getAddress());
-			ps.setString(4, user.getUserId());
+			ps.setInt(1, amount);
+			ps.setInt(2, itemId);
 			return ps.executeUpdate();
 		}
 	}

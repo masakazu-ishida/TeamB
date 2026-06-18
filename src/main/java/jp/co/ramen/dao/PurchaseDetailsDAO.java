@@ -16,14 +16,13 @@ public class PurchaseDetailsDAO {
 		this.con = con;
 	}
 
-	// データの挿入 (Create)
-	public int insert(UserDTO user) throws SQLException {
-		String sql = "INSERT INTO public.users (user_id, password, name, address) VALUES (?, ?, ?, ?)";
+	// データの挿入 
+	public int purchaseInsert(String WAKARAN, String itemId, int ammount) throws SQLException {
+		String sql = "INSERT INTO public.purchase_details( purchase_id, item_id, amount)	VALUES (?, ?, ?);";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			//ps.setString(1, user.getUserId());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getName());
-			ps.setString(4, user.getAddress());
+			ps.setString(1, WAKARAN);
+			ps.setString(2, itemId);
+			ps.setInt(3, ammount);
 			return ps.executeUpdate();
 		}
 	}

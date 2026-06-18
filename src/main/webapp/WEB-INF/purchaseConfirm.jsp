@@ -42,7 +42,7 @@
 	</p>
 	
 	<p>配送先<br>
-		<input type="radio" name="destination" value="registered" checked>ご自宅<br><br>
+		<input type="radio" name="destination" value="${address}" checked>ご自宅<br><br>
 		<input type="radio" name="destination" value="another">配送先を指定<br>
 		ご住所<br>
 		<input type="text" name="address"><br><br>
