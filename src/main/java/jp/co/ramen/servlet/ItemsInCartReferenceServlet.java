@@ -38,10 +38,10 @@ public class ItemsInCartReferenceServlet extends HttpServlet {
 		String userId = (String) session.getAttribute("loginUser");
 		request.setAttribute("requestFrom", "/ItemsInCartReferenceServlet");
 
-		//if (userId == null) {
-		//	response.sendRedirect(request.getContextPath() + "/login");
-		//	return;
-		//}
+		if (userId == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
 
 		GetItemsInCartService service = new GetItemsInCartService();
 		try {
