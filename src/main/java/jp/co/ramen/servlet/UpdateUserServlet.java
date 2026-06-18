@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.ramen.dto.UserDTO;
 import jp.co.ramen.service.UpdateUserService;
@@ -32,9 +33,12 @@ public class UpdateUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//HttpSession session = request.getSession(false);
-		//String userId = (String) session.getAttribute("userId");
-		String userId = "user1";
+		HttpSession session = request.getSession(false);
+		String userId = (String) session.getAttribute("userId");
+		//		if (userId == null) {
+		//			userId = "user1";
+		//		}
+		//String userId = "user1";
 
 		// 2. ユーザー情報を取得
 		UpdateUserService service = new UpdateUserService();
