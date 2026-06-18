@@ -34,14 +34,6 @@ public class UpdateUserServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-
-		// 1. セッションからユーザーIDを取得
-		if (session == null || session.getAttribute("userId") == null) {
-			request.setAttribute("src", "usersInformation");
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-			return;
-		}
-
 		String userId = (String) session.getAttribute("userId");
 
 		// 2. ユーザー情報を取得
@@ -50,7 +42,6 @@ public class UpdateUserServlet extends HttpServlet {
 		try {
 			user = service.getUserInformation(userId);
 		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
