@@ -65,6 +65,8 @@ public class LoginServlet extends HttpServlet {
 
 		} else {
 			request.setAttribute("errorMsg", "ログインに失敗しました");
+			request.setAttribute("itemId", request.getParameter("itemId"));
+			request.setAttribute("order", request.getParameter("order"));
 			path = "/WEB-INF/login.jsp";
 		}
 
