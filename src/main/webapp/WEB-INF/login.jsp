@@ -26,6 +26,7 @@
 		</table>
 				<input type="hidden" name="itemId" value="${itemId}">
 				<input type="hidden" name="order"value="${order}">
+				<input type="hidden" name="requestFrom"value="${requestFrom}">
 			
 		</form>
 		<a href="${pageContext.request.contextPath}/updateUser">会員登録</a><br>
