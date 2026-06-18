@@ -29,6 +29,7 @@ public class LoginShowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setAttribute("requestFrom", "/loginShow");
 		String url = "/WEB-INF/login.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
