@@ -67,7 +67,7 @@
 		</c:forEach>
 		</c:if>
 		<br>
-		<a href='main.html'>商品検索</a>へ<br>
+		<a href="${pageContext.request.contextPath}/main">商品検索へ</a><br>
 
 </body>
 </html>
