@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
 import jp.co.ramen.service.CartDeleteConfirmService;
@@ -32,11 +33,11 @@ public class CartDeleteConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//int itemId = Integer.parseInt(request.getParameter("itemId"));
-		int itemId = 5;
-		//HttpSession session = request.getSession();
-		//String userId = (String) session.getAttribute("userId");
-		String userId = "user1";
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		//int itemId = 5;
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userId");
+		//String userId = "user1";
 		CartDeleteConfirmService service = new CartDeleteConfirmService();
 		ItemsInCartDTO targetItem = service.getCartItemForDelete(userId, itemId);
 
