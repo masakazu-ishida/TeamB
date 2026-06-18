@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 	
 	<c:if test="${not empty errorMsg}">
 		<!-- ※エラーメッセージが存在する場合 --><br>
-		<h4><c:out value="${errorMsg}"></c:out></h4><br>
+		<c:out value="${errorMsg}"></c:out><br>
 	</c:if>
 		
 		
