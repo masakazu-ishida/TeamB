@@ -31,13 +31,13 @@ public class LoginService {
 			UserDTO userDto = userDao.findById(userId);
 
 			if (userDto != null) {
-				if (userDto.getPassword() == passward) {
+				if (userDto.getPassword().equals(passward)) {
 					return 0;
 				} else {
 					return 1;
 				}
 			} else {
-				return 2;
+				return 1;
 			}
 
 		} catch (Exception e) {
