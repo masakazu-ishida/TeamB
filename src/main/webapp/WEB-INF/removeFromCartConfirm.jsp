@@ -15,7 +15,7 @@
 		<c:out value="${deleteTarget.itemsDto.manufacturer }"/><br>
 		<fmt:formatNumber value="${deleteTarget.itemsDto.price * deleteTarget.amount}" />円<br>
 		数量<c:out value="${deleteTarget.amount }"/>個<br>
-		<form action="${pageContext.request.contextPath}/cancelCommit" method='POST'>
+		<form action="${pageContext.request.contextPath}/cartDeleteCommit" method='POST'>
 			<input type='hidden' name='itemId' value="${deleteTarget.item_id}" />
 			<input type='submit' value='削除する' /><br>
 		</form>
