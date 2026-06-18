@@ -1,7 +1,6 @@
 package jp.co.ramen.service;
 
 import java.sql.Connection;
-import java.util.List;
 
 import jakarta.servlet.ServletException;
 
@@ -30,16 +29,7 @@ public class CartDeleteConfirmService {
 		try (Connection conn = ConnectionUtil.getConnection(jndiName)) {
 
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-			ItemsInCartDTO targetItem = null;
-
-			List<ItemsInCartDTO> iicList = dao.findAll(userId);
-
-			for (ItemsInCartDTO dto : iicList) {
-				if (dto.getItem_id() == itemId) {
-					targetItem = dto; // 見つけたらキープ！
-					break;
-				}
-			}
+			ItemsInCartDTO targetItem = dao.findById(userId, itemId);
 
 			return targetItem;
 

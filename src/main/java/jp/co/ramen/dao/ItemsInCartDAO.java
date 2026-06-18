@@ -91,22 +91,47 @@ public class ItemsInCartDAO {
 	//カート内から削除対象の行を取り出す　←テストクリア
 
 	public ItemsInCartDTO findById(String userId, int itemId) throws SQLException {
-		String sql = "SELECT * FROM items_in_cart WHERE user_id = ? AND item_id = ?";
-		ItemsInCartDTO dto = null;
+		String sql = "SELECT items.item_id,items.name,items.manufacturer, items.category_id, items.color,"
+				+ " items.price, items.stock, items.recommended,"
+				+ "items_in_cart.user_id, items_in_cart.item_id,"
+				+ " items_in_cart.amount, items_in_cart.booked_date \n"
+				+ "FROM items_in_cart \n"
+				+ "INNER JOIN items ON items_in_cart.item_id = items.item_id\n"
+				+ "WHERE items_in_cart.user_id = ? AND items_in_cart.item_id=?";
+
+		ItemsInCartDTO iicDto = null;
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, userId);
 			ps.setInt(2, itemId);
+			System.out.println(ps);
 			try (ResultSet rs = ps.executeQuery()) {
-				while (rs.next()) {
+				if (rs.next()) {
 					//mapRowはResultSetからDTOへの変換メソッド。複数箇所で利用するので共通化
-					dto.setUser_id(rs.getString("user_id"));
-					dto.setItem_id(rs.getInt("item_id"));
-					dto.setAmount(rs.getInt("amount"));
+
+					iicDto = new ItemsInCartDTO();
+
+					ItemsDTO idto = new ItemsDTO();
+
+					idto.setItem_id(rs.getInt("item_id"));
+					idto.setName(rs.getString("name"));
+					idto.setManufacturer(rs.getString("manufacturer"));
+					idto.setCategory_id(rs.getInt("category_id"));
+					idto.setColor(rs.getString("color"));
+					idto.setPrice(rs.getInt("price"));
+					idto.setStock(rs.getInt("stock"));
+					idto.setRecommended(rs.getBoolean("recommended"));
+					iicDto.setItemsDto(idto);
+
+					iicDto.setUser_id(rs.getString("user_id"));
+					iicDto.setItem_id(rs.getInt("item_id"));
+					iicDto.setAmount(rs.getInt("amount"));
+					iicDto.setBooked_date(rs.getDate("booked_date"));
 
 				}
 			}
+
+			return iicDto;// 見つからない場合はnullを返す
 		}
-		return dto;
 	}
 
 	//カート内削除完了
