@@ -27,7 +27,7 @@
 		<a href="${pageContext.request.contextPath}/loginShow">ログイン</a><br></c:if>
 		
 		<c:if test="${not empty loginUser}">
-		<!-- ※ログイン済の場合には以下を表示--><br>
+		<!-- ※ログイン済の場合には以下を表示 --><br>
 		<a href="${pageContext.request.contextPath}/userInfo">会員情報の変更</a><br></c:if>
 
 </body>
