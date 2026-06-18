@@ -108,7 +108,7 @@ public class ItemsInCartDAO {
 		return dto;
 	}
 
-	//カート内削除確認
+	//カート内削除完了
 	public void deleteCartItem(String userId, int itemId) throws SQLException {
 		String sql = "delete from items_in_cart where user_id=? and item_id=?";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {

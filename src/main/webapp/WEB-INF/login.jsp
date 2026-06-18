@@ -8,8 +8,8 @@
 </head>
 <body>
 	<h3>ログインしてください。</h3><br>
-	<form action='main.html' method='POST'>
-			<table border="1">
+	<form action="${pageContext.request.contextPath}/main">
+		<table border="1">
 				<tr>
 					<th>会員ID</th>
 					<td><input type='text' class='id' name='id' /></td>
@@ -24,7 +24,7 @@
 				</tr>
 			
 		</form>
-		<a href='registerUser.html'>会員登録</a><br />
+		<a href="${pageContext.request.contextPath}/updateUser">会員登録</a><br />
 
 </body>
 </html>
