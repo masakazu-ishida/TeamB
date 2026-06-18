@@ -8,7 +8,7 @@ import jp.co.ramen.util.ConnectionUtil;
 
 public class UpdateUserService {
 
-	public UserDTO getUserInfo(String userId) throws Exception {
+	public UserDTO getUserInformation(String userId) throws Exception {
 
 		try (Connection con = ConnectionUtil.getConnection("java:comp/env/jdbc/ecsite")) {
 

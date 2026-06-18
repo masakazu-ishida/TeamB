@@ -7,6 +7,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import jp.co.ramen.dto.UserDTO;
+import jp.co.ramen.service.UpdateUserService;
 
 /**
  * Servlet implementation class UpdateUserServlet
@@ -29,8 +33,32 @@ public class UpdateUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//session session = new session(); 
+		HttpSession session = request.getSession(false);
 
+		// 1. セッションからユーザーIDを取得
+		if (session == null || session.getAttribute("userId") == null) {
+			request.setAttribute("src", "usersInformation");
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			return;
+		}
+
+		String userId = (String) session.getAttribute("userId");
+
+		// 2. ユーザー情報を取得
+		UpdateUserService service = new UpdateUserService();
+		UserDTO user = null;
+		try {
+			user = service.getUserInformation(userId);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		// 3. 画面出力項目の設定
+		request.setAttribute("user", user);
+
+		// 4. 会員情報変更画面へフォワード
+		request.getRequestDispatcher("/updateUser.jsp").forward(request, response);
 	}
 
 	/**
