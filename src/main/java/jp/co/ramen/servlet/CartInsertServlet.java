@@ -32,15 +32,6 @@ public class CartInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 		request.setCharacterEncoding("UTF-8");
 
 		// 1. 商品IDと指定数量を取得
@@ -69,6 +60,15 @@ public class CartInsertServlet extends HttpServlet {
 
 		// 4. ショッピングカート一覧表示処理へ
 		response.sendRedirect(request.getContextPath() + "/ItemsInCartReference");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doGet(request, response);
 	}
 
 }
