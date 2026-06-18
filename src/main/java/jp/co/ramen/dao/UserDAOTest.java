@@ -61,7 +61,7 @@ class UserDAOTest extends TestBase {
 	@Test
 	void testFindById1() {
 
-		//JUnitテストでは引数はNULLでよい。
+		//JUnitテストでは引数はNULLでよい 。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			UserDAO dao = new UserDAO(conn);
 			UserDTO user = dao.findById("user1");
