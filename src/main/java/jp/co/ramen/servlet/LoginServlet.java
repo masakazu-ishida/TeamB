@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 
 		//		手入力での動作確認2(ログイン成功 from /ItemsInCartReferenceServlet）
 		String id = "user1";
-		String password = "userpass1";
+		String password = "password10";
 		String requestFrom = "/ItemsInCartReferenceServlet";
 
 		LoginService loginService = new LoginService();
