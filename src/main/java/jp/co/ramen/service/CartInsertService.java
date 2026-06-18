@@ -7,7 +7,7 @@ import jp.co.ramen.dto.ItemsInCartDTO;
 
 public class CartInsertService {
 
-	public void addCart(String userId, int itemId, int order, java.sql.Date bookedDate) throws SQLException {
+	public void addCart(String userId, int itemId, int order) throws SQLException {
 
 		ItemsInCartDAO cartDAO = new ItemsInCartDAO();
 
@@ -19,7 +19,7 @@ public class CartInsertService {
 			int newAmount = cartDto.getAmount() + order;
 
 			// カート内の数量と更新日を更新
-			cartDAO.update(userId, itemId, newAmount, bookedDate);
+			cartDAO.update(userId, itemId, newAmount);
 
 		} else {
 			// カートにない場合は、orderを数量として新規登録する
