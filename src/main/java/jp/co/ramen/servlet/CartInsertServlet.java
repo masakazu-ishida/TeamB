@@ -61,7 +61,7 @@ public class CartInsertServlet extends HttpServlet {
 
 		// 4. ショッピングカート一覧表示処理へ
 		//response.sendRedirect(request.getContextPath() + "/ItemsInCartReference");
-		request.getRequestDispatcher("/ItemsInCartReference").forward(request, response);
+		request.getRequestDispatcher("/ItemsInCartReferenceServlet").forward(request, response);
 	}
 
 	/**
