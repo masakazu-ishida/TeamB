@@ -47,6 +47,7 @@ public class CartInsertServlet extends HttpServlet {
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 			return;
 		}
+
 		String userId = (String) session.getAttribute("userId");
 		// 3. カート追加処理
 		CartInsertService service = new CartInsertService();
@@ -59,7 +60,8 @@ public class CartInsertServlet extends HttpServlet {
 		}
 
 		// 4. ショッピングカート一覧表示処理へ
-		response.sendRedirect(request.getContextPath() + "/ItemsInCartReference");
+		//response.sendRedirect(request.getContextPath() + "/ItemsInCartReference");
+		request.getRequestDispatcher("/ItemsInCartReference").forward(request, response);
 	}
 
 	/**
