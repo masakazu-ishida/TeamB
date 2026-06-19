@@ -61,8 +61,9 @@ public class ItemsDAO {
 	// 全件検索 
 	public List<ItemsDTO> findByCondision(int categoryId, String name) throws SQLException {
 		String sql = null;
+		categoryId = categoryId - 1;
 
-		if (categoryId == 3) {
+		if (categoryId == 0) {
 			if (name == null || name.isEmpty()) {
 				sql = "select item_id,category_id,name, color, manufacturer, price,stock, recommended from items;";
 			} else {
