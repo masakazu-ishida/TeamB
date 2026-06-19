@@ -35,7 +35,7 @@
 		</table>
 		<form action="${pageContext.request.contextPath}/CartInsertServlet" method="POST">
 			数量
-			<select name="amount">
+			<select name="order">
 				<option selected value='1'>1</option>
 				<option value='2'>2</option>
 				<option value='3'>3</option>
