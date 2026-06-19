@@ -129,4 +129,135 @@ class ItemsInCartDAOTest extends TestBase {
 		}
 	}
 
+	//カートから特定のユーザーの特定の商品のカート内情報の取得
+	// 完全一致：データが取得できる
+	@Test
+	void testFindByUserIdAndItemId1() {
+
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+			ItemsInCartDTO result = dao.findByUserIdAndItemId("user1", 3);
+
+			assertNotNull(result);
+			assertEquals("user1", result.getUser_id());
+			assertEquals(3, result.getItem_id());
+			assertEquals(3, result.getAmount());
+			assertEquals("2026-06-19", result.getBooked_date().toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
+	// 商品違い：nullが返る
+
+	@Test
+	void testFindByUserIdAndItemId2() {
+
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+			ItemsInCartDTO result = dao.findByUserIdAndItemId("user1", 999);
+
+			assertNull(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
+	//ユーザー違い：nullが返る
+	@Test
+	void testFindByUserIdAndItemId3() {
+
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+			ItemsInCartDTO result = dao.findByUserIdAndItemId("wrong_user", 3);
+
+			assertNull(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
+	//両方違い：nullが返る
+	@Test
+	void testFindByUserIdAndItemId4() {
+
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+			ItemsInCartDTO result = dao.findByUserIdAndItemId("wrong_user", 999);
+
+			assertNull(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
+	//カート内商品の数量と日付更新
+	@Test
+	void testUpdate1() {
+
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+
+			int newAmount = 10;
+			java.time.LocalDate newDate = java.time.LocalDate.of(2026, 6, 20);
+
+			int row = dao.update("user1", 3, newAmount, newDate);
+			assertEquals(1, row);
+
+			// 検証
+			ItemsInCartDTO actual = dao.findByUserIdAndItemId("user1", 3);
+			assertNotNull(actual);
+			assertEquals("user1", actual.getUser_id());
+			assertEquals(3, actual.getItem_id());
+			assertEquals(10, actual.getAmount());
+			assertEquals("2026-06-20", actual.getBooked_date().toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
+	//カートへの商品追加
+	@Test
+	void testInsert1() {
+
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+
+			ItemsInCartDTO newDto = new ItemsInCartDTO();
+			newDto.setUser_id("user1");
+			newDto.setItem_id(10);
+			newDto.setAmount(5);
+			newDto.setBooked_date(java.time.LocalDate.of(2026, 6, 19));
+
+			int row = dao.insert(newDto);
+			assertEquals(1, row);
+
+			ItemsInCartDTO actual = dao.findByUserIdAndItemId("user1", 10);
+			assertNotNull(actual);
+			assertEquals("user1", actual.getUser_id());
+			assertEquals(10, actual.getItem_id());
+			assertEquals(5, actual.getAmount());
+			assertEquals("2026-06-19", actual.getBooked_date().toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
 }
