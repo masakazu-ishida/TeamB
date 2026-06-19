@@ -11,6 +11,7 @@
 <body>
 	<h3>購入履歴の一覧</h3><br>
 	
+	
 	<c:if test="${empty list}">
 		<p>購入履歴はありません</p>
 	</c:if>
@@ -25,7 +26,7 @@
 				<th></th>
 			</tr>
 			<tr>
-				<td><fmt:formatDate value="${p.purchased_date}" pattern="yyyy/MM/dd"/></td>
+				<td><c:out value="${p.purchased_date}" /></td>
 				<td>
 				<table>
 					<tr>
@@ -46,7 +47,7 @@
 				</c:forEach>
 				</table>
 				</td>
-				<td><c:out value="${empty p.destination ? '自宅' : p.destination}" /></td>
+				<td><c:out value="${empty p.destination ? 'ご自宅' : p.destination}" /></td>
 				<td>
 					<c:choose>
 					<c:when test="${p.cancel}">

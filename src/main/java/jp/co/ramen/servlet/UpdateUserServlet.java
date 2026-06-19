@@ -52,9 +52,9 @@ public class UpdateUserServlet extends HttpServlet {
 		// 3. 画面出力項目の設定
 		request.setAttribute("user", user);
 
-		if (user != null) {
-			session.setAttribute("loginUser", user.getUserId());
-		}
+		//		if (user != null) {
+		//			session.setAttribute("loginUser", user.getUserId());
+		//		}
 
 		// 4. 会員情報変更画面へフォワード
 		request.getRequestDispatcher("/WEB-INF/updateUser.jsp").forward(request, response);
