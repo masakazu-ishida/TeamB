@@ -74,6 +74,8 @@ public class PurchaseCommitService {
 				ItemsInCartDAO itemsInCartDAO = new ItemsInCartDAO(conn);
 				itemsInCartDAO.deleteAllCartItem(loguinId);
 
+				conn.commit();
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 				conn.rollback();

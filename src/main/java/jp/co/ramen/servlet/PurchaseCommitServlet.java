@@ -44,6 +44,7 @@ public class PurchaseCommitServlet extends HttpServlet {
 			//			String payment = request.getParameter("payment");
 
 			String loginId = "user1";
+			String adress = "住所ーーーー";
 			String payment = "代金引換";
 
 			//カート情報の取得
@@ -55,7 +56,7 @@ public class PurchaseCommitServlet extends HttpServlet {
 
 				try {
 					PurchaseCommitService purchaseCommitService = new PurchaseCommitService();
-					purchaseCommitService.execute(cartList, loginId, payment);
+					purchaseCommitService.execute(cartList, loginId, adress);
 
 				} catch (Exception e) {
 					e.printStackTrace();
