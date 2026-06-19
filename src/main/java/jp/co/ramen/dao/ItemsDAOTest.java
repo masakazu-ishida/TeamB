@@ -64,7 +64,7 @@ class ItemsDAOTest extends TestBase {
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
 
-			List<ItemsDTO> itemsList = dao.findByCondision(3, "");
+			List<ItemsDTO> itemsList = dao.findByCondision(1, "");
 
 			assertNotNull(itemsList);
 			assertEquals(20, itemsList.size());
@@ -95,7 +95,7 @@ class ItemsDAOTest extends TestBase {
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
 
-			List<ItemsDTO> itemsList = dao.findByCondision(3, "麦");
+			List<ItemsDTO> itemsList = dao.findByCondision(1, "麦");
 
 			assertNotNull(itemsList);
 			assertEquals(2, itemsList.size());
@@ -126,7 +126,7 @@ class ItemsDAOTest extends TestBase {
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
 
-			List<ItemsDTO> itemsList = dao.findByCondision(1, "");
+			List<ItemsDTO> itemsList = dao.findByCondision(2, "");
 
 			assertNotNull(itemsList);
 			assertEquals(11, itemsList.size());
