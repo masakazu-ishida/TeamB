@@ -44,7 +44,7 @@ public class CartInsertServlet extends HttpServlet {
 			request.setAttribute("requestFrom", "/CartInsertServlet");
 			request.setAttribute("itemId", itemId);
 			request.setAttribute("order", order);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/LoginServlet").forward(request, response);
 			return;
 		}
 
