@@ -33,7 +33,7 @@
 				<td><c:out value="${item.stock}"/>個</td>
 			</tr>
 		</table>
-		<form action="${pageContext.request.contextPath}/cart" method="POST">
+		<form action="${pageContext.request.contextPath}/CartInsertServlet" method="POST">
 			数量
 			<select name="amount">
 				<option selected value='1'>1</option>
