@@ -148,16 +148,12 @@ public class ItemsInCartDAO {
 	}
 
 	//カート内商品全削除
-	public ItemsInCartDTO deleteAllCartItem(String userId, int itemId) throws SQLException {
-		ItemsInCartDTO ItemDelete = findById(userId, itemId);
-
-		String sql = "delete from items_in_cart where user_id=? and item_id=?";
+	public void deleteAllCartItem(String userId) throws SQLException {
+		String sql = "delete from items_in_cart where user_id=?";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, userId);
-			ps.setInt(2, itemId);
 			ps.executeUpdate();
 		}
-		return ItemDelete;
 	}
 
 	//カートから特定のユーザーの特定の商品のカート内情報の取得
