@@ -1,7 +1,6 @@
 package jp.co.ramen.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -54,11 +53,8 @@ public class CartInsertServlet extends HttpServlet {
 		try {
 			service.addCart(userId, itemId, order);
 
-		} catch (SQLException e) {
-
-			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
+
 			e.printStackTrace();
 		}
 
