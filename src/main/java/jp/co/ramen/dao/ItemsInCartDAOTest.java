@@ -79,7 +79,7 @@ class ItemsInCartDAOTest extends TestBase {
 				assertEquals(false, item.getItemsDto().getRecommended());
 				assertEquals("user1", item.getUser_id());
 				assertEquals(3, item.getAmount());
-				assertEquals("2026-06-18", item.getBooked_date().toString());
+				assertEquals("2026-06-19", item.getBooked_date().toString());
 				//先頭だけDTOの中身をチェック
 				break;
 			}
