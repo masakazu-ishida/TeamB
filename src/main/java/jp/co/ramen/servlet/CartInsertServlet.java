@@ -57,6 +57,9 @@ public class CartInsertServlet extends HttpServlet {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
 
 		// 4. ショッピングカート一覧表示処理へ

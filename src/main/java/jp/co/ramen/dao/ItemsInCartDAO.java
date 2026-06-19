@@ -183,7 +183,7 @@ public class ItemsInCartDAO {
 	public int update(String userId, int itemId, int newAmount, LocalDate bookedDate) throws SQLException {
 
 		String sql = "UPDATE items_in_cart " +
-				"SET amount = ?, booked_date = ？ " +
+				"SET amount = ?, booked_date = ? " +
 				"WHERE user_id = ? AND item_id = ?";
 
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
