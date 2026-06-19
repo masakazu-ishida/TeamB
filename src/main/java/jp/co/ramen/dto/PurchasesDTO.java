@@ -3,7 +3,7 @@ package jp.co.ramen.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-//リスト追加
+//リスト 追加
 public class PurchasesDTO {
 
 	private int purchase_id;
