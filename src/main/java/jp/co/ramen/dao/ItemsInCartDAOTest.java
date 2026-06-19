@@ -130,7 +130,7 @@ class ItemsInCartDAOTest extends TestBase {
 	}
 
 	//カートから特定のユーザーの特定の商品のカート内情報の取得
-	// 完全一致：データが取得できる
+	// 完全一致
 	@Test
 	void testFindByUserIdAndItemId1() {
 
