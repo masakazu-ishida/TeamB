@@ -224,6 +224,33 @@ class ItemsDAOTest extends TestBase {
 		}
 	}
 
+	/**
+	 * 主キーが存在しない場合のテスト
+	 */
+	@Test
+	void testPurchaseUpdate() {
+		//JUnitテストでは引数はNULLでよい。
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			int testAmount = 2;
+			int testItemId = 1;
+			int result = dao.purchaseUpdate(testAmount, testItemId);
+
+			assertEquals(1, result);
+
+			ItemsDTO iDto = dao.findById(testItemId);
+
+			assertNotNull(iDto);
+
+			assertEquals(10, iDto.getStock());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
 	//	@Test
 	//	void testInsert() {
 	//		try (Connection conn = ConnectionUtil.getConnection(null)) {

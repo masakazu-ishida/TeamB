@@ -114,7 +114,7 @@ public class ItemsDAO {
 
 	// データの更新 
 	public int purchaseUpdate(int amount, int itemId) throws SQLException {
-		String sql = "update items set stock = (sotck - ?) where items.item_id = ?";
+		String sql = "update items set stock = (stock - ?) where items.item_id = ?";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, amount);
 			ps.setInt(2, itemId);
