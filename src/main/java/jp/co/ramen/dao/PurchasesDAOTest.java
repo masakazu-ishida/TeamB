@@ -3,8 +3,8 @@ package jp.co.ramen.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -75,7 +75,7 @@ class PurchasesDAOTest extends TestBase {
 			PurchasesDTO Pdto = list.get(0);
 
 			assertEquals(1, Pdto.getPurchase_id());
-			assertEquals(Date.valueOf("2026-06-17"), Pdto.getPurchased_date());
+			assertEquals(LocalDate.of(2026, 06, 19), Pdto.getPurchased_date());
 			assertEquals(false, Pdto.getCancel());
 			assertEquals("user1", Pdto.getPurchased_user());
 
@@ -165,6 +165,86 @@ class PurchasesDAOTest extends TestBase {
 			ItemsDAO dao = new ItemsDAO(conn);
 			int fakeItemId = 999;
 			ItemsDTO result = dao.findById(fakeItemId);
+
+			assertNull(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	@Test
+	//purchaseid新規生成, purchasedUser, date, destination, cancelが想定通り入るか確認
+	void testPurchaseInsert() {
+
+		//JUnitテストでは引数はNULLでよい。
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+
+			PurchasesDTO purchasesDTO = new PurchasesDTO();
+			purchasesDTO.setPurchased_user("user1");
+			purchasesDTO.setPurchased_date(LocalDate.of(2026, 06, 19));
+			purchasesDTO.setDestination("test愛知県");
+
+			PurchasesDAO dao = new PurchasesDAO(conn);
+			int result = dao.purchaseInsert(purchasesDTO);
+
+			assertEquals(1, result);
+
+			PurchasesDTO historyById = dao.findHistoryById(4);
+
+			assertNotNull(historyById);
+
+			assertEquals(4, historyById.getPurchase_id());
+			assertEquals("user1", historyById.getPurchased_user());
+			assertEquals(LocalDate.of(2026, 06, 19), historyById.getPurchased_date());
+			assertEquals("test愛知県", historyById.getDestination());
+			assertEquals(false, historyById.getCancel());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	/**
+	 * 主キーで検索できる
+	 */
+	@Test
+	void testFindHistoryById1() {
+		//JUnitテストでは引数はNULLでよい。
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			PurchasesDAO purchasesDAO = new PurchasesDAO(conn);
+
+			int testPurchase_id = 1;
+
+			PurchasesDTO result = purchasesDAO.findHistoryById(testPurchase_id);
+
+			assertNotNull(result);
+			assertEquals(1, result.getPurchase_id());
+			assertEquals("user1", result.getPurchased_user());
+			assertEquals(LocalDate.of(2026, 06, 19), result.getPurchased_date());
+			assertEquals(null, result.getDestination());
+			assertEquals(false, result.getCancel());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	/**
+	 * 存在しない主キーは検索できない
+	 */
+	@Test
+	void testFindHistoryById2() {
+		//JUnitテストでは引数はNULLでよい。
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			PurchasesDAO purchasesDAO = new PurchasesDAO(conn);
+
+			int testPurchase_id = 9999;
+
+			PurchasesDTO result = purchasesDAO.findHistoryById(testPurchase_id);
 
 			assertNull(result);
 

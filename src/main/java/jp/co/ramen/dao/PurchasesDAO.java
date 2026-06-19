@@ -19,25 +19,27 @@ public class PurchasesDAO {
 		this.con = con;
 	}
 
-	public void purchaseInsert(PurchasesDTO dto) throws SQLException {
-		String sql = "INSERT INTO public.purchases( purchased_user, purchased_date, destination, cancel) VALUES ( ?, CURRENT_DATE, ?, false)";
+	public int purchaseInsert(PurchasesDTO dto) throws SQLException {
+		String sql = "INSERT INTO public.purchases( purchased_user, purchased_date, destination, cancel) VALUES ( ?, ?, ?, false)";
 		try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			//			ps.setString(1, );
-			//			ps.setString(2, );
-
-			ps.executeUpdate();
+			ps.setString(1, dto.getPurchased_user());
+			ps.setDate(2, java.sql.Date.valueOf(dto.getPurchased_date()));
+			ps.setString(3, dto.getDestination());
+			int result = ps.executeUpdate();
 
 			ResultSet rs = ps.getGeneratedKeys();
 
 			if (rs.next()) {
 				int purchaseId = rs.getInt("purchase_id");
 				dto.setPurchase_id(purchaseId);
+
 			}
+			return result;
 		}
 	}
 
 	//-----------------以下、UserDAOをコピペ----------------------------
-	// 主キーによる検索 
+	// ユーザーIDによる検索 
 	public List<PurchasesDTO> findHistoryByUserId(String userId) throws SQLException {
 		String sql = "SELECT p.purchase_id, p.purchased_user,p.purchased_date, p.destination, p.cancel, "
 				+ "d.purchase_detail_id,d.purchase_id, d.amount, "
@@ -66,7 +68,7 @@ public class PurchasesDAO {
 						currentPdto = new PurchasesDTO();
 						currentPdto.setPurchase_id(currentPurchasedId);
 						currentPdto.setPurchased_user(rs.getString("purchased_user"));
-						currentPdto.setPurchased_date(rs.getDate("purchased_date"));
+						currentPdto.setPurchased_date(rs.getDate("purchased_date").toLocalDate());
 						currentPdto.setDestination(rs.getString("destination"));
 						currentPdto.setCancel(rs.getBoolean("cancel"));
 
@@ -100,6 +102,32 @@ public class PurchasesDAO {
 			}
 		}
 		return list;
+	}
+
+	// 主キーによる検索 
+	public PurchasesDTO findHistoryById(int purchase_id) throws SQLException {
+		String sql = "SELECT p.purchase_id, p.purchased_user,p.purchased_date, p.destination, p.cancel "
+				+ "FROM purchases p "
+				+ "WHERE p.purchase_id = ? ";
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, purchase_id);
+			try (ResultSet rs = ps.executeQuery()) {
+				PurchasesDTO purchasesDTO = null;
+
+				if (rs.next()) {
+					purchasesDTO = new PurchasesDTO();
+					purchasesDTO.setPurchase_id(rs.getInt("purchase_id"));
+					purchasesDTO.setPurchased_user(rs.getString("purchased_user"));
+					purchasesDTO.setPurchased_date(rs.getDate("purchased_date").toLocalDate());
+					purchasesDTO.setDestination(rs.getString("destination"));
+					purchasesDTO.setCancel(rs.getBoolean("cancel"));
+
+				}
+				return purchasesDTO;
+
+			}
+		}
+
 	}
 
 	// 全件検索 
