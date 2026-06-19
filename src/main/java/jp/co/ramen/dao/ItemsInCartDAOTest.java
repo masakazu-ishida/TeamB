@@ -129,6 +129,25 @@ class ItemsInCartDAOTest extends TestBase {
 		}
 	}
 
+	//user1のレコードを削除し、user1のレコードを検索してもヒットしないことを確認
+	void testDeleteAllCartItem() {
+		try {
+			String userId = "user1";
+
+			ItemsInCartDAO dao = new ItemsInCartDAO();
+
+			int result = dao.deleteAllCartItem(userId);
+			assertEquals(3, result);
+
+			List<ItemsInCartDTO> iicDto = dao.findAll(userId);
+			assertNull(iicDto);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			fail("例外発生");
+		}
+	}
+
 	//カートから特定のユーザーの特定の商品のカート内情報の取得
 	// 完全一致
 	@Test

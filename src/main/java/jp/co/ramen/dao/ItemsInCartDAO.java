@@ -149,11 +149,12 @@ public class ItemsInCartDAO {
 	}
 
 	//カート内商品全削除
-	public void deleteAllCartItem(String userId) throws SQLException {
+	public int deleteAllCartItem(String userId) throws SQLException {
 		String sql = "delete from items_in_cart where user_id=?";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, userId);
-			ps.executeUpdate();
+			int result = ps.executeUpdate();
+			return result;
 		}
 	}
 
