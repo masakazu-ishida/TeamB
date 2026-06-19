@@ -34,9 +34,9 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		//		JSP整備前のためコメントアウト
-		//		String id = request.getParameter("id");
-		//		String password = request.getParameter("password");
-		//		String requestFrom = request.getParameter("requestFrom");
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		String requestFrom = request.getParameter("requestFrom");
 
 		//		手入力での動作確認1(DB参照失敗 fromメイン画面）
 		//		String id = "user0";
@@ -44,9 +44,9 @@ public class LoginServlet extends HttpServlet {
 		//		String requestFrom = null;
 
 		//		手入力での動作確認2(ログイン成功 from /ItemsInCartReferenceServlet）
-		String id = "user1";
-		String password = "userpass1";
-		String requestFrom = "/ItemsInCartReferenceServlet";
+		//		String id = "user1";
+		//		String password = "userpass1";
+		//		String requestFrom = "/ItemsInCartReferenceServlet";
 
 		LoginService loginService = new LoginService();
 		int authenticate = loginService.execute(id, password);
@@ -59,6 +59,8 @@ public class LoginServlet extends HttpServlet {
 
 			if (requestFrom == null) {
 				path = "/WEB-INF/main.jsp";
+				request.setAttribute("itemId", request.getParameter("itemId"));
+				request.setAttribute("order", request.getParameter("order"));
 			} else {
 				path = requestFrom;
 			}

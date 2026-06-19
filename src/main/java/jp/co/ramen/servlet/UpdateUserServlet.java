@@ -34,10 +34,10 @@ public class UpdateUserServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		String userId = (String) session.getAttribute("userId");
-		if (userId == null) {
-			userId = "user1";
-		}
+		String userId = (String) session.getAttribute("loginUser");
+		//		if (userId == null) {
+		//			userId = "user1";
+		//		}
 		//String userId = "user1";
 
 		// 2. ユーザー情報を取得
@@ -51,6 +51,10 @@ public class UpdateUserServlet extends HttpServlet {
 
 		// 3. 画面出力項目の設定
 		request.setAttribute("user", user);
+
+		if (user != null) {
+			session.setAttribute("loginUser", user.getUserId());
+		}
 
 		// 4. 会員情報変更画面へフォワード
 		request.getRequestDispatcher("/WEB-INF/updateUser.jsp").forward(request, response);
