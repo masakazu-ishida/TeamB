@@ -57,7 +57,7 @@ class ItemsDAOTest extends TestBase {
 	}
 
 	@Test
-	//カテゴリ：すべて　キーワード：空
+	//カテゴリ：すべて　 キーワード：空
 	void testfindByCondision1() {
 
 		//JUnitテストでは引数はNULLでよい。

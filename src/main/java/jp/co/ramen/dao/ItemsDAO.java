@@ -112,7 +112,7 @@ public class ItemsDAO {
 		return itemsList;
 	}
 
-	// データの更新 
+	//  データの更新 
 	public int purchaseUpdate(int amount, int itemId) throws SQLException {
 		String sql = "update items set stock = (stock - ?) where items.item_id = ?";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
