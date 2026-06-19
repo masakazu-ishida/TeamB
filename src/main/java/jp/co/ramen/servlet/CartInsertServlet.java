@@ -39,7 +39,7 @@ public class CartInsertServlet extends HttpServlet {
 
 		// 2. セッションチェック
 		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("userId") == null) {
+		if (session == null || session.getAttribute("loginUser") == null) {
 			request.setAttribute("requestFrom", "/CartInsertServlet");
 			request.setAttribute("itemId", itemId);
 			request.setAttribute("order", order);
