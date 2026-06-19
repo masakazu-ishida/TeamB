@@ -62,7 +62,7 @@ public class PurchaseCommitService {
 					purchaseDetailsDAO.purchaseInsert(purchaseDetailsDTO);
 				}
 
-				// Itemsにデータ挿入
+				// Itemsの在庫更新
 				for (ItemsInCartDTO cartItem : cartList) {
 					int amount = cartItem.getAmount();
 					int itemId = cartItem.getItem_id();

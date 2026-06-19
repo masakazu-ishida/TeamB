@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
 import jp.co.ramen.service.GetItemsInCartService;
+import jp.co.ramen.service.PurchaseCommitService;
 
 /**
  * Servlet implementation class PurchaseConfirmServlet
@@ -37,10 +38,13 @@ public class PurchaseCommitServlet extends HttpServlet {
 
 		//パラメータ取得
 		try {
-			HttpServletRequest session = request;
-			String loginId = (String) session.getAttribute("loginUser");
+			//			セッション処理スルー用コメントアウト
+			//			HttpServletRequest session = request;
+			//			String loginId = (String) session.getAttribute("loginUser");
+			//			String payment = request.getParameter("payment");
 
-			String payment = request.getParameter("payment");
+			String loginId = "user1";
+			String payment = "代金引換";
 
 			//カート情報の取得
 			try {
@@ -48,32 +52,30 @@ public class PurchaseCommitServlet extends HttpServlet {
 				List<ItemsInCartDTO> cartList = getItemsInCartService.execute(loginId);
 
 				//購入確定サービスの実行
+
 				try {
-
-					try {
-
-					} catch (Exception e) {
-						e.printStackTrace();
-						// TODO: handle exception
-					}
-					session.setAttribute("cartList", cartList);
-					String path = "/WEB-INF/purchaseConfirm.jsp";
-					RequestDispatcher rd = session.getRequestDispatcher(path);
-					rd.forward(session, response);
+					PurchaseCommitService purchaseCommitService = new PurchaseCommitService();
+					purchaseCommitService.execute(cartList, loginId, payment);
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					// TODO: handle exception
 				}
 
+				request.setAttribute("cartList", cartList);
+				String path = "/WEB-INF/purchaseCommit.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(path);
+				rd.forward(request, response);
+
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
+				// TODO: handle exception
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+
 		}
 	}
 
