@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,24 +172,26 @@ public class ItemsInCartDAO {
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setItem_id(rs.getInt("item_id"));
 				dto.setAmount(rs.getInt("amount"));
-				dto.setBooked_date(rs.getDate("booked_date").toLocalDate());
+				dto.setBooked_date(rs.getObject("booked_date", LocalDate.class));
+
 			}
 		}
 		return dto;
 	}
 
 	//カート内商品の数量と日付更新
-	public int update(String userId, int itemId, int newAmount) throws SQLException {
+	public int update(String userId, int itemId, int newAmount, LocalDate bookedDate) throws SQLException {
 
 		String sql = "UPDATE items_in_cart " +
-				"SET amount = ?, booked_date = itemscart.getBookedDate() " +
+				"SET amount = ?, booked_date = ？ " +
 				"WHERE user_id = ? AND item_id = ?";
 
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 
 			ps.setInt(1, newAmount);
-			ps.setString(2, userId);
-			ps.setInt(3, itemId);
+			ps.setObject(2, bookedDate);
+			ps.setString(3, userId);
+			ps.setInt(4, itemId);
 
 			return ps.executeUpdate();
 		}
@@ -199,13 +202,14 @@ public class ItemsInCartDAO {
 
 		String sql = "INSERT INTO items_in_cart " +
 				"(user_id, item_id, amount, booked_date) " +
-				"VALUES (?, ?, ?, itemscart.getBookedDate())";
+				"VALUES (?, ?, ?, ?)";
 
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 
 			ps.setString(1, dto.getUser_id());
 			ps.setInt(2, dto.getItem_id());
 			ps.setInt(3, dto.getAmount());
+			ps.setObject(4, dto.getBooked_date());
 			return ps.executeUpdate();
 
 		}
