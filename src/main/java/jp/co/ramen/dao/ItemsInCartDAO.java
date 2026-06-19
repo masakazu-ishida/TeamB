@@ -54,7 +54,7 @@ public class ItemsInCartDAO {
 					iicDto.setUser_id(rs.getString("user_id"));
 					iicDto.setItem_id(rs.getInt("item_id"));
 					iicDto.setAmount(rs.getInt("amount"));
-					iicDto.setBooked_date(rs.getDate("booked_date"));
+					iicDto.setBooked_date(rs.getDate("booked_date").toLocalDate());
 					iicList.add(iicDto);
 				}
 			}
@@ -125,7 +125,7 @@ public class ItemsInCartDAO {
 					iicDto.setUser_id(rs.getString("user_id"));
 					iicDto.setItem_id(rs.getInt("item_id"));
 					iicDto.setAmount(rs.getInt("amount"));
-					iicDto.setBooked_date(rs.getDate("booked_date"));
+					iicDto.setBooked_date(rs.getDate("booked_date").toLocalDate());
 
 				}
 			}
@@ -175,7 +175,7 @@ public class ItemsInCartDAO {
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setItem_id(rs.getInt("item_id"));
 				dto.setAmount(rs.getInt("amount"));
-				dto.setBooked_date(rs.getDate("booked_date"));
+				dto.setBooked_date(rs.getDate("booked_date").toLocalDate());
 			}
 		}
 		return dto;

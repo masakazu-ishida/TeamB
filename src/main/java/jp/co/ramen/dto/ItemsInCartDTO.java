@@ -1,16 +1,16 @@
 package jp.co.ramen.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class ItemsInCartDTO {
 
 	private String user_id;
 	private int item_id;
 	private int amount;
-	private Date booked_date;
+	private LocalDate booked_date;
 	private ItemsDTO itemsDto;
 
-	public ItemsInCartDTO(String user_id, int item_id, int amount, Date booked_date, ItemsDTO itemsDto) {
+	public ItemsInCartDTO(String user_id, int item_id, int amount, LocalDate booked_date, ItemsDTO itemsDto) {
 		super();
 		this.user_id = user_id;
 		this.item_id = item_id;
@@ -47,11 +47,11 @@ public class ItemsInCartDTO {
 		this.amount = amount;
 	}
 
-	public Date getBooked_date() {
+	public LocalDate getBooked_date() {
 		return booked_date;
 	}
 
-	public void setBooked_date(Date booked_date) {
+	public void setBooked_date(LocalDate booked_date) {
 		this.booked_date = booked_date;
 	}
 
