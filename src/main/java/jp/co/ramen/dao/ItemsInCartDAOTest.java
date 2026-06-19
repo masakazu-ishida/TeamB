@@ -131,10 +131,10 @@ class ItemsInCartDAOTest extends TestBase {
 
 	//user1のレコードを削除し、user1のレコードを検索してもヒットしないことを確認
 	void testDeleteAllCartItem() {
-		try {
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			String userId = "user1";
 
-			ItemsInCartDAO dao = new ItemsInCartDAO();
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
 
 			int result = dao.deleteAllCartItem(userId);
 			assertEquals(3, result);
@@ -142,7 +142,7 @@ class ItemsInCartDAOTest extends TestBase {
 			List<ItemsInCartDTO> iicDto = dao.findAll(userId);
 			assertNull(iicDto);
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("例外発生");
 		}

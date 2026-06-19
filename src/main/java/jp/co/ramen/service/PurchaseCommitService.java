@@ -1,12 +1,19 @@
 package jp.co.ramen.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
 
+import jp.co.ramen.dao.ItemsDAO;
 import jp.co.ramen.dao.ItemsInCartDAO;
+import jp.co.ramen.dao.PurchaseDetailsDAO;
+import jp.co.ramen.dao.PurchasesDAO;
 import jp.co.ramen.dto.ItemsInCartDTO;
+import jp.co.ramen.dto.PurchaseDetailsDTO;
+import jp.co.ramen.dto.PurchasesDTO;
 import jp.co.ramen.util.ConnectionUtil;
 
 /**
@@ -23,15 +30,59 @@ public class PurchaseCommitService {
 	 * @return ユーザのDTO。認証に成功すれば非NULL、認証に失敗すればNULL
 	 * @throws ECSiteException
 	 */
-	public List<ItemsInCartDTO> execute(List<ItemsInCartDTO> cartList, String SESSION) throws ServletException {
+	public void execute(List<ItemsInCartDTO> cartList, String loguinId, String adress)
+			throws ServletException {
 
 		String jndiName = "java:comp/env/jdbc/ecsite";
 		try (Connection conn = ConnectionUtil.getConnection(jndiName)) {
 
-			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-			//			List<ItemsInCartDTO> cartList = dao.findAll(SESSION);
+			try {
+				conn.setAutoCommit(false);
 
-			return cartList;
+				//	日付取得
+				LocalDate localDate = LocalDate.now();
+
+				//	PurchseDBにデータ挿入
+				PurchasesDTO purchasesDTO = new PurchasesDTO();
+				purchasesDTO.setPurchased_user(loguinId);
+				purchasesDTO.setPurchased_date(localDate);
+				purchasesDTO.setDestination(adress);
+
+				PurchasesDAO purchasesDAO = new PurchasesDAO(conn);
+				purchasesDAO.purchaseInsert(purchasesDTO);
+
+				// PurchaseDetailsにデータ挿入
+				for (ItemsInCartDTO cartItem : cartList) {
+					PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
+					purchaseDetailsDTO.setPurchase_id(purchasesDTO.getPurchase_id());
+					purchaseDetailsDTO.setItem_id(cartItem.getItem_id());
+					purchaseDetailsDTO.setAmount(cartItem.getAmount());
+
+					PurchaseDetailsDAO purchaseDetailsDAO = new PurchaseDetailsDAO(conn);
+					purchaseDetailsDAO.purchaseInsert(purchaseDetailsDTO);
+				}
+
+				// Itemsにデータ挿入
+				for (ItemsInCartDTO cartItem : cartList) {
+					int amount = cartItem.getAmount();
+					int itemId = cartItem.getItem_id();
+					ItemsDAO itemsDAO = new ItemsDAO(conn);
+					itemsDAO.purchaseUpdate(amount, itemId);
+				}
+
+				// ItemsInCart内の商品を全件削除
+				ItemsInCartDAO itemsInCartDAO = new ItemsInCartDAO(conn);
+				itemsInCartDAO.deleteAllCartItem(loguinId);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				conn.rollback();
+				// TODO: handle exception
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+				// TODO: handle exception
+			}
 
 		} catch (Exception e) {
 
