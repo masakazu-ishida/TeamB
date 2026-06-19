@@ -1,6 +1,6 @@
 package jp.co.ramen.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 //リスト追加
@@ -8,7 +8,7 @@ public class PurchasesDTO {
 
 	private int purchase_id;
 	private String purchased_user;
-	private Date purchased_date;
+	private LocalDate purchased_date;
 	private String destination;
 	private boolean cancel;
 	private ItemsDTO itemsDto;
@@ -18,13 +18,16 @@ public class PurchasesDTO {
 
 	}
 
-	public PurchasesDTO(int purchase_id, String purchased_user, Date purchased_date, String destination,
-			boolean cancel) {
+	public PurchasesDTO(int purchase_id, String purchased_user, LocalDate purchased_date, String destination,
+			boolean cancel, ItemsDTO itemsDto, List<PurchaseDetailsDTO> purchaseDetailsDto) {
+		super();
 		this.purchase_id = purchase_id;
 		this.purchased_user = purchased_user;
 		this.purchased_date = purchased_date;
 		this.destination = destination;
 		this.cancel = cancel;
+		this.itemsDto = itemsDto;
+		this.purchaseDetailsDto = purchaseDetailsDto;
 	}
 
 	public int getPurchase_id() {
@@ -43,11 +46,11 @@ public class PurchasesDTO {
 		this.purchased_user = purchased_user;
 	}
 
-	public Date getPurchased_date() {
+	public LocalDate getPurchased_date() {
 		return purchased_date;
 	}
 
-	public void setPurchased_date(Date purchased_date) {
+	public void setPurchased_date(LocalDate purchased_date) {
 		this.purchased_date = purchased_date;
 	}
 
