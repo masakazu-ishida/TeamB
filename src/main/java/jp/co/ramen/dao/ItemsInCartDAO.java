@@ -212,7 +212,6 @@ public class ItemsInCartDAO {
 			ps.setInt(3, dto.getAmount());
 			ps.setObject(4, dto.getBooked_date());
 			return ps.executeUpdate();
-
 		}
 
 	}
