@@ -80,7 +80,7 @@ public class ItemsDAO {
 
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 
-			if (categoryId == 3) {
+			if (categoryId == 0) {
 				if (name != null && !name.isEmpty()) {
 					ps.setString(1, "%" + name + "%");
 				}
