@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
 import jp.co.ramen.dto.UserDTO;
@@ -39,17 +40,17 @@ public class PurchaseConfirmServlet extends HttpServlet {
 
 		//		パラメータ設定
 		try {
-			//			HttpSession session = request.getSession();
-			//			String loginId = (String) session.getAttribute("loginUser");
+			HttpSession session = request.getSession();
+			String loginId = (String) session.getAttribute("loginUser");
 
 			UpdateUserService updateUserService = new UpdateUserService();
-			UserDTO userInformation = updateUserService.getUserInformation("user1");
+			UserDTO userInformation = updateUserService.getUserInformation(loginId);
 			String address = userInformation.getAddress();
 			request.setAttribute("address", address);
 
 			try {
 				GetItemsInCartService getItemsInCartService = new GetItemsInCartService();
-				List<ItemsInCartDTO> cartList = getItemsInCartService.execute("user1");
+				List<ItemsInCartDTO> cartList = getItemsInCartService.execute(loginId);
 
 				try {
 					request.setAttribute("cartList", cartList);
