@@ -47,7 +47,7 @@ public class CartInsertServlet extends HttpServlet {
 			return;
 		}
 
-		String userId = (String) session.getAttribute("userId");
+		String userId = (String) session.getAttribute("loginUser");
 		// 3. カート追加処理
 		CartInsertService service = new CartInsertService();
 		try {
