@@ -41,10 +41,10 @@ public class PurchaseHistoryServlet extends HttpServlet {
 
 		String userId = (String) session.getAttribute("loginUser");
 
-		if (userId == null) {
-			response.sendRedirect("noSession.html");
-			return;
-		}
+		//		if (userId == null) {
+		//			response.sendRedirect("noSession.html");
+		//			return;
+		//		}
 		try {
 			PurchaseHistoryService hService = new PurchaseHistoryService();
 			List<PurchasesDTO> list = hService.getHistory(userId);
