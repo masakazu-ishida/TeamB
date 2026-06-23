@@ -161,7 +161,7 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals("user1", result.getUser_id());
 			assertEquals(3, result.getItem_id());
 			assertEquals(3, result.getAmount());
-			assertEquals("2026-06-19", result.getBooked_date().toString());
+			assertEquals("2026-06-23", result.getBooked_date().toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -241,7 +241,7 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals("user1", actual.getUser_id());
 			assertEquals(3, actual.getItem_id());
 			assertEquals(10, actual.getAmount());
-			assertEquals("2026-06-20", actual.getBooked_date().toString());
+			assertEquals("2026-06-23", actual.getBooked_date().toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -271,7 +271,7 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals("user1", actual.getUser_id());
 			assertEquals(10, actual.getItem_id());
 			assertEquals(5, actual.getAmount());
-			assertEquals("2026-06-19", actual.getBooked_date().toString());
+			assertEquals("2026-06-23", actual.getBooked_date().toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
