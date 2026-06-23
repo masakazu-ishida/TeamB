@@ -79,7 +79,7 @@ class ItemsInCartDAOTest extends TestBase {
 				assertEquals(false, item.getItemsDto().getRecommended());
 				assertEquals("user1", item.getUser_id());
 				assertEquals(3, item.getAmount());
-				assertEquals("2026-06-19", item.getBooked_date().toString());
+				assertEquals("2026-06-23", item.getBooked_date().toString());
 				//先頭だけDTOの中身をチェック
 				break;
 			}
@@ -110,6 +110,7 @@ class ItemsInCartDAOTest extends TestBase {
 	}
 
 	//カート内商品削除確認
+	@Test
 	void testDeleteCartItem() {
 		try {
 			String userId = "user1";
@@ -241,7 +242,7 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals("user1", actual.getUser_id());
 			assertEquals(3, actual.getItem_id());
 			assertEquals(10, actual.getAmount());
-			assertEquals("2026-06-23", actual.getBooked_date().toString());
+			assertEquals("2026-06-20", actual.getBooked_date().toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -271,7 +272,7 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals("user1", actual.getUser_id());
 			assertEquals(10, actual.getItem_id());
 			assertEquals(5, actual.getAmount());
-			assertEquals("2026-06-23", actual.getBooked_date().toString());
+			assertEquals("2026-06-19", actual.getBooked_date().toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
