@@ -50,9 +50,9 @@ public class CartDeleteCommitServlet extends HttpServlet {
 		CartDeleteCommitService itemsDelete = new CartDeleteCommitService();
 		System.out.println("★itemid" + itemId);
 		System.out.println("★userId" + userId);
-		ItemsInCartDTO Delete = itemsDelete.getCartItemDelete(userId, itemId);
+		ItemsInCartDTO deleteCart = itemsDelete.getCartItemDelete(userId, itemId);
 
-		request.setAttribute("itemDelete", Delete);
+		request.setAttribute("itemDelete", deleteCart);
 		request.getRequestDispatcher("/WEB-INF/removeFromCartCommit.jsp").forward(request, response);
 	}
 

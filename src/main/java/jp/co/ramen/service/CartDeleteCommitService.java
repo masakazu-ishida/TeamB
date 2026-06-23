@@ -17,18 +17,16 @@ public class CartDeleteCommitService {
 		try (Connection conn = ConnectionUtil.getConnection(jndiName)) {
 
 			try {
-				conn.setAutoCommit(false);
+
 				ItemsInCartDAO dao = new ItemsInCartDAO(conn);
 
 				deleteItem = dao.findById(userId, itemId);
 
 				dao.delete(userId, itemId);
-				conn.commit();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-				conn.rollback();
-				throw e;
+
 			}
 
 		} catch (Exception e) {

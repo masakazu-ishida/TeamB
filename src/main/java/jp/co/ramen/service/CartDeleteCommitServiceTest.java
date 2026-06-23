@@ -2,8 +2,6 @@ package jp.co.ramen.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.SQLException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -44,16 +42,29 @@ class CartDeleteCommitServiceTest extends TestBase {
 			String userId = "user1";
 			int itemId = 5;
 
+			CartDeleteCommitService service = new CartDeleteCommitService();
+			ItemsInCartDTO result = service.getCartItemDelete(userId, itemId);
+
+			assertEquals(userId, result.getUser_id());
+			assertEquals(itemId, result.getItem_id());
+			assertEquals(2, result.getAmount());
+
+			assertNotNull(result.getItemsDto());
+
+			assertEquals("野球帽", result.getItemsDto().getName());
+			assertEquals("日本帽子製造", result.getItemsDto().getManufacturer());
+			assertEquals(2500, result.getItemsDto().getPrice());
+
 			ItemsInCartDAO dao = new ItemsInCartDAO(con);
 
-			int result = dao.delete(userId, itemId);
-			assertEquals(1, result);
 			ItemsInCartDTO cartDTO = dao.findById(userId, itemId);
 			assertNull(cartDTO);
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
+
 			e.printStackTrace();
-			fail("例外発生");
+			fail(e);
 		}
+
 	}
 }
