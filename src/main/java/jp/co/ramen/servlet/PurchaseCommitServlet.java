@@ -54,33 +54,28 @@ public class PurchaseCommitServlet extends HttpServlet {
 
 			}
 
-			//			String loginId = "user1";
-			//			String adress = "住所ーーーー";
-			//			String payment = "代金引換";
-
 			//カート情報の取得
 			try {
 				GetItemsInCartService getItemsInCartService = new GetItemsInCartService();
 				List<ItemsInCartDTO> cartList = getItemsInCartService.execute(loginId);
 
 				//購入確定サービスの実行
-
 				try {
-
 					PurchaseCommitService purchaseCommitService = new PurchaseCommitService();
 					purchaseCommitService.execute(cartList, loginId, address);
+
+					request.setAttribute("cartList", cartList);
+					request.setAttribute("payment", payment);
+					request.setAttribute("address", address);
+
+					String path = "/WEB-INF/purchaseCommit.jsp";
+					RequestDispatcher rd = request.getRequestDispatcher(path);
+					rd.forward(request, response);
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					// TODO: handle exception
 				}
-
-				request.setAttribute("cartList", cartList);
-				request.setAttribute("payment", payment);
-				request.setAttribute("address", address);
-				String path = "/WEB-INF/purchaseCommit.jsp";
-				RequestDispatcher rd = request.getRequestDispatcher(path);
-				rd.forward(request, response);
 
 			} catch (Exception e) {
 				e.printStackTrace();
