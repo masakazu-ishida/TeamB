@@ -18,8 +18,6 @@ public class CartInsertService {
 		String jndiName = "java:comp/env/jdbc/ecsite";
 		try (Connection conn = ConnectionUtil.getConnection(jndiName)) {
 
-			conn.setAutoCommit(false);
-
 			try {
 				ItemsInCartDAO cartDAO = new ItemsInCartDAO(conn);
 
@@ -49,11 +47,10 @@ public class CartInsertService {
 						result = cartDAO.insert(insertDto);
 					}
 
-					conn.commit();
 				} catch (Exception e) {
 
 					e.printStackTrace();
-					conn.rollback();
+
 				}
 
 			} catch (Exception e) {
