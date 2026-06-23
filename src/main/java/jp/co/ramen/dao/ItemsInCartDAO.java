@@ -136,16 +136,17 @@ public class ItemsInCartDAO {
 	}
 
 	//カート内削除完了
-	public ItemsInCartDTO deleteCartItem(String userId, int itemId) throws SQLException {
-		ItemsInCartDTO ItemDelete = findById(userId, itemId);
+	public int delete(String userId, int itemId) throws SQLException {
 
 		String sql = "delete from items_in_cart where user_id=? and item_id=?";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, userId);
 			ps.setInt(2, itemId);
-			ps.executeUpdate();
+			int result = ps.executeUpdate();
+			return result;
+
 		}
-		return ItemDelete;
+
 	}
 
 	//カート内商品全削除

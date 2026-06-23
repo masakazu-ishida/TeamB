@@ -117,14 +117,11 @@ class ItemsInCartDAOTest extends TestBase {
 			int itemId = 5;
 
 			ItemsInCartDAO dao = new ItemsInCartDAO(con);
-			ItemsInCartDTO result = dao.deleteCartItem(userId, itemId);
 
-			assertNotNull(result);
-			assertEquals(userId, result.getUser_id());
-			assertEquals(itemId, result.getItem_id());
-
-			ItemsInCartDTO checkDeleted = dao.findById(userId, itemId);
-			assertNull(checkDeleted);
+			int result = dao.delete(userId, itemId);
+			assertEquals(1, result);
+			ItemsInCartDTO cartDTO = dao.findById(userId, itemId);
+			assertNull(cartDTO);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
