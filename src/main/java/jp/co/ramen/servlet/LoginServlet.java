@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 		//		String password = "userpass1";
 		//		String requestFrom = "/ItemsInCartReferenceServlet";
 
+		System.out.println("★requestFromの値は: " + requestFrom);
 		LoginService loginService = new LoginService();
 		int authenticate = loginService.execute(id, password);
 
@@ -57,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginUser", id);
 
-			if (requestFrom == null) {
+			if (requestFrom == null || requestFrom.isEmpty()) {
 				path = "/WEB-INF/main.jsp";
 				request.setAttribute("itemId", request.getParameter("itemId"));
 				request.setAttribute("order", request.getParameter("order"));
