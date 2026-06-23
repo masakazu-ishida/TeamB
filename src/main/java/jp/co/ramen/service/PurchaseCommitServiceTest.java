@@ -2,14 +2,25 @@ package jp.co.ramen.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Date;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
+
+import jakarta.servlet.ServletException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import jp.co.ramen.dao.ItemsDAO;
+import jp.co.ramen.dao.ItemsInCartDAO;
+import jp.co.ramen.dao.PurchaseDetailsDAO;
+import jp.co.ramen.dao.PurchasesDAO;
+import jp.co.ramen.dto.ItemsDTO;
+import jp.co.ramen.dto.ItemsInCartDTO;
 import jp.co.ramen.dto.PurchaseDetailsDTO;
 import jp.co.ramen.dto.PurchasesDTO;
+import jp.co.ramen.util.ConnectionUtil;
 import jp.co.ramen.util.TestBase;
 
 /**
@@ -40,81 +51,106 @@ class PurchaseCommitServiceTest extends TestBase {
 	}
 
 	/**
-	 * 購入履歴ありの場合のテスト
+	 *　各DBに全ての処理が反映されている
 	 */
 	@Test
-	void testGetHistory1() {
+	void testExecute() throws ServletException {
 
-		try {
-			String userId = "user1";
-			PurchaseHistoryService hService = new PurchaseHistoryService();
-			List<PurchasesDTO> result = hService.getHistory(userId);
+		//		user1のカート情報を取得
+		GetItemsInCartService getItemsInCartService = new GetItemsInCartService();
+		List<ItemsInCartDTO> cartList = getItemsInCartService.execute("user1");
 
-			assertNotNull(result);
-			assertEquals(1, result.size());
+		String jndiName = "java:comp/env/jdbc/ecsite";
+		try (Connection conn = ConnectionUtil.getConnection(jndiName)) {
 
-			PurchasesDTO purchase = result.get(0);
-			assertEquals(1, purchase.getPurchase_id());
+			try {
+				conn.setAutoCommit(false);
 
-			assertEquals(Date.valueOf("2026-06-17"), purchase.getPurchased_date());
+				//				テストユーザー
+				String testUser = "user1";
 
-			assertNull(purchase.getDestination());
+				//	日付取得
+				LocalDate localDate = LocalDate.now();
 
-			List<PurchaseDetailsDTO> detailsList = purchase.getPurchaseDetailsDto();
-			assertNotNull(detailsList);
-			assertEquals(3, detailsList.size());
+				//	PurchseDBにデータ挿入
+				PurchasesDTO purchasesDTO = new PurchasesDTO();
+				purchasesDTO.setPurchased_user(testUser);
+				purchasesDTO.setPurchased_date(localDate);
+				purchasesDTO.setDestination("テスト住所");
 
-			PurchaseDetailsDTO detail1 = detailsList.get(0);
-			assertEquals(1, detail1.getPurchase_detail_id());
-			assertEquals(4, detail1.getAmount());
-			assertEquals("ハンチング帽", detail1.getIdto().getName());
-			assertEquals(1980, detail1.getIdto().getPrice());
-			assertEquals("黄色", detail1.getIdto().getColor());
-			assertEquals("日本帽子製造", detail1.getIdto().getManufacturer());
+				PurchasesDAO purchasesDAO = new PurchasesDAO(conn);
+				int result = purchasesDAO.purchaseInsert(purchasesDTO);
 
-			PurchaseDetailsDTO detail2 = detailsList.get(1);
-			assertEquals(2, detail2.getPurchase_detail_id());
-			assertEquals(1, detail2.getAmount());
-			assertEquals("ニットキャップ", detail2.getIdto().getName());
-			assertEquals(1800, detail2.getIdto().getPrice());
-			assertEquals("紺色", detail2.getIdto().getColor());
-			assertEquals("日本帽子製造", detail2.getIdto().getManufacturer());
+				assertEquals(1, result);
 
-			PurchaseDetailsDTO detail3 = detailsList.get(2);
-			assertEquals(3, detail3.getPurchase_detail_id());
-			assertEquals(2, detail3.getAmount());
-			assertEquals("野球帽", detail3.getIdto().getName());
-			assertEquals(2500, detail3.getIdto().getPrice());
-			assertEquals("緑色", detail3.getIdto().getColor());
-			assertEquals("日本帽子製造", detail3.getIdto().getManufacturer());
+				PurchasesDTO list = purchasesDAO.findHistoryById(4);
+				assertEquals(testUser, list.getPurchased_user());
+				assertEquals(localDate, list.getPurchased_date());
+				assertEquals("テスト住所", list.getDestination());
+				assertEquals(false, list.getCancel());
+
+				// PurchaseDetailsにデータ挿入
+				for (ItemsInCartDTO cartItem : cartList) {
+					PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
+					purchaseDetailsDTO.setPurchase_id(purchasesDTO.getPurchase_id());
+					purchaseDetailsDTO.setItem_id(cartItem.getItem_id());
+					purchaseDetailsDTO.setAmount(cartItem.getAmount());
+
+					PurchaseDetailsDAO purchaseDetailsDAO = new PurchaseDetailsDAO(conn);
+					int purchaseDetailsInsertResult = purchaseDetailsDAO.purchaseInsert(purchaseDetailsDTO);
+
+					assertEquals(1, purchaseDetailsInsertResult);
+
+					assertEquals(9, purchaseDetailsDTO.getPurchase_detail_id());
+					assertEquals(4, purchaseDetailsDTO.getPurchase_id());
+					assertEquals(3, purchaseDetailsDTO.getItem_id());
+					assertEquals(3, purchaseDetailsDTO.getAmount());
+					break;
+
+				}
+
+				// Itemsの在庫更新
+				for (ItemsInCartDTO cartItem : cartList) {
+					int amount = cartItem.getAmount();
+					int itemId = cartItem.getItem_id();
+					ItemsDAO itemsDAO = new ItemsDAO(conn);
+					int purchaseUpdateResult = itemsDAO.purchaseUpdate(amount, itemId);
+
+					assertEquals(1, purchaseUpdateResult);
+
+					ItemsDTO ItemsIdDto = itemsDAO.findById(itemId);
+					assertEquals(0, ItemsIdDto.getStock());
+
+					break;
+				}
+
+				// ItemsInCart内の商品を全件削除
+				ItemsInCartDAO itemsInCartDAO = new ItemsInCartDAO(conn);
+				int deleteAllCartItemResult = itemsInCartDAO.deleteAllCartItem(testUser);
+
+				assertEquals(3, deleteAllCartItemResult);
+
+				ItemsInCartDTO itemsInCartDto = itemsInCartDAO.findBySingleID(testUser);
+				assertEquals(null, itemsInCartDto);
+
+				conn.commit();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				conn.rollback();
+				// TODO: handle exception
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+				// TODO: handle exception
+			}
 
 		} catch (Exception e) {
 
-			e.printStackTrace();
-			fail(e);
-		}
-
-	}
-
-	/**
-	 * 購入履歴なしの場合のテスト
-	 */
-	@Test
-	void testGetHistory2() {
-
-		try {
-			String userId = "no_order_user";
-
-			PurchaseHistoryService hService = new PurchaseHistoryService();
-			List<PurchasesDTO> result = hService.getHistory(userId);
-
-			assertNotNull(result);//空にリストオブジェクトが返るべき
-			assertTrue(result.isEmpty());
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			fail(e);
+			//発生した例外は全部独自例外に変換してスロー
+			//コントローラクラスでは常に独自例外のみキャッチさせる事で、コントローラーの記述を単純化させる
+			throw new ServletException(e.getCause());
 		}
 	}
+
 }
