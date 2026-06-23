@@ -47,11 +47,12 @@
 		ご住所<br>
 		<input type="text" name="address"><br><br>
 	</p>
-	</form>
+	
 	
 	<p>購入しますか？<br>
 		<input type="submit" value="購入する">
-	</p><br><br>
+	</p><br>
+	</form>
 	
 	<a href="${pageContext.request.contextPath}/main">商品検索へ</a><br>
 	

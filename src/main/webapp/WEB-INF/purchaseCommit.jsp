@@ -33,6 +33,19 @@
 	</table>
 	合計 <c:out value="${total}"> </c:out> 円<br>
 	
+	<p>清算方法 <c:out value="${payment}"></c:out></p>
+	<p>配送先 <c:choose>
+        <%-- ラジオボタンで「配送先を指定」を選んだ時（another）は、入力された住所を出す --%>
+        <c:when test="${param.destination == 'another'}">
+            <c:out value="${address}" />
+        </c:when>
+        
+        <%-- それ以外（初期選択の自宅の時）は、文字通り「ご自宅」と表示する --%>
+        <c:otherwise>
+            ご自宅
+        </c:otherwise>
+    </c:choose></p>
+	
 	
 	
 	
