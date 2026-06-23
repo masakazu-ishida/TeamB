@@ -10,9 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import jp.co.ramen.dao.UserDAO;
 import jp.co.ramen.dto.ItemsInCartDTO;
-import jp.co.ramen.dto.UserDTO;
 import jp.co.ramen.service.GetItemsInCartService;
 import jp.co.ramen.service.PurchaseCommitService;
 
@@ -47,16 +45,13 @@ public class PurchaseCommitServlet extends HttpServlet {
 			String destination = request.getParameter("destination");
 			String address = "";
 
-			if (destination == null || "".equals(destination)) {
-				UserDAO userDao = new UserDAO(null);
-				UserDTO userDto = userDao.findById(loginId);
-				if (userDto != null) {
-
-					address = userDto.getAddress();
-				}
-			} else if ("another".equals(destination)) {
-				// 「配送先を指定」が選ばれた場合：テキストボックスの入力値を使う
+			// 「配送先を指定」が選ばれた場合：テキストボックスの入力値を使う
+			if ("another".equals(destination)) {
 				address = request.getParameter("address");
+				// 「ご自宅」が選ばれた場合：JSPに渡された住所を使う
+			} else {
+				address = destination;
+
 			}
 
 			//			String loginId = "user1";
