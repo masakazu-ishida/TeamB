@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.ramen.dto.ItemsInCartDTO;
 import jp.co.ramen.service.GetItemsInCartService;
@@ -39,7 +40,7 @@ public class PurchaseCommitServlet extends HttpServlet {
 		//パラメータ取得
 		try {
 			//セッション処理スルー用コメントアウト
-			HttpServletRequest session = request;
+			HttpSession session = request.getSession(false);
 			String loginId = (String) session.getAttribute("loginUser");
 			String payment = request.getParameter("payment");
 			String destination = request.getParameter("destination");
