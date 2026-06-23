@@ -20,11 +20,20 @@ public class PurchaseDetailsDAO {
 	// データの挿入 
 	public int purchaseInsert(PurchaseDetailsDTO pdDto) throws SQLException {
 		String sql = "INSERT INTO public.purchase_details( purchase_id, item_id, amount)	VALUES (?, ?, ?);";
-		try (PreparedStatement ps = con.prepareStatement(sql)) {
+		try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setInt(1, pdDto.getPurchase_id());
 			ps.setInt(2, pdDto.getItem_id());
 			ps.setInt(3, pdDto.getAmount());
-			return ps.executeUpdate();
+			int result = ps.executeUpdate();
+
+			ResultSet rs = ps.getGeneratedKeys();
+
+			if (rs.next()) {
+				int purchase_detail_id = rs.getInt("purchase_detail_id");
+				pdDto.setPurchase_detail_id(purchase_detail_id);
+
+			}
+			return result;
 		}
 	}
 
