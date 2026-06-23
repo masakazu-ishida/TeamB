@@ -123,6 +123,9 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals(userId, result.getUser_id());
 			assertEquals(itemId, result.getItem_id());
 
+			ItemsInCartDTO checkDeleted = dao.findById(userId, itemId);
+			assertNull(checkDeleted);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			fail("例外発生");
