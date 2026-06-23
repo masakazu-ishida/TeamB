@@ -63,6 +63,9 @@ class PurchasesDAOTest extends TestBase {
 	//ログイン済みで購入履歴あり
 	void testFindHistoryByUserId1() {
 
+		//		日付取得
+		LocalDate localDate = LocalDate.now();
+
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			PurchasesDAO dao = new PurchasesDAO(conn);
@@ -75,7 +78,7 @@ class PurchasesDAOTest extends TestBase {
 			PurchasesDTO Pdto = list.get(0);
 
 			assertEquals(1, Pdto.getPurchase_id());
-			assertEquals(LocalDate.of(2026, 06, 19), Pdto.getPurchased_date());
+			assertEquals(localDate, Pdto.getPurchased_date());
 			assertEquals(false, Pdto.getCancel());
 			assertEquals("user1", Pdto.getPurchased_user());
 
@@ -181,9 +184,12 @@ class PurchasesDAOTest extends TestBase {
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 
+			//			日付取得
+			LocalDate localDate = LocalDate.now();
+
 			PurchasesDTO purchasesDTO = new PurchasesDTO();
 			purchasesDTO.setPurchased_user("user1");
-			purchasesDTO.setPurchased_date(LocalDate.of(2026, 06, 19));
+			purchasesDTO.setPurchased_date(localDate);
 			purchasesDTO.setDestination("test愛知県");
 
 			PurchasesDAO dao = new PurchasesDAO(conn);
@@ -197,7 +203,7 @@ class PurchasesDAOTest extends TestBase {
 
 			assertEquals(4, historyById.getPurchase_id());
 			assertEquals("user1", historyById.getPurchased_user());
-			assertEquals(LocalDate.of(2026, 06, 19), historyById.getPurchased_date());
+			assertEquals(localDate, historyById.getPurchased_date());
 			assertEquals("test愛知県", historyById.getDestination());
 			assertEquals(false, historyById.getCancel());
 
@@ -218,12 +224,15 @@ class PurchasesDAOTest extends TestBase {
 
 			int testPurchase_id = 1;
 
+			//			日付取得
+			LocalDate localDate = LocalDate.now();
+
 			PurchasesDTO result = purchasesDAO.findHistoryById(testPurchase_id);
 
 			assertNotNull(result);
 			assertEquals(1, result.getPurchase_id());
 			assertEquals("user1", result.getPurchased_user());
-			assertEquals(LocalDate.of(2026, 06, 19), result.getPurchased_date());
+			assertEquals(localDate, result.getPurchased_date());
 			assertEquals(null, result.getDestination());
 			assertEquals(false, result.getCancel());
 
@@ -254,83 +263,4 @@ class PurchasesDAOTest extends TestBase {
 		}
 	}
 
-	//	@Test
-	//	void testInsert() {
-	//		try (Connection conn = ConnectionUtil.getConnection(null)) {
-	//			UserDAO dao = new UserDAO(conn);
-	//			UserDTO user = new UserDTO();
-	//			user.setUserId("user10");
-	//			user.setPassword("password10");
-	//			user.setName("島根一郎");
-	//			user.setAddress("島根県奥出雲町");
-	//
-	//			int result = dao.insert(user);
-	//
-	//			assertEquals(1, result);
-	//
-	//			user = dao.findById("user10");
-	//
-	//			assertNotNull(user);
-	//			assertEquals("user10", user.getUserId());
-	//			assertEquals("password10", user.getPassword());
-	//			assertEquals("島根一郎", user.getName());
-	//			assertEquals("島根県奥出雲町", user.getAddress());
-	//
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//			fail(e);
-	//		}
-	//
-	//	}
-	//
-	//	@Test
-	//	void testUpdate() {
-	//		try (Connection conn = ConnectionUtil.getConnection(null)) {
-	//			UserDAO dao = new UserDAO(conn);
-	//			UserDTO user = new UserDTO();
-	//			user.setUserId("user1");
-	//			user.setPassword("password10");
-	//			user.setName("鳥取太郎");
-	//			user.setAddress("鳥取県日南町茶屋");
-	//
-	//			int result = dao.update(user);
-	//
-	//			assertEquals(1, result);
-	//
-	//			user = dao.findById("user1");
-	//
-	//			assertNotNull(user);
-	//			assertEquals("user1", user.getUserId());
-	//			assertEquals("password10", user.getPassword());
-	//			assertEquals("鳥取太郎", user.getName());
-	//			assertEquals("鳥取県日南町茶屋", user.getAddress());
-	//
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//			fail(e);
-	//		}
-	//
-	//	}
-	//
-	//	@Test
-	//	void testDelete() {
-	//		try (Connection conn = ConnectionUtil.getConnection(null)) {
-	//			UserDAO dao = new UserDAO(conn);
-	//			UserDTO user = new UserDTO();
-	//			user.setUserId("user4");
-	//
-	//			int result = dao.delete("user4");
-	//
-	//			assertEquals(1, result);
-	//
-	//			user = dao.findById("user4");
-	//
-	//			assertNull(user);
-	//
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//			fail(e);
-	//		}
-	//
-	//	}
 }

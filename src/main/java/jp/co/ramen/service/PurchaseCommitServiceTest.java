@@ -66,8 +66,11 @@ class PurchaseCommitServiceTest extends TestBase {
 			try {
 				conn.setAutoCommit(false);
 
-				//				テストユーザー
+				//	テストユーザー
 				String testUser = "user1";
+
+				//	テストアドレス
+				String testAdress = "テスト住所";
 
 				//	日付取得
 				LocalDate localDate = LocalDate.now();
@@ -76,7 +79,7 @@ class PurchaseCommitServiceTest extends TestBase {
 				PurchasesDTO purchasesDTO = new PurchasesDTO();
 				purchasesDTO.setPurchased_user(testUser);
 				purchasesDTO.setPurchased_date(localDate);
-				purchasesDTO.setDestination("テスト住所");
+				purchasesDTO.setDestination(testAdress);
 
 				PurchasesDAO purchasesDAO = new PurchasesDAO(conn);
 				int result = purchasesDAO.purchaseInsert(purchasesDTO);
