@@ -37,7 +37,6 @@
 				<input type="hidden" name="requestFrom"value="${requestFrom}">
 			
 		</form>
-		<a href="${pageContext.request.contextPath}/UpdateUserServlet">会員登録</a><br>
 
 </body>
 </html>
