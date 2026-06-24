@@ -65,15 +65,15 @@ public class ItemsDAO {
 
 		if (categoryId == 0) {
 			if (name == null || name.isEmpty()) {
-				sql = "select item_id,category_id,name, color, manufacturer, price,stock, recommended from items;";
+				sql = "select item_id,category_id,name, color, manufacturer, price,stock, recommended from items order by item_id ASC;";
 			} else {
-				sql = "select item_id,category_id,name, color, manufacturer, price ,stock, recommended from items where name like ?;";
+				sql = "select item_id,category_id,name, color, manufacturer, price ,stock, recommended from items where name like ? order by item_id ASC;";
 			}
 		} else {
 			if (name == null || name.isEmpty()) {
-				sql = "select item_id,category_id,name, color, manufacturer, price ,stock, recommended from items where category_id = ?;";
+				sql = "select item_id,category_id,name, color, manufacturer, price ,stock, recommended from items where category_id = ? order by item_id ASC;";
 			} else {
-				sql = "select item_id,category_id,name, color, manufacturer, price,stock, recommended from items where category_id = ? and name like ?;";
+				sql = "select item_id,category_id,name, color, manufacturer, price,stock, recommended from items where category_id = ? and name like ? order by item_id ASC;";
 			}
 		}
 

@@ -43,7 +43,16 @@ public class SearchServlet extends HttpServlet {
 
 		List<ItemsDTO> itemsList = itemSerch.execute(categoryId, name);
 
-		request.setAttribute("category", categoryId);
+		String categoryName = "";
+		if (categoryId == 1) {
+			categoryName = "すべて";
+		} else if (categoryId == 2) {
+			categoryName = "帽子";
+		} else {
+			categoryName = "鞄";
+		}
+
+		request.setAttribute("category", categoryName);
 		request.setAttribute("keyword", name);
 		request.setAttribute("itemsList", itemsList);
 
