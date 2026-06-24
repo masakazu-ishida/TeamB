@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,13 +25,13 @@
 				<td><c:out value="${cart.itemsDto.name }"></c:out></td>
 	 			<td><c:out value="${cart.itemsDto.color }"></c:out></td>
 				<td><c:out value="${cart.itemsDto.manufacturer }"></c:out></td>
-				<td><c:out value="${cart.itemsDto.price }"></c:out></td>
+				<td><fmt:formatNumber value="${cart.itemsDto.price }"/></td>
 				<td><c:out value="${cart.amount }"></c:out></td>			
 			</tr>
 			<c:set var="total" value="${total + cart.itemsDto.price * cart.amount}" />
 		</c:forEach>
 	</table>
-	合計 <c:out value="${total}"> </c:out> 円<br>
+	合計 <fmt:formatNumber value="${total}"/>  円<br>
 	
 	<p>清算方法 <c:out value="${payment}"></c:out></p>
 	<p>配送先 <c:choose>
