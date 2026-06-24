@@ -17,7 +17,7 @@
 		数量<c:out value="${itemDelete.amount}" />個<br>
 		
 		<br>
-		<a href="${pageContext.request.contextPath}/main">商品検索へ</a><br>
+		<a href="${pageContext.request.contextPath}/main">商品検索</a>へ<br>
 
 </body>
 </html>
