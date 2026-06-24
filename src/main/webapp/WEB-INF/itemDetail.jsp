@@ -44,7 +44,7 @@
 			</select><br />
 			<input type="hidden" name="itemId" value="${item.item_id}">
 			<input type="submit" value="ショッピングカートに入れる"><br>
-			※ログインしていない状態では、ボタンのクリック後、
+			<!--※ログインしていない状態では、ボタンのクリック後、-->
 			<c:if test="${empty loginUser}">
 			<a href="${pageContext.request.contextPath}/login"></a><!--ログイン画面に転送される。--><br></c:if>
 		</form>
