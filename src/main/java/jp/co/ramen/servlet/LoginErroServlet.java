@@ -31,6 +31,8 @@ public class LoginErroServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String path = "/WEB-INF/login.jsp";
+		request.setAttribute("itemId", request.getParameter("itemId"));
+		request.setAttribute("order", request.getParameter("order"));
 		request.setAttribute("requestFrom", request.getParameter("requestFrom"));
 
 		request.getRequestDispatcher(path).forward(request, response);
