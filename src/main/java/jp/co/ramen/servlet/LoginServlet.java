@@ -38,17 +38,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String requestFrom = request.getParameter("requestFrom");
 
-		//		手入力での動作確認1(DB参照失敗 fromメイン画面）
-		//		String id = "user0";
-		//		String password = "userpass1";
-		//		String requestFrom = null;
-
-		//		手入力での動作確認2(ログイン成功 from /ItemsInCartReferenceServlet）
-		//		String id = "user1";
-		//		String password = "userpass1";
-		//		String requestFrom = "/ItemsInCartReferenceServlet";
-
-		System.out.println("★requestFromの値は: " + requestFrom);
+		System.out.println("★LoginServletのrequestFromの値は: " + requestFrom);
 		LoginService loginService = new LoginService();
 		int authenticate = loginService.execute(id, password);
 
@@ -70,7 +60,8 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("errorMsg", "ログインに失敗しました");
 			request.setAttribute("itemId", request.getParameter("itemId"));
 			request.setAttribute("order", request.getParameter("order"));
-			path = "/WEB-INF/login.jsp";
+			request.setAttribute("requestFrom", request.getParameter("requestFrom"));
+			path = "/WEB-INF/loginErro.jsp";
 		}
 
 		request.getRequestDispatcher(path).forward(request, response);

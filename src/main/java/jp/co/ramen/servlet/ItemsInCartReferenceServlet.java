@@ -40,7 +40,7 @@ public class ItemsInCartReferenceServlet extends HttpServlet {
 
 		if (userId == null) {
 
-			request.setAttribute("resuestFrom", "/ItemsInCartReferenceServlet");
+			request.setAttribute("requestFrom", "/ItemsInCartReferenceServlet");
 			request.getRequestDispatcher("/loginShow").forward(request, response);
 			//response.sendRedirect(request.getContextPath() + "/loginShow");
 			return;
