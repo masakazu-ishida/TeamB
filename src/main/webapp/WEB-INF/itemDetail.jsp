@@ -48,7 +48,7 @@
 			<c:if test="${empty loginUser}">
 			<a href="${pageContext.request.contextPath}/login"></a><!--ログイン画面に転送される。--><br></c:if>
 		</form>
-		<a href="${pageContext.request.contextPath}/main">商品検索へ</a><br>
+		<a href="${pageContext.request.contextPath}/main">商品検索</a>へ<br>
 
 </body>
 </html>
