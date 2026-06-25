@@ -49,17 +49,17 @@
 				</td>
 				<td><c:out value="${empty p.destination ? 'ご自宅' : p.destination}" /></td>
 				<td>
-					<c:choose>
+					<!--<c:choose>
 					<c:when test="${p.cancel}">
 					<p>キャンセル済み</p>
 					</c:when>
 					<c:otherwise>
 					<form action="${pageContext.request.contextPath}/cancelConfirm" method="POST">
 					<input type="hidden" name="purchaseId" value="${p.purchase_id}" />
-					<button type="submit">キャンセル</button>
+					<button type="submit">-->キャンセル<!--  </button>
 					</form>
 					</c:otherwise>
-					</c:choose>
+					</c:choose>-->
 				</td>
 			</tr>
 			</tr>
