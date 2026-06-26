@@ -30,7 +30,7 @@
 		
 		<c:if test="${not empty loginUser}">
 		<!-- ※ログイン済の場合には以下を表示 --><br>
-		<a href="${pageContext.request.contextPath}/UpdateUserServlet">会員情報の変更</a><br></c:if>
+		<a href="${pageContext.request.contextPath}/UpdateUserServlet">会員情報の参照</a><br></c:if>
 
 </body>
 </html>
